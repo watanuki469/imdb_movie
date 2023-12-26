@@ -1,0 +1,12 @@
+@baseUrl = https://moviesminidatabase.p.rapidapi.com/?rapidapi-key=a2a95be700msha63091279c27375p19ad20jsn429dfc2eaedb
+
+# Movies
+
+# @name getAllGenres
+# GET {{baseUrl}}/genres/
+
+# @name retrievegetMoviesByGenre
+GET {{baseUrl}}/movie/byGen/Adventure
+
+
+

@@ -1,0 +1,6 @@
+export *from './common'
+export *from './genres'
+export *from './movie'
+export *from './movieItem'
+export *from './singleMovie'
+export *from './popularity'

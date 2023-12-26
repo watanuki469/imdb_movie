@@ -1,0 +1,1 @@
+babel --plugins babel-plugin-macros script.js
