@@ -43,7 +43,6 @@ export default function MovieItemPage({
               <img
                 src={item.banner}
                 style={{ height: "280px" }}
-                // onClick={() => handleOpenClick(item)}
                 onClick={() => onEdit?.(item)}
               />
               <Typography variant="h6" color="white">

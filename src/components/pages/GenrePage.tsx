@@ -32,8 +32,7 @@ export default function GenrePage({
         {genresList.map(item =>
           <Button variant="contained" size="large" onClick={() => navigate(`/movie/byGen/${item.genre}`)}
             sx={{
-              fontWeight: '600', textTransform: 'uppercase'
-              // , textAlign: 'center'
+              fontWeight: '600', textTransform: 'uppercase' 
               , minHeight: '1rem', width: '15rem', ':hover': {
                 bgcolor: 'red',
                 color: 'white',

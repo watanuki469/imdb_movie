@@ -7,13 +7,13 @@ import { movieItem, popularity } from 'models';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export interface PopurarityItemPageDashBoardProps {
+export interface SliderItemPageDashBoardProps {
   popurarityList: popularity[]
 }
 
-export default function PopurarityItemPageDashBoard({
+export default function SliderItemPageDashBoard({
   popurarityList
-}: PopurarityItemPageDashBoardProps) {
+}: SliderItemPageDashBoardProps) {
   const dispatch = useAppDispatch()
   const popurarityItemList = useAppSelector(selectmovieItemList)
   let navigate = useNavigate();
@@ -34,8 +34,8 @@ export default function PopurarityItemPageDashBoard({
   }, [popurarityList])
 
   return (
-    <div style={{backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
-        <PopurarityPage popurarityItemList={popurarityItemList} onEdit={handleChangePage} />
+    <div style={{ backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
+      <SliderPage popurarityItemList={popurarityItemList} />
     </div >
 
   );
