@@ -1,17 +1,12 @@
-import { YouTube } from '@mui/icons-material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import { Avatar, Box, Container, Grid, ListSubheader, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Grid, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import MobileStepper from '@mui/material/MobileStepper';
 import { useTheme } from '@mui/material/styles';
 import { movieItem } from 'models';
 import { useState } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 
 export interface SliderPageProps {
     popurarityItemList: movieItem[];
@@ -23,6 +18,7 @@ export default function SliderPage({
 }: SliderPageProps) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
+    // const maxSteps = 50
     const maxSteps = popurarityItemList.length
 
     const handleNext = () => {
@@ -62,7 +58,14 @@ export default function SliderPage({
 
                             />
                             <Box sx={{ display: 'flex', bgcolor: 'black', height: '115px', alignSelf: 'flex-end', width: '100%' }}>
-                                <PlayCircleOutlineIcon sx={{ height: '100px', bgcolor: 'black', color: 'white', alignSelf: 'flex-end', width: '100px', margin: '6px' }} />
+                                <PlayCircleOutlineIcon sx={{
+                                    height: '100px', bgcolor: 'black', color: 'white', alignSelf: 'flex-end', width: '100px', margin: '6px'
+                                    , ':hover': {
+                                        bgcolor: 'black',
+                                        color: 'yellow',
+                                        borderColor: 'red'
+                                    },
+                                }} />
                                 <div style={{ alignSelf: 'center', marginTop: '-6px' }}>
                                     <h2 style={{
                                         textAlign: "justify",
@@ -92,10 +95,11 @@ export default function SliderPage({
                             </Box>
 
                         </div>
+
                     </Box>
 
                     <MobileStepper
-                        sx={{ backgroundColor: 'transparent', color: 'red' }}
+                        sx={{ backgroundColor: 'transparent', color: 'blue' }}
                         variant="text"
                         steps={maxSteps}
                         position="static"
@@ -147,7 +151,14 @@ export default function SliderPage({
                                     </Avatar>
                                     <Stack>
                                         <Box sx={{ display: 'flex' }}>
-                                            <PlayCircleOutlineIcon sx={{ height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem' }} />
+                                            <PlayCircleOutlineIcon sx={{
+                                                height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem'
+                                                , ':hover': {
+                                                    bgcolor: 'black',
+                                                    color: 'yellow',
+                                                    borderColor: 'red'
+                                                },
+                                            }} />
                                             <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
                                                 {popurarityItemList[activeStep + 1]?.movie_length} min
                                             </h4>
@@ -189,7 +200,14 @@ export default function SliderPage({
                                     </Avatar>
                                     <Stack>
                                         <Box sx={{ display: 'flex' }}>
-                                            <PlayCircleOutlineIcon sx={{ height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem' }} />
+                                            <PlayCircleOutlineIcon sx={{
+                                                height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem'
+                                                , ':hover': {
+                                                    bgcolor: 'black',
+                                                    color: 'yellow',
+                                                    borderColor: 'red'
+                                                },
+                                            }} />
                                             <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
                                                 {popurarityItemList[activeStep + 2]?.movie_length} min
                                             </h4>
@@ -231,7 +249,14 @@ export default function SliderPage({
                                     </Avatar>
                                     <Stack>
                                         <Box sx={{ display: 'flex' }}>
-                                            <PlayCircleOutlineIcon sx={{ height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem' }} />
+                                            <PlayCircleOutlineIcon sx={{
+                                                height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem'
+                                                , ':hover': {
+                                                    bgcolor: 'black',
+                                                    color: 'yellow',
+                                                    borderColor: 'red'
+                                                },
+                                            }} />
                                             <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
                                                 {popurarityItemList[activeStep + 3]?.movie_length} min
                                             </h4>
@@ -264,74 +289,12 @@ export default function SliderPage({
 
                                 </Stack>
                                 <Stack spacing={2} direction="row" alignItems="center">
-                                            <Typography variant='h4' sx={{color:'white'}}>Browse trailer {'>'} </Typography>
+                                    <Typography variant='h4' sx={{ color: 'white' }}>Browse trailer {'>'} </Typography>
                                 </Stack>
                             </Stack>
 
 
                         </Box>
-
-
-
-                        {/* <List sx={{ width: '150%', bgcolor: 'background.paper' }}
-                            subheader={
-                                <ListSubheader component="div" sx={{ color: 'red', textAlign: 'left' }}>
-                                    <h1>Up Next</h1>
-                                </ListSubheader>
-                            }> */}
-                        {/* <ListItem sx={{ maxHeight: '100px' }}>
-                                <ListItemAvatar>
-                                    <Avatar variant="square" sx={{
-                                        margin: 'auto', objectFit: 'contain'
-                                        , justifyContent: 'center',
-                                        alignItems: 'center',
-                                        width: "100px",
-                                        boxSizing: "border-box",
-                                        height: 'auto',
-                                        alignSelf: 'flex-start'
-
-                                    }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 1]?.image_url}
-                                            alt="movie-img"
-                                        />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <PlayCircleOutlineIcon sx={{ height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem' }} />
-                                        <h4 style={{ textDecoration: 'none', color: 'green', alignSelf: 'flex-end' }}>
-                                            {popurarityItemList[activeStep + 1]?.movie_length} min
-                                        </h4>
-                                    </Box>
-                                    <Box>
-                                        <h4 style={{
-                                            textAlign: "justify",
-                                            display: "-webkit-box",
-                                            overflow: "hidden",
-                                            WebkitBoxOrient: "vertical",
-                                            textDecoration: 'bold',
-                                            WebkitLineClamp: 2,
-                                            color: 'purple',
-                                            marginTop: '0%'
-
-                                        }}>
-                                            {popurarityItemList[activeStep]?.title}
-                                        </h4>
-                                        <Typography sx={{
-                                            color: 'red',
-                                            textAlign: "justify",
-                                            display: "-webkit-box",
-                                            overflow: "hidden",
-                                            WebkitBoxOrient: "vertical",
-                                            WebkitLineClamp: 1,
-                                            marginTop: '0%'
-
-                                        }}>{popurarityItemList[activeStep]?.description.substring(0, 70)}...</Typography>
-                                    </Box>
-                                </ListItemText>
-                            </ListItem> */}
-                        {/* </List> */}
 
                     </Grid>
                 </Grid>

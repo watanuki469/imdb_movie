@@ -1,17 +1,17 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import SliderPage from "components/pages/SliderPage";
+import Top10Page from "components/pages/Top10Page";
 import { movieItemActions, selectmovieItemList } from "features/movieItem/movieItemSlice";
 import { movieItem, popularity } from 'models';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export interface SliderItemPageDashBoardProps {
+export interface Top10ItemPageDashBoardProps {
   popurarityList: popularity[]
 }
 
-export default function SliderItemPageDashBoard({
+export default function Top10ItemPageDashBoard({
   popurarityList
-}: SliderItemPageDashBoardProps) {
+}: Top10ItemPageDashBoardProps) {
   const dispatch = useAppDispatch()
   const popurarityItemList = useAppSelector(selectmovieItemList)
   let navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function SliderItemPageDashBoard({
 
   return (
     <div style={{ backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
-      <SliderPage popurarityItemList={popurarityItemList} />
+      <Top10Page popurarityItemList={popurarityItemList} />
     
     </div >
 

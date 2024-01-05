@@ -17,14 +17,15 @@ const genresApi = {
     const url = `/movie/id/${movie}`
     return axiosClient.get(url)
   },
-  // retrievegetMovieByImdbId2(movie: any): Promise<singleMovie> {
-  //   const url = `/movie/id/${movie}`
-  //   return axiosClient.get(url)
-  // },
+
   listgetMoviesOrderByPopularitys(params: ListParams): Promise<ListResponse<popularity>> {
     const url = '/movie/order/byPopularity/';
     return axiosClient.get(url, { params });
 
+  },
+  retrievegetMovieIdByTitle(imdb_id: any): Promise<Movie> {
+    const url = `/movie/imdb_id/byTitle/${imdb_id}`
+    return axiosClient.get(url)
   },
 
 };

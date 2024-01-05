@@ -1,7 +1,8 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import { AdminLayout, MovieLayout, NotFound, SingleMovie } from 'components/layout';
 import PopurarityDashBoard from 'components/dashboard/PopurarityDashBoard';
+import { AdminLayout, MovieLayout, NotFound, SingleMovie } from 'components/layout';
+import { Pro } from 'components/layout/Pro';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
         <Route path="/movie/byGen/:genre" element={<MovieLayout/>}/>
         <Route path="/movie/id/:imdb_id" element={<SingleMovie/>}/>
         <Route path='*' element={<NotFound />}/>
+        <Route path='IMDbPro' element={<Pro />}/>
+
       </Routes>
     </div>
   );

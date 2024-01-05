@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { popularityActions, selectPopularityList } from "features/popularity/popularitySlice";
 import { useEffect } from 'react';
 import SliderItemPageDashBoard from "./SliderItemPageDashBoard";
+import Top10ItemPageDashBoard from "./Top10ItemPageDashBoard";
 
-export default function SliderDashBoard() {
+export default function Top10DashBoard() {
 
   const popurarityList = useAppSelector(selectPopularityList);
 
@@ -20,7 +21,7 @@ export default function SliderDashBoard() {
   return (
     <div>
       <Box sx={{bgcolor: "black", position: "relative"}}>
-        <SliderItemPageDashBoard popurarityList={popurarityList} />
+        <Top10ItemPageDashBoard popurarityList={popurarityList} />
       </Box>
     </div>
   );

@@ -4,7 +4,6 @@ import { yellow } from "@mui/material/colors";
 import { movieItem } from 'models';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SingleMoviePage from './SingleMoviePage';
 
 export interface movieItemPageProps {
   movieItemList: movieItem[],

@@ -1,9 +1,8 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Box, Button, Typography } from "@mui/material";
 import { genres } from 'models';
-import { Route, Routes, useNavigate } from "react-router-dom"
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export interface GenrePageProps {
@@ -16,9 +15,6 @@ export default function GenrePage({
 }: GenrePageProps) {
 
   let navigate = useNavigate();
-  const [page, setPage] = useState(1);
-
-
   return (
 
     <div style={{ width: '80%', marginLeft: '13%' }}>
@@ -40,12 +36,9 @@ export default function GenrePage({
               background: "linear-gradient(180deg,grey,transparent) border-box",
               border: "2px solid transparent",
               backgroundColor: 'black',
-              // paddingLeft: '1rem', paddingRight: '1rem',
               borderRadius: '1rem',
               '--Grid-borderWidth': '1px', borderColor: 'pink',
-
             }}>
-
 
             <Typography>
               {(() => {

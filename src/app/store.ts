@@ -6,7 +6,8 @@ import movieReducer from 'features/movie/movieSlice'
 import movieItemReducer from 'features/movieItem/movieItemSlice'
 import singleMovieReducer from 'features/singleMovie/singleMovieSlice'
 import popularityReducer from 'features/popularity/popularitySlice'
-
+import searchReducer from 'features/search/searchSlice'
+import searchItemReducer from 'features/searchItem/searchItemSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
@@ -15,7 +16,9 @@ export const store = configureStore({
     movie: movieReducer,
     movieItem: movieItemReducer,
     singleMovie: singleMovieReducer,
-    popularity:popularityReducer,
+    searchItem: searchItemReducer,
+    popularity: popularityReducer,
+    search: searchReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

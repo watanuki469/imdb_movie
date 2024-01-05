@@ -13,10 +13,6 @@ export default function Dashboard() {
     dispatch(genreActions.fetchGenreList({}))
   }, [])
 
-  // useEffect(() => {
-  //   console.log('genre list  ' + genreList);
-  // }, [genreList])
-
   return (
     <div>
       <Box>

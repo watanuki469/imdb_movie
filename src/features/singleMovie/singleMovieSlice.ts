@@ -19,7 +19,7 @@ const singleMovieSlice = createSlice({
         fetchSingleMovieList(state, action: PayloadAction<any>) {
             state.loading = true;
         },
-        //cập nhật vào redux từ fetch movie item list
+        //cập nhật vào redux từ fetch single movie list
         fetchSingleMovieListSuccess(state, action: PayloadAction<any>) {
             // state.list = [...state.list, action.payload.results]
             state.list = [action.payload.results]

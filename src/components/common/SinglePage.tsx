@@ -10,16 +10,12 @@ import { useParams } from 'react-router-dom';
 export function SinglePage() {
   const { imdb_id } = useParams();
   const dispatch = useAppDispatch()
-  const singleList = useAppSelector(selectmovieItemList)
   const singleList2 = useAppSelector(selectSingleMovieList)
 
   useEffect(() => {
-    dispatch(movieItemActions.fetchmovieItemList(imdb_id))
     dispatch(singleMovieActions.fetchSingleMovieList(imdb_id))
     
   }, [imdb_id])
-
-
   
   return (
     <div>

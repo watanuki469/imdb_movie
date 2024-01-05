@@ -37,8 +37,10 @@ const movieItemSlice = createSlice({
         setFilter(state,action:PayloadAction<ListParams>){
             state.filter=action.payload;
         },
+      
     }
 })
+
 //Actions
 export const movieItemActions = movieItemSlice.actions
 //Selectors

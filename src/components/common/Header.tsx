@@ -4,6 +4,10 @@ import { People, Public, Search, Stars, Theaters, VideoLibrary } from "@mui/icon
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TvIcon from '@mui/icons-material/Tv';
 import { AppBar, Box, Button, Checkbox, Dialog, FormControl, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import SearchDashBoard from 'components/dashboard/SearchDashBoard';
+import { searchActions, selectSearchFilterList } from 'features/search/searchSlice';
+import { ListParams } from 'models';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +15,8 @@ export function Header() {
     let navigate = useNavigate();
 
     const [open, setOpen] = useState(false);
+
+
     const handleRemoveClick = () => {
         setOpen(true);
     };
@@ -18,18 +24,6 @@ export function Header() {
         setOpen(false);
     };
 
-    const names = [
-        'Oliver Hansen',
-        'Van Henry',
-        'April Tucker',
-        'Ralph Hubbard',
-        'Omar Alexander',
-        'Carlos Abbott',
-        'Miriam Wagner',
-        'Bradley Wilkerson',
-        'Virginia Andrews',
-        'Kelly Snyder',
-    ];
     const [personName, setPersonName] = useState<string[]>([]);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -51,35 +45,36 @@ export function Header() {
             },
         },
     };
+
     return (
         <>
             <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 3, textAlign: 'center' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Grid container spacing={2} alignContent="center" alignItems="center">
                         <Grid item xs={1} >
-                            <Button fullWidth sx={{
-                                bgcolor: 'yellow',
-                                color: 'black',
-                                textAlign: 'center',
-                                border: 'none',
-                                fontWeight: 'bold',
-                                fontSize: '36px',
-                                fontFamily: 'sans-serif',
-                                padding: '10px 20px',
-                                height: '50px',
-                                textTransform: 'none',
-                                overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                ':hover': {
-                                    bgcolor: 'black',
-                                    color: 'blue',
-                                    borderColor:'red'
-                                  },
-                                 
-    
+                            <Button onClick={() => navigate('/')}
+                                fullWidth sx={{
+                                    bgcolor: 'yellow',
+                                    color: 'black',
+                                    textAlign: 'center',
+                                    border: 'none',
+                                    fontWeight: 'bold',
+                                    fontSize: '36px',
+                                    fontFamily: 'sans-serif',
+                                    padding: '10px 20px',
+                                    height: '50px',
+                                    textTransform: 'none',
+                                    overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                    whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                    textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                    ':hover': {
+                                        bgcolor: 'black',
+                                        color: 'blue',
+                                        borderColor: 'red'
+                                    },
 
-                            }}>IMDb</Button>
+
+                                }}>IMDb</Button>
                         </Grid>
                         <Grid item xs={1}>
                             <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}>
@@ -99,9 +94,9 @@ export function Header() {
                             </Button>
 
                         </Grid>
-                        <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: 'flex' }} >
+                        {/* <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: 'flex' }} >
                             <FormControl variant="outlined" size="small" sx={{ bgcolor: 'white', width: '30%' }}>
-                                <InputLabel sx={{ color: 'black' }}>Sort</InputLabel>
+                                <InputLabel sx={{ color: 'black' }}>All</InputLabel>
                                 <Select fullWidth sx={{ color: "black", width: '100%' }} label="Sort" >
                                     <MenuItem value="name.asc" > Titles  </MenuItem>
                                     <MenuItem value="name.desc">TV Episodes  </MenuItem>
@@ -120,9 +115,12 @@ export function Header() {
                                     endAdornment={<Search />}
                                 />
                             </FormControl>
+                        </Grid> */}
+                        <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: 'flex' }} >
+                            <SearchDashBoard />
                         </Grid>
                         <Grid item xs={1} >
-                            <Button fullWidth sx={{
+                            <Button onClick={() => navigate('/IMDbPro')} fullWidth sx={{
                                 bgcolor: 'black',
                                 color: 'white',
                                 textAlign: 'center',
@@ -191,12 +189,12 @@ export function Header() {
                                     MenuProps={MenuProps}
                                     sx={{ color: 'white' }}
                                 >
-                                    {names.map((name) => (
+                                    {/* {names.map((name) => (
                                         <MenuItem key={name} value={name} >
                                             <Checkbox checked={personName.indexOf(name) > -1} />
                                             <ListItemText primary={name} />
                                         </MenuItem>
-                                    ))}
+                                    ))} */}
                                 </Select>
                             </FormControl>
 
@@ -218,9 +216,9 @@ export function Header() {
                     }
                 }}
             >
-                <Grid sx={{display:'flex'}} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
-                    <Grid item xs={6} sx={{textAlign:'center',alignContent:'center',justifyContent:'center'}}>
-                        <Button sx={{
+                <Grid sx={{ display: 'flex' }} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
+                    <Grid item xs={6} sx={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center' }}>
+                        <Button onClick={() => navigate('/')} sx={{
                             marginTop: '3rem',
                             bgcolor: 'yellow',
                             color: 'black',
@@ -238,11 +236,10 @@ export function Header() {
                             ':hover': {
                                 bgcolor: 'yellow',
                                 color: 'blue',
-                              },
-
+                            },
                         }}>IMDb</Button>
                     </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'center' }}>
+                    <Grid item xs={6} sx={{ textAlign: 'center' }}>
                         <Button onClick={() => handleClose()} sx={{
                             marginTop: '3rem',
                             bgcolor: 'yellow',
@@ -262,7 +259,7 @@ export function Header() {
                             ':hover': {
                                 bgcolor: 'yellow',
                                 color: 'blue',
-                              },
+                            },
 
 
                         }}>X</Button>

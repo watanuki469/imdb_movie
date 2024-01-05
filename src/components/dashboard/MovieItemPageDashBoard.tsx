@@ -9,7 +9,7 @@ export interface MoviePageProps {
   movieList: Movie[]
 }
 
-export default function ({
+export default function MoviePage ({
   movieList
 }: MoviePageProps) {
   const dispatch = useAppDispatch()
@@ -18,7 +18,6 @@ export default function ({
   let navigate = useNavigate();
   const handleChangePage = async (movie: movieItem) => {
     navigate(`/movie/id/${movie.imdb_id}`)
-   
   }
   useEffect(() => {
     if (movieList) {
