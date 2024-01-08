@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
-import { Footer, SinglePage } from "components/common";
+import { Footer, Header, SinglePage } from "components/common";
 import { useState } from "react";
 
 export function SingleMovie() {
@@ -9,6 +9,7 @@ export function SingleMovie() {
   return (
     <div>
       <Box sx={{ bgcolor: "black", position: "relative" }}>
+        <Header/>
         <SinglePage />
 
         <div className={`${loading ? "block" : "hidden"} `}>

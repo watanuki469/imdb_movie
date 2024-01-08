@@ -17,10 +17,7 @@ export default function MoviePageDashBoard() {
   }, [genre])
 
   return (
-    <div>
-      <Box>
-        <MoviePage movieList={movieList} />
-      </Box>
-    </div>
+    <MoviePage movieList={movieList} />
+
   );
 }

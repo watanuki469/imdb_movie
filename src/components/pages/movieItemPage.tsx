@@ -1,9 +1,11 @@
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { Box, Button, Card, CardContent, Dialog, Grid, Stack, Typography } from "@mui/material";
+import { AppBar, Badge, BottomNavigation, BottomNavigationAction, Box, Button, Card, CardContent, Dialog, Divider, Grid, IconButton, Paper, Stack, Toolbar, Typography } from "@mui/material";
 import { yellow } from "@mui/material/colors";
 import { movieItem } from 'models';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CategoryIcon from '@mui/icons-material/Category';
+import ShareIcon from '@mui/icons-material/Share';
 
 export interface movieItemPageProps {
   movieItemList: movieItem[],
@@ -25,32 +27,46 @@ export default function MovieItemPage({
     setSelectedMovie(item)
     setOpen(true)
   }
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)', color: 'white' }}
-    >    •
-    </Box>
-  );
+  const bull = (<Box sx={{ display: 'inline-block', mx: '6px', transform: 'scale(0.8)', color: 'white' }} >     • </Box>);
+  const handleChangePage = () => {
+
+  };
+  const renderPopularity = (uniqueTitles: any[] = []) => {
+    return (
+      <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
+        {movieItemList?.map((item: movieItem) => {
+          // Kiểm tra xem item.title đã xuất hiện chưa
+          if (!uniqueTitles.includes(item.title)) {
+            // Nếu chưa xuất hiện, thêm vào mảng uniqueTitles và hiển thị
+            uniqueTitles.push(item.title);
+            return (
+              <Grid item xs={4} md={3} lg={2.4} key={item.title}>
+                <Stack alignItems="center">
+                  <img
+                    src={item.banner}
+                    style={{ height: "280px" }}
+                    onClick={() => onEdit?.(item)}
+                  />
+                  <Typography variant="h6" color="white">
+                    {item.title}
+                  </Typography>
+                </Stack>
+              </Grid>
+            );
+          }
+
+          // Nếu item.title đã xuất hiện, không hiển thị
+          return null;
+        })}
+      </Grid>
+    );
+  };
+
 
   return (
-    <div>
-      <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
-        {movieItemList?.map(item =>
-          <Grid item xs={4} md={3} lg={2.4} >
-            <Stack alignItems="center">
-              <img
-                src={item.banner}
-                style={{ height: "280px" }}
-                onClick={() => onEdit?.(item)}
-              />
-              <Typography variant="h6" color="white">
-                {item.title}
-              </Typography>
-            </Stack>
-          </Grid>
-        )}
-      </Grid>
+    <div style={{ width: '80%', marginLeft: '10%' }}>
+      {renderPopularity()}
+
       {/* Dialog */}
       <Dialog
         maxWidth="lg"

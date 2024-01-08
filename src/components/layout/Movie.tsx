@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from '@mui/material';
-import { Footer, Header2 } from 'components/common';
+import { Footer, Header, Header2 } from 'components/common';
 import MoviePageDashBoard from "components/dashboard/MoviePageDashBoard";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ export function MovieLayout() {
   return (
     <div>
       <Box sx={{ bgcolor: "black", position: "relative" }}>
-        <Header2 />
+        <Header />
         <MoviePageDashBoard />
         <div className={`${loading ? "block" : "hidden"} `}>
           <CircularProgress disableShrink />

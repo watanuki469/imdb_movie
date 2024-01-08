@@ -28,7 +28,7 @@ export default function MoviePage ({
   }, [movieList])
 
   return (
-    <div style={{ width: '80%', marginLeft: '13%' }}>
+    <div >
       <MovieItemPage movieItemList={movieItemList} onEdit={handleChangePage} />
     </div >
 
