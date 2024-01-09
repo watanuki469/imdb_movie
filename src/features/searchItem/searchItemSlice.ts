@@ -18,22 +18,27 @@ const searchItemSlice = createSlice({
     reducers: {
         fetchSearchItemList(state, action: PayloadAction<any>) {
             state.loading = true;
+            state.list=[]
         },
         //cập nhật vào redux từ fetch search item movie list
         fetchSearchItemListSuccess(state, action: PayloadAction<any>) {
+            // state.list = []
             // state.list = [state.list, action.payload.results]
-            state.list = [action.payload.results]
+            // state.list = [action.payload.results]
+            // state.list = [...state.list, ...action.payload.results]
             // state.list = action.payload.results
+            state.list = state.list.concat(action.payload.results);
+
             state.loading = false
         },
         fetchSearchItemListFailed(state, action: PayloadAction<string>) {
             state.loading = false
         },
-       
+
     }
 })
 //Actions
-export const searchItemActions =searchItemSlice.actions
+export const searchItemActions = searchItemSlice.actions
 //Selectors
 export const selectSearchItemList = (state: RootState) => state.searchItem.list
 // Reducer

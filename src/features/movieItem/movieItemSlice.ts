@@ -5,14 +5,12 @@ import { ListParams, movieItem } from "models";
 export interface movieItemState {
     loading: boolean;
     list: movieItem[];
-    list2: movieItem[];
     filter: ListParams;
 }
 
 const initialState: movieItemState = {
     loading: false,
     list: [],
-    list2: [],
     filter: {
         _: 1,
         index: 15,

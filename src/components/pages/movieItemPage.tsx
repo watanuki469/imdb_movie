@@ -54,7 +54,6 @@ export default function MovieItemPage({
               </Grid>
             );
           }
-
           // Nếu item.title đã xuất hiện, không hiển thị
           return null;
         })}

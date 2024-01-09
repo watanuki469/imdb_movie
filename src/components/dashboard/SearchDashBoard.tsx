@@ -17,32 +17,13 @@ export default function SearchDashBoard() {
 
   const [loading, setLoading] = useState(false);
   const debouncedValue = useDebounce(query, 500);
-  console.log(debouncedValue)
 
   const anchorRef = useRef(null);
-  const delay = 2000;
-
   const searchList = useAppSelector(selectSearchList)
   const handleSearchTypeChange = (event: any) => {
     setSearchType(event.target.value);
   };
 
-  // const onQueryChange = (e: any) => {
-  //   const newQuery = e.target.value;
-  //   if (!newQuery.startsWith(" ")) {
-  //     setQuery(newQuery);
-  // }
-  //   if (!newQuery) {
-  //     setOpen(false); // Đóng Popper nếu không có chữ trên thanh input
-  //     return;
-  //   }
-  //   setOpen(!!newQuery); // Mở Popper khi có nội dung
-  //   clearTimeout(timer);
-  //   setOpen(true)
-
-  //   timer = setTimeout(() => {
-  //   }, timeout);
-  // };
   const onQueryChange = (e: any) => {
     const newQuery = e.target.value;
     setOpen(!!newQuery);
@@ -57,17 +38,6 @@ export default function SearchDashBoard() {
     }
     dispatch(searchActions.fetchSearchList(debouncedValue));
   }, [debouncedValue])
-
-  // useEffect(() => {
-  //   const timerId = setTimeout(() => {
-  //     if (debouncedValue.trim()) {
-  //       dispatch(searchActions.fetchSearchList(debouncedValue));
-  //     }
-  //   }, delay);
-  
-  //   // Hủy timer cũ khi giá trị debouncedValue thay đổi
-  //   return () => clearTimeout(timerId);
-  // }, [debouncedValue]);
 
   const handleClear = () => {
     setQuery('')
@@ -128,6 +98,7 @@ export default function SearchDashBoard() {
           open={open}
           transition
           placement="bottom-start">
+         
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <Box

@@ -14,6 +14,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
+import Top10PageItem from './Top10PageItem';
 
 export interface Top10PageProps {
     popurarityItemList: movieItem[];
@@ -25,16 +26,35 @@ export default function Top10Page({
 }: Top10PageProps) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    const maxSteps = popurarityItemList.length
+
+
+    // const uniquePopurarityItemList = Array.from(new Set(popurarityItemList.map(item => item.title)))
+    //     .map(title => popurarityItemList.find(item => item.title === title));
+
+    const uniquePopurarityItemList: movieItem[] = [];
+    const seenTitles = new Set<string>();
+
+    popurarityItemList.forEach((item: movieItem) => {
+        if (!seenTitles.has(item.imdb_id)) {
+            seenTitles.add(item.imdb_id);
+            uniquePopurarityItemList.push(item);
+        }
+    });
+    const maxSteps = uniquePopurarityItemList.length
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 6);
+    };
+    const handleLast = () => {
+        setActiveStep(maxSteps - 1);
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 6);
     };
-
+    const handleBackFirst = () => {
+        setActiveStep(0);
+    };
 
     return (
         <div>
@@ -44,7 +64,7 @@ export default function Top10Page({
                     marginTop: '30px',
                     marginBottom: '30px'
                 }}>
-                    <Diversity2Icon sx={{ color: 'yellow', height: '100%'  }} />;
+                    <Diversity2Icon sx={{ color: 'yellow', height: '100%' }} />;
                     <>
                         <Typography variant='h3' sx={{
                             color: 'white',
@@ -59,446 +79,57 @@ export default function Top10Page({
                     </>
                     {/* <PlayArrowIcon  sx={{ color: 'yellow', height: '100%'  }} /> */}
                 </Button>
-                <Grid item xs={12} >
-                    <Stack direction='row' spacing={3}>
-                        <Box sx={{ px: 3, objectFit: 'contain', width: '100%', bgcolor: 'black', position: 'relative' }}>
-                            <Stack spacing={5.5} direction="row">
-                                <Stack spacing={2} alignItems="center">
-                                    <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 0]?.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
-                                        />
-                                        <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                                        <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
-                                    </Stack>
+                <Grid item xs={12}>
+                    <Stack direction='row' spacing={3} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Box>
+                            <Button sx={{ color: 'white' }} size="small" onClick={handleBack} disabled={activeStep === 0}>
+                                {theme.direction === 'rtl' ? (
+                                    <KeyboardArrowRight />
+                                ) : (
+                                    <KeyboardArrowLeft />
+                                )}
+                               Back
 
-                                    <Stack>
-                                        <Stack direction="row" spacing={5} >
-                                            <Stack direction="row" spacing={1} >
-                                                <StarIcon sx={{ color: 'yellow' }} />
-                                                <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 0]?.rating}</Typography>
-                                            </Stack>
-                                            <StarBorderIcon sx={{ color: 'blue' }} />
-
-                                        </Stack>
-                                        <Box>
-                                            <h4 style={{
-                                                textAlign: "justify",
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                textDecoration: 'bold',
-                                                color: 'white',
-                                                marginTop: '0%',
-
-
-                                            }}>
-                                                {popurarityItemList[activeStep + 0]?.title.substring(0, 24)}...
-                                            </h4>
-                                        </Box>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
-                                            < AddIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: '#7FC7D9',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Watch List
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#black', height: '50px', opacity: '90%' }}>
-                                            < PlayArrowIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Trailer
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                    </Stack>
-
-                                </Stack>
-                                <Stack spacing={2} alignItems="center">
-                                    <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 1]?.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                        />
-                                        <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                                        <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
-                                    </Stack>
-
-                                    <Stack>
-                                        <Stack direction="row" spacing={5} >
-                                            <Stack direction="row" spacing={1} >
-                                                <StarIcon sx={{ color: 'yellow' }} />
-                                                <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 1]?.rating}</Typography>
-                                            </Stack>
-                                            <StarBorderIcon sx={{ color: 'blue' }} />
-
-                                        </Stack>
-                                        <Box>
-                                            <h4 style={{
-                                                textAlign: "justify",
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                textDecoration: 'bold',
-                                                color: 'white',
-                                                marginTop: '0%',
-
-
-                                            }}>
-                                                {popurarityItemList[activeStep + 1]?.title.substring(0, 24)}...
-                                            </h4>
-                                        </Box>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
-                                            < AddIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: '#7FC7D9',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Watch List
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#black', height: '50px', opacity: '90%' }}>
-                                            < PlayArrowIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Trailer
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                    </Stack>
-
-                                </Stack>
-                                <Stack spacing={2} alignItems="center">
-                                    <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 2]?.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                        />
-                                        <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                                        <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
-                                    </Stack>
-
-                                    <Stack>
-                                        <Stack direction="row" spacing={5} >
-                                            <Stack direction="row" spacing={1} >
-                                                <StarIcon sx={{ color: 'yellow' }} />
-                                                <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 2]?.rating}</Typography>
-                                            </Stack>
-                                            <StarBorderIcon sx={{ color: 'blue' }} />
-
-                                        </Stack>
-                                        <Box>
-                                            <h4 style={{
-                                                textAlign: "justify",
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                textDecoration: 'bold',
-                                                color: 'white',
-                                                marginTop: '0%',
-
-
-                                            }}>
-                                                {popurarityItemList[activeStep + 2]?.title.substring(0, 24)}...
-                                            </h4>
-                                        </Box>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
-                                            < AddIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: '#7FC7D9',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Watch List
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#black', height: '50px', opacity: '90%' }}>
-                                            < PlayArrowIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Trailer
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                    </Stack>
-
-                                </Stack>
-                                <Stack spacing={2} alignItems="center">
-                                    <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 3]?.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                        />
-                                        <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                                        <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
-                                    </Stack>
-
-                                    <Stack>
-                                        <Stack direction="row" spacing={5} >
-                                            <Stack direction="row" spacing={1} >
-                                                <StarIcon sx={{ color: 'yellow' }} />
-                                                <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 3]?.rating}</Typography>
-                                            </Stack>
-                                            <StarBorderIcon sx={{ color: 'blue' }} />
-
-                                        </Stack>
-                                        <Box>
-                                            <h4 style={{
-                                                textAlign: "justify",
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                textDecoration: 'bold',
-                                                color: 'white',
-                                                marginTop: '0%',
-
-
-                                            }}>
-                                                {popurarityItemList[activeStep + 3]?.title.substring(0, 24)}...
-                                            </h4>
-                                        </Box>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
-                                            < AddIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: '#7FC7D9',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Watch List
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#black', height: '50px', opacity: '90%' }}>
-                                            < PlayArrowIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Trailer
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                    </Stack>
-
-                                </Stack>
-                                <Stack spacing={2} alignItems="center">
-                                    <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 4]?.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                        />
-                                        <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                                        <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
-                                    </Stack>
-
-                                    <Stack>
-                                        <Stack direction="row" spacing={5} >
-                                            <Stack direction="row" spacing={1} >
-                                                <StarIcon sx={{ color: 'yellow' }} />
-                                                <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 4]?.rating}</Typography>
-                                            </Stack>
-                                            <StarBorderIcon sx={{ color: 'blue' }} />
-
-                                        </Stack>
-                                        <Box>
-                                            <h4 style={{
-                                                textAlign: "justify",
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                textDecoration: 'bold',
-                                                color: 'white',
-                                                marginTop: '0%',
-
-
-                                            }}>
-                                                {popurarityItemList[activeStep + 4]?.title.substring(0, 24)}...
-                                            </h4>
-                                        </Box>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
-                                            < AddIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: '#7FC7D9',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Watch List
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#black', height: '50px', opacity: '90%' }}>
-                                            < PlayArrowIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Trailer
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                    </Stack>
-
-                                </Stack>
-                                <Stack spacing={2} alignItems="center">
-                                    <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            src={popurarityItemList[activeStep + 5]?.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                        />
-                                        <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                                        <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
-                                    </Stack>
-
-                                    <Stack>
-                                        <Stack direction="row" spacing={5} >
-                                            <Stack direction="row" spacing={1} >
-                                                <StarIcon sx={{ color: 'yellow' }} />
-                                                <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 5]?.rating}</Typography>
-                                            </Stack>
-                                            <StarBorderIcon sx={{ color: 'blue' }} />
-
-                                        </Stack>
-                                        <Box>
-                                            <h4 style={{
-                                                textAlign: "justify",
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                textDecoration: 'bold',
-                                                color: 'white',
-                                                marginTop: '0%',
-
-
-                                            }}>
-                                                {popurarityItemList[activeStep + 5]?.title.substring(0, 24)}...
-                                            </h4>
-                                        </Box>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
-                                            < AddIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: '#7FC7D9',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Watch List
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                        <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#black', height: '50px', opacity: '90%' }}>
-                                            < PlayArrowIcon sx={{ color: 'blue' }} />
-                                            <>
-                                                <span style={{ marginRight: '1rem' }}></span>
-                                                <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
-                                                }}>
-                                                    Trailer
-                                                </Typography>
-
-                                            </>
-                                        </Button>
-                                    </Stack>
-
-                                </Stack>
-
-                            </Stack>
-
-
+                            </Button>
+                            <Button sx={{ color: 'white', mt: '40px' }} size="small" onClick={handleBackFirst} disabled={activeStep === 0}>
+                                {theme.direction === 'rtl' ? (
+                                    <KeyboardArrowRight />
+                                ) : (
+                                    <KeyboardArrowLeft />
+                                )}
+                                
+                                First
+                            </Button>
                         </Box>
 
-                        <Button sx={{ position: 'absolute', top: '50%', left: -50, color: 'black', height: "30px", bgcolor: 'green' }} size="small" onClick={handleBack} disabled={activeStep === 0}>
-                            {theme.direction === 'rtl' ? (
-                                <KeyboardArrowRight />
-                            ) : (
-                                <KeyboardArrowLeft />
-                            )}
-                            <Button sx={{ color: 'red' }}> Back </Button>
-                        </Button>
-                        <Button sx={{ position: 'absolute', top: '50%', right: 100, color: 'white', height: "30px", bgcolor: 'green' }} size="small" onClick={handleNext}
-                            disabled={activeStep === maxSteps - 1}
-                        >
-                            Next
-                            {theme.direction === 'rtl' ? (
-                                <KeyboardArrowLeft />
-                            ) : (
-                                <KeyboardArrowRight />
-                            )}
-                        </Button>
-                        {/* </Grid> */}
+                        <Box sx={{ px: 3, objectFit: 'contain', width: '100%', bgcolor: 'black' }}>
+                            <Stack spacing={3.3} direction="row" sx={{ width: '100%', height: '60vh' }}>
+                                {uniquePopurarityItemList.slice(0, 6).map((item, index) => (
+                                    <Top10PageItem key={index} popurarityItemList={uniquePopurarityItemList} number={index} activeStep={activeStep} />
+                                ))}
+                            </Stack>
+                        </Box>
+                        <Box>
+                            <Button sx={{ color: 'white' }} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                                Next
+                                {theme.direction === 'rtl' ? (
+                                    <KeyboardArrowLeft />
+                                ) : (
+                                    <KeyboardArrowRight />
+                                )}
+                            </Button>
+                            <Button sx={{ color: 'white', mt: '40px'  }} size="small" onClick={handleLast} disabled={activeStep === maxSteps - 1}>
+                                Latest
+                                {theme.direction === 'rtl' ? (
+                                    <KeyboardArrowLeft />
+                                ) : (
+                                    <KeyboardArrowRight />
+                                )}
+                            </Button>
+                        </Box>
                     </Stack>
-
                 </Grid>
+
             </Grid>
         </div >
 

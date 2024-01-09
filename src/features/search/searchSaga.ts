@@ -17,7 +17,7 @@ function* fetchSearchList(action: PayloadAction<ListParams>) {
 }
 
 export default function* searchSaga() {
-    yield takeLatest(searchActions.fetchSearchList.type, fetchSearchList)
+    yield takeEvery(searchActions.fetchSearchList.type, fetchSearchList)
     // yield debounce(500,searchActions.fetchSearchList.type, fetchSearchListItem)
 
 }

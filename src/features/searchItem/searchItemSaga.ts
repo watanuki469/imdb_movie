@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import genresApi from 'api/genresApi';
 import { ListParams, ListResponse, searchItem } from 'models';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, debounce, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { searchItemActions } from './searchItemSlice';
 
 function* fetchSearchItemList(action: PayloadAction<ListParams>) {

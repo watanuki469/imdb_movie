@@ -18,8 +18,8 @@ export default function SliderPage({
 }: SliderPageProps) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    // const maxSteps = 50
-    const maxSteps = popurarityItemList.length
+    // const maxSteps = popurarityItemList.length
+    const maxSteps = 50
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -28,6 +28,28 @@ export default function SliderPage({
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+    // const uniquePopurarityItemList: movieItem[] = [];
+    // const seenTitles = new Set<string>();
+
+    // popurarityItemList.forEach((item: movieItem) => {
+    //     if (!seenTitles.has(item.title)) {
+    //         seenTitles.add(item.title);
+    //         uniquePopurarityItemList.push(item);
+    //     }
+    // });
+    const removeDuplicateData = (popurarityItemList: any) => {
+        // Sử dụng Set để đảm bảo các phần tử duy nhất
+        const uniqueSet = new Set(popurarityItemList.map((item: any) => item.title));
+        // Chuyển đổi Set thành mảng để có thể sử dụng các phương thức của mảng
+        const uniqueArray = Array.from(uniqueSet);
+        // Tạo một mảng mới chỉ chứa các phần tử không trùng lặp
+        const result = uniqueArray.map((title) => popurarityItemList.find((item: any) => item.title === title));
+        return result;
+    };
+
+    // Sử dụng hàm để loại bỏ các phần tử trùng lặp từ mảng movieItemList
+    //   const uniqueMovieItemList = removeDuplicateData(popurarityItemList);
+    const uniquePopurarityItemList = removeDuplicateData(popurarityItemList);
 
 
     return (
@@ -43,14 +65,14 @@ export default function SliderPage({
                         },
                         backgroundPosition: "top",
                         backgroundSize: "cover",
-                        // src={popurarityItemList[activeStep] && popurarityItemList[activeStep].banner && popurarityItemList[activeStep]?.banner}
-                        backgroundImage: `url(${popurarityItemList[activeStep]?.banner})`,
+                        // src={uniquePopurarityItemList[activeStep] && uniquePopurarityItemList[activeStep].banner && uniquePopurarityItemList[activeStep]?.banner}
+                        backgroundImage: `url(${uniquePopurarityItemList[activeStep]?.banner})`,
 
 
                     }} >
                         <div style={{ display: 'flex' }} >
                             <img
-                                src={popurarityItemList[activeStep]?.image_url}
+                                src={uniquePopurarityItemList[activeStep]?.image_url}
                                 alt="movie-img"
                                 style={{
                                     display: 'inline-flex',
@@ -75,7 +97,7 @@ export default function SliderPage({
                                         textDecoration: 'bold',
                                         color: 'white',
 
-                                    }}>{popurarityItemList[activeStep]?.title}
+                                    }}>{uniquePopurarityItemList[activeStep]?.title}
                                     </h2>
 
                                     <div>
@@ -86,11 +108,11 @@ export default function SliderPage({
                                             overflow: "hidden",
                                             WebkitBoxOrient: "vertical",
 
-                                        }}>{popurarityItemList[activeStep]?.description.substring(0, 120)}...</Typography>
+                                        }}>{uniquePopurarityItemList[activeStep]?.description.substring(0, 120)}...</Typography>
                                     </div>
                                 </div>
                                 <h4 style={{ textDecoration: 'none', color: 'rgba(255, 255, 255, 0.7)', alignSelf: 'center', marginRight: '10px', width: '150px' }}>
-                                    {popurarityItemList[activeStep]?.movie_length} min
+                                    {uniquePopurarityItemList[activeStep]?.movie_length} min
                                 </h4>
                             </Box>
 
@@ -98,6 +120,7 @@ export default function SliderPage({
 
                     </Box>
 
+                 
                     <MobileStepper
                         sx={{ backgroundColor: 'transparent', color: 'blue' }}
                         variant="text"
@@ -144,7 +167,7 @@ export default function SliderPage({
                                 <Stack spacing={2} direction="row" alignItems="center">
                                     <Avatar variant="square" sx={{ width: '100px', height: '100%', overflow: 'hidden', objectFit: 'cover' }}>
                                         <img
-                                            src={popurarityItemList[activeStep + 1]?.image_url}
+                                            src={uniquePopurarityItemList[activeStep + 1]?.image_url}
                                             alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
@@ -160,7 +183,7 @@ export default function SliderPage({
                                                 },
                                             }} />
                                             <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
-                                                {popurarityItemList[activeStep + 1]?.movie_length} min
+                                                {uniquePopurarityItemList[activeStep + 1]?.movie_length} min
                                             </h4>
                                         </Box>
                                         <Box>
@@ -175,7 +198,7 @@ export default function SliderPage({
 
 
                                             }}>
-                                                {popurarityItemList[activeStep + 1]?.title}
+                                                {uniquePopurarityItemList[activeStep + 1]?.title}
                                             </h4>
                                             <Typography sx={{
                                                 color: 'gray',
@@ -193,7 +216,7 @@ export default function SliderPage({
                                 <Stack spacing={2} direction="row" alignItems="center">
                                     <Avatar variant="square" sx={{ width: '100px', height: '100%', overflow: 'hidden', objectFit: 'cover' }}>
                                         <img
-                                            src={popurarityItemList[activeStep + 2]?.image_url}
+                                            src={uniquePopurarityItemList[activeStep + 2]?.image_url}
                                             alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
@@ -209,7 +232,7 @@ export default function SliderPage({
                                                 },
                                             }} />
                                             <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
-                                                {popurarityItemList[activeStep + 2]?.movie_length} min
+                                                {uniquePopurarityItemList[activeStep + 2]?.movie_length} min
                                             </h4>
                                         </Box>
                                         <Box>
@@ -224,7 +247,7 @@ export default function SliderPage({
 
 
                                             }}>
-                                                {popurarityItemList[activeStep + 2]?.title}
+                                                {uniquePopurarityItemList[activeStep + 2]?.title}
                                             </h4>
                                             <Typography sx={{
                                                 color: 'gray',
@@ -242,7 +265,7 @@ export default function SliderPage({
                                 <Stack spacing={2} direction="row" alignItems="center">
                                     <Avatar variant="square" sx={{ width: '100px', height: '100%', overflow: 'hidden', objectFit: 'cover' }}>
                                         <img
-                                            src={popurarityItemList[activeStep + 3]?.image_url}
+                                            src={uniquePopurarityItemList[activeStep + 3]?.image_url}
                                             alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
@@ -258,7 +281,7 @@ export default function SliderPage({
                                                 },
                                             }} />
                                             <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
-                                                {popurarityItemList[activeStep + 3]?.movie_length} min
+                                                {uniquePopurarityItemList[activeStep + 3]?.movie_length} min
                                             </h4>
                                         </Box>
                                         <Box>
@@ -273,7 +296,7 @@ export default function SliderPage({
 
 
                                             }}>
-                                                {popurarityItemList[activeStep + 3]?.title}
+                                                {uniquePopurarityItemList[activeStep + 3]?.title}
                                             </h4>
                                             <Typography sx={{
                                                 color: 'gray',

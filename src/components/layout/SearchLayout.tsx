@@ -1,8 +1,7 @@
-import { Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import SearchPage from "components/pages/SearchPage";
 import { searchItemActions, selectSearchItemList } from "features/searchItem/searchItemSlice";
-import { Movie, search } from 'models';
+import { search } from 'models';
 import { useEffect } from "react";
 
 export interface SearchLayoutProps {
@@ -18,12 +17,13 @@ export default function SearchLayout({
 
   useEffect(() => {
     if (searchList) {
-      searchList.map(item =>
+      searchList.forEach(item =>
         dispatch(searchItemActions.fetchSearchItemList(item.imdb_id))
-
       )
     }
   }, [searchList])
+
+
 
   return (
     <div>

@@ -77,11 +77,12 @@ export function Header() {
                                 }}>IMDb</Button>
                         </Grid>
                         <Grid item xs={1}>
-                            <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}>
+                            <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}
+                            onClick={() => handleRemoveClick()}>
                                 < ReorderIcon sx={{ color: 'white' }} />
                                 <>
                                     <span style={{ marginRight: '1rem' }}></span>
-                                    <Typography onClick={() => handleRemoveClick()} sx={{
+                                    <Typography  sx={{
                                         display: 'flex', alignItems: 'center', color: 'white',
                                         border: 'none',
                                         fontWeight: 'bold',
@@ -156,6 +157,7 @@ export function Header() {
                             </Button>
 
                         </Grid>
+                        
                         <Grid item xs={1} >
                             <Button fullWidth sx={{
                                 bgcolor: 'black',
@@ -267,7 +269,7 @@ export function Header() {
                     <Grid item xs={4} sx={{ color: 'white', alignContent: 'center', textAlign: 'center' }}>
                         <Button
                             fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', mt: 3 }}>
-                            < Theaters fontSize="large" sx={{ color: 'white', height: '500px' }} />
+                            < Theaters fontSize="large" sx={{ color: 'yellow', height: '500px' }} />
                             <>
                                 <span style={{ marginRight: '1rem' }}></span>
                                 <Typography variant='h3' sx={{
@@ -282,20 +284,20 @@ export function Header() {
                             </>
                         </Button>
 
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Release Calendar</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top 250 Movies</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Movies</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse Movies By Genre</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Box Office</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Showtimes & Ticked</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Movies News</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>India Movie Spotlight</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Release Calendar</Typography>
+                        {/* <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Movies</Typography> */}
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Movies</Typography>
+                        {/* <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse Movies By Genre</Typography> */}
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Box Office</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Showtimes & Ticked</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Movies News</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>India Movie Spotlight</Typography>
 
                     </Grid>
 
                     <Grid item xs={4} sx={{ color: 'white', alignContent: 'center', textAlign: 'center' }}>
                         <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', mt: 7 }}>
-                            < TvIcon fontSize="large" sx={{ color: 'white', height: '500px' }} />
+                            < TvIcon fontSize="large" sx={{ color: 'yellow', height: '500px' }} />
                             <>
                                 <span style={{ marginRight: '1rem' }}></span>
                                 <Typography variant='h3' sx={{
@@ -309,16 +311,16 @@ export function Header() {
 
                             </>
                         </Button>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What's on TV & Streaming</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top 250 TV Shows</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular TV Shows</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse TV Shows By Genre</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>TV News</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What's on TV & Streaming</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top 250 TV Shows</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular TV Shows</Typography>
+                        {/* <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse TV Shows By Genre</Typography> */}
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>TV News</Typography>
 
                     </Grid>
                     <Grid item xs={4} sx={{ color: 'white', alignContent: 'center', textAlign: 'center' }}>
                         <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', mt: 3 }}>
-                            < Stars fontSize="large" sx={{ color: 'white', height: '500px' }} />
+                            < Stars fontSize="large" sx={{ color: 'yellow', height: '500px' }} />
                             <>
                                 <span style={{ marginRight: '1rem' }}></span>
                                 <Typography variant='h3' sx={{
@@ -332,19 +334,19 @@ export function Header() {
 
                             </>
                         </Button>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Oscars</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Emmys</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Best Of 2023</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Holiday Picks</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Starmeter Awards</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Awards Central</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Festival Central</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>All Event</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Oscars</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Emmys</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Best Of 2023</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Holiday Picks</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Starmeter Awards</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Awards Central</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Festival Central</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>All Event</Typography>
 
                     </Grid>
                     <Grid item xs={4} sx={{ color: 'white', alignContent: 'center', textAlign: 'center' }}>
                         <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', mt: 3 }}>
-                            < People fontSize="large" sx={{ color: 'white', height: '500px' }} />
+                            < People fontSize="large" sx={{ color: 'yellow', height: '500px' }} />
                             <>
                                 <span style={{ marginRight: '1rem' }}></span>
                                 <Typography variant='h3' sx={{
@@ -358,14 +360,14 @@ export function Header() {
 
                             </>
                         </Button>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Born Today</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Celebs</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Celebrity News</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Born Today</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Celebs</Typography>
+                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Celebrity News</Typography>
 
                     </Grid>
                     <Grid item xs={4} sx={{ color: 'white', alignContent: 'center', textAlign: 'center' }}>
                         <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', mt: -7 }}>
-                            < VideoLibrary fontSize="large" sx={{ color: 'white', height: '500px' }} />
+                            < VideoLibrary fontSize="large" sx={{ color: 'yellow', height: '500px' }} />
                             <>
                                 <span style={{ marginRight: '1rem' }}></span>
                                 <Typography variant='h3' sx={{
@@ -379,16 +381,16 @@ export function Header() {
 
                             </>
                         </Button>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What to Watch</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Latest Trailers</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Originals</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Picks</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Podcasts</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What to Watch</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Latest Trailers</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Originals</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Picks</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Podcasts</Typography>
 
                     </Grid>
                     <Grid item xs={4} sx={{ color: 'white', alignContent: 'center', textAlign: 'center' }}>
                         <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', mt: 3 }}>
-                            < Public fontSize="large" sx={{ color: 'white', height: '500px' }} />
+                            < Public fontSize="large" sx={{ color: 'yellow', height: '500px' }} />
                             <>
                                 <span style={{ marginRight: '1rem' }}></span>
                                 <Typography variant='h3' sx={{
@@ -402,9 +404,9 @@ export function Header() {
 
                             </>
                         </Button>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Help Center</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Contributor Zone</Typography>
-                        <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Polls</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Help Center</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Contributor Zone</Typography>
+                        <Typography onClick={() => navigate('/NotFound')}variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Polls</Typography>
 
                     </Grid>
                 </Grid>

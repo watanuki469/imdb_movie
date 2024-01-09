@@ -28,7 +28,9 @@ const searchSlice = createSlice({
         },
         //cập nhật vào redux từ fetch search list
         fetchSearchListSuccess(state, action: PayloadAction<any>) {
-            state.list = action.payload.results // Take only the first 4 results
+            state.list = action.payload.results
+            // state.list = [...state.list, action.payload.results]
+            // state.list = [ action.payload.results]
             state.loading = false
         },
         fetchSearchListFailed(state, action: PayloadAction<string>) {
