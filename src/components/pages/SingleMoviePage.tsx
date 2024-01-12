@@ -1,25 +1,20 @@
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { AppBar, Avatar, Badge, Box, Button, Card, CardContent, Divider, Grid, IconButton, List, ListItem, ListItemText, Stack, Toolbar, Typography } from "@mui/material";
-import { yellow } from "@mui/material/colors";
-import { movieItem, singleMovie } from 'models';
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CategoryIcon from '@mui/icons-material/Category';
+import FilterIcon from '@mui/icons-material/Filter';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ShareIcon from '@mui/icons-material/Share';
 import StarIcon from '@mui/icons-material/Star';
-import SpeedIcon from '@mui/icons-material/Speed';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import AddIcon from '@mui/icons-material/Add';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import Diversity2Icon from '@mui/icons-material/Diversity2';
-import FilterIcon from '@mui/icons-material/Filter';
-import { useState } from 'react';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { AppBar, Badge, Box, Button, Divider, Grid, IconButton, List, ListItem, Stack, Toolbar, Typography } from "@mui/material";
+import { movieItem, singleMovie } from 'models';
+import { useNavigate } from "react-router-dom";
 
 export interface SingleMoviePageProps {
-    singleList: movieItem[]
+    singleList: singleMovie[]
+    //fix from movieItem
 }
 
 export default function SingleMoviePage({
@@ -212,12 +207,7 @@ export default function SingleMoviePage({
                                         </Typography>
 
                                     </Stack>
-                                    {/* <Stack alignItems="left">
-                                        <Typography variant="h6" color='#B0A695'>
-                                            Original Tittle:   {item.title}
-                                        </Typography>
-
-                                    </Stack> */}
+                                   
                                     <Stack alignItems="left">
                                         <Typography variant="h6" color="#B0A695">
                                             {item.year}  {bull}   {item.content_rating}  {bull}   {item.movie_length} min
@@ -473,10 +463,11 @@ export default function SingleMoviePage({
                                         </Box>
                                         <Box sx={{ textAlign: 'left' }}>
                                             <Typography sx={{
-                                                color: "black", fontSize: "1.5rem",
+                                                color: "black", fontSize: "1rem",
                                                 fontWeight: "bold",
                                                 fontFamily: "Arial, sans-serif",
-                                                textTransform: 'capitalize'
+                                                textTransform: 'capitalize',
+                                                
                                             }}>  Add to watch list </Typography>
                                             <Typography sx={{ color: 'black' }}>Added by {item.popularity} user </Typography>
 

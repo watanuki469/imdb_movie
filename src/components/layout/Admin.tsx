@@ -8,13 +8,13 @@ export function AdminLayout() {
     // const classes = useStyles();
 
     return (
-        <Box  sx={{ bgcolor: "black" }}>
+        <Box sx={{ bgcolor: "black" }}>
             <Header />
-            <SliderDashBoard/>
-            <Body />
+            {/* <SliderDashBoard /> */}
+                {/* <Body />  */}
          
-            <Top10DashBoard/>
-            <Footer/>
+            {/* <Top10DashBoard/>  */}
+            {/* <Footer/> */}
         </Box>
     );
 }

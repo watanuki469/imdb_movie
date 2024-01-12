@@ -18,4 +18,8 @@ export interface movieItem {
         id:any,
         genre:any
     ]
+    keywords:[
+        id:any,
+        keyword:any
+    ]
 }

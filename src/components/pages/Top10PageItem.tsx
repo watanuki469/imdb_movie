@@ -6,6 +6,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Box, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { movieItem } from 'models';
+import { useNavigate } from 'react-router-dom';
 
 export interface Top10PageProps {
     popurarityItemList: movieItem[],
@@ -19,19 +20,22 @@ export default function Top10PageItem({
     activeStep
 
 }: Top10PageProps) {
+    const navigate = useNavigate()
     return (
         <div>
             <Stack sx={{ position: 'relative', height: '300px', width: '200px' }}>
-                <img
-                    src={popurarityItemList[activeStep + number]?.image_url}
-                    alt="movie-img"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
-                   
-                    onError={(e) => {
-                        const imgElement = e.currentTarget as HTMLImageElement;
-                        imgElement.src = 'https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây
-                      }}
-                />
+                <a href='/'>
+                    <img
+                        src={popurarityItemList[activeStep + number]?.image_url}
+                        alt="movie-img"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
+                        onError={(e) => {
+                            const imgElement = e.currentTarget as HTMLImageElement;
+                            imgElement.src = 'https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây
+                        }}
+                    />
+                </a>
+
                 <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
                 <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
             </Stack>
@@ -39,8 +43,8 @@ export default function Top10PageItem({
             <Stack>
                 <Stack direction="row" spacing={5} >
                     <Stack direction="row" spacing={1} >
-                        <StarIcon sx={{ color: 'yellow' }} />
-                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + 0]?.rating}</Typography>
+                        <StarIcon sx={{ color: 'yellow', fontSize: '25px', left: 5, top: 10 }} />
+                        <Typography variant='h5' sx={{ color: 'rgba(255, 255, 255, 0.7)' }}> {popurarityItemList[activeStep + number]?.rating}</Typography>
                     </Stack>
                     <StarBorderIcon sx={{ color: 'blue' }} />
 

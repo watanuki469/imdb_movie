@@ -3,6 +3,7 @@ import { AdminLayout, MovieLayout, NotFound, SingleMovie } from 'components/layo
 import { Pro } from 'components/layout/Pro';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import PopularDashBoard from 'components/dashboard/PopularDashBoard';
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
         <Route path="/movie/id/:imdb_id" element={<SingleMovie/>}/>
         <Route path='*' element={<NotFound />}/>
         <Route path='IMDbPro' element={<Pro />}/>
-
+        <Route path='Popular' element={<PopularDashBoard/>}/>
+        <Route/>
+        
       </Routes>
     </div>
   );

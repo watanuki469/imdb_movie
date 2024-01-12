@@ -1,22 +1,16 @@
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { People, Public, Search, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
+import { People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TvIcon from '@mui/icons-material/Tv';
-import { AppBar, Box, Button, Checkbox, Dialog, FormControl, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { AppBar, Box, Button, Dialog, FormControl, Grid, InputLabel, OutlinedInput, Select, SelectChangeEvent, Typography } from "@mui/material";
 import SearchDashBoard from 'components/dashboard/SearchDashBoard';
-import { searchActions, selectSearchFilterList } from 'features/search/searchSlice';
-import { ListParams } from 'models';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 export function Header() {
     let navigate = useNavigate();
-
     const [open, setOpen] = useState(false);
-
-
     const handleRemoveClick = () => {
         setOpen(true);
     };
@@ -90,33 +84,11 @@ export function Header() {
                                     }}>
                                         Menu
                                     </Typography>
-
                                 </>
                             </Button>
 
                         </Grid>
-                        {/* <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: 'flex' }} >
-                            <FormControl variant="outlined" size="small" sx={{ bgcolor: 'white', width: '30%' }}>
-                                <InputLabel sx={{ color: 'black' }}>All</InputLabel>
-                                <Select fullWidth sx={{ color: "black", width: '100%' }} label="Sort" >
-                                    <MenuItem value="name.asc" > Titles  </MenuItem>
-                                    <MenuItem value="name.desc">TV Episodes  </MenuItem>
-                                    <MenuItem value="mark.asc"> Celebs   </MenuItem>
-                                    <MenuItem value="mark.desc"> Companies </MenuItem>
-                                    <MenuItem value="gender.asc"> Keywords </MenuItem>
-                                    <MenuItem value="gender.desc"> Advanced Search </MenuItem>
-                                </Select>
-                            </FormControl>
-                            <FormControl fullWidth variant="outlined" size="small" sx={{ borderColor: 'white', bgcolor: 'white' }}>
-                                <InputLabel htmlFor="searchByName">Search by name</InputLabel>
-                                <OutlinedInput
-                                    id="searchByName"
-                                    label="Search by name"
-                                    sx={{ color: 'black' }}
-                                    endAdornment={<Search />}
-                                />
-                            </FormControl>
-                        </Grid> */}
+                  
                         <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: 'flex' }} >
                             <SearchDashBoard />
                         </Grid>
@@ -142,7 +114,6 @@ export function Header() {
                             <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', padding: '10px' }}>
                                 <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '70%' }} />;
                                 <>
-                                    {/* <span style={{ marginRight: '10px' }}></span> */}
                                     <Typography sx={{
                                         display: 'flex', alignItems: 'center', color: 'white',
                                         border: 'none',
@@ -152,7 +123,6 @@ export function Header() {
                                     }}>
                                         Watch List
                                     </Typography>
-
                                 </>
                             </Button>
 
@@ -191,12 +161,6 @@ export function Header() {
                                     MenuProps={MenuProps}
                                     sx={{ color: 'white' }}
                                 >
-                                    {/* {names.map((name) => (
-                                        <MenuItem key={name} value={name} >
-                                            <Checkbox checked={personName.indexOf(name) > -1} />
-                                            <ListItemText primary={name} />
-                                        </MenuItem>
-                                    ))} */}
                                 </Select>
                             </FormControl>
 
@@ -286,7 +250,7 @@ export function Header() {
 
                         <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Release Calendar</Typography>
                         {/* <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Movies</Typography> */}
-                        <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Movies</Typography>
+                        <Typography onClick={() => navigate('/Popular')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Movies</Typography>
                         {/* <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse Movies By Genre</Typography> */}
                         <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Box Office</Typography>
                         <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Showtimes & Ticked</Typography>
