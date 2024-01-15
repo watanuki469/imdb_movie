@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import SliderItemPageDashBoard from "./SliderItemPageDashBoard";
 import Top10ItemPageDashBoard from "./Top10ItemPageDashBoard";
 import PopularItemPageDashBoard from "./PopularItemPageDashBoard";
+import { Footer, Header } from "components/common";
 
 export default function PopularDashBoard() {
 
@@ -21,8 +22,11 @@ export default function PopularDashBoard() {
 
   return (
     <div>
-      <Box sx={{bgcolor: "black", position: "relative"}}>
-        <PopularItemPageDashBoard popurarityList={popurarityList}  />
+      <Box sx={{ bgcolor: "black", position: "relative" }}>
+        <Header />
+        <PopularItemPageDashBoard popurarityList={popurarityList} />
+        <Footer />
+
       </Box>
     </div>
   );
