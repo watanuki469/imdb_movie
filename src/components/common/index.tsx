@@ -6,3 +6,6 @@ export * from './Footer'
 export * from '../dashboard/MoviePageDashBoard'
 export * from './SinglePage'
 export * from '../dashboard/GenrePageDashBoard'
+export * from './ActorBio'
+export * from './Cast'
+

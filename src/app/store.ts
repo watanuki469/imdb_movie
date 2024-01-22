@@ -8,6 +8,11 @@ import singleMovieReducer from 'features/singleMovie/singleMovieSlice'
 import popularityReducer from 'features/popularity/popularitySlice'
 import searchReducer from 'features/search/searchSlice'
 import searchItemReducer from 'features/searchItem/searchItemSlice'
+import castReducer from 'features/cast/castSlice'
+import StarReducer from 'features/star/starSlice'
+import ActorReducer from 'features/actor/actorSlice'
+import AwardReducer from 'features/award/awardSlice'
+import singleStarReducer from 'features/singleStar/singleStarSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
@@ -15,10 +20,15 @@ export const store = configureStore({
     genre: genreReducer,
     movie: movieReducer,
     movieItem: movieItemReducer,
+    cast:castReducer,
     singleMovie: singleMovieReducer,
     searchItem: searchItemReducer,
     popularity: popularityReducer,
-    search: searchReducer
+    search: searchReducer,
+    star:StarReducer,
+    actor:ActorReducer,
+    award:AwardReducer,
+    singleStar:singleStarReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

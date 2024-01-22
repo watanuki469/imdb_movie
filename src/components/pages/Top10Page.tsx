@@ -1,19 +1,11 @@
+import Diversity2Icon from '@mui/icons-material/Diversity2';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import { Avatar, Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import MobileStepper from '@mui/material/MobileStepper';
 import { useTheme } from '@mui/material/styles';
 import { movieItem } from 'models';
 import { useState } from 'react';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import AddIcon from '@mui/icons-material/Add';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import StarIcon from '@mui/icons-material/Star';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import Diversity2Icon from '@mui/icons-material/Diversity2';
 import Top10PageItem from './Top10PageItem';
 
 export interface Top10PageProps {
@@ -34,6 +26,7 @@ export default function Top10Page({
     const uniquePopurarityItemList: movieItem[] = [];
     const seenTitles = new Set<string>();
 
+    //lọc bị trùng
     popurarityItemList.forEach((item: movieItem) => {
         if (!seenTitles.has(item.imdb_id)) {
             seenTitles.add(item.imdb_id);
@@ -101,6 +94,7 @@ export default function Top10Page({
                                 First
                             </Button>
                         </Box>
+                        
 
                         <Box sx={{ px: 3, objectFit: 'contain', width: '100%', bgcolor: 'black' }}>
                             <Stack spacing={3.3} direction="row" sx={{ width: '100%', height: '60vh' }}>
@@ -109,6 +103,8 @@ export default function Top10Page({
                                 ))}
                             </Stack>
                         </Box>
+
+
                         <Box>
                             <Button sx={{ color: 'white' }} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
                                 Next

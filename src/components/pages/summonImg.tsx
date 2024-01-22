@@ -1,18 +1,17 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import PopularPage from "components/pages/PopularPage";
-import Top10Page from "components/pages/Top10Page";
+import SliderPage from "components/pages/SliderPage";
 import { movieItemActions, selectmovieItemList } from "features/movieItem/movieItemSlice";
-import { movieItem, popularity } from 'models';
+import { award, movieItem, popularity } from 'models';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export interface PopularItemPageDashBoardProps {
-  popurarityList: popularity[]
+export interface SliderItemPageDashBoardProps {
+  popurarityList: award[]
 }
 
-export default function PopularItemPageDashBoard({
+export default function summonImg({
   popurarityList
-}: PopularItemPageDashBoardProps) {
+}: SliderItemPageDashBoardProps) {
   const dispatch = useAppDispatch()
   const popurarityItemList = useAppSelector(selectmovieItemList)
 
@@ -20,7 +19,7 @@ export default function PopularItemPageDashBoard({
     (async () => {
       if (popurarityList) {
         await popurarityList.map(item => {
-          dispatch(movieItemActions.fetchmovieItemList(item.imdb_id))
+          dispatch(movieItemActions.fetchmovieItemList(item.movie.imdb_id))
         })
       }
     })()
@@ -29,8 +28,7 @@ export default function PopularItemPageDashBoard({
 
   return (
     <div style={{ backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
-      <PopularPage popurarityItemList={popurarityItemList} />
-    
+      <SliderPage popurarityItemList={popurarityItemList} />
     </div >
 
   );

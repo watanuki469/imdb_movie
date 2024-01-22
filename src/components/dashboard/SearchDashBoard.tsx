@@ -44,6 +44,10 @@ export default function SearchDashBoard() {
     setOpen(false);
 
   };
+  const handleCloseButNotDeleteQuery = () => {
+    setOpen(false);
+
+  };
 
   return (
     <div style={{ width: '100%' }}>
@@ -101,7 +105,7 @@ export default function SearchDashBoard() {
          
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Box
+              <Box onClick={handleCloseButNotDeleteQuery}
                 sx={{
                   border: 1,
                   p: 1,

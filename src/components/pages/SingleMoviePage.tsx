@@ -9,6 +9,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import { AppBar, Badge, Box, Button, Divider, Grid, IconButton, List, ListItem, Stack, Toolbar, Typography } from "@mui/material";
+import Cast from 'components/common/Cast';
 import { movieItem, singleMovie } from 'models';
 import { useNavigate } from "react-router-dom";
 
@@ -57,16 +58,22 @@ export default function SingleMoviePage({
             return null;
         }
     };
-
+    const getRandomNumber = () => {
+        // Generate a random number between 1 and 100
+        return Math.floor(Math.random() * 100) + 1;
+    };
     let navigate = useNavigate();
+    const randomScore = getRandomNumber();
+
     return (
+        
         <div>
             <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 1, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Toolbar>
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <IconButton size="large" color="inherit">
                                 <Typography sx={{
                                     color: 'white',
                                     fontSize: "1.5rem",
@@ -199,7 +206,6 @@ export default function SingleMoviePage({
                     <Toolbar sx={{ mt: '30px' }}>
                         <Box>
                             {singleList.map(item =>
-                                // <Grid item xs={4} md={3} lg={2.4} >
                                 <Stack sx={{ textAlign: 'left' }}>
                                     <Stack alignItems="left">
                                         <Typography variant="h3" color="white">
@@ -207,7 +213,7 @@ export default function SingleMoviePage({
                                         </Typography>
 
                                     </Stack>
-                                   
+
                                     <Stack alignItems="left">
                                         <Typography variant="h6" color="#B0A695">
                                             {item.year}  {bull}   {item.content_rating}  {bull}   {item.movie_length} min
@@ -290,45 +296,46 @@ export default function SingleMoviePage({
                                     </Stack>
                                 </Grid>
                                 <Grid item xs={6} md={7}>
-                                    <iframe src={item.trailer} width="100%" height="100%">nfkn
+                                    <iframe src={`${item.trailer}?autoplay=1`}
+                                        width="100%" height="100%"
+                                        title="Trailer" frameBorder="0"
+                                    >nfkn
                                     </iframe>
                                 </Grid>
                                 <Grid item xs={6} md={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                                     <Stack sx={{ width: '100%', height: '100%' }} direction="column" justifyContent="center" alignItems="center">
                                         <Button fullWidth sx={{
-                                            height: '50%', bgcolor: 'gray', mb: 1,
+                                            height: '50%', bgcolor: '#EDCDBB', mb: 1,
                                             ':hover': {
-                                                opacity: '50%',
-                                                bgcolor: '#BC7AF9'
+                                                bgcolor: '#FFB6B9'
                                             },
                                         }}>
                                             <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
                                                 <VideoLibraryIcon sx={{ color: 'white', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
                                                 <Typography sx={{
-                                                    color: "blue", fontSize: "1.5rem",
+                                                    color: "yellow", fontSize: "1.5rem",
                                                     fontWeight: "bold",
                                                     fontFamily: "Arial, sans-serif",
                                                     textTransform: 'capitalize'
                                                 }}>
-                                                    24 VIDEOS
+                                                    {item.popularity} VIDEOS
                                                 </Typography>
                                             </Stack>
                                         </Button>
                                         <Button fullWidth sx={{
-                                            height: '50%', bgcolor: 'gray', mb: 1, ':hover': {
-                                                opacity: '50%',
-                                                bgcolor: '#BC7AF9'
+                                            height: '50%', bgcolor: '#EDCDBB', mb: 1, ':hover': {
+                                                bgcolor: '#FFB6B9'
                                             },
                                         }}>
                                             <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
                                                 <FilterIcon sx={{ color: 'white', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
                                                 <Typography sx={{
-                                                    color: "blue", fontSize: "1.5rem",
+                                                    color: "yellow", fontSize: "1.5rem",
                                                     fontWeight: "bold",
                                                     fontFamily: "Arial, sans-serif",
                                                     textTransform: 'capitalize'
                                                 }}>
-                                                    99+ PHOTOS
+                                                    {item.movie_length} PHOTOS
                                                 </Typography>
                                             </Stack>
                                         </Button>
@@ -399,55 +406,9 @@ export default function SingleMoviePage({
                                             {item.plot}</Typography>
                                     </ListItem>
                                     <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                                    <ListItem>
-                                        <Typography sx={{
-                                            color: 'white',
-                                            fontSize: "1.5rem",
-                                            fontWeight: "bold",
-                                            fontFamily: "Arial, sans-serif",
-                                            textTransform: 'capitalize',
-                                            ':hover': {
-                                                textDecoration: 'underline',
+                                    <Cast />
 
-                                            }
-                                        }}>Writers
 
-                                            <span style={{ color: 'blue', fontWeight: 'normal' }}>  J.K. Rowling {bull} Steve Kloves</span>
-                                        </Typography>
-                                    </ListItem>
-                                    <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                                    <ListItem>
-                                        <Typography sx={{
-                                            color: 'white',
-                                            fontSize: "1.5rem",
-                                            fontWeight: "bold",
-                                            fontFamily: "Arial, sans-serif",
-                                            textTransform: 'capitalize',
-                                            ':hover': {
-                                                textDecoration: 'underline',
-
-                                            }
-                                        }}>Stars
-
-                                            <span style={{ color: 'blue', fontWeight: 'normal' }}>  Daniel Radcliffe {bull} Rupert GrintRichard Harris</span>
-                                        </Typography>
-                                    </ListItem>
-                                    <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                                    <ListItem>
-                                        <Typography sx={{
-                                            color: 'white',
-                                            fontSize: "1.5rem",
-                                            fontWeight: "bold",
-                                            fontFamily: "Arial, sans-serif",
-                                            textTransform: 'capitalize',
-                                            ':hover': {
-                                                textDecoration: 'underline',
-
-                                            }
-                                        }}>IMBb<span style={{ color: '#AED2FF' }}>Pro</span>
-                                            <span style={{ color: 'blue', fontWeight: 'normal' }}> See production info at IMDbPro</span>
-                                        </Typography>
-                                    </ListItem>
                                 </List>
 
                             )}
@@ -457,7 +418,14 @@ export default function SingleMoviePage({
                         {singleList.map(item =>
                             <div>
                                 <Stack direction="row" spacing={0} >
-                                    <Button sx={{ display: 'flex', bgcolor: 'yellow' }}>
+                                    <Button sx={{
+                                        display: 'flex', bgcolor: 'yellow',
+                                        ':hover': {
+                                            bgcolor: 'green',
+                                            color: 'white',
+                                            borderColor: 'red'
+                                        },
+                                    }}>
                                         <Box>
                                             < AddIcon sx={{ color: 'black', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
                                         </Box>
@@ -467,17 +435,23 @@ export default function SingleMoviePage({
                                                 fontWeight: "bold",
                                                 fontFamily: "Arial, sans-serif",
                                                 textTransform: 'capitalize',
-                                                
+
                                             }}>  Add to watch list </Typography>
-                                            <Typography sx={{ color: 'black' }}>Added by {item.popularity} user </Typography>
+                                            <Typography sx={{ color: 'black' }}>Added by {item.popularity}k user </Typography>
 
                                         </Box>
 
 
                                     </Button>
                                     <Divider sx={{ borderColor: 'divider', border: '1px solid' }} orientation="vertical" />
-
-                                    <Button sx={{ display: 'flex', bgcolor: 'yellow' }}>
+                                    <Button sx={{
+                                        display: 'flex', bgcolor: 'yellow',
+                                        ':hover': {
+                                            bgcolor: 'green',
+                                            color: 'white',
+                                            borderColor: 'red'
+                                        },
+                                    }}>
                                         <Box>
                                             < KeyboardArrowDownIcon sx={{ color: 'black', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
                                         </Box>
@@ -510,6 +484,7 @@ export default function SingleMoviePage({
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={5}>
+                                            
                                             <Typography>
                                                 <span style={{
                                                     color: "white", fontSize: "1.5rem",
@@ -517,7 +492,7 @@ export default function SingleMoviePage({
                                                     fontFamily: "Arial, sans-serif",
                                                     textTransform: 'capitalize',
                                                     backgroundColor: 'green'
-                                                }}>65  </span>
+                                                }}>{randomScore}  </span>
                                                 Metascore
                                             </Typography>
                                         </Grid>

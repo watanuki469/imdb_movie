@@ -26,6 +26,7 @@ export function Footer() {
                                 <Avatar alt="Popcorn" src="https://mood2movie.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo512.14e7e857.png&w=640&q=75" />
                                 by
                                 <Avatar alt="Remy Sharp" src="https://cdn.gogeticon.net/files/1925428/fa0cbc2764f70113bf2fad3905933545.png" />
+                                Vasiliev
                             </Typography>
 
                         </Toolbar>

@@ -23,6 +23,7 @@ const singleMovieSlice = createSlice({
         fetchSingleMovieListSuccess(state, action: PayloadAction<any>) {
             // state.list = [...state.list, action.payload.results]
             state.list = [action.payload.results]
+            
             state.loading = false
         },
         fetchSingleMovieListFailed(state, action: PayloadAction<string>) {

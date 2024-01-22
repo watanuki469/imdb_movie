@@ -34,7 +34,6 @@ export default function SliderItemPageDashBoard({
   return (
     <div style={{ backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
       <SliderPage popurarityItemList={popurarityItemList} />
-    
     </div >
 
   );

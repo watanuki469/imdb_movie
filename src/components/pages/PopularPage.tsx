@@ -113,7 +113,9 @@ export default function PopularPage({
                                 <div key={movie.imdb_id} style={{ display: 'flex', alignItems: 'center' }}>
 
                                     {/* Left side - Image */}
-                                    <img src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }} />
+                                    <img src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }}
+                                        onClick={()=>navigate(`/movie/id/${movie.imdb_id}`)}
+                                    />
 
                                     {/* Right side - Details */}
                                     <Stack sx={{ color: 'white' }} alignItems={'flex-start'}>
@@ -125,7 +127,8 @@ export default function PopularPage({
                                                 fontFamily: "Arial, sans-serif",
                                                 textTransform: 'capitalize',
                                             }}
-                                        >{`${movie.title}`}</Typography>
+                                        >{`${movie.title}`}
+                                        </Typography>
 
                                         <div style={{ display: 'flex', marginBottom: '10px' }}>
                                             <h4 style={{ marginRight: '20px' }}>Year: {movie.year}</h4>
@@ -994,7 +997,7 @@ export default function PopularPage({
     const [displayedGenres, setDisplayedGenres] = useState(8); // Initial number of genres to display
     const handleLoadMore = () => {
         // Increase the number of displayed genres when "load more" is clicked
-        setDisplayedGenres(displayedGenres + 40); // You can adjust the number as per your requirement
+        setDisplayedGenres(displayedGenres + 40);
     };
 
 
@@ -1097,9 +1100,9 @@ export default function PopularPage({
                                                 </div>
                                             ))
                                         }
-                                         {/* Display selected genre with "X" icon */}
+                                        {/* Display selected genre with "X" icon */}
 
-                                         {
+                                        {
                                             // selectedGenres.length > 0 ? (
                                             selectedKeys.map((genre) => (
                                                 <div key={genre} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
@@ -1119,12 +1122,12 @@ export default function PopularPage({
                                     </Stack>
                                     <Dialog open={openGenDialog} onClose={handleDiaGenlogClose} maxWidth={'lg'}
                                         keepMounted={true}
-                                        
+
                                         PaperProps={{
                                             style: {
                                                 background: 'linear-gradient(rgba(57, 36, 103, 0.5), rgba(57, 36, 103, 0.5)), #392467',
                                                 // Gradient from transparent to #392467
-                                              },
+                                            },
                                         }}
                                     >
                                         <DialogTitle sx={{ color: 'yellow', textTransform: 'uppercase', fontWeight: 'bold' }}>Genres and Counts</DialogTitle>
@@ -1229,7 +1232,6 @@ export default function PopularPage({
                                                 }} >
                                                 <Box>
                                                     <Box sx={{
-                                                       
                                                         rowGap: 3,
                                                         gridTemplateColumns: 'repeat(4, 1fr)',
                                                     }} >
@@ -1269,7 +1271,7 @@ export default function PopularPage({
                                                                     alignContent: 'center', justifyContent: 'center',
                                                                     color: 'purple',
                                                                     border: '2px solid blue',
-                                                                    backgroundColor:'white'
+                                                                    backgroundColor: 'white'
                                                                 }}
                                                             >
                                                                 Load More ({Object.entries(keyCount).length - displayedGenres})

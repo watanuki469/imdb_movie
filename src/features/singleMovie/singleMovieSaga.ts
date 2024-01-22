@@ -18,4 +18,5 @@ function* fetchSingleMovieList(action: PayloadAction<ListParams>) {
 
 export default function* singleMovieSaga() {
     yield takeLatest(singleMovieActions.fetchSingleMovieList.type, fetchSingleMovieList)
+    // yield takeEvery(singleMovieActions.fetchSingleMovieList.type, fetchSingleMovieList)
 }

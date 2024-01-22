@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { searchItem } from 'models';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export interface SearchPageProps {
     searchItemList: searchItem[];
@@ -14,12 +15,15 @@ export default function SearchPage({
     const showMoreMovies = () => {
         setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4);
     };
+    let navigate=useNavigate()
 
     return (
         <div>
             {searchItemList.slice(0, visibleMovies).map((movie, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-                    <img src={movie.image_url} alt="" style={{ marginRight: '10px' ,height:'100px'}} />
+                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}
+                   onClick={() => navigate(`/movie/id/${movie.imdb_id}`)}
+                >
+                    <img src={movie.image_url} alt="" style={{ marginRight: '10px', height: '100px' }} />
                     <div>
                         <p style={{ marginBottom: '5px' }}>{movie.title}</p>
                         <p>Rating: {movie.rating}</p>

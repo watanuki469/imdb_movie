@@ -1,11 +1,9 @@
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { AppBar, Badge, BottomNavigation, BottomNavigationAction, Box, Button, Card, CardContent, Dialog, Divider, Grid, IconButton, Paper, Stack, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Dialog, Grid, Stack, Typography } from "@mui/material";
 import { yellow } from "@mui/material/colors";
 import { movieItem } from 'models';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CategoryIcon from '@mui/icons-material/Category';
-import ShareIcon from '@mui/icons-material/Share';
 
 export interface movieItemPageProps {
   movieItemList: movieItem[],
