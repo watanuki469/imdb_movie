@@ -17,7 +17,7 @@ const castSlice = createSlice({
     initialState,
     reducers: {
         fetchCastList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch cast list
         fetchCastListSuccess(state, action: PayloadAction<any>) {

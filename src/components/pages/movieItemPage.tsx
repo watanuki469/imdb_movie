@@ -62,6 +62,7 @@ export default function MovieItemPage({
 
   return (
     <div style={{ width: '80%', marginLeft: '10%' }}>
+      
       {renderPopularity()}
 
       {/* Dialog */}

@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
-import { Footer, Header, SinglePage } from "components/common";
+import { Footer, Header } from "components/common";
 import { StarPage } from "components/common/StarPage";
 import { useState } from "react";
 

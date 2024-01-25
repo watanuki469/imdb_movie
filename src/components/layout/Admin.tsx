@@ -10,11 +10,11 @@ export function AdminLayout() {
     return (
         <Box sx={{ bgcolor: "black" }}>
             <Header />
-            {/* <SliderDashBoard /> */}
-                {/* <Body />  */}
-         
-            {/* <Top10DashBoard/>  */}
-            {/* <Footer/> */}
+            <SliderDashBoard />
+            <Body />
+
+            <Top10DashBoard />
+            <Footer />
         </Box>
     );
 }

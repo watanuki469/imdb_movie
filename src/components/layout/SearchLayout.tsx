@@ -28,6 +28,7 @@ export default function SearchLayout({
   return (
     <div>
       <SearchPage searchItemList={searchItemList} />
+      
     </div>
 
   );

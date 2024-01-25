@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { searchItem } from 'models';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,9 +25,9 @@ export default function SearchPage({
                 >
                     <img src={movie.image_url} alt="" style={{ marginRight: '10px', height: '100px' }} />
                     <div>
-                        <p style={{ marginBottom: '5px' }}>{movie.title}</p>
-                        <p>Rating: {movie.rating}</p>
-                        <p>Year: {movie.year}</p>
+                        <Typography sx={{ marginBottom: '5px' }}>{movie.title}</Typography>
+                        <Typography>Rating: {movie.rating}</Typography>
+                        <Typography>Year: {movie.year}</Typography>
                     </div>
                 </div>
             ))}

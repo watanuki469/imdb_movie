@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export function MovieLayout() {
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>

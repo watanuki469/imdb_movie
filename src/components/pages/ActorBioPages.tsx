@@ -1,15 +1,8 @@
-import AddIcon from '@mui/icons-material/Add';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import CategoryIcon from '@mui/icons-material/Category';
-import ShareIcon from '@mui/icons-material/Share';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { AppBar, Badge, Box, Button, Dialog, Divider, Grid, IconButton, List, Popper, Stack, Toolbar, Typography } from "@mui/material";
-import { actor, star } from 'models';
-import { ReactNode, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import SingleStarMedia from './SingleStarMedia';
-import { PlayArrow } from '@mui/icons-material';
 import InfoIcon from '@mui/icons-material/Info';
+import { AppBar, Box, Button, Dialog, IconButton, Stack, Toolbar, Typography } from "@mui/material";
+import { star } from 'models';
+import { ReactNode, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export interface SingleStarPageProps {
     starList: star[]
@@ -79,7 +72,8 @@ export default function ActorBioPages({
                         <Stack alignContent={'flex-start'} justifyContent={'flex-start'} >
                             <AppBar position="static" sx={{ bgcolor: 'black' }}>
                                 {starList.map(item => (
-                                    <Stack>
+                                    // key here
+                                    <Stack key={item.actor.imdb_id}>
                                         <Toolbar sx={{ bgcolor: 'black', border: '2px solid white' }}>
                                             <Stack sx={{ textAlign: 'left' }} >
                                                 <Typography sx={{
@@ -104,8 +98,9 @@ export default function ActorBioPages({
                                                 <IconButton
                                                     size="large"
                                                     color="inherit"
+                                                    onClick={handleDiaGenlogOpen}
                                                 >
-                                                    <InfoIcon onClick={handleDiaGenlogOpen} />
+                                                    <InfoIcon />
                                                 </IconButton>
                                                 <Dialog open={openGenDialog} onClose={handleDiaGenlogClose} maxWidth={'lg'}
                                                     keepMounted={true} fullWidth
@@ -134,12 +129,12 @@ export default function ActorBioPages({
                                                         <Typography variant='h3' sx={{ textAlign: "center", color: 'white', bgcolor: 'black' }}> {starList.map(item => (
                                                             item.actor.name
                                                         ))} Trivia</Typography>
-                                                        {starList.map(item =>
-                                                            <Typography key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
+                                                        {starList.map((item, index) =>
+                                                            <Box key={index} sx={{ textAlign: 'left' }}>
                                                                 <AppBar position="static" sx={{ bgcolor: 'black', color: 'white', }} >
-                                                                    {Array.isArray(item.biography.trivia) && item.biography.trivia.length > 0
+                                                                    {Array.isArray(item.biography.trivia) && item.biography && item.biography.trivia.length > 0
                                                                         ? item.biography.trivia.map((triviaItem, index) => (
-                                                                            <Typography sx={{ margin: '18px' }}>
+                                                                            <Typography key={index} sx={{ margin: '18px' }}>
                                                                                 <span
                                                                                     style={{
                                                                                         borderBottom: '2px solid white',
@@ -155,9 +150,13 @@ export default function ActorBioPages({
                                                                             </Typography>
 
                                                                         ))
-                                                                        : 'No trivia available'}
+                                                                        : <span>
+                                                                            <Typography>     No trivia available     </Typography>
+
+                                                                        </span>
+                                                                        }
                                                                 </AppBar>
-                                                            </Typography>
+                                                            </Box>
                                                         )}
                                                     </Stack>
                                                 </Dialog>
@@ -187,8 +186,9 @@ export default function ActorBioPages({
                                                 <IconButton
                                                     size="large"
                                                     color="inherit"
+                                                    onClick={handleDiaQuoteslogOpen}
                                                 >
-                                                    <InfoIcon onClick={handleDiaQuoteslogOpen} />
+                                                    <InfoIcon />
                                                 </IconButton>
                                                 <Dialog open={openQuotesDialog} onClose={handleDiaQuoteslogClose} maxWidth={'lg'}
                                                     keepMounted={true} fullWidth
@@ -218,29 +218,36 @@ export default function ActorBioPages({
                                                             item.actor.name
                                                         ))} Quotes</Typography>
                                                         {starList.map(item =>
-                                                            <Typography key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
-                                                                <AppBar position="static" sx={{ bgcolor: 'black', color: 'white', }} >
-                                                                    {Array.isArray(item.biography.quotes) && item.biography.quotes.length > 0
-                                                                        ? item.biography.quotes.map((triviaItem, index) => (
-                                                                            <Typography sx={{ margin: '18px' }}>
+                                                            <Stack key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
+                                                                <AppBar position="static" sx={{ bgcolor: 'black', color: 'white' }}>
+                                                                    {Array.isArray(item.biography.quotes) && item.biography && item.biography.quotes.length > 0 ? (
+                                                                        item.biography.quotes.map((triviaItem, index) => (
+                                                                            <div key={index} style={{ margin: '18px' }}>
                                                                                 <span
                                                                                     style={{
                                                                                         borderBottom: '2px solid white',
                                                                                         paddingBottom: '2px', // Optional: Adjust the padding for better spacing
                                                                                         display: 'inline-block', // Make sure the border only wraps the text
-
                                                                                     }}
                                                                                 >
-                                                                                    {index}. {triviaItem}
-
+                                                                                    {index + 1}. {triviaItem}
                                                                                 </span>
-
-                                                                            </Typography>
-
+                                                                            </div>
                                                                         ))
-                                                                        : 'No trivia available'}
+                                                                    ) : (
+
+                                                                        <div style={{ margin: '18px' }}>
+                                                                            <span>
+                                                                                <Typography>     No quotes available     </Typography>
+
+                                                                            </span>
+                                                                        </div>
+
+                                                                    )}
                                                                 </AppBar>
-                                                            </Typography>
+                                                            </Stack>
+
+
                                                         )}
                                                     </Stack>
                                                 </Dialog>
@@ -270,8 +277,9 @@ export default function ActorBioPages({
                                                 <IconButton
                                                     size="large"
                                                     color="inherit"
+                                                    onClick={handleSalaryDialogOpen}
                                                 >
-                                                    <InfoIcon onClick={handleSalaryDialogOpen} />
+                                                    <InfoIcon />
                                                 </IconButton>
                                                 <Dialog open={openSalaryDialog} onClose={handleDiaSalaryDialogClose} maxWidth={'lg'} fullWidth
                                                     keepMounted={true}
@@ -301,9 +309,9 @@ export default function ActorBioPages({
                                                             item.actor.name
                                                         ))} Salaries</Typography>
                                                         {starList.map(item =>
-                                                            <Typography key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
-                                                                <AppBar position="static" sx={{ bgcolor: 'black', color: 'white', }} >
-                                                                    {Object.keys(item.biography.salary).length > 0
+                                                            <Box key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
+                                                                <AppBar position="static" sx={{ bgcolor: 'black', color: 'white' }}>
+                                                                    {item.biography && item.biography.salary && Object.keys(item.biography.salary).length > 0
                                                                         ? Object.entries(item.biography.salary).map(([key, value], index) => (
                                                                             <Typography key={index} sx={{ margin: '18px' }}>
                                                                                 <span
@@ -317,9 +325,12 @@ export default function ActorBioPages({
                                                                                 </span>
                                                                             </Typography>
                                                                         ))
-                                                                        : 'No salary information available'}
+                                                                        : <span>
+                                                                        <Typography>     No salaries available     </Typography>
+
+                                                                    </span>}
                                                                 </AppBar>
-                                                            </Typography>
+                                                            </Box>
                                                         )}
                                                     </Stack>
                                                 </Dialog>
@@ -349,8 +360,9 @@ export default function ActorBioPages({
                                                 <IconButton
                                                     size="large"
                                                     color="inherit"
+                                                    onClick={handleTradeDialogOpen}
                                                 >
-                                                    <InfoIcon onClick={handleTradeDialogOpen} />
+                                                    <InfoIcon />
                                                 </IconButton>
                                                 <Dialog open={openTradeDialog} onClose={handleTradeDialogClose} maxWidth={'lg'}
                                                     keepMounted={true} fullWidth
@@ -380,11 +392,12 @@ export default function ActorBioPages({
                                                             item.actor.name
                                                         ))} Trade Marks</Typography>
                                                         {starList.map(item =>
-                                                            <Typography key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
+                                                            <Box key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
                                                                 <AppBar position="static" sx={{ bgcolor: 'black', color: 'white', }} >
-                                                                    {Array.isArray(item.biography.trademarks) && item.biography.trademarks.length > 0
+                                                                    {/* {item.biography && item.biography.salary && Object.keys(item.biography.salary).length > 0 */}
+                                                                    {Array.isArray(item.biography.trademarks) && item.biography && item.biography.trademarks.length > 0
                                                                         ? item.biography.trademarks.map((triviaItem, index) => (
-                                                                            <Typography sx={{ margin: '18px' }}>
+                                                                            <Typography sx={{ margin: '18px', textAlign: 'center' }}>
                                                                                 <span
                                                                                     style={{
                                                                                         borderBottom: '2px solid white',
@@ -400,9 +413,12 @@ export default function ActorBioPages({
                                                                             </Typography>
 
                                                                         ))
-                                                                        : 'No trade mark available'}
+                                                                        :<span>
+                                                                        <Typography>     No trade mark available     </Typography>
+
+                                                                    </span>}
                                                                 </AppBar>
-                                                            </Typography>
+                                                            </Box>
                                                         )}
                                                     </Stack>
                                                 </Dialog>
@@ -432,12 +448,12 @@ export default function ActorBioPages({
                                                 <IconButton
                                                     size="large"
                                                     color="inherit"
+                                                    onClick={handleSpouseDialogOpen}
                                                 >
-                                                    <InfoIcon onClick={handleSpouseDialogOpen} />
+                                                    <InfoIcon />
                                                 </IconButton>
                                                 <Dialog open={openSpouseDialog} onClose={handleSpouseDialogClose} maxWidth={'lg'} fullWidth
                                                     keepMounted={true}
-
                                                     PaperProps={{
                                                         style: {
                                                             backgroundColor: 'white'
@@ -462,13 +478,13 @@ export default function ActorBioPages({
                                                         <Typography variant='h3' sx={{ textAlign: "center", color: 'white', bgcolor: 'black' }}> {starList.map(item => (
                                                             item.actor.name
                                                         ))} Spouse</Typography>
-                                                     
+
                                                         {starList.map(item => (
-                                                            <Typography key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
+                                                            <Box key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
                                                                 <AppBar position="static" sx={{ bgcolor: 'black', color: 'white' }}>
-                                                                    {item.biography.spouse && Object.keys(item.biography.spouse).length > 0
+                                                                    {item.biography && item.biography.spouse && Object.keys(item.biography.spouse).length > 0
                                                                         ? Object.entries(item.biography.spouse).map(([key, value], index) => (
-                                                                            <Typography key={index} sx={{ margin: '18px' }}>
+                                                                            <Typography key={index} sx={{ margin: '18px', textAlign: 'center' }}>
                                                                                 <span
                                                                                     style={{
                                                                                         borderBottom: '2px solid white',
@@ -480,14 +496,18 @@ export default function ActorBioPages({
                                                                                 </span>
                                                                             </Typography>
                                                                         ))
-                                                                        : 'No spouse information available'}
+                                                                        : <span>
+                                                                        <Typography>     No spouse available     </Typography>
+
+                                                                    </span>}
                                                                 </AppBar>
-                                                            </Typography>
+                                                            </Box>
                                                         ))}
                                                     </Stack>
                                                 </Dialog>
                                             </Box>
                                         </Toolbar>
+
                                     </Stack>
                                 ))}
 

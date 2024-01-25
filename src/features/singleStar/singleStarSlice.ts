@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { singleMovie, singleStar } from "models";
+import { singleStar } from "models";
 
 export interface StarItemState {
     loading: boolean;
@@ -17,15 +17,14 @@ const singleStarSlice = createSlice({
     initialState,
     reducers: {
         fetchSingleStarList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            state.list=[] 
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch single Star list
         fetchSingleStarListSuccess(state, action: PayloadAction<any>) {
             // state.list = [...state.list, action.payload.results]
             // state.list = [action.payload.results]
             state.list = state.list.concat(action.payload.results);
-
-            
             state.loading = false
         },
         fetchSingleStarListFailed(state, action: PayloadAction<string>) {

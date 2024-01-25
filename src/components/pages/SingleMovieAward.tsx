@@ -1,43 +1,29 @@
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { award } from 'models';
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import SingleStarItemPage from "./SingleStarItemPage";
-import { selectSingleStarList, singleStarActions } from "features/singleStar/singleStarSlice";
 import InfoIcon from '@mui/icons-material/Info';
+import { Grid, Stack, Typography } from "@mui/material";
+import { movieAward } from 'models';
+import { useNavigate } from "react-router-dom";
 
 export interface SingleStarItemProps {
-    awardList: award[];
+    awardList: movieAward[];
 }
-export default function SingleStarItem({
+export default function SingleMovieAward({
     awardList,
 }: SingleStarItemProps) {
     const remainingList = awardList.slice(1);//bỏ qua phần tử đầu tiên(bị undefine)
 
     const navigate = useNavigate()
-    // const dispatch = useAppDispatch()
-    // const singleList = useAppSelector(selectSingleStarList)
-
-    // useEffect(() => {
-    //     if (remainingList) {
-    //         remainingList.slice(0, 4).forEach((item: any) => {
-    //             dispatch(singleStarActions.fetchSingleStarList(item.movie.imdb_id));
-    //         });
-    //     }
-
-    // }, [remainingList]);
-
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      };
     return (
         <div>
             <Grid container spacing={1}>
                 {remainingList.map((item: any, index: number) => (
                     <Grid item xs={2} sm={6} md={6} key={index}>
                         <Stack key={index} direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
-                            {/* <Typography onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)} >
-                                {index}
-                            </Typography> */}
-
                             <Stack direction={'column'} alignItems="flex-start" alignContent={'flex-start'}
                                 sx={{
                                     display: 'flex',
@@ -82,7 +68,7 @@ export default function SingleStarItem({
                                                 {item.actor && item.actor.length > 0 && (
                                                     item.actor.map((actor: any, actorIndex: any) => (
                                                         <span key={actorIndex}>{actor.name}
-                                                            {actorIndex < Math.min(item.actor.length, 3) - 1 ? ', ' : ''}</span>
+                                                            {actorIndex < Math.min(item.actor.length) - 1 ? ', ' : ''}</span>
                                                     ))
                                                 )}
                                                 {/* {item.actor && item.actor.length > 3 && <span>, ...</span>} */}
@@ -92,9 +78,10 @@ export default function SingleStarItem({
 
                                 </Stack>
                             </Stack>
-                            <InfoIcon onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)}
+                            <InfoIcon
+                                onClick={scrollToTop}
                                 sx={{
-                                    marginLeft: 'auto', // Add this style to move the InfoIcon to the right
+                                    marginLeft: 'auto',
                                     justifyContent: 'flex-end',
                                     alignContent: 'flex-end',
                                     marginRight: '30px'

@@ -31,11 +31,9 @@ export function Pro() {
                 margin: 'auto'
 
             }}>
-                <header>
-                    <Typography variant="h3" sx={{ textAlign: 'center' }}>
-                        Get the essential resource for entertainment professionals
-                    </Typography>
-                </header>
+                <Typography variant="h3" sx={{ textAlign: 'center' }}>
+                    Get the essential resource for entertainment professionals
+                </Typography>
 
                 <List sx={{ width: '100%', maxWidth: '50%', ml: '200px' }}>
                     <ListItem sx={{ textAlign: 'center', border: ' 2px solid red', }}>
@@ -74,7 +72,7 @@ export function Pro() {
             <Box alignContent="center" sx={{ flexGrow: 1, width: '100%', p: 3 }}>
                 <AppBar position="static" sx={{
                     backgroundColor: "white", borderRadius: '10px',
-                    opacity: '-moz-initial',boxShadow:'none'
+                    opacity: '-moz-initial', boxShadow: 'none'
                 }}>
                     <hr style={{ flexGrow: 1, margin: ' 0 60px' }} />
                     <Toolbar sx={{ justifyContent: 'center' }}>

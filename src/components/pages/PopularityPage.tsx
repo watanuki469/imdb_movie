@@ -17,8 +17,8 @@ export default function PopurarityPage({
   return (
   
       <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
-        {popurarityItemList?.map(item =>
-          <Grid item xs={4} md={3} lg={2.4} >
+        {popurarityItemList?.map((item,index) =>
+          <Grid key={index} item xs={4} md={3} lg={2.4} >
             <Stack alignItems="center">
               <img
                 src={item.banner}

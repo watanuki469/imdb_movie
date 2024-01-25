@@ -18,7 +18,7 @@ const popularitySlice = createSlice({
     initialState,
     reducers: {
         fetchPopularityList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         fetchPopularityListSuccess(state, action: PayloadAction<any>) {
             state.list = action.payload.results

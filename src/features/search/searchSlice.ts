@@ -24,7 +24,7 @@ const searchSlice = createSlice({
     initialState,
     reducers: {
         fetchSearchList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch search list
         fetchSearchListSuccess(state, action: PayloadAction<any>) {
@@ -46,7 +46,6 @@ const searchSlice = createSlice({
 export const searchActions = searchSlice.actions
 //Selectors
 export const selectSearchList = (state: RootState) => state.search.list
-// export const selectSearchListItem = (state: RootState) => state.search.list2
 export const selectSearchFilterList = (state: RootState) => state.search.filter
 
 // Reducer

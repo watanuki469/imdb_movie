@@ -17,7 +17,7 @@ const singleMovieSlice = createSlice({
     initialState,
     reducers: {
         fetchSingleMovieList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch single movie list
         fetchSingleMovieListSuccess(state, action: PayloadAction<any>) {
@@ -37,6 +37,7 @@ const singleMovieSlice = createSlice({
 export const singleMovieActions =singleMovieSlice.actions
 //Selectors
 export const selectSingleMovieList = (state: RootState) => state.singleMovie.list
+export const selectSingleMovieListLoading = (state: RootState) => state.singleMovie.loading
 // Reducer
 const singleMovieReducer = singleMovieSlice.reducer;
 export default singleMovieReducer

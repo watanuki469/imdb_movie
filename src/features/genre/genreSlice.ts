@@ -24,7 +24,7 @@ const genreSlice = createSlice({
     initialState,
     reducers: {
         fetchGenreList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         fetchGenreListSuccess(state, action: PayloadAction<any>) {
             state.list = action.payload.results

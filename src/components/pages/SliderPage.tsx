@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import MobileStepper from '@mui/material/MobileStepper';
 import { useTheme } from '@mui/material/styles';
 import { movieItem } from 'models';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface SliderPageProps {
     popurarityItemList: movieItem[];
@@ -28,15 +28,7 @@ export default function SliderPage({
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-    // const uniquePopurarityItemList: movieItem[] = [];
-    // const seenTitles = new Set<string>();
 
-    // popurarityItemList.forEach((item: movieItem) => {
-    //     if (!seenTitles.has(item.title)) {
-    //         seenTitles.add(item.title);
-    //         uniquePopurarityItemList.push(item);
-    //     }
-    // });
     const removeDuplicateData = (popurarityItemList: any) => {
         // Sử dụng Set để đảm bảo các phần tử duy nhất
         const uniqueSet = new Set(popurarityItemList.map((item: any) => item.title));
@@ -48,15 +40,35 @@ export default function SliderPage({
     };
 
     // Sử dụng hàm để loại bỏ các phần tử trùng lặp từ mảng movieItemList
-    //   const uniqueMovieItemList = removeDuplicateData(popurarityItemList);
     const uniquePopurarityItemList = removeDuplicateData(popurarityItemList);
 
+    const handleImageError = (e: any) => {
+        const imgElement = e.currentTarget as HTMLImageElement;
+        imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
+    };
+    const handleBackgroundImageError = (e: any) => {
+        e.target.style.backgroundImage = 'url(https://www.dtcvietnam.com.vn/web/images/noimg.jpg)';
+    };
 
+    useEffect(() => {
+        const boxElement = document.getElementById('1234567'); // replace 'yourBoxId' with the actual id of your Box component
+
+        if (boxElement) {
+            boxElement.style.backgroundImage = `url(${uniquePopurarityItemList[activeStep]?.banner})`;
+            boxElement.addEventListener('error', handleBackgroundImageError);
+        }
+
+        return () => {
+            if (boxElement) {
+                boxElement.removeEventListener('error', handleBackgroundImageError);
+            }
+        };
+    }, [activeStep, uniquePopurarityItemList]);
     return (
         <div>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={7}>
-                    <Box sx={{
+                    <Box id="1234567" sx={{
                         paddingTop: {
                             xs: "130%",
                             sm: "80%",
@@ -67,12 +79,12 @@ export default function SliderPage({
                         backgroundSize: "cover",
                         // src={uniquePopurarityItemList[activeStep] && uniquePopurarityItemList[activeStep].banner && uniquePopurarityItemList[activeStep]?.banner}
                         backgroundImage: `url(${uniquePopurarityItemList[activeStep]?.banner})`,
+                    }}    >
 
-
-                    }} >
                         <div style={{ display: 'flex' }} >
                             <img
                                 src={uniquePopurarityItemList[activeStep]?.image_url}
+                                onError={handleImageError}
                                 alt="movie-img"
                                 style={{
                                     display: 'inline-flex',
@@ -120,7 +132,7 @@ export default function SliderPage({
 
                     </Box>
 
-                 
+
                     <MobileStepper
                         sx={{ backgroundColor: 'transparent', color: 'blue' }}
                         variant="text"
@@ -168,6 +180,7 @@ export default function SliderPage({
                                     <Avatar variant="square" sx={{ width: '100px', height: '100%', overflow: 'hidden', objectFit: 'cover' }}>
                                         <img
                                             src={uniquePopurarityItemList[activeStep + 1]?.image_url}
+                                            onError={handleImageError}
                                             alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
@@ -216,6 +229,7 @@ export default function SliderPage({
                                 <Stack spacing={2} direction="row" alignItems="center">
                                     <Avatar variant="square" sx={{ width: '100px', height: '100%', overflow: 'hidden', objectFit: 'cover' }}>
                                         <img
+                                            onError={handleImageError}
                                             src={uniquePopurarityItemList[activeStep + 2]?.image_url}
                                             alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}

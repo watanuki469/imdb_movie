@@ -15,8 +15,6 @@ function* fetchSingleStarList(action: PayloadAction<ListParams>) {
     }
 }
 
-
 export default function* singleStarSaga() {
-    // yield takeLatest(singleStarActions.fetchSingleStarList.type, fetchSingleStarList)
     yield takeEvery(singleStarActions.fetchSingleStarList.type, fetchSingleStarList)
 }

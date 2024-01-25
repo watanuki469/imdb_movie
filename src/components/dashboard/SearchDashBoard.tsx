@@ -1,11 +1,10 @@
-import { Search } from "@mui/icons-material";
-import { Box, Fade, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Popper, Select, Typography } from "@mui/material";
+import { Clear, Loop, Search } from "@mui/icons-material";
+import { Box, Fade, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Popper, Select } from "@mui/material";
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import SearchLayout from "components/layout/SearchLayout";
 import { searchActions, selectSearchList } from "features/search/searchSlice";
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { Clear, Loop, Search as SearchIcon } from "@mui/icons-material";
 import { useDebounce } from "hook/useDebounce";
+import { useEffect, useRef, useState } from 'react';
 
 export default function SearchDashBoard() {
   const dispatch = useAppDispatch()
@@ -42,7 +41,6 @@ export default function SearchDashBoard() {
   const handleClear = () => {
     setQuery('')
     setOpen(false);
-
   };
   const handleCloseButNotDeleteQuery = () => {
     setOpen(false);
@@ -105,7 +103,8 @@ export default function SearchDashBoard() {
          
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Box onClick={handleCloseButNotDeleteQuery}
+              <Box
+              //  onClick={handleCloseButNotDeleteQuery}
                 sx={{
                   border: 1,
                   p: 1,

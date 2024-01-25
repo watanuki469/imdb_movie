@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import genresApi from 'api/genresApi';
-import { ListParams, ListResponse, award, star } from 'models';
+import { ListParams, ListResponse, award } from 'models';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AwardActions } from './awardSlice';
 

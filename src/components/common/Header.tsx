@@ -23,9 +23,7 @@ export function Header() {
     const [personName, setPersonName] = useState<string[]>([]);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-        const {
-            target: { value },
-        } = event;
+        const { target: { value } } = event;
         setPersonName(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
@@ -49,18 +47,7 @@ export function Header() {
                     <Grid container spacing={2} alignContent="center" alignItems="center">
                         <Grid item xs={1} >
                             <Button onClick={() => navigate('/')}
-                                fullWidth sx={{
-                                    bgcolor: 'yellow',
-                                    color: 'black',
-                                    textAlign: 'center',
-                                    border: 'none',
-                                    fontWeight: 'bold',
-                                    fontSize: '36px',
-                                    fontFamily: 'sans-serif',
-                                    padding: '10px 20px',
-                                    height: '50px',
-                                    textTransform: 'none',
-                                    overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                fullWidth sx={{bgcolor: 'yellow',color: 'black',textAlign: 'center',border: 'none',fontWeight: 'bold',fontSize: '36px',fontFamily: 'sans-serif',padding: '10px 20px',height: '50px',textTransform: 'none',overflow: 'hidden', // Tránh chữ tràn ra ngoài
                                     whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                                     textOverflow: 'ellipsis', // Hiển thị dấu elipsis
                                     ':hover': {
@@ -251,25 +238,23 @@ export function Header() {
                             </>
                         </Button>
                         <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
-                            <IconButton color="inherit" sx={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center', ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Release Calendar</Typography>
-                                {/* <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Movies</Typography> */}
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center', ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Release Calendar</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/Popular')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Movies</Typography>
-                                {/* <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse Movies By Genre</Typography> */}
+                            <IconButton onClick={() => navigate('/Popular')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Movies</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Box Office</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top Box Office</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Showtimes & Ticked</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Showtimes & Ticked</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Movies News</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Movies News</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>India Movie Spotlight</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>India Movie Spotlight</Typography>
                             </IconButton>
                         </Stack>
 
@@ -293,23 +278,19 @@ export function Header() {
                         </Button>
                         <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
 
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What's on TV & Streaming</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What's on TV & Streaming</Typography>
+                            </IconButton>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top 250 TV Shows</Typography>
                             </IconButton>
 
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Top 250 TV Shows</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular TV Shows</Typography>
                             </IconButton>
 
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular TV Shows</Typography>
-                                {/* <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Browse TV Shows By Genre</Typography> */}
-
-                            </IconButton>
-
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>TV News</Typography>
-
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>TV News</Typography>
                             </IconButton>
 
                         </Stack>
@@ -332,29 +313,29 @@ export function Header() {
                             </>
                         </Button>
                         <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Oscars</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Oscars</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Emmys</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Emmys</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Best Of 2023</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Best Of 2023</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Holiday Picks</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Holiday Picks</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Starmeter Awards</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Starmeter Awards</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Awards Central</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Awards Central</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Festival Central</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Festival Central</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>All Event</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>All Event</Typography>
                             </IconButton>
                         </Stack>
 
@@ -377,14 +358,14 @@ export function Header() {
                             </>
                         </Button>
                         <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Born Today</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Born Today</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Celebs</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Most Popular Celebs</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Celebrity News</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Celebrity News</Typography>
                             </IconButton>
                         </Stack>
                     </Grid>
@@ -402,20 +383,20 @@ export function Header() {
                             </>
                         </Button>
                         <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What to Watch</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>What to Watch</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Latest Trailers</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Latest Trailers</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Originals</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Originals</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Picks</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Picks</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Podcasts</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>IMDb Podcasts</Typography>
                             </IconButton>
                         </Stack>
                     </Grid>
@@ -436,14 +417,14 @@ export function Header() {
                             </>
                         </Button>
                         <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Help Center</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Help Center</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Contributor Zone</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Contributor Zone</Typography>
                             </IconButton>
-                            <IconButton color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                <Typography onClick={() => navigate('/NotFound')} variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Polls</Typography>
+                            <IconButton onClick={() => navigate('/NotFound')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                <Typography variant='h5' sx={{ color: 'white', alignContent: 'center', textAlign: 'center', mt: 2 }}>Polls</Typography>
                             </IconButton>
                         </Stack>
                     </Grid>

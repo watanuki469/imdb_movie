@@ -4,12 +4,12 @@ import { useState } from "react";
 
 export function SingleMovie() {
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
       <Box sx={{ bgcolor: "black", position: "relative" }}>
-        <Header/>
+        <Header />
         <SinglePage />
 
         <div className={`${loading ? "block" : "hidden"} `}>

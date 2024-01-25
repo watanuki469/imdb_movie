@@ -31,7 +31,8 @@ export default function Top10PageItem({
                         style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
                         onError={(e) => {
                             const imgElement = e.currentTarget as HTMLImageElement;
-                            imgElement.src = 'https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây
+                            imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây
+                            
                         }}
                     />
                 </a>

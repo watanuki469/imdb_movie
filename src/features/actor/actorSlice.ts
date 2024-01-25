@@ -17,7 +17,7 @@ const ActorSlice = createSlice({
     initialState,
     reducers: {
         fetchActorList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch actor list
         fetchActorListSuccess(state, action: PayloadAction<any>) {

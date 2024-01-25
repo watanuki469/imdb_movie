@@ -17,7 +17,7 @@ const searchItemSlice = createSlice({
     initialState,
     reducers: {
         fetchSearchItemList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
             state.list=[]
         },
         //cập nhật vào redux từ fetch search item movie list

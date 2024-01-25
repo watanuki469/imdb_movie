@@ -8,10 +8,13 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import { AppBar, Badge, Box, Button, Divider, Grid, IconButton, List, ListItem, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, Button, Divider, Grid, IconButton, LinearProgress, List, ListItem, Stack, Toolbar, Typography, makeStyles } from "@mui/material";
+import { useAppSelector } from 'app/hooks';
 import Cast from 'components/common/Cast';
+import { selectSingleMovieListLoading } from 'features/singleMovie/singleMovieSlice';
 import { movieItem, singleMovie } from 'models';
 import { useNavigate } from "react-router-dom";
+
 
 export interface SingleMoviePageProps {
     singleList: singleMovie[]
@@ -22,11 +25,12 @@ export default function SingleMoviePage({
     singleList,
 
 }: SingleMoviePageProps) {
-    const bull = (<Box sx={{ display: 'inline-block', mx: '6px', transform: 'scale(0.8)', color: 'white' }} >     • </Box>);
+    const bull = (<span style={{ display: 'inline-block', marginLeft: '6px', marginRight: '6px', transform: 'scale(0.8)', color: 'white' }} >     • </span>);
 
     const handleChangePage = () => {
 
     };
+    const loading = useAppSelector(selectSingleMovieListLoading)
 
     const renderPopularity = (popularity: number) => {
         const num = 5000 - popularity
@@ -64,10 +68,16 @@ export default function SingleMoviePage({
     };
     let navigate = useNavigate();
     const randomScore = getRandomNumber();
+    const handleImageError = (e: any) => {
+        const imgElement = e.currentTarget as HTMLImageElement;
+        imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
+    };
+
+
 
     return (
-        
         <div>
+
             <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 1, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Toolbar>
@@ -146,27 +156,26 @@ export default function SingleMoviePage({
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                             </IconButton>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                    < CategoryIcon sx={{ color: 'white' }} />
-                                    <>
-                                        <Typography onClick={() => handleChangePage()} sx={{
-                                            alignItems: 'center', color: 'white',
-                                            border: 'none',
-                                            fontWeight: 'bold',
-                                            fontSize: "1.5rem",
-                                            fontFamily: "Arial, sans-serif",
-                                            textTransform: 'capitalize',
-                                            ':hover': {
-                                                textDecoration: 'underline',
+                            <Button sx={{ display: 'flex', alignItems: 'center', mt: 1, height: '50px' }}>
+                                < CategoryIcon sx={{ color: 'white' }} />
+                                <>
+                                    <Typography onClick={() => handleChangePage()} sx={{
+                                        alignItems: 'center', color: 'white',
+                                        border: 'none',
+                                        fontWeight: 'bold',
+                                        fontSize: "1.5rem",
+                                        fontFamily: "Arial, sans-serif",
+                                        textTransform: 'capitalize',
 
-                                            },
-                                        }}>
-                                            All Topic
-                                        </Typography>
-                                    </>
-                                </Button>
-                            </IconButton>
+                                        ':hover': {
+                                            textDecoration: 'underline',
+
+                                        },
+                                    }}>
+                                        All Topic
+                                    </Typography>
+                                </>
+                            </Button>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                             </IconButton>
@@ -205,8 +214,8 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar sx={{ mt: '30px' }}>
                         <Box>
-                            {singleList.map(item =>
-                                <Stack sx={{ textAlign: 'left' }}>
+                            {singleList.map((item, index) =>
+                                <Stack key={index} sx={{ textAlign: 'left' }}>
                                     <Stack alignItems="left">
                                         <Typography variant="h3" color="white">
                                             {item.title}
@@ -225,8 +234,8 @@ export default function SingleMoviePage({
                         </Box>
 
                         <Box sx={{ flexGrow: 1 }} />
-                        {singleList.map(item =>
-                            <Stack direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex', textAlign: 'center' } }}>
+                        {singleList.map((item, index) =>
+                            <Stack key={index} direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex', textAlign: 'center' } }}>
 
                                 <Box>
                                     <Typography sx={{
@@ -282,11 +291,12 @@ export default function SingleMoviePage({
                         )}
                     </Toolbar>
                     <Toolbar>
-                        {singleList.map(item =>
-                            <Grid container spacing={2}>
+                        {singleList.map((item, index) =>
+                            <Grid key={index} container spacing={2}>
                                 <Grid item xs={6} md={3}>
                                     <Stack sx={{ position: 'relative' }}>
                                         <img
+                                            onError={handleImageError}
                                             src={item.image_url}
                                             alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
@@ -348,35 +358,33 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                {singleList.map(item =>
-                                    <Typography>
-                                        {item.gen.map((item: any) =>
-                                            <Button variant="contained"
-                                                onClick={() => navigate(`/movie/byGen/${item.genre}`)}
-                                                sx={{
-                                                    mx: '6px',
-                                                    textTransform: 'uppercase', textAlign: 'center'
-                                                    , minHeight: '1rem', width: '10rem', ':hover': {
-                                                        bgcolor: 'A9A9A9',
-                                                        color: 'black',
-                                                    },
-                                                    background: "linear-gradient(180deg,grey,transparent) border-box",
-                                                    border: "2px solid transparent",
-                                                    paddingLeft: '1rem', paddingRight: '1rem',
-                                                    backgroundColor: 'black',
-                                                    color: 'white',
-                                                    borderRadius: '1rem',
-                                                    '--Grid-borderWidth': '1px',
-                                                    borderColor: 'pink',
+                            {singleList.map((item, index) =>
+                                <Box key={index}>
+                                    {item.gen.map((item: any, index) =>
+                                        <Button variant="contained" key={index}
+                                            onClick={() => navigate(`/movie/byGen/${item.genre}`)}
+                                            sx={{
+                                                mx: '6px',
+                                                textTransform: 'uppercase', textAlign: 'center'
+                                                , minHeight: '1rem', width: '10rem', ':hover': {
+                                                    bgcolor: 'A9A9A9',
+                                                    color: 'black',
+                                                },
+                                                background: "linear-gradient(180deg,grey,transparent) border-box",
+                                                border: "2px solid transparent",
+                                                paddingLeft: '1rem', paddingRight: '1rem',
+                                                backgroundColor: 'black',
+                                                color: 'white',
+                                                borderRadius: '1rem',
+                                                '--Grid-borderWidth': '1px',
+                                                borderColor: 'pink',
 
-                                                }}>
-                                                {item.genre}
-                                            </Button>
-                                        )} </Typography>
-                                )}
-
-                            </IconButton>
+                                            }}>
+                                            {item.genre}
+                                        </Button>
+                                    )}
+                                </Box>
+                            )}
                         </Box>
 
                         <Box sx={{ flexGrow: 1 }} />
@@ -384,27 +392,30 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar sx={{ mt: '30px' }}>
                         <Box>
-                            {singleList.map(item =>
-                                <List sx={{
+                            {singleList.map((item, index) =>
+                                <List key={index} sx={{
                                     width: '100%',
                                     borderRadius: 2,
                                     border: '1px solid',
                                     borderColor: 'divider',
                                 }}>
-                                    <ListItem>
-                                        <Typography sx={{
-                                            color: 'white',
-                                            fontSize: "1rem",
-                                            fontWeight: "bold",
-                                            fontFamily: "Arial, sans-serif",
-                                            textTransform: 'capitalize',
-                                            ':hover': {
-                                                textDecoration: 'underline',
+                                    <Typography sx={{
+                                        color: 'white',
+                                        textAlign: 'left',
+                                        fontSize: "1rem",
+                                        fontWeight: "bold",
+                                        fontFamily: "Arial, sans-serif",
+                                        textTransform: 'capitalize',
+                                        ':hover': {
+                                            textDecoration: 'underline',
 
-                                            }
-                                        }}>
-                                            {item.plot}</Typography>
-                                    </ListItem>
+                                        }
+                                    }}>
+                                        {item.plot}
+                                    </Typography>
+
+
+
                                     <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                                     <Cast />
 
@@ -415,8 +426,8 @@ export default function SingleMoviePage({
                         </Box>
 
                         <Box sx={{ flexGrow: 1 }} />
-                        {singleList.map(item =>
-                            <div>
+                        {singleList.map((item, index) =>
+                            <div key={index}>
                                 <Stack direction="row" spacing={0} >
                                     <Button sx={{
                                         display: 'flex', bgcolor: 'yellow',
@@ -441,20 +452,6 @@ export default function SingleMoviePage({
 
                                         </Box>
 
-
-                                    </Button>
-                                    <Divider sx={{ borderColor: 'divider', border: '1px solid' }} orientation="vertical" />
-                                    <Button sx={{
-                                        display: 'flex', bgcolor: 'yellow',
-                                        ':hover': {
-                                            bgcolor: 'green',
-                                            color: 'white',
-                                            borderColor: 'red'
-                                        },
-                                    }}>
-                                        <Box>
-                                            < KeyboardArrowDownIcon sx={{ color: 'black', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
-                                        </Box>
 
                                     </Button>
 
@@ -484,7 +481,7 @@ export default function SingleMoviePage({
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            
+
                                             <Typography>
                                                 <span style={{
                                                     color: "white", fontSize: "1.5rem",

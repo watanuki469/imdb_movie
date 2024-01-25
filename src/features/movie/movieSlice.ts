@@ -28,7 +28,7 @@ const movieSlice = createSlice({
     initialState,
     reducers: {
         fetchMovieList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch movie list
         fetchMovieListSuccess(state, action: PayloadAction<any>) {

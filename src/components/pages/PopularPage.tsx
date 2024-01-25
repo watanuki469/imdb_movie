@@ -14,7 +14,7 @@ import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
 import ViewListIcon from '@mui/icons-material/ViewList';
-import { AppBar, Box, Button, Checkbox, Dialog, DialogContent, DialogTitle, Divider, Fade, FormControlLabel, Grid, IconButton, ListItemText, Menu, MenuItem, Popper, Radio, Stack, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Checkbox, Dialog, DialogContent, DialogTitle, Divider, Fade, FormControl, FormControlLabel, Grid, IconButton, ListItemText, Menu, MenuItem, Popper, Radio, Stack, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { movieItem } from 'models';
 import { useEffect, useRef, useState } from 'react';
@@ -93,14 +93,19 @@ export default function PopularPage({
 
         />
     ));
+    const handleImageError = (e: any) => {
+        const imgElement = e.currentTarget as HTMLImageElement;
+        imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
+    };
 
     const renderMovieItem = (movie: any, movieIndex: number, currentView: any, sortOrder: any) => {
         // Implement rendering logic based on the currentView (detail, grid, compact)
+
         switch (currentView) {
             case 'detail':
                 return (
                     // Render detail view
-                    <Box sx={{ flexGrow: 1, bgcolor: 'black' }}>
+                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black' }}>
                         <Divider sx={{
                             width: '100%',
                             borderRadius: 2,
@@ -113,8 +118,9 @@ export default function PopularPage({
                                 <div key={movie.imdb_id} style={{ display: 'flex', alignItems: 'center' }}>
 
                                     {/* Left side - Image */}
-                                    <img src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }}
-                                        onClick={()=>navigate(`/movie/id/${movie.imdb_id}`)}
+                                    <img onError={handleImageError}
+                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }}
+                                        onClick={() => navigate(`/movie/id/${movie.imdb_id}`)}
                                     />
 
                                     {/* Right side - Details */}
@@ -139,13 +145,13 @@ export default function PopularPage({
                                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                                 {/* <span role="img" aria-label="Stars Icon">⭐</span> */}
                                                 <StarRateIcon sx={{ color: 'yellow' }} />
-                                                <p style={{ marginLeft: '5px' }}>{movie.rating}</p>
+                                                <Typography sx={{ marginLeft: '5px' }}>{movie.rating}</Typography>
                                             </Box>
                                             <div>
                                                 <Button sx={{ marginLeft: '25px' }} onClick={() => handleRatingClick(movie)}>
                                                     <StarRateIcon sx={{ color: 'blue' }} />
-                                                    <p style={{ color: 'blue' }} ref={anchorRef}
-                                                    >Rate</p>
+                                                    <Typography style={{ color: 'blue' }} ref={anchorRef}
+                                                    >Rate</Typography>
 
                                                 </Button>
 
@@ -237,8 +243,8 @@ export default function PopularPage({
                                                                 {selectedStudent?.content_rating}
                                                             </Typography>
                                                             <Stack direction={'row'}>
-                                                                {selectedStudent?.gen.map((item: any) =>
-                                                                    <Typography>
+                                                                {selectedStudent?.gen.map((item: any, index) =>
+                                                                    <Typography key={index}>
                                                                         {item.genre} {bull}
                                                                     </Typography>
 
@@ -247,10 +253,10 @@ export default function PopularPage({
 
                                                             <Typography>
                                                                 <Stack direction={'row'} alignItems={'center'}>
-                                                                    <p style={{ marginLeft: '5px' }}><span role="img" aria-label="Stars Icon">⭐</span>{selectedStudent?.rating}/10</p>
+                                                                    <Typography style={{ marginLeft: '5px' }}><span role="img" aria-label="Stars Icon">⭐</span>{selectedStudent?.rating}/10</Typography>
                                                                     <Button sx={{ marginLeft: '5px' }} onClick={() => selectedStudent && handleRatingClick(selectedStudent)}>
                                                                         <StarRateIcon sx={{ color: 'blue' }} />
-                                                                        <p style={{ color: 'blue' }} ref={anchorRef}>Rate</p>
+                                                                        <Typography style={{ color: 'blue' }} ref={anchorRef}>Rate</Typography>
 
                                                                     </Button>
 
@@ -338,16 +344,20 @@ export default function PopularPage({
                                         >{`${movie.plot}`}
                                         </Typography>
                                         <Stack>
-                                            <Stack direction={'row'} sx={{ marginTop: '10px' }}>
-                                                <Typography sx={{ fontWeight: 'bold' }}> Director: <span style={{ color: 'red' }}>Emerald Fennell</span></Typography>
-                                                <Typography sx={{ marginLeft: '10px', fontWeight: 'bold' }}> Stars:
-                                                    <span style={{ marginLeft: '17px', color: 'blue' }}>Barry Keoghan</span>
-                                                    <span style={{ marginLeft: '17px', color: 'blue' }}>Jacob Elordi</span>
-                                                    <span style={{ marginLeft: '17px', color: 'blue' }}>Emma Watson</span>
-                                                </Typography>
+                                            <Stack direction={'row'} sx={{ marginTop: '10px', alignContent: 'flex-start', justifyContent: 'flex-start' }}>
+                                                <div>
+                                                    <Typography sx={{ fontWeight: 'bold', textAlign: 'left' }}> Director: <span style={{ color: 'red' }}>Emerald Fennell</span></Typography>
+                                                    <Typography sx={{ fontWeight: 'bold', textAlign: 'left' }}> Stars:
+                                                        <span style={{ marginLeft: '17px', color: 'blue' }}>Barry Keoghan</span>
+                                                        <span style={{ marginLeft: '17px', color: 'blue' }}>Jacob Elordi</span>
+                                                        <span style={{ marginLeft: '17px', color: 'blue' }}>Emma Watson</span>
+                                                    </Typography>
+                                                </div>
                                             </Stack>
-                                            <Stack direction={'row'} >
-                                                <Typography sx={{ fontWeight: 'bold' }}> Votes: <span>103,682</span></Typography>
+                                            <Stack direction={'row'}>
+                                                <div>
+                                                    <Typography sx={{ fontWeight: 'bold' }}> Votes: <span>103,682</span></Typography>
+                                                </div>
                                             </Stack>
                                         </Stack>
                                     </Stack>
@@ -364,19 +374,12 @@ export default function PopularPage({
             case 'grid':
 
                 return (
-                    // <Grid item xs={3} sx={{ mt: 3 }}>
-                    //     <div key={movie.imdb_id} style={{ backgroundColor: 'white' }}>
-                    //         <Typography variant='h6' sx={{ color: 'black' }}>{`${movieIndex + 1}`}</Typography>
-                    //         <img src={movie.image_url} alt={movie.title} />
-                    //         <Typography sx={{ color: 'black' }}>{movie.title}</Typography>
-                    //     </div>
-                    // </Grid>
                     <Grid item xs={3} sx={{
                         mt: 2,
                         width: '100%', objectFit: 'cover'
 
                     }} >
-                        <div key={movie.imdb_id} style={{
+                        <div key={movieIndex} style={{
                             backgroundColor: 'white', width: '100%', height: '500px', objectFit: 'cover',
                             border: '8px solid black'
                         }}>
@@ -394,20 +397,20 @@ export default function PopularPage({
                             <Stack direction={'column'} position={'static'} display={'flex'} sx={{ marginLeft: '10px' }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     <StarRateIcon sx={{ color: 'yellow' }} />
-                                    <p style={{ marginLeft: '5px' }}>{movie.rating}</p>
+                                    <Typography style={{ marginLeft: '5px' }}>{movie.rating}</Typography>
                                 </Box>
                                 <Box sx={{ margin: '0 30px' }} /> {/* Adjust the margin value as needed */}
                                 {/* <Stack direction={'row'} alignContent={'center'} alignItems={'center'} onClick={() => handleRatingClick(movie)} sx={{marginTop:'-10px'}}>
                                     <StarRateIcon sx={{ color: 'blue' }} />
-                                    <p style={{ color: 'blue' }} ref={anchorRef}>
+                                    <Typography style={{ color: 'blue' }} ref={anchorRef}>
                                         Rate
-                                    </p>
+                                    </Typography>
                                 </Stack> */}
                                 <Button onClick={() => handleRatingClick(movie)} sx={{ marginTop: '-10px', display: 'flex', alignContent: 'left', justifyContent: 'left' }}>
                                     <StarRateIcon sx={{ color: 'blue' }} />
-                                    <p style={{ color: 'blue' }} ref={anchorRef}>
+                                    <Typography style={{ color: 'blue' }} ref={anchorRef}>
                                         Rate
-                                    </p>
+                                    </Typography>
                                 </Button>
                             </Stack>
                             <div>
@@ -538,8 +541,8 @@ export default function PopularPage({
                                                         {selectedStudent?.content_rating}
                                                     </Typography>
                                                     <Stack direction={'row'}>
-                                                        {selectedStudent?.gen.map((item: any) =>
-                                                            <Typography>
+                                                        {selectedStudent?.gen.map((item: any, index) =>
+                                                            <Typography key={index}>
                                                                 {item.genre} {bull}
                                                             </Typography>
 
@@ -548,10 +551,10 @@ export default function PopularPage({
 
                                                     <Typography>
                                                         <Stack direction={'row'} alignItems={'center'}>
-                                                            <p style={{ marginLeft: '5px' }}><span role="img" aria-label="Stars Icon">⭐</span>{selectedStudent?.rating}/10</p>
+                                                            <Typography style={{ marginLeft: '5px' }}><span role="img" aria-label="Stars Icon">⭐</span>{selectedStudent?.rating}/10</Typography>
                                                             <Button sx={{ marginLeft: '5px' }} onClick={() => selectedStudent && handleRatingClick(selectedStudent)}>
                                                                 <StarRateIcon sx={{ color: 'blue' }} />
-                                                                <p style={{ color: 'blue' }} ref={anchorRef}>Rate</p>
+                                                                <Typography style={{ color: 'blue' }} ref={anchorRef}>Rate</Typography>
 
                                                             </Button>
 
@@ -630,7 +633,7 @@ export default function PopularPage({
 
             case 'compact':
                 return (
-                    <Box sx={{ flexGrow: 1, bgcolor: 'black' }}>
+                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black' }}>
                         <Divider sx={{
                             width: '100%',
                             borderRadius: 2,
@@ -643,7 +646,8 @@ export default function PopularPage({
                                 <div key={movie.imdb_id} style={{ display: 'flex', alignItems: 'center' }}>
 
                                     {/* Left side - Image */}
-                                    <img src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }} />
+                                    <img onError={handleImageError}
+                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }} />
 
                                     {/* Right side - Details */}
                                     <Stack sx={{ color: 'white' }} alignItems={'flex-start'}>
@@ -666,13 +670,13 @@ export default function PopularPage({
                                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                                 {/* <span role="img" aria-label="Stars Icon">⭐</span> */}
                                                 <StarRateIcon sx={{ color: 'yellow' }} />
-                                                <p style={{ marginLeft: '5px' }}>{movie.rating}</p>
+                                                <Typography style={{ marginLeft: '5px' }}>{movie.rating}</Typography>
                                             </Box>
                                             <div>
                                                 <Button sx={{ marginLeft: '25px' }} onClick={() => handleRatingClick(movie)}>
                                                     <StarRateIcon sx={{ color: 'blue' }} />
-                                                    <p style={{ color: 'blue' }} ref={anchorRef}
-                                                    >Rate</p>
+                                                    <Typography style={{ color: 'blue' }} ref={anchorRef}
+                                                    >Rate</Typography>
 
                                                 </Button>
 
@@ -763,8 +767,8 @@ export default function PopularPage({
                                                                 {selectedStudent?.content_rating}
                                                             </Typography>
                                                             <Stack direction={'row'}>
-                                                                {selectedStudent?.gen.map((item: any) =>
-                                                                    <Typography>
+                                                                {selectedStudent?.gen.map((item: any, index) =>
+                                                                    <Typography key={index}>
                                                                         {item.genre} {bull}
                                                                     </Typography>
 
@@ -773,10 +777,10 @@ export default function PopularPage({
 
                                                             <Typography>
                                                                 <Stack direction={'row'} alignItems={'center'}>
-                                                                    <p style={{ marginLeft: '5px' }}><span role="img" aria-label="Stars Icon">⭐</span>{selectedStudent?.rating}/10</p>
+                                                                    <Typography style={{ marginLeft: '5px' }}><span role="img" aria-label="Stars Icon">⭐</span>{selectedStudent?.rating}/10</Typography>
                                                                     <Button sx={{ marginLeft: '5px' }} onClick={() => selectedStudent && handleRatingClick(selectedStudent)}>
                                                                         <StarRateIcon sx={{ color: 'blue' }} />
-                                                                        <p style={{ color: 'blue' }} ref={anchorRef}>Rate</p>
+                                                                        <Typography style={{ color: 'blue' }} ref={anchorRef}>Rate</Typography>
 
                                                                     </Button>
                                                                 </Stack>
@@ -873,11 +877,6 @@ export default function PopularPage({
         setNumberKey(totalKeyCount);
 
     }, [popurarityItemList]);
-
-
-    const handleChangePage = () => {
-        // Handle page change
-    };
 
     function countGenres(popurarityItemList: movieItem[]): Record<string, number> {
         const genreCount: Record<string, number> = {};
@@ -1003,11 +1002,11 @@ export default function PopularPage({
 
     return (
         <div>
-            <Box alignContent="center" sx={{ width: '100%', m: 'auto', p: 3, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
+            <Box alignContent="center" sx={{ width: '100%', m: 'auto', Typography: 3, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Toolbar>
                         <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <IconButton size="large" color="inherit">
                                 <Typography sx={{
                                     color: 'white',
                                     fontSize: "2rem",
@@ -1017,54 +1016,42 @@ export default function PopularPage({
                                     ':hover': {
                                         textDecoration: 'underline',
                                     },
-                                }}>IMDb Charts </Typography>
+                                }}>IMDb Charts
+                                </Typography>
                             </IconButton>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                    <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
-                                    <>
-                                        <Typography onClick={() => handleChangePage()} sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                            Most Popular Movies
-                                        </Typography>
-                                    </>
-                                </Button>
-                            </IconButton>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>As determined by IMDb users</Typography>
-                            </IconButton>
+                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
+                                <>
+                                    <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                        Most Popular Movies
+                                    </Typography>
+                                </>
+                            </Button>
+                            <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>As determined by IMDb users</Typography>
                         </Stack>
 
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                    <>
-                                        <Typography onClick={() => handleChangePage()} sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                            Share
-                                        </Typography>
-                                    </>
-                                    <ShareIcon sx={{ color: 'gray', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
-                                </Button>
-                            </IconButton>
+                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                <>
+                                    <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                        Share
+                                    </Typography>
+                                </>
+                                <ShareIcon sx={{ color: 'gray', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
+                            </Button>
                         </Box>
                     </Toolbar>
                 </AppBar>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} >
                     <Grid item xs={7}>
                         <AppBar position="static" sx={{ bgcolor: 'black' }} >
-                            <Toolbar>
+                            <Toolbar >
                                 <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                                    <IconButton size="large" aria-label="show 4 new mails" color="inherit" >
-                                        <Typography sx={{ color: 'white', fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}
-                                        >
-
-                                            {/* {numberGen} Tittle */}
-                                            {/* {popurarityItemList.length} Movies */}
-                                            {isFilterApplied ? '0 of ' : ''} {popurarityItemList.length} Movies
-
-
-                                        </Typography>
-                                    </IconButton>
+                                    <Typography sx={{ color: 'white', fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}
+                                    >
+                                        {isFilterApplied ? '0 of ' : ''} {popurarityItemList.length} Movies
+                                    </Typography>
                                     <Stack
                                         sx={{
                                             display: 'grid',
@@ -1072,57 +1059,44 @@ export default function PopularPage({
                                             rowGap: 3,
                                             gridTemplateColumns: 'repeat(4, 1fr)',
                                         }} >
-                                        <IconButton
-                                            size="large"
-                                            aria-label="show 4 new mails"
-                                            color="inherit"
-                                            sx={{ bgcolor: 'blue' }}
 
-                                        >
-                                            <FilterListIcon onClick={handleDiaGenlogOpen} sx={{ color: 'white', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
-                                        </IconButton>
-                                        {/* Display selected genre with "X" icon */}
+                                        <FilterListIcon fontSize='large' sx={{ bgcolor: 'blue', color: 'white', alignContent: 'center', mt: '3px', borderRadius: '100%', height: '50px', width: '50px' }} onClick={handleDiaGenlogOpen} />
 
-                                        {
-                                            // selectedGenres.length > 0 ? (
-                                            selectedGenres.map((genre) => (
-                                                <div key={genre} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                                                    <Typography sx={{ fontWeight: 'bold', marginRight: '5px' }}>
-                                                        {genre}
-                                                    </Typography>
-                                                    <IconButton
-                                                        size="small"
-                                                        onClick={() => handleRemoveGenreFilter(genre)}
-                                                        sx={{ color: 'red', padding: 0 }}
-                                                    >
-                                                        <CloseIcon />
-                                                    </IconButton>
-                                                </div>
-                                            ))
+                                        {selectedGenres.map((genre, index) => (
+                                            <div key={genre} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                                <Typography sx={{ fontWeight: 'bold', marginRight: '5px' }}>
+                                                    {genre}
+                                                </Typography>
+                                                <IconButton
+                                                    size="small"
+                                                    onClick={() => handleRemoveGenreFilter(genre)}
+                                                    sx={{ color: 'red', padding: 0 }}
+                                                >
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </div>
+                                        ))
                                         }
                                         {/* Display selected genre with "X" icon */}
 
-                                        {
-                                            // selectedGenres.length > 0 ? (
-                                            selectedKeys.map((genre) => (
-                                                <div key={genre} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                                                    <Typography sx={{ fontWeight: 'bold', marginRight: '5px' }}>
-                                                        {genre}
-                                                    </Typography>
-                                                    <IconButton
-                                                        size="small"
-                                                        onClick={() => handleRemoveKeyFilter(genre)}
-                                                        sx={{ color: 'red', padding: 0 }}
-                                                    >
-                                                        <CloseIcon />
-                                                    </IconButton>
-                                                </div>
-                                            ))
+                                        {selectedKeys.map((genre, index) => (
+                                            <div key={genre} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                                <Typography sx={{ fontWeight: 'bold', marginRight: '5px' }}>
+                                                    {genre}
+                                                </Typography>
+                                                <IconButton
+                                                    size="small"
+                                                    onClick={() => handleRemoveKeyFilter(genre)}
+                                                    sx={{ color: 'red', padding: 0 }}
+                                                >
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </div>
+                                        ))
                                         }
                                     </Stack>
                                     <Dialog open={openGenDialog} onClose={handleDiaGenlogClose} maxWidth={'lg'}
                                         keepMounted={true}
-
                                         PaperProps={{
                                             style: {
                                                 background: 'linear-gradient(rgba(57, 36, 103, 0.5), rgba(57, 36, 103, 0.5)), #392467',
@@ -1132,7 +1106,6 @@ export default function PopularPage({
                                     >
                                         <DialogTitle sx={{ color: 'yellow', textTransform: 'uppercase', fontWeight: 'bold' }}>Genres and Counts</DialogTitle>
                                         <DialogContent>
-                                            {/* <List> */}
                                             <Box
                                                 sx={{
                                                     display: 'grid',
@@ -1151,7 +1124,8 @@ export default function PopularPage({
                                                         onClick={() => handleGenreClick(genre as Genre)}
                                                     >
                                                         <Typography>
-                                                            <ListItemText primary={`${genre}: (${count})`} />
+                                                            {`${genre}: (${count})`}
+
                                                         </Typography>
                                                     </Button>
                                                 ))}
@@ -1256,9 +1230,7 @@ export default function PopularPage({
                                                                     }}
                                                                     onClick={() => handleTypeClick(genre as Key)}
                                                                 >
-                                                                    <Typography>
-                                                                        <ListItemText primary={`${genre}: (${count})`} />
-                                                                    </Typography>
+                                                                    <Typography>{`${genre}: (${count})`}         </Typography>
                                                                 </Button>
                                                             ))}
                                                     </Box>
@@ -1278,28 +1250,16 @@ export default function PopularPage({
                                                             </Button>
                                                         )}
                                                     </Stack>
-
-
                                                 </Box>
-
                                             </Box>
                                         </DialogContent>
                                     </Dialog>
                                 </Stack>
                                 <Box sx={{ flexGrow: 1 }} />
                                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                        <ViewListIcon onClick={() => switchView('detail')} sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
-                                    </IconButton>
-                                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                        <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                            <GridViewIcon onClick={() => switchView('grid')} sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
-                                        </Button>
-                                    </IconButton>
-                                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                        <ViewHeadlineIcon onClick={() => switchView('compact')} sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
-                                    </IconButton>
-
+                                    <ViewListIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '70px' }} onClick={() => switchView('detail')} />
+                                    <GridViewIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '70px' }} onClick={() => switchView('grid')} />
+                                    <ViewHeadlineIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '70px' }} onClick={() => switchView('compact')} />
                                 </Box>
                             </Toolbar>
                         </AppBar>
@@ -1348,7 +1308,7 @@ export default function PopularPage({
                                         <Popper id={id} open={open} anchorEl={anchorEl} transition>
                                             {({ TransitionProps }) => (
                                                 <Fade {...TransitionProps} timeout={350}>
-                                                    <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
+                                                    <Box sx={{ border: 1, Typography: 1, bgcolor: 'background.paper' }}>
                                                         <Menu
                                                             id="ranking-menu"
                                                             anchorEl={anchorEl}
@@ -1376,6 +1336,7 @@ export default function PopularPage({
                                 </Box>
                             </Toolbar>
                         </AppBar> */}
+
 
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {sortedPopularityItemList
@@ -1427,7 +1388,7 @@ export default function PopularPage({
                         </div>
 
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={5} key={selectedGenres.length}>
                         <AppBar position="static">
                             <Stack
                                 direction="column"
@@ -1465,16 +1426,13 @@ export default function PopularPage({
                             <Toolbar>
                                 <Stack direction={'column'}>
                                     <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                                <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
-                                                <>
-                                                    <Typography onClick={() => handleChangePage()} sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                                        More to explore
-                                                    </Typography>
-                                                </>
-                                            </Button>
-                                        </IconButton>
+                                        <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                            <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
+
+                                            <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                                More to explore
+                                            </Typography>
+                                        </Button>
                                         <Stack alignContent={'flex-start'} alignItems={'flex-start'} direction={'column'} spacing={2}>
                                             <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}
                                             >Charts
@@ -1545,18 +1503,16 @@ export default function PopularPage({
 
                                     </Stack>
                                     <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                                        <IconButton size="large" color="inherit">
-                                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                                <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
-                                                <>
-                                                    <Typography onClick={() => handleChangePage()} sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                                        Top Rated Movies by Genre
-                                                    </Typography>
-                                                </>
-                                            </Button>
-                                        </IconButton>
+                                        <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                            <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
+                                            <>
+                                                <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                                    Top Rated Movies by Genre
+                                                </Typography>
+                                            </>
+                                        </Button>
                                         <Stack alignContent={'flex-start'} alignItems={'flex-start'} spacing={2}>
-                                            <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}
+                                            <Box sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}
                                             >
                                                 {Object.entries(genreCount).map(([genre, count]) => (
                                                     <Button key={genre} variant="contained" size="large" sx={{
@@ -1568,19 +1524,19 @@ export default function PopularPage({
                                                     }}
                                                         onClick={() => navigate(`/movie/byGen/${genre}`)}
                                                     >
-                                                        <Typography>
-                                                            <ListItemText primary={`${genre}`} />
+                                                        <Typography> {`${genre}`}
+                                                            {/* <ListItemText primary={`${genre}`} /> */}
                                                         </Typography>
                                                     </Button>
                                                 ))}
-                                            </Typography>
+                                            </Box>
 
                                         </Stack>
                                     </Stack>
                                 </Stack>
                             </Toolbar>
                         </AppBar>
-                        <Button fullWidth sx={{ bgcolor: 'black', height: '100%' }} />
+                        <FormControl fullWidth sx={{ bgcolor: 'black', height: '100%' }} />
 
                     </Grid>
                 </Grid>

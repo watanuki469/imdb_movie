@@ -17,7 +17,7 @@ const starSlice = createSlice({
     initialState,
     reducers: {
         fetchStarList(state, action: PayloadAction<any>) {
-            state.loading = true;
+            // state.loading = true;
         },
         //cập nhật vào redux từ fetch single movie list
         fetchStarListSuccess(state, action: PayloadAction<any>) {
