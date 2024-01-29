@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import MoviePage from 'components/dashboard/MovieItemPageDashBoard';
 import { movieActions, selectMovieList } from 'features/movie/movieSlice';
@@ -17,7 +17,11 @@ export default function MoviePageDashBoard() {
   }, [genre])
 
   return (
-    <MoviePage movieList={movieList} />
+    <div>
+      <Typography variant='h3' sx={{color:'white',textAlign:'center'}}>{genre} Movie</Typography>
+      <MoviePage movieList={movieList} />
+    </div>
+
 
   );
 }

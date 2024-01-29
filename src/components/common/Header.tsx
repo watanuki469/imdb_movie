@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TvIcon from '@mui/icons-material/Tv';
-import { AppBar, Box, Button, Dialog, FormControl, Grid, IconButton, InputLabel, OutlinedInput, Select, SelectChangeEvent, Stack, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, Dialog, FormControl, Grid, IconButton, InputLabel, OutlinedInput, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
 import SearchDashBoard from 'components/dashboard/SearchDashBoard';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -44,119 +44,129 @@ export function Header() {
         <>
             <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 3, textAlign: 'center' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
-                    <Grid container spacing={2} alignContent="center" alignItems="center">
-                        <Grid item xs={1} >
-                            <Button onClick={() => navigate('/')}
-                                fullWidth sx={{bgcolor: 'yellow',color: 'black',textAlign: 'center',border: 'none',fontWeight: 'bold',fontSize: '36px',fontFamily: 'sans-serif',padding: '10px 20px',height: '50px',textTransform: 'none',overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                    whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                    textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                    ':hover': {
+                    <Container maxWidth="xl">
+                        <Toolbar disableGutters>
+                            <Grid container spacing={2} alignContent="center" alignItems="center">
+                                <Grid item xs={1} >
+                                    <Button onClick={() => navigate('/')}
+                                        fullWidth sx={{
+                                            bgcolor: 'yellow', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '24px', fontFamily: 'sans-serif', padding: '10px 20px', height: '50px', textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                            whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                            textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                            ':hover': {
+                                                bgcolor: 'black',
+                                                color: 'blue',
+                                                borderColor: 'red'
+                                            },
+
+
+                                        }}>IMDb</Button>
+                                </Grid>
+
+
+                                <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                    <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}
+                                        onClick={() => handleRemoveClick()}>
+                                        < ReorderIcon sx={{ color: 'white' }} />
+                                        <>
+                                            <span style={{ marginRight: '1rem' }}></span>
+                                            <Typography sx={{
+                                                display: 'flex', alignItems: 'center', color: 'white',
+                                                border: 'none',
+                                                fontWeight: 'bold',
+
+                                            }}>
+                                                Menu
+                                            </Typography>
+                                        </>
+                                    </Button>
+
+                                </Grid>
+
+                                <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: { xs: 'none', md: 'flex' } }} >
+                                    <SearchDashBoard />
+                                </Grid>
+                                <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
+                                    <Button onClick={() => navigate('/IMDbPro')} fullWidth sx={{
                                         bgcolor: 'black',
-                                        color: 'blue',
-                                        borderColor: 'red'
-                                    },
-
-
-                                }}>IMDb</Button>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}
-                                onClick={() => handleRemoveClick()}>
-                                < ReorderIcon sx={{ color: 'white' }} />
-                                <>
-                                    <span style={{ marginRight: '1rem' }}></span>
-                                    <Typography sx={{
-                                        display: 'flex', alignItems: 'center', color: 'white',
+                                        color: 'white',
+                                        textAlign: 'center',
                                         border: 'none',
                                         fontWeight: 'bold',
+                                        fontSize: '20px',
+                                        fontFamily: 'sans-serif',
+                                        padding: '10px 20px',
+                                        height: '40px',
+                                        textTransform: 'none',
+                                        overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                        whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                        textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                    }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
+                                    <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', padding: '10px' }}>
+                                        <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '70%' }} />;
+                                        <>
+                                            <Typography sx={{
+                                                display: 'flex', alignItems: 'center', color: 'white',
+                                                border: 'none',
+                                                fontWeight: 'bold',
+                                                marginLeft: '10px',
+                                                marginTop: '10px',
+                                            }}>
+                                                Watch List
+                                            </Typography>
+                                        </>
+                                    </Button>
 
-                                    }}>
-                                        Menu
-                                    </Typography>
-                                </>
-                            </Button>
+                                </Grid>
 
-                        </Grid>
-
-                        <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: 'flex' }} >
-                            <SearchDashBoard />
-                        </Grid>
-                        <Grid item xs={1} >
-                            <Button onClick={() => navigate('/IMDbPro')} fullWidth sx={{
-                                bgcolor: 'black',
-                                color: 'white',
-                                textAlign: 'center',
-                                border: 'none',
-                                fontWeight: 'bold',
-                                fontSize: '24px',
-                                fontFamily: 'sans-serif',
-                                padding: '10px 20px',
-                                height: '50px',
-                                textTransform: 'none',
-                                overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                            }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
-                            </Button>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', padding: '10px' }}>
-                                <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '70%' }} />;
-                                <>
-                                    <Typography sx={{
-                                        display: 'flex', alignItems: 'center', color: 'white',
+                                <Grid item xs={1} ml="auto">
+                                    <Button fullWidth sx={{
+                                        bgcolor: 'black',
+                                        color: 'white',
+                                        textAlign: 'center',
                                         border: 'none',
                                         fontWeight: 'bold',
-                                        marginLeft: '10px',
-                                        marginTop: '10px',
-                                    }}>
-                                        Watch List
-                                    </Typography>
-                                </>
-                            </Button>
+                                        fontSize: '20px',
+                                        fontFamily: 'sans-serif',
+                                        padding: '10px 20px',
+                                        height: '50px',
+                                        textTransform: 'none',
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                        textOverflow: 'ellipsis',
+                                    }}>Sign In</Button>
+                                </Grid>
+                                <Grid item xs={1} ml="auto">
+                                    <FormControl sx={{ m: 1, width: 200, bgcolor: 'black', color: 'red' }}>
+                                        <InputLabel
+                                            id="demo-multiple-checkbox-label"
+                                            sx={{ color: 'white', textAlign: 'center', alignContent: "center" }}
+                                        >
+                                            EN
+                                        </InputLabel>
 
-                        </Grid>
+                                        <Select
+                                            labelId="demo-multiple-checkbox-label"
+                                            id="demo-multiple-checkbox"
+                                            value={personName}
+                                            onChange={handleChange}
+                                            input={<OutlinedInput label="Tag" />}
+                                            renderValue={(selected) => selected.join(', ')}
+                                            MenuProps={MenuProps}
+                                            sx={{ color: 'white' }}
+                                        >
+                                            {/* Các mục của Select */}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
 
-                        <Grid item xs={1} >
-                            <Button fullWidth sx={{
-                                bgcolor: 'black',
-                                color: 'white',
-                                textAlign: 'center',
-                                border: 'none',
-                                fontWeight: 'bold',
-                                fontSize: '24px',
-                                fontFamily: 'sans-serif',
-                                padding: '10px 20px',
-                                height: '50px',
-                                textTransform: 'none',
-                                overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
 
-                            }}>Sign In</Button>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <FormControl fullWidth sx={{ m: 1, width: 200, bgcolor: 'black', color: 'red' }} >
-                                <InputLabel id="demo-multiple-checkbox-label"
-                                    sx={{ color: 'white', textAlign: 'center', alignContent: "center" }}>EN</InputLabel>
-
-                                <Select
-                                    labelId="demo-multiple-checkbox-label"
-                                    id="demo-multiple-checkbox"
-                                    // multiple
-                                    value={personName}
-                                    onChange={handleChange}
-                                    input={<OutlinedInput label="Tag" />}
-                                    renderValue={(selected) => selected.join(', ')}
-                                    MenuProps={MenuProps}
-                                    sx={{ color: 'white' }}
-                                >
-                                </Select>
-                            </FormControl>
-
-                        </Grid >
-
-                    </Grid >
+                            </Grid >
+                        </Toolbar>
+                    </Container>
                 </AppBar >
             </Box >
             {/* Remove dialog */}

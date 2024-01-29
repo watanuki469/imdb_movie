@@ -256,26 +256,31 @@ export default function SingleStarPage({
                                 </Stack>
                             </Grid>
                             <Grid item xs={6} md={9}>
-                                <Typography variant='h2' sx={{ color: 'yellow' }}>{item.name}</Typography>
-                                <List
-                                    key={index}
-                                    sx={{
-                                        width: '100%',
-                                        borderRadius: 2,
-                                        border: '1px solid',
-                                        borderColor: 'divider',
-                                        overflow: 'hidden',
-                                    }}
-                                >
-                                    <Stack direction={'column'} >
-                                        <MovieBio partialBio={item.partial_bio} name={item.name} />
-                                        {!showMore && (
-                                            <Button onClick={handleLoadMore} sx={{ color: 'white', mt: 1 }}>
-                                                Load More
-                                            </Button>
-                                        )}
-                                    </Stack>
-                                </List>
+                                <Box sx={{
+                                    width: { xs: "100%", md: "80%" },
+                                    padding: { xs: "1rem 0", md: "1rem 2rem" }
+                                }}>
+                                    <Typography variant='h4' sx={{ color: 'yellow' }}>{item.name}</Typography>
+                                    <List
+                                        key={index}
+                                        sx={{
+                                            width: '100%',
+                                            borderRadius: 2,
+                                            border: '1px solid',
+                                            borderColor: 'divider',
+                                            overflow: 'hidden',
+                                        }}
+                                    >
+                                        <Stack direction={'column'} >
+                                            <MovieBio partialBio={item.partial_bio} name={item.name} />
+                                            {!showMore && (
+                                                <Button onClick={handleLoadMore} sx={{ color: 'white', mt: 1 }}>
+                                                    Load More
+                                                </Button>
+                                            )}
+                                        </Stack>
+                                    </List>
+                                </Box>
 
                             </Grid>
                         </Grid>

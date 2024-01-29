@@ -15,7 +15,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Box>
+      <Box sx={{alignContent:'center',justifyContent:'center',alignItems:'center'}}>
         <GenrePage genresList={genreList} />
       </Box>
     </div>

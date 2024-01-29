@@ -32,7 +32,7 @@ export default function Top10ItemPageDashBoard({
   }, [popurarityList])
 
   return (
-    <div style={{ backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
+    <div style={{ backgroundColor: "black", position: "relative", width: '100%' }}>
       <Top10Page popurarityItemList={popurarityItemList} />
     
     </div >

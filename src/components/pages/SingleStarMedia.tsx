@@ -1,5 +1,5 @@
 import { PlayArrow } from "@mui/icons-material";
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Divider, FormControl, IconButton, Stack, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { AwardActions, selectAwardList } from 'features/award/awardSlice';
 import { award } from 'models';
@@ -37,46 +37,35 @@ export default function SingleStarMedia() {
         return keyCounting;
 
     }
-   
-    
+
+
     return (
         <div>
-            <Stack direction={'column'}>
-                <Stack alignContent={'flex-start'} alignItems={'flex-start'}>
-                    <IconButton color="inherit">
-                        {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
-                            <Divider sx={{ border: '5px solid yellow', marginRight: '10px' ,height: '50px'}} orientation="vertical" />
-                            <Stack direction={'row'} alignContent={'center'} alignItems={'center'}>
-                                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', } }}>
-                                    <b>Award</b>:
-                                </Typography>
-                                <Box
-                                    sx={{
-                                        display: 'grid',
-                                        gridTemplateColumns: 'repeat(4, 1fr)',
-                                    }} >
+            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'flex-start'}>
+                {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
+                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.8rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                    Award:
+                </Typography>
+                <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', marginTop: '5px' }}>
 
-                                    {Object.entries(typeCount)
-                                        .filter(([type, count]) => type !== 'undefined') // Filter out entries with type 'undefine'
-                                        .map(([type, count], index, array) => (
-                                            <Typography key={index} sx={{ fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow' }}>
-                                                {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
-                                            </Typography>
-
-                                        ))}
-                                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
-                                </Box>
-
+                    {Object.entries(typeCount)
+                        .filter(([type, count]) => type !== 'undefined')
+                        .map(([type, count], index, array) => (
+                            <Stack key={index} direction={'row'} sx={{ fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                                {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
                             </Stack>
-                        {/* </Button> */}
-                    </IconButton>
+
+                        ))}
+                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+
                 </Stack>
-                <Stack direction={'row'}>
-                    <SingleStarItem awardList={awardList} />
-                </Stack>
+
+                {/* </Button> */}
             </Stack>
-
-
+            <Stack direction={'row'}>
+                <SingleStarItem awardList={awardList} />
+            </Stack>
         </div >
 
     );

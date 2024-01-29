@@ -59,7 +59,7 @@ export default function CastPage({
                 <Stack direction={'row'}>  Director:{' '}
                     {directors &&
                         directors.map((item: any, index: number) => (
-                            <Fragment key={item.role}>
+                            <Fragment key={`director_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1}>
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
@@ -88,7 +88,7 @@ export default function CastPage({
                 <Stack direction={'row'} spacing={1}>   Writers:{' '}
                     {writers &&
                         writers.map((item: any, index: number) => (
-                            <Fragment key={item.role}>
+                            <Fragment  key={`writer_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1}>
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
@@ -115,7 +115,7 @@ export default function CastPage({
                 <Stack direction={'row'}>   Stars:{' '}
                     <Stack direction={'row'} sx={{ marginLeft: '5px' }}>
                         {sortedStars && sortedStars.slice(0, 3).map((item: any, index: number) => (
-                            <Fragment key={item.role}>
+                            <Fragment  key={`star_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1}>
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton

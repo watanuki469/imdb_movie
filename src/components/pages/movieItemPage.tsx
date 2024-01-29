@@ -29,8 +29,14 @@ export default function MovieItemPage({
   const handleChangePage = () => {
 
   };
+  const handleImageError = (e: any) => {
+    const imgElement = e.currentTarget as HTMLImageElement;
+    imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
+};
+
   const renderPopularity = (uniqueTitles: any[] = []) => {
     return (
+
       <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
         {movieItemList?.map((item: movieItem) => {
           // Kiểm tra xem item.title đã xuất hiện chưa
@@ -38,11 +44,13 @@ export default function MovieItemPage({
             // Nếu chưa xuất hiện, thêm vào mảng uniqueTitles và hiển thị
             uniqueTitles.push(item.title);
             return (
-              <Grid item xs={4} md={3} lg={2.4} key={item.title}>
+              <Grid item xs={6} md={3} lg={2.4} key={item.title}>
                 <Stack alignItems="center">
                   <img
+                    onError={handleImageError}
                     src={item.banner}
-                    style={{ height: "280px" }}
+                    style={{ height: "280px",maxWidth: '200px', objectFit: 'initial',
+                    backgroundColor: 'black', }}
                     onClick={() => onEdit?.(item)}
                   />
                   <Typography variant="h6" color="white">
@@ -62,7 +70,7 @@ export default function MovieItemPage({
 
   return (
     <div style={{ width: '80%', marginLeft: '10%' }}>
-      
+
       {renderPopularity()}
 
       {/* Dialog */}

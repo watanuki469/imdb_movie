@@ -21,24 +21,19 @@ export function ActorBio() {
   return (
     <div>
       <Stack alignContent={'flex-start'} alignItems={'flex-start'} direction={'row'}>
-          {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
-          <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '50px' }} orientation="vertical" />
-          <Stack direction={'row'} alignContent={'center'} alignItems={'center'}>
-            <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', } }}>
-              <b>Did you know</b>
-            </Typography>
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-              }} >
-              <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+        {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
+        <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '50px' }} orientation="vertical" />
+        <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', } }}>
+          Did you know
+        </Typography>
+        <Stack direction={'row'} alignContent={'center'} alignItems={'center'}>
 
-              {/* </List> */}
-            </Box>
+          <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
 
-          </Stack>
-          {/* </Button> */}
+          {/* </List> */}
+
+        </Stack>
+        {/* </Button> */}
       </Stack>
       <ActorBioPages starList={starList} />
 

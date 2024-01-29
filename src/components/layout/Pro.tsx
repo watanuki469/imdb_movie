@@ -1,8 +1,8 @@
-import { AppBar, Avatar, Box, Container, Divider, List, ListItem, ListItemAvatar, ListItemText, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Container, Divider, Grid, List, ListItem, ListItemAvatar, ListItemText, Paper, Stack, Toolbar, Typography } from "@mui/material";
 
 export function Pro() {
     return (
-        <Box sx={{ bgcolor: "white", position: "relative" }}>
+        <Box sx={{ bgcolor: "white", position: "relative", width: '100%' }}>
             <Typography sx={{
                 bgcolor: 'white',
                 color: 'black',
@@ -19,26 +19,29 @@ export function Pro() {
                 textOverflow: 'ellipsis', // Hiển thị dấu elipsis
             }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
             </Typography>
+            <Grid
+                container
+                spacing={2}
+                sx={{
+                    border: '2px solid #ff0000',
+                    padding: '20px',
+                    borderRadius: '10px',
+                    textAlign: 'center',
+                    alignContent: 'center',
+                    justifyContent: 'center', // Canh giữa theo chiều ngang
+                    alignItems: 'center', // Canh giữa theo chiều dọc
+                }}
+            >
 
-            <form style={{
-                borderColor: 'red',
-                border: ' 2px solid #ff0000',
-                padding: '20px',
-                borderRadius: '10px',
-                width: '900px',
-                textAlign: 'center',
-                alignContent: 'center',
-                margin: 'auto'
-
-            }}>
                 <Typography variant="h3" sx={{ textAlign: 'center' }}>
                     Get the essential resource for entertainment professionals
                 </Typography>
 
-                <List sx={{ width: '100%', maxWidth: '50%', ml: '200px' }}>
+                
+                <List sx={{ maxWidth: '50%' }}>
                     <ListItem sx={{ textAlign: 'center', border: ' 2px solid red', }}>
                         <ListItemAvatar>
-                            <Avatar variant="square" sx={{ width: 100, height: 50, textAlign: 'center', alignItems: 'center' }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
+                            <Avatar variant="square" sx={{ width: 100, height: 50, textAlign: 'center', alignItems: 'center', alignContent: 'center' }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
                         </ListItemAvatar>
                         <ListItemText sx={{ fontSize: '200px' }}> <Typography variant='h4'>Join With Amazon</Typography></ListItemText>
                     </ListItem>
@@ -50,25 +53,29 @@ export function Pro() {
                     <hr style={{ flexGrow: 1, margin: ' 0 60px' }} />
 
                 </Container>
-                <List sx={{ width: '100%', maxWidth: '50%', ml: '200px' }}>
-                    <ListItem sx={{ textAlign: 'center', border: ' 2px solid black', }}>
-                        <ListItemAvatar>
-                            <Avatar variant="square" sx={{ width: 100, height: 50, textAlign: 'center', alignItems: 'center' }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
-                        </ListItemAvatar>
-                        <ListItemText sx={{ fontSize: '200px' }}> <Typography variant='h4'>Join With Amazon</Typography></ListItemText>
-                    </ListItem>
-                </List>
+                <Stack direction={'column'}>
+                    <List sx={{ maxWidth: '100%' }}>
+                        <ListItem sx={{ textAlign: 'center', border: ' 2px solid black', }}>
+                            <ListItemAvatar>
+                                <Avatar variant="square" sx={{ width: 100, height: 50, textAlign: 'center', alignItems: 'center' }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
+                            </ListItemAvatar>
+                            <ListItemText sx={{ fontSize: '200px' }}> <Typography variant='h4'>Join With Amazon</Typography></ListItemText>
+                        </ListItem>
+                    </List>
 
-                <List sx={{ width: '100%', maxWidth: '50%', ml: '200px' }}>
-                    <ListItem sx={{ textAlign: 'center', border: ' 2px solid black', }}>
-                        <ListItemAvatar>
-                            <Avatar variant="square" sx={{ width: 80, height: 40, textAlign: 'center', alignItems: 'center' }} alt="Remy Sharp" src="https://m.media-amazon.com/images/G/01/imdbpro/logos/imdb_login_logo._CB1539729863_.png" />
-                        </ListItemAvatar>
-                        <ListItemText sx={{ fontSize: '200px' }}> <Typography variant='h4'>Join With IMDb</Typography></ListItemText>
-                    </ListItem>
-                </List>
+                    <List sx={{ maxWidth: '100%' }}>
+                        <ListItem sx={{ textAlign: 'center', border: ' 2px solid black', }}>
+                            <ListItemAvatar>
+                                <Avatar variant="square" sx={{ width: 80, height: 40, textAlign: 'center', alignItems: 'center' }} alt="Remy Sharp" src="https://m.media-amazon.com/images/G/01/imdbpro/logos/imdb_login_logo._CB1539729863_.png" />
+                            </ListItemAvatar>
+                            <ListItemText sx={{ fontSize: '200px' }}> <Typography variant='h4'>Join With IMDb</Typography></ListItemText>
+                        </ListItem>
+                    </List>
+                </Stack>
 
-            </form>
+            </Grid >
+
+
             <Box alignContent="center" sx={{ flexGrow: 1, width: '100%', p: 3 }}>
                 <AppBar position="static" sx={{
                     backgroundColor: "white", borderRadius: '10px',
@@ -108,7 +115,8 @@ export function Pro() {
                 </AppBar>
 
             </Box>
-
         </Box>
+
+
     );
 }

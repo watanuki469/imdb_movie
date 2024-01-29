@@ -14,16 +14,16 @@ export default function SingleMovieAward({
     const navigate = useNavigate()
     const scrollToTop = () => {
         window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
+            top: 0,
+            behavior: 'smooth',
         });
-      };
+    };
     return (
         <div>
             <Grid container spacing={1}>
-                {remainingList.map((item: any, index: number) => (
-                    <Grid item xs={2} sm={6} md={6} key={index}>
-                        <Stack key={index} direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
+                {remainingList.map((item: movieAward, index: number) => (
+                    <Grid item xs={2} sm={6} md={6} key={index} >
+                        <Stack direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
                             <Stack direction={'column'} alignItems="flex-start" alignContent={'flex-start'}
                                 sx={{
                                     display: 'flex',
@@ -46,7 +46,7 @@ export default function SingleMovieAward({
                                             textAlign: 'center'
                                         }}
                                     >
-                                        <Typography variant="h5" sx={{
+                                        <Typography key={item.award_name} variant="h5" sx={{
                                             fontWeight: 'bold', textAlign: 'center', alignContent: 'center'
                                             , justifyContent: 'center'
                                         }}>
