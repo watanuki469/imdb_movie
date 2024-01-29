@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
   method:'GET',

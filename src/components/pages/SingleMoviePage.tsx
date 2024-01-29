@@ -72,7 +72,12 @@ export default function SingleMoviePage({
         const imgElement = e.currentTarget as HTMLImageElement;
         imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
     };
-
+    const handleCastClick = () => {
+        const casterElement = document.getElementById('caster');
+        if (casterElement) {
+            casterElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
 
     return (
@@ -83,7 +88,9 @@ export default function SingleMoviePage({
                     <Toolbar>
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" color="inherit">
+                            <IconButton size="large" color="inherit"
+                                onClick={handleCastClick}
+                            >
                                 <Typography sx={{
                                     color: 'white',
                                     fontSize: "1.5rem",
@@ -97,7 +104,9 @@ export default function SingleMoviePage({
                                 }}>Cast & crew {bull} </Typography>
                             </IconButton>
 
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <IconButton size="large"
+                                onClick={() => navigate('/')}
+                                color="inherit">
                                 <Typography sx={{
                                     color: 'white',
                                     fontSize: "1.5rem",
@@ -111,7 +120,7 @@ export default function SingleMoviePage({
                                 }}> User reviews {bull}</Typography>
                             </IconButton>
 
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <IconButton size="large" onClick={() => navigate('/')} color="inherit">
                                 <Typography sx={{
                                     color: 'white',
                                     fontSize: "1.5rem",
@@ -125,7 +134,8 @@ export default function SingleMoviePage({
                                 }}> Trivia {bull}</Typography>
                             </IconButton>
 
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <IconButton  onClick={() => navigate('/')}
+                             size="large" aria-label="show 4 new mails" color="inherit">
                                 <Typography sx={{
                                     color: 'white',
                                     fontSize: "1.5rem",
@@ -417,7 +427,10 @@ export default function SingleMoviePage({
 
 
                                     <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                                    <Cast />
+                                    <div id='caster'>
+                                        <Cast />
+                                    </div>
+
 
 
                                 </List>
