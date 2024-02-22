@@ -12,9 +12,11 @@ import actorSaga from 'features/actor/actorSaga';
 import awardSaga from 'features/award/awardSaga';
 import singleStarSaga from 'features/singleStar/singleStarSaga';
 import movieAwardSaga from 'features/movieAward/movieAwardSaga';
+import TechSaga from 'features/tech/techSaga';
 
 export default function* rootSaga() {
     console.log('rootSaga')
   yield all([genreSaga(),movieSaga(),movieItemSaga(),singleMovieSaga(),
-    popularitySaga(),searchSaga(),searchItemSaga(),castSaga(),starSaga(),actorSaga(),awardSaga(),singleStarSaga(),movieAwardSaga()]);
+    popularitySaga(),searchSaga(),searchItemSaga(),castSaga(),starSaga(),actorSaga(),awardSaga()
+    ,singleStarSaga(),movieAwardSaga(),TechSaga()]);
 }

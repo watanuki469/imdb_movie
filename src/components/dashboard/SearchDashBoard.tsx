@@ -1,10 +1,13 @@
-import { Clear, Loop, Search } from "@mui/icons-material";
+import { Clear, Label, Loop, Search } from "@mui/icons-material";
 import { Box, Fade, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Popper, Select } from "@mui/material";
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import SearchLayout from "components/layout/SearchLayout";
 import { searchActions, selectSearchList } from "features/search/searchSlice";
 import { useDebounce } from "hook/useDebounce";
 import { useEffect, useRef, useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { purple, red } from '@mui/material/colors';
+
 
 export default function SearchDashBoard() {
   const dispatch = useAppDispatch()
@@ -13,6 +16,8 @@ export default function SearchDashBoard() {
   const [searchType, setSearchType] = useState('all'); // Khởi tạo giá trị mặc định
 
   const [query, setQuery] = useState("");
+  const [inputLabelVisible, setInputLabelVisible] = useState(false);
+
 
   const [loading, setLoading] = useState(false);
   const debouncedValue = useDebounce(query, 500);
@@ -27,8 +32,8 @@ export default function SearchDashBoard() {
     const newQuery = e.target.value;
     setOpen(!!newQuery);
     setQuery(newQuery);
+    setInputLabelVisible(false);
   };
-
 
   useEffect(() => {
     if (!debouncedValue.trim()) {
@@ -41,15 +46,18 @@ export default function SearchDashBoard() {
   const handleClear = () => {
     setQuery('')
     setOpen(false);
+    setInputLabelVisible(true);
   };
   const handleCloseButNotDeleteQuery = () => {
     setOpen(false);
+    setInputLabelVisible(true);
 
   };
 
+
   return (
-    <div style={{ width: '100%' }}>
-      <Grid sx={{ alignItems: 'center', height: '50px', display: 'flex' }}>
+    <div style={{ width: '100%', backgroundColor: 'black' }}>
+      <Grid sx={{ alignItems: 'center', height: '50px', display: 'flex', bgcolor: "black" }}>
         <FormControl variant="outlined" size="small" sx={{ bgcolor: 'white', width: '30%' }}>
           <InputLabel sx={{ color: 'black' }}>All</InputLabel>
           <Select
@@ -69,7 +77,7 @@ export default function SearchDashBoard() {
           </Select>
         </FormControl>
         <FormControl fullWidth variant="outlined" size="small" sx={{ borderColor: 'white', bgcolor: 'white' }}>
-          <InputLabel htmlFor="searchBy">Search by {searchType}</InputLabel>
+          <InputLabel sx={{ color: 'blue' }}>Search by {searchType}</InputLabel>
           <OutlinedInput
             id="searchBy "
             label="Search by "
@@ -78,7 +86,6 @@ export default function SearchDashBoard() {
             onChange={onQueryChange}
             value={query}
             ref={anchorRef}
-
             endAdornment={
               loading ? (
                 <Loop sx={{ position: 'absolute', right: '26px', animation: 'spin 1s linear infinite' }} />
@@ -87,7 +94,7 @@ export default function SearchDashBoard() {
                   <Clear />
                 </button>
               ) : (
-                <Search />
+                <Search onClick={handleClear} />
               )
             }
 
@@ -100,11 +107,11 @@ export default function SearchDashBoard() {
           open={open}
           transition
           placement="bottom-start">
-         
+
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <Box
-              //  onClick={handleCloseButNotDeleteQuery}
+                onClick={handleCloseButNotDeleteQuery}
                 sx={{
                   border: 1,
                   p: 1,

@@ -36,14 +36,11 @@ export default function SliderItemPageDashBoard({
     <AppBar position="static" sx={{ bgcolor: 'black' }}>
       <Container maxWidth="xl">
         <div style={{
-          backgroundColor: "black", width: '100%',
+          backgroundColor: "black", width: '80%',
           alignContent: 'center',
           textAlign: 'center',
           justifyContent: 'center',
-          maxHeight: "80%",
-
-          top: 0,
-          left: 0,
+          margin: 'auto',
         }}>
           <SliderPage popurarityItemList={popurarityItemList} />
         </div >

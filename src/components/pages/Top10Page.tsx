@@ -18,8 +18,6 @@ export default function Top10Page({
 }: Top10PageProps) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-   
-
 
     // const uniquePopurarityItemList = Array.from(new Set(popurarityItemList.map(item => item.title)))
     //     .map(title => popurarityItemList.find(item => item.title === title));
@@ -36,7 +34,7 @@ export default function Top10Page({
     });
     const maxSteps = uniquePopurarityItemList.length
 
-    const handleNext = () => {       
+    const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 6);
     };
     const handleLast = () => {
@@ -56,14 +54,14 @@ export default function Top10Page({
 
     let itemsToShow;
     if (matchesXs) {
-        itemsToShow = 1;
+        itemsToShow = 2;
     } else if (matchesSm) {
         itemsToShow = 2;
     } else if (matchesMd) {
         itemsToShow = 4;
     } else {
         // Mặc định hoặc xử lý cho các kích thước màn hình khác
-        itemsToShow = 6; // Giả sử mặc định là 4 cho các kích thước khác
+        itemsToShow = 5; // Giả sử mặc định là 4 cho các kích thước khác
     }
 
     return (
@@ -84,7 +82,8 @@ export default function Top10Page({
                             fontWeight: 'bold',
                             marginLeft: '10px',
                             marginTop: '10px',
-                            textAlign: 'center'
+                            textAlign: 'center',
+                            cursor:'pointer'
                         }}>
                             Top movies on IMDb this week
                         </Typography>
@@ -92,19 +91,36 @@ export default function Top10Page({
                     </>
                     {/* <PlayArrowIcon  sx={{ color: 'yellow', height: '100%'  }} /> */}
                 </Button>
-                <Grid item xs={12}>
+                <Grid item xs={12} >
                     <Stack direction='row' spacing={3} sx={{ justifyContent: 'center', alignItems: 'center' }}>
                         <Box>
-                            <Button sx={{ color: 'white' }} size="small" onClick={handleBack} disabled={activeStep === 0}>
+                            <Button sx={{
+                                color: 'white' ,
+                         display: activeStep === 0 ? 'none' : 'inline-block'
+                            }} size="small" onClick={handleBack} disabled={activeStep === 0}>
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowRight />
                                 ) : (
-                                    <KeyboardArrowLeft />
+
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
+                                        <Box sx={{
+                                            width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
+
+                                        }}>
+                                            <KeyboardArrowLeft sx={{
+                                                color: 'white', fontSize: 69,
+                                                ':hover': {
+                                                    color: 'yellow'
+                                                },
+                                            }} />
+                                        </Box>
+                                    </Box>
                                 )}
-                                Back:{activeStep}
+
 
                             </Button>
-                            <Button sx={{ color: 'white', mt: '40px' }} size="small" onClick={handleBackFirst} disabled={activeStep === 0}>
+                            {/* <Button sx={{ color: 'white', mt: '40px' }} size="small" onClick={handleBackFirst} disabled={activeStep === 0}>
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowRight />
                                 ) : (
@@ -112,12 +128,12 @@ export default function Top10Page({
                                 )}
 
                                 First
-                            </Button>
+                            </Button> */}
                         </Box>
 
 
-                        <Box sx={{ px: 3, objectFit: 'contain', width: '100%', bgcolor: 'black' }}>
-                            <Stack spacing={3.3} direction="row" sx={{ width: '100%', height: '60vh' }}>
+                        <Box sx={{ objectFit: 'contain', width: '80%', bgcolor: 'black' }}>
+                            <Stack spacing={1} direction="row" sx={{ width: '100%', height: '60vh', textAlign: 'center' }}>
                                 {uniquePopurarityItemList.slice(0, itemsToShow).map((item, index) => (
                                     <Top10PageItem key={index} popurarityItemList={uniquePopurarityItemList} number={index} activeStep={activeStep} />
                                 ))}
@@ -126,22 +142,36 @@ export default function Top10Page({
 
 
                         <Box>
-                            <Button sx={{ color: 'white' }} size="small" onClick={handleNext} disabled={activeStep >= 44}>
-                                Next: {50-activeStep-6  }
+                            <Button sx={{ color: 'white',
+                        display: activeStep >=44 ? 'none' : 'inline-block' }} size="small" onClick={handleNext} disabled={activeStep >= 44}>
+
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowLeft />
                                 ) : (
-                                    <KeyboardArrowRight />
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
+                                        <Box sx={{
+                                            width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
+
+                                        }}>
+                                            <KeyboardArrowRight sx={{
+                                                color: 'white', fontSize: 69,
+                                                ':hover': {
+                                                    color: 'yellow'
+                                                },
+                                            }} />
+                                        </Box>
+                                    </Box>
                                 )}
                             </Button>
-                            <Button sx={{ color: 'white', mt: '40px' }} size="small" onClick={handleLast} disabled={activeStep >= 44 }>
+                            {/* <Button sx={{ color: 'white', mt: '40px' }} size="small" onClick={handleLast} disabled={activeStep >= 44}>
                                 Latest
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowLeft />
                                 ) : (
                                     <KeyboardArrowRight />
                                 )}
-                            </Button>
+                            </Button> */}
                         </Box>
                     </Stack>
                 </Grid>

@@ -22,7 +22,7 @@ export default function SingleMovieAward({
         <div>
             <Grid container spacing={1}>
                 {remainingList.map((item: movieAward, index: number) => (
-                    <Grid item xs={2} sm={6} md={6} key={index} >
+                    <Grid item xs={6} sm={4} md={3} key={index} >
                         <Stack direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
                             <Stack direction={'column'} alignItems="flex-start" alignContent={'flex-start'}
                                 sx={{
@@ -63,6 +63,7 @@ export default function SingleMovieAward({
                                 <Typography variant="body1" sx={{ color: 'blue' }}>{item.movie?.title ?? 'Meow Meow'}</Typography>
                                 <Stack direction={'row'} >
                                     <Typography variant="body1" style={{ color: 'gray' }} > Shared with:
+
                                         {item.actor && (
                                             <span style={{ marginLeft: '5px', color: 'red' }} >
                                                 {item.actor && item.actor.length > 0 && (
@@ -79,12 +80,14 @@ export default function SingleMovieAward({
                                 </Stack>
                             </Stack>
                             <InfoIcon
-                                onClick={scrollToTop}
+                                // onClick={scrollToTop}
+                                onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)}
                                 sx={{
                                     marginLeft: 'auto',
                                     justifyContent: 'flex-end',
                                     alignContent: 'flex-end',
-                                    marginRight: '30px'
+                                    marginRight: '30px',
+
                                 }}
                             />
                         </Stack>

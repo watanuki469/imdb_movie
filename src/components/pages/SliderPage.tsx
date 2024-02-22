@@ -66,6 +66,23 @@ export default function SliderPage({
         };
     }, [activeStep, uniquePopurarityItemList]);
     let navigate = useNavigate()
+    const [imageHeight, setImageHeight] = useState(300); // Chiều cao mặc định của ảnh là 300px
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 600) {
+                setImageHeight(150); // Đặt chiều cao của ảnh là 150px khi màn hình thu nhỏ
+            } else {
+                setImageHeight(200); // Đặt lại chiều cao mặc định khi màn hình lớn hơn 600px
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Clean up
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
@@ -92,7 +109,7 @@ export default function SliderPage({
                                 backgroundImage: `url(${uniquePopurarityItemList[activeStep]?.banner})`,
                             }}    >
 
-                            <div style={{ display: 'flex', backgroundColor: 'transparent', marginTop: 5 }}>
+                            <div style={{ display: 'flex', marginTop: 5 }}>
                                 <img
                                     src={uniquePopurarityItemList[activeStep]?.image_url}
                                     onError={handleImageError}
@@ -101,7 +118,8 @@ export default function SliderPage({
                                         display: 'block', // Hiển thị ảnh dưới dạng block để đảm bảo nó nằm ở vị trí dưới cùng
                                         margin: 'auto', // Canh giữa theo chiều ngang
                                         marginBottom: '0', // Loại bỏ khoảng trắng dưới ảnh
-                                        maxHeight: '100%', // Đảm bảo ảnh không vượt quá chiều cao của parent container (nếu cần)
+                                        height: `${imageHeight}px`, // Sử dụng dynamic height
+
                                     }}
                                 />
                                 <Box sx={{ display: 'flex', bgcolor: 'rgba(0, 0, 0, 0.6)', height: '115px', alignSelf: 'flex-end', width: '100%' }}>
@@ -128,17 +146,19 @@ export default function SliderPage({
                                             textAlign: "justify",
                                             display: "-webkit-box",
                                             overflow: "hidden",
-                                            WebkitBoxOrient: "vertical", marginTop: '-30px'
+                                            WebkitBoxOrient: "vertical", marginTop: '-10videpx'
 
                                         }}>Watch The Trailer
                                         </Typography>
 
                                     </div>
                                     <Typography variant='h4' sx={{
+                                        left: 0,
                                         textDecoration: 'none', color: 'rgba(255, 255, 255, 0.7)', alignSelf: 'center', marginRight: '10px', width: '150px'
                                         , display: { xs: 'none', md: 'flex' }
                                     }}>
                                         {uniquePopurarityItemList[activeStep]?.movie_length} min
+
 
                                     </Typography>
                                 </Box>
@@ -149,7 +169,7 @@ export default function SliderPage({
 
 
                         <MobileStepper
-                            sx={{ backgroundColor: 'transparent', color: 'blue' }}
+                            sx={{ backgroundColor: 'transparent', color: 'blue', marginTop: 2 }}
                             variant="text"
                             steps={maxSteps}
                             position="static"
@@ -186,37 +206,37 @@ export default function SliderPage({
                     <Grid item xs={3} sx={{ display: { xs: 'none', md: 'flex' }, bgcolor: 'black' }}>
                         <Grid item xs={12} >
                             <Stack spacing={4} direction="row" alignItems="center" sx={{ color: 'yellow', bgcolor: 'black' }}>
-                                <Typography variant='h4'>  Up next</Typography>
+                                <Typography variant='h5'>  Up next</Typography>
 
                             </Stack>
                             <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3, objectFit: 'contain', display: 'block', width: '100%', bgcolor: 'black' }}>
-                                <Stack spacing={4}>
-                                    <Stack spacing={2} direction="row" alignItems="center">
-                                        <Avatar variant="square" sx={{ width: '100px', height: '100%', overflow: 'hidden', objectFit: 'cover' }}>
+                                <Stack spacing={1}>
+                                    <Stack spacing={2} direction="row" alignItems="center" >
+                                        <Avatar variant="square" sx={{ width: '100px', height: '60%', overflow: 'hidden', objectFit: 'cover' }}>
                                             <img
                                                 onClick={() => navigate(`/movie/id/${uniquePopurarityItemList[activeStep + 1]?.imdb_id}`)}
                                                 src={uniquePopurarityItemList[activeStep + 1]?.image_url}
                                                 onError={handleImageError}
                                                 alt="movie-img"
-                                                style={{ width: '100%', height: '100%', objectFit: 'fill' }}
+                                                style={{ width: '100%', objectFit: 'fill' }}
                                             />
                                         </Avatar>
                                         <Stack>
                                             <Box sx={{ display: 'flex' }}>
                                                 <PlayCircleOutlineIcon sx={{
-                                                    height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem'
+                                                    height: '40px', bgcolor: 'black', color: 'white', width: '40px', margin: '6px', alignSelf: 'center'
                                                     , ':hover': {
                                                         bgcolor: 'black',
                                                         color: 'yellow',
                                                         borderColor: 'red'
                                                     },
                                                 }} />
-                                                <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
+                                                <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'center' }}>
                                                     {uniquePopurarityItemList[activeStep + 1]?.movie_length} min
                                                 </h4>
                                             </Box>
                                             <Box>
-                                                <h4 style={{
+                                                <h5 style={{
                                                     textAlign: "justify",
                                                     display: "-webkit-box",
                                                     overflow: "hidden",
@@ -228,13 +248,11 @@ export default function SliderPage({
 
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 1]?.title}
-                                                </h4>
+                                                </h5>
                                                 <Typography sx={{
                                                     color: 'gray',
-                                                    textAlign: "justify",
-                                                    display: "-webkit-box",
+                                                    textAlign: "left",
                                                     overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
                                                     mt: '-1rem'
                                                 }}>
                                                     The Final Match And More</Typography>
@@ -249,29 +267,27 @@ export default function SliderPage({
                                                 onError={handleImageError}
                                                 src={uniquePopurarityItemList[activeStep + 2]?.image_url}
                                                 alt="movie-img"
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                style={{ width: '100%', height: '80%', objectFit: 'cover' }}
                                             />
                                         </Avatar>
                                         <Stack>
                                             <Box sx={{ display: 'flex' }}>
                                                 <PlayCircleOutlineIcon sx={{
-                                                    height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem'
+                                                    height: '40px', bgcolor: 'black', color: 'white', width: '40px', margin: '6px', alignSelf: 'center'
                                                     , ':hover': {
                                                         bgcolor: 'black',
                                                         color: 'yellow',
                                                         borderColor: 'red'
                                                     },
                                                 }} />
-                                                <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
+                                                <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'center' }}>
                                                     {uniquePopurarityItemList[activeStep + 2]?.movie_length} min
                                                 </h4>
                                             </Box>
                                             <Box>
-                                                <h4 style={{
+                                                <h5 style={{
                                                     textAlign: "justify",
-                                                    display: "-webkit-box",
                                                     overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
                                                     textDecoration: 'bold',
                                                     color: 'white',
                                                     marginTop: '0%',
@@ -279,13 +295,11 @@ export default function SliderPage({
 
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 2]?.title}
-                                                </h4>
+                                                </h5>
                                                 <Typography sx={{
                                                     color: 'gray',
-                                                    textAlign: "justify",
-                                                    display: "-webkit-box",
+                                                    textAlign: "left",
                                                     overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
                                                     mt: '-1rem'
                                                 }}>
                                                     Tell me your mood and feeling</Typography>
@@ -299,29 +313,27 @@ export default function SliderPage({
                                                 onClick={() => navigate(`/movie/id/${uniquePopurarityItemList[activeStep + 3]?.imdb_id}`)}
                                                 src={uniquePopurarityItemList[activeStep + 3]?.image_url}
                                                 alt="movie-img"
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                style={{ width: '100%', height: '80%', objectFit: 'cover' }}
                                             />
                                         </Avatar>
                                         <Stack>
                                             <Box sx={{ display: 'flex' }}>
                                                 <PlayCircleOutlineIcon sx={{
-                                                    height: '60px', bgcolor: 'black', color: 'white', width: '60px', margin: '6px', alignSelf: 'flex-end', mt: '1rem'
+                                                    height: '40px', bgcolor: 'black', color: 'white', width: '40px', margin: '6px', alignSelf: 'center'
                                                     , ':hover': {
                                                         bgcolor: 'black',
                                                         color: 'yellow',
                                                         borderColor: 'red'
                                                     },
                                                 }} />
-                                                <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'flex-end' }}>
+                                                <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'center' }}>
                                                     {uniquePopurarityItemList[activeStep + 3]?.movie_length} min
                                                 </h4>
                                             </Box>
                                             <Box>
-                                                <h4 style={{
+                                                <h5 style={{
                                                     textAlign: "justify",
-                                                    display: "-webkit-box",
                                                     overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
                                                     textDecoration: 'bold',
                                                     color: 'white',
                                                     marginTop: '0%',
@@ -329,11 +341,10 @@ export default function SliderPage({
 
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 3]?.title}
-                                                </h4>
+                                                </h5>
                                                 <Typography sx={{
                                                     color: 'gray',
-                                                    textAlign: "justify",
-                                                    display: "-webkit-box",
+                                                    textAlign: "left",
                                                     overflow: "hidden",
                                                     WebkitBoxOrient: "vertical",
                                                     mt: '-1rem'

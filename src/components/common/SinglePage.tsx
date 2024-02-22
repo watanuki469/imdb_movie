@@ -3,26 +3,34 @@ import { AppBar, Box, Button, Divider, IconButton, Stack, Typography } from "@mu
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import SingleMovieAward from "components/pages/SingleMovieAward";
 import SingleMoviePage from 'components/pages/SingleMoviePage';
+import SingleTech from "components/pages/SingleTech";
 import { movieAwardActions, selectmovieAwardList } from 'features/movieAward/movieAwardSlice';
 import { selectSingleMovieList, singleMovieActions } from 'features/singleMovie/singleMovieSlice';
+import { TechActions, selectTechList } from "features/tech/techSlice";
 import { movieAward } from 'models';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import OpenWithIcon from '@mui/icons-material/OpenWith';
 
 export function SinglePage() {
   const { imdb_id } = useParams();
   const dispatch = useAppDispatch()
   const singleList2 = useAppSelector(selectSingleMovieList)
   const movieAward = useAppSelector(selectmovieAwardList)
-
+  const techList = useAppSelector(selectTechList)
 
   useEffect(() => {
     dispatch(singleMovieActions.fetchSingleMovieList(imdb_id))
-
   }, [imdb_id])
 
   useEffect(() => {
     dispatch(movieAwardActions.fetchmovieAwardList(imdb_id))
+
+  }, [imdb_id])
+
+  useEffect(() => {
+    dispatch(TechActions.fetchTechList(imdb_id))
 
   }, [imdb_id])
 
@@ -46,6 +54,16 @@ export function SinglePage() {
     return keyCounting;
 
   }
+  const [isPlay, setIsPlay] = useState(true);
+
+  const handlePlayClick = () => {
+    setIsPlay(!isPlay);
+  };
+  const [moviesPlay, setMoviesIsPlay] = useState(true);
+
+  const handleMoviesClick = () => {
+    setMoviesIsPlay(!moviesPlay);
+  };
 
   return (
     <div>
@@ -55,45 +73,62 @@ export function SinglePage() {
         <AppBar position="static" sx={{ bgcolor: 'black' }}>
           <Stack direction={'column'}>
             <Stack alignContent={'flex-start'} alignItems={'flex-start'}>
-
-              <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}>
-                <Divider sx={{ border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
-                <Stack direction={'row'} alignContent={'center'} alignItems={'center'}>
-                  <Typography sx={{ color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', } }}>
-                    <b>Movie Award</b>:
+              <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
+                <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
+                  <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+                  <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                    Movie Award:
                   </Typography>
-                  <Box
-                    sx={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(4, 1fr)',
-                    }} >
-
-                    {Object.entries(typeCount)
-                      .filter(([type, count]) => type !== 'undefined') // Filter out entries with type 'Halloween'
-                      .map(([type, count], index, array) => (
-                        <Typography key={index} sx={{ fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'white' }}>
-                          {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
-                        </Typography>
-
-                      ))}
-                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
-
-                    {/* </List> */}
-                  </Box>
+                  {Object.entries(typeCount)
+                    .filter(([type, count]) => type !== 'undefined')
+                    .map(([type, count], index, array) => (
+                      <Stack key={index} direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                        {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
+                      </Stack>
+                    ))}
+                  <IconButton onClick={handleMoviesClick}>
+                    {moviesPlay ?
+                      <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+                      :
+                      <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "4rem" }} />}
+                  </IconButton>
 
                 </Stack>
-              </Button>
+
+              </Stack>
 
             </Stack>
-            <Stack direction={'row'}>
-              <SingleMovieAward awardList={movieAward} />
+            {moviesPlay ?
+              <Stack direction={'column'} sx={{ mt: 3 }}>
+                <SingleMovieAward awardList={movieAward} />
+              </Stack>
+              : <Stack></Stack>
+            }
+
+
+            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
+              <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
+                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                  Technical Spec
+                </Typography>
+                <IconButton onClick={handlePlayClick}>
+                  {isPlay ?
+                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+                    :
+                    <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "4rem" }} />}
+                </IconButton>
+              </Stack>
+
             </Stack>
+            {isPlay ?
+              <SingleTech awardList={techList} /> :
+              <Stack></Stack>
+            }
+
           </Stack>
         </AppBar>
-
       </Box>
-
-
     </div>
   );
 }

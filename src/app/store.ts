@@ -14,6 +14,7 @@ import ActorReducer from 'features/actor/actorSlice'
 import AwardReducer from 'features/award/awardSlice'
 import movieAwardReducer from 'features/movieAward/movieAwardSlice'
 import singleStarReducer from 'features/singleStar/singleStarSlice'
+import TechReducer from 'features/tech/techSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
@@ -31,6 +32,7 @@ export const store = configureStore({
     award:AwardReducer,
     singleStar:singleStarReducer,
     movieAward:movieAwardReducer,
+    tech:TechReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

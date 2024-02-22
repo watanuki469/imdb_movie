@@ -1,14 +1,13 @@
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
+import { Label, People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TvIcon from '@mui/icons-material/Tv';
-import { AppBar, Box, Button, Container, Dialog, FormControl, Grid, IconButton, InputLabel, OutlinedInput, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, Dialog, FormControl, Grid, IconButton, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
 import SearchDashBoard from 'components/dashboard/SearchDashBoard';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-// import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
-
+import { Clear, Loop, Search } from "@mui/icons-material";
 
 export function Header() {
     let navigate = useNavigate();
@@ -20,8 +19,7 @@ export function Header() {
         setOpen(false);
     };
 
-    const [personName, setPersonName] = useState<string[]>([]);
-
+    const [personName, setPersonName] = useState<string[]>(['en']);
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const { target: { value } } = event;
         setPersonName(
@@ -29,6 +27,7 @@ export function Header() {
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -39,132 +38,178 @@ export function Header() {
             },
         },
     };
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+    const handleSearchClick = () => {
+        setIsSearchOpen(true);
+    };
+
+    const handleCloseSearch = () => {
+        setIsSearchOpen(false);
+    };
 
     return (
         <>
-            <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 3, textAlign: 'center' }}>
+            <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 1, textAlign: 'center' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
-                            <Grid container spacing={2} alignContent="center" alignItems="center">
-                                <Grid item xs={1} >
-                                    <Button onClick={() => navigate('/')}
-                                        fullWidth sx={{
-                                            bgcolor: 'yellow', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '24px', fontFamily: 'sans-serif', padding: '10px 20px', height: '50px', textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                            {isSearchOpen ? (
+                                <Grid container spacing={2} alignContent="center" alignItems="center">
+                                    <Grid item xs={12} >
+                                        <Stack direction={'row'}>
+                                            <SearchDashBoard />
+                                            <button style={{
+                                                backgroundColor: 'black',
+                                                border: 'none'
+                                            }} className="clear-icon" onClick={handleCloseSearch}>
+                                                <Clear sx={{ color: 'white' }} />
+                                            </button>
+                                        </Stack>
+
+                                    </Grid>
+                                </Grid>
+                            ) : (
+                                <Grid container spacing={2} alignContent="center" alignItems="center">
+                                    <Grid item xs={1} >
+                                        <Button onClick={() => navigate('/')}
+                                            fullWidth sx={{
+                                                bgcolor: 'yellow', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '24px', fontFamily: 'sans-serif', padding: '10px 20px', height: '50px', textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                                ':hover': {
+                                                    bgcolor: 'black',
+                                                    color: 'blue',
+                                                    borderColor: 'red'
+                                                },
+                                            }}>IMDb</Button>
+                                    </Grid>
+
+                                    <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                        <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}
+                                            onClick={() => handleRemoveClick()}>
+                                            < ReorderIcon sx={{ color: 'white' }} />
+                                            <>
+                                                <span style={{ marginRight: '1rem' }}></span>
+                                                <Typography sx={{
+                                                    display: 'flex', alignItems: 'center', color: 'white',
+                                                    border: 'none',
+                                                    fontWeight: 'bold',
+
+                                                }}>
+                                                    Menu
+                                                </Typography>
+                                            </>
+                                        </Button>
+
+                                    </Grid>
+
+                                    <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', bgcolor: 'black', display: { xs: 'none', md: 'flex' } }} >
+                                        <SearchDashBoard />
+                                    </Grid>
+
+                                    <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
+                                        <Button onClick={() => navigate('/IMDbPro')} fullWidth sx={{
+                                            bgcolor: 'black',
+                                            color: 'white',
+                                            textAlign: 'center',
+                                            border: 'none',
+                                            fontWeight: 'bold',
+                                            fontSize: '15px',
+                                            fontFamily: 'sans-serif',
+                                            padding: '10px 20px',
+                                            height: '30px',
+                                            textTransform: 'none',
+                                            overflow: 'hidden', // Tránh chữ tràn ra ngoài
                                             whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                                             textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                            ':hover': {
+                                        }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
+                                        </Button>
+                                    </Grid>
+                                    <Grid item xs={1}  >
+                                        <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                            <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '40px', padding: '5px' }}>
+                                                <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '60%' }} />
+                                                <>
+                                                    <Typography sx={{
+                                                        display: 'flex', alignItems: 'center', color: 'white',
+                                                        border: 'none',
+                                                        fontWeight: 'bold',
+                                                        marginLeft: '10px',
+                                                        marginTop: '10px',
+
+                                                    }}>
+                                                        Watch List
+                                                    </Typography>
+                                                </>
+                                            </Button>
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid item xs={1} ml="auto" >
+                                        <Stack direction="row" sx={{ alignItems: 'center' }} >
+                                            <Search sx={{ display: { xs: 'flex', md: 'none' } }} onClick={handleSearchClick} />
+                                            <Button fullWidth sx={{
                                                 bgcolor: 'black',
-                                                color: 'blue',
-                                                borderColor: 'red'
-                                            },
-
-
-                                        }}>IMDb</Button>
-                                </Grid>
-
-
-                                <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}
-                                        onClick={() => handleRemoveClick()}>
-                                        < ReorderIcon sx={{ color: 'white' }} />
-                                        <>
-                                            <span style={{ marginRight: '1rem' }}></span>
-                                            <Typography sx={{
-                                                display: 'flex', alignItems: 'center', color: 'white',
+                                                color: 'white',
+                                                textAlign: 'center',
                                                 border: 'none',
                                                 fontWeight: 'bold',
+                                                fontSize: '16px',
+                                                fontFamily: 'sans-serif',
+                                                height: '50px',
+                                                textTransform: 'none',
+                                                overflow: 'hidden',
+                                                whiteSpace: 'nowrap',
+                                                textOverflow: 'ellipsis',
+                                            }}>Sign In
+                                            </Button>
 
-                                            }}>
-                                                Menu
-                                            </Typography>
-                                        </>
-                                    </Button>
+                                        </Stack>
 
-                                </Grid>
-
-                                <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', display: { xs: 'none', md: 'flex' } }} >
-                                    <SearchDashBoard />
-                                </Grid>
-                                <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
-                                    <Button onClick={() => navigate('/IMDbPro')} fullWidth sx={{
-                                        bgcolor: 'black',
-                                        color: 'white',
-                                        textAlign: 'center',
-                                        border: 'none',
-                                        fontWeight: 'bold',
-                                        fontSize: '20px',
-                                        fontFamily: 'sans-serif',
-                                        padding: '10px 20px',
-                                        height: '40px',
-                                        textTransform: 'none',
-                                        overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                        whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                        textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                    }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
-                                    <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', padding: '10px' }}>
-                                        <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '70%' }} />;
-                                        <>
-                                            <Typography sx={{
-                                                display: 'flex', alignItems: 'center', color: 'white',
-                                                border: 'none',
-                                                fontWeight: 'bold',
-                                                marginLeft: '10px',
-                                                marginTop: '10px',
-                                            }}>
-                                                Watch List
-                                            </Typography>
-                                        </>
-                                    </Button>
-
-                                </Grid>
-
-                                <Grid item xs={1} ml="auto">
-                                    <Button fullWidth sx={{
-                                        bgcolor: 'black',
-                                        color: 'white',
-                                        textAlign: 'center',
-                                        border: 'none',
-                                        fontWeight: 'bold',
-                                        fontSize: '20px',
-                                        fontFamily: 'sans-serif',
-                                        padding: '10px 20px',
-                                        height: '50px',
-                                        textTransform: 'none',
-                                        overflow: 'hidden',
-                                        whiteSpace: 'nowrap',
-                                        textOverflow: 'ellipsis',
-                                    }}>Sign In</Button>
-                                </Grid>
-                                <Grid item xs={1} ml="auto">
-                                    <FormControl sx={{ m: 1, width: 200, bgcolor: 'black', color: 'red' }}>
-                                        <InputLabel
-                                            id="demo-multiple-checkbox-label"
-                                            sx={{ color: 'white', textAlign: 'center', alignContent: "center" }}
-                                        >
-                                            EN
-                                        </InputLabel>
-
-                                        <Select
-                                            labelId="demo-multiple-checkbox-label"
-                                            id="demo-multiple-checkbox"
-                                            value={personName}
-                                            onChange={handleChange}
-                                            input={<OutlinedInput label="Tag" />}
-                                            renderValue={(selected) => selected.join(', ')}
-                                            MenuProps={MenuProps}
-                                            sx={{ color: 'white' }}
-                                        >
-                                            {/* Các mục của Select */}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
+                                    </Grid>
+                                    <Grid item xs={1} ml="auto" sx={{ overflow: '-moz-hidden-unscrollable' }}
+                                    >
+                                        <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                            <FormControl sx={{ width: '100%', bgcolor: 'black', color: 'red' }}>
+                                                <Select
+                                                    label="Agel"
+                                                    value={personName}
+                                                    onChange={handleChange}
+                                                    renderValue={(selected) => selected.join(', ')}
+                                                    MenuProps={MenuProps}
+                                                    variant="standard"
+                                                    sx={{ color: 'white', textAlign: 'center', justifyContent: 'center', alignContent: 'center' }}
+                                                >
+                                                    <MenuItem value="language" disabled>Language</MenuItem>
+                                                    <MenuItem value="en">English</MenuItem>
+                                                    <MenuItem value="vn">Vietnamese</MenuItem>
+                                                    <MenuItem value="jp">Japanese</MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </Stack>
+                                        <Button onClick={() => navigate('/')}
+                                            fullWidth sx={{
+                                                bgcolor: 'yellow', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '12px', fontFamily: 'sans-serif', padding: '10px 20px', height: '50px', textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                                display: { xs: 'flex', md: 'none' },
+                                                ':hover': {
+                                                    bgcolor: 'black',
+                                                    color: 'blue',
+                                                    borderColor: 'red'
+                                                },
+                                            }}>Use App
+                                        </Button>
 
 
-                            </Grid >
+                                    </Grid>
+
+
+                                </Grid >
+                            )}
+
+
                         </Toolbar>
                     </Container>
                 </AppBar >

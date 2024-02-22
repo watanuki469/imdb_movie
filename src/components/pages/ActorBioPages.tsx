@@ -154,7 +154,7 @@ export default function ActorBioPages({
                                                                             <Typography>     No trivia available     </Typography>
 
                                                                         </span>
-                                                                        }
+                                                                    }
                                                                 </AppBar>
                                                             </Box>
                                                         )}
@@ -326,9 +326,9 @@ export default function ActorBioPages({
                                                                             </Typography>
                                                                         ))
                                                                         : <span>
-                                                                        <Typography>     No salaries available     </Typography>
+                                                                            <Typography>     No salaries available     </Typography>
 
-                                                                    </span>}
+                                                                        </span>}
                                                                 </AppBar>
                                                             </Box>
                                                         )}
@@ -388,16 +388,19 @@ export default function ActorBioPages({
                                                             // transform: 'translate(1650%, 290%)'
                                                         }}>X
                                                         </Button>
-                                                        <Typography variant='h3' sx={{ textAlign: "center", color: 'white', bgcolor: 'black' }}> {starList.map(item => (
-                                                            item.actor.name
-                                                        ))} Trade Marks</Typography>
+                                                        <Typography variant='h3' sx={{ textAlign: "center", color: 'white', bgcolor: 'black' }}>
+                                                            {starList.map(item => (
+                                                                <span key={item.actor.name}>{item.actor.name}</span>
+                                                            ))}
+                                                            Trade Marks
+                                                        </Typography>
                                                         {starList.map(item =>
                                                             <Box key={item.actor.imdb_id} sx={{ textAlign: 'left' }}>
                                                                 <AppBar position="static" sx={{ bgcolor: 'black', color: 'white', }} >
                                                                     {/* {item.biography && item.biography.salary && Object.keys(item.biography.salary).length > 0 */}
                                                                     {Array.isArray(item.biography.trademarks) && item.biography && item.biography.trademarks.length > 0
                                                                         ? item.biography.trademarks.map((triviaItem, index) => (
-                                                                            <Typography sx={{ margin: '18px', textAlign: 'center' }}>
+                                                                            <Typography key={index} sx={{ margin: '18px', textAlign: 'center' }}>
                                                                                 <span
                                                                                     style={{
                                                                                         borderBottom: '2px solid white',
@@ -413,10 +416,10 @@ export default function ActorBioPages({
                                                                             </Typography>
 
                                                                         ))
-                                                                        :<span>
-                                                                        <Typography>     No trade mark available     </Typography>
+                                                                        : <span>
+                                                                            <Typography>     No trade mark available     </Typography>
 
-                                                                    </span>}
+                                                                        </span>}
                                                                 </AppBar>
                                                             </Box>
                                                         )}
@@ -497,9 +500,9 @@ export default function ActorBioPages({
                                                                             </Typography>
                                                                         ))
                                                                         : <span>
-                                                                        <Typography>     No spouse available     </Typography>
+                                                                            <Typography>     No spouse available     </Typography>
 
-                                                                    </span>}
+                                                                        </span>}
                                                                 </AppBar>
                                                             </Box>
                                                         ))}

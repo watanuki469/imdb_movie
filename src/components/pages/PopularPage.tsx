@@ -14,7 +14,7 @@ import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
 import ViewListIcon from '@mui/icons-material/ViewList';
-import { AppBar, Box, Button, Checkbox, Dialog, DialogContent, DialogTitle, Divider, Fade, FormControl, FormControlLabel, Grid, IconButton, ListItemText, Menu, MenuItem, Popper, Radio, Stack, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Checkbox, Dialog, DialogContent, DialogTitle, Divider, Fade, FormControl, FormControlLabel, Grid, IconButton, ListItemText, Menu, MenuItem, Popper, Radio, Stack, ToggleButton, ToggleButtonGroup, Toolbar, Tooltip, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { movieItem } from 'models';
 import { useEffect, useRef, useState } from 'react';
@@ -151,33 +151,40 @@ export default function PopularPage({
                                                 <Button sx={{ marginLeft: '25px' }} onClick={() => handleRatingClick(movie)}>
                                                     <StarRateIcon sx={{ color: 'blue' }} />
                                                     <Typography style={{ color: 'blue' }} ref={anchorRef}
-                                                    >Rate</Typography>
+                                                    >Rate
+                                                    </Typography>
 
                                                 </Button>
 
-                                                <Popper
+                                                <Dialog
                                                     open={openDialog}
-                                                    // anchorEl={anchorEl}
-                                                    anchorEl={anchorRef.current}
-                                                    transition
-                                                    placement="bottom-start"
+                                                // anchorEl={anchorEl}
+                                                // anchorEl={anchorRef.current}
+                                                // transition
+                                                // placement="bottom-start"
 
                                                 >
                                                     <Button onClick={() => handleCloseRating()} sx={{
-                                                        position: 'absolute', bgcolor: 'white', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto', height: '50px', textTransform: 'none', borderRadius: '100%',
+                                                        justifyContent: 'center', right: 0,
+                                                        position: 'absolute', bgcolor: 'white', color: 'black',
+                                                        textAlign: 'center', border: 'none', fontWeight: 'bold',
+                                                        fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto',
+                                                        height: '50px', textTransform: 'none', borderRadius: '100%',
                                                         overflow: 'hidden', // Tránh chữ tràn ra ngoài
                                                         whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                                        textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                                        // textOverflow: 'ellipsis', // Hiển thị dấu elipsis
                                                         ':hover': {
                                                             bgcolor: 'yellow',
                                                             color: 'blue',
                                                         },
-                                                        transform: 'translate(1650%, 290%)'
+                                                        // transform: 'translate(1200%, 290%)'
                                                     }}>X
                                                     </Button>
                                                     <Stack direction={'column'} sx={{
                                                         bgcolor: 'black', color: 'white'
-                                                        , border: '1px solid white', transform: 'translate(125%, 100%)', width: '100%'
+                                                        , border: '1px solid white',
+                                                        //  transform: 'translate(70%, 100%)',
+                                                        width: '99%'
                                                     }}>
                                                         <Typography variant='h3' sx={{ textAlign: 'center', color: 'yellow' }}>
                                                             Rate {starIndex} <StarIcon > </StarIcon> of
@@ -194,7 +201,7 @@ export default function PopularPage({
                                                             RATE
                                                         </Button>
                                                     </Stack>
-                                                </Popper>
+                                                </Dialog>
                                             </div>
                                         </div>
                                     </Stack>
@@ -204,10 +211,18 @@ export default function PopularPage({
 
                                 <Box sx={{ flexGrow: 1 }} />
                                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <InfoIcon onClick={() => handleInfoClick(movie)} ref={anchorRef} />
-                                    <Popper open={openInfoDialog} anchorEl={anchorRef.current} transition >
+                                    <InfoIcon onClick={() => handleInfoClick(movie)} ref={anchorRef} sx={{ display: { xs: 'none', md: 'flex' } }} />
+                                    <Popper open={openInfoDialog} anchorEl={anchorRef.current}
+                                        transition
+                                        sx={{
+                                            left: '50%', // đặt Popper ở giữa theo chiều ngang
+                                            top: '50%', // đặt Popper ở giữa theo chiều dọc
+                                            transform: 'translate(20%, 1%)', // dịch chuyển Popper để nó chính xác ở giữa
+                                        }}
+                                    >
                                         <Button onClick={() => handleCloseInfo()} sx={{
-                                            position: 'absolute', bgcolor: 'white', color: 'black', textAlign: 'center',
+                                            bgcolor: 'white', color: 'black', textAlign: 'center',
+                                            top: 0,
                                             right: 0, border: 'none', fontWeight: 'bold', fontSize: '36px',
                                             fontFamily: 'sans-serif', padding: 'auto', height: '50px', textTransform: 'none', borderRadius: '100%'
                                             , overflow: 'hidden', // Tránh chữ tràn ra ngoài
@@ -216,14 +231,15 @@ export default function PopularPage({
                                                 bgcolor: 'yellow',
                                                 color: 'blue',
                                             },
-                                            transform: 'translate(610%, 150%)'
+                                            transform: 'translate(1250%, 10%)'
 
                                         }}>X</Button>
                                         <Stack direction={'column'} sx={{
                                             width: '900px', // Adjust the width as needed
                                             height: '500px', // Adjust the height as needed
                                             bgcolor: 'black !important', color: 'white', border: '0px solid black',
-                                            transform: 'translate(43%, 30%)', backgroundColor: 'black'
+                                            // transform: 'translate(43%, 30%)', 
+                                            backgroundColor: 'black'
                                         }}>
                                             <AppBar position="static" sx={{ bgcolor: 'transparent' }}>
                                                 <Toolbar>
@@ -259,20 +275,15 @@ export default function PopularPage({
                                                                         <Typography style={{ color: 'blue' }} ref={anchorRef}>Rate</Typography>
 
                                                                     </Button>
-
                                                                 </Stack>
-
                                                             </Typography>
-
                                                         </Box>
 
                                                     </Stack>
 
 
                                                     <Box sx={{ flexGrow: 1 }} />
-                                                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
-                                                    </Box>
+                                                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>  </Box>
                                                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
 
                                                     </Box>
@@ -308,7 +319,9 @@ export default function PopularPage({
                                                         </>
                                                     </Button>
                                                     <Box sx={{ margin: '0 10px' }} /> {/* Adjust the margin value as needed */}
-                                                    <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
+                                                    <Button
+                                                        onClick={() => navigate(`/movie/id/${selectedStudent?.imdb_id}`)}
+                                                        fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
                                                         < PlayArrowIcon sx={{ color: 'blue' }} />
                                                         <>
                                                             <span style={{ marginRight: '1rem' }}></span>
@@ -344,7 +357,7 @@ export default function PopularPage({
                                         >{`${movie.plot}`}
                                         </Typography>
                                         <Stack>
-                                            <Stack direction={'row'} sx={{ marginTop: '10px', alignContent: 'flex-start', justifyContent: 'flex-start' }}>
+                                            {/* <Stack direction={'row'} sx={{ marginTop: '10px', alignContent: 'flex-start', justifyContent: 'flex-start' }}>
                                                 <div>
                                                     <Typography sx={{ fontWeight: 'bold', textAlign: 'left' }}> Director: <span style={{ color: 'red' }}>Emerald Fennell</span></Typography>
                                                     <Typography sx={{ fontWeight: 'bold', textAlign: 'left' }}> Stars:
@@ -353,7 +366,7 @@ export default function PopularPage({
                                                         <span style={{ marginLeft: '17px', color: 'blue' }}>Emma Watson</span>
                                                     </Typography>
                                                 </div>
-                                            </Stack>
+                                            </Stack> */}
                                             <Stack direction={'row'}>
                                                 <div>
                                                     <Typography sx={{ fontWeight: 'bold' }}> Votes: <span>103,682</span></Typography>
@@ -372,23 +385,27 @@ export default function PopularPage({
                 );
 
             case 'grid':
-
                 return (
-                    <Grid item xs={3} sx={{
-                        mt: 2,
-                        width: '100%', objectFit: 'cover'
+                    <Grid item key={movieIndex} xs={6} sm={6} md={3} sx={{
+                        display: { xs: 'none', md: 'flex' },
+                        mt: 2, ml: { xs: '190px', sm: '190px', md: 'auto' }
+                        , width: { xd: '400px', sm: '400px', md: 'auto' }
+                    }}
+                        spacing={{ xs: 2, sm: 4 }}
+                    >
+                        <div style={{
+                            backgroundColor: 'white', height: '500px', objectFit: 'cover',
+                            border: '8px solid black', width: '100%',
 
-                    }} >
-                        <div key={movieIndex} style={{
-                            backgroundColor: 'white', width: '100%', height: '500px', objectFit: 'cover',
-                            border: '8px solid black'
                         }}>
 
                             <Typography variant='h6' sx={{ color: 'black', textAlign: 'left' }}>{`${movieIndex + 1}`} <span>({movie.content_rating})</span></Typography>
                             <img
                                 src={movie.image_url}
                                 alt={movie.title}
-                                style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                                style={{
+                                    width: '100%', height: '200px', objectFit: 'cover',
+                                }}
                                 onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                                     e.currentTarget.src = 'https://etalkindia.com/talk/attachment.php?attachmentid=472&d=1305371963'; // Replace with your fallback image path
                                     e.currentTarget.alt = 'Fail to load image'; // Replace with fallback title
@@ -400,12 +417,7 @@ export default function PopularPage({
                                     <Typography style={{ marginLeft: '5px' }}>{movie.rating}</Typography>
                                 </Box>
                                 <Box sx={{ margin: '0 30px' }} /> {/* Adjust the margin value as needed */}
-                                {/* <Stack direction={'row'} alignContent={'center'} alignItems={'center'} onClick={() => handleRatingClick(movie)} sx={{marginTop:'-10px'}}>
-                                    <StarRateIcon sx={{ color: 'blue' }} />
-                                    <Typography style={{ color: 'blue' }} ref={anchorRef}>
-                                        Rate
-                                    </Typography>
-                                </Stack> */}
+
                                 <Button onClick={() => handleRatingClick(movie)} sx={{ marginTop: '-10px', display: 'flex', alignContent: 'left', justifyContent: 'left' }}>
                                     <StarRateIcon sx={{ color: 'blue' }} />
                                     <Typography style={{ color: 'blue' }} ref={anchorRef}>
@@ -414,16 +426,15 @@ export default function PopularPage({
                                 </Button>
                             </Stack>
                             <div>
-                                <Popper
+                                <Dialog
                                     open={openDialog}
-                                    // anchorEl={anchorEl}
-                                    anchorEl={anchorRef.current}
-                                    transition
-                                    placement="bottom-start"
-
+                                // anchorEl={anchorEl}
+                                // anchorEl={anchorRef.current}
+                                // transition
+                                // placement="bottom-start"
                                 >
                                     <Button onClick={() => handleCloseRating()} sx={{
-                                        position: 'absolute', bgcolor: 'white', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto', height: '50px', textTransform: 'none', borderRadius: '100%',
+                                        position: 'absolute', bgcolor: 'red', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto', height: '50px', textTransform: 'none', borderRadius: '100%',
                                         overflow: 'hidden', // Tránh chữ tràn ra ngoài
                                         whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                                         textOverflow: 'ellipsis', // Hiển thị dấu elipsis
@@ -431,12 +442,14 @@ export default function PopularPage({
                                             bgcolor: 'yellow',
                                             color: 'blue',
                                         },
-                                        transform: 'translate(1650%, 290%)'
+                                        // transform: 'translate(1650%, 290%)'
                                     }}>X
                                     </Button>
                                     <Stack direction={'column'} sx={{
                                         bgcolor: 'black', color: 'white'
-                                        , border: '1px solid white', transform: 'translate(125%, 100%)', width: '100%'
+                                        , border: '1px solid white',
+                                        //  transform: 'translate(125%, 100%)',
+                                        width: '99%'
                                     }}>
                                         <Typography variant='h3' sx={{ textAlign: 'center', color: 'yellow' }}>
                                             Rate {starIndex} <StarIcon > </StarIcon> of
@@ -445,7 +458,7 @@ export default function PopularPage({
                                             <Typography variant='h4' sx={{ maxWidth: '20ch', overflowWrap: 'break-word' }}>
                                                 {selectedStudent?.title}
                                             </Typography>
-                                            <Stack direction="row" spacing={2}>
+                                            <Stack direction="row" spacing={2} sx={{ width: '90%' }}>
                                                 {starsArray}
                                             </Stack>
                                         </DialogContent>
@@ -453,21 +466,11 @@ export default function PopularPage({
                                             RATE
                                         </Button>
                                     </Stack>
-                                </Popper>
+                                </Dialog>
                             </div>
                             <Typography variant='h5'
                                 sx={{
-                                    color: 'black',
-                                    overflow: 'hidden',
-                                    display: '-webkit-box',
-                                    WebkitBoxOrient: 'vertical',
-                                    WebkitLineClamp: 2,
-                                    textAlign: 'left',
-                                    fontWeight: 'bold',
-                                    height: '2.4em',
-                                    // marginLeft: '10px',
-                                    margin: '10px',
-
+                                    color: 'black', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, textAlign: 'left', fontWeight: 'bold', height: '2.4em', margin: '10px',
                                 }}>{movie.title}
                             </Typography>
                             <Stack direction={'row'} sx={{ marginTop: '20px', marginLeft: '10px' }} alignContent={'left'} justifyContent={'left'}>
@@ -503,9 +506,10 @@ export default function PopularPage({
                                     color: 'blue', bgcolor: '#FFE5E5', textAlign: 'center', width: '70%', marginTop: '10px',
                                     fontWeight: 'bold'
                                 }}>Detail</Button>
-                            <Popper open={openInfoDialog} anchorEl={anchorRef.current} transition >
+                            <Dialog
+                                open={openInfoDialog} >
                                 <Button onClick={() => handleCloseInfo()} sx={{
-                                    position: 'absolute', bgcolor: 'white', color: 'black', textAlign: 'center',
+                                    bgcolor: 'white', color: 'black', textAlign: 'center',
                                     right: 0, border: 'none', fontWeight: 'bold', fontSize: '36px',
                                     fontFamily: 'sans-serif', padding: 'auto', height: '50px', textTransform: 'none', borderRadius: '100%'
                                     , overflow: 'hidden', // Tránh chữ tràn ra ngoài
@@ -514,14 +518,15 @@ export default function PopularPage({
                                         bgcolor: 'yellow',
                                         color: 'blue',
                                     },
-                                    transform: 'translate(610%, 150%)'
+                                    // transform: 'translate(610%, 150%)'
 
                                 }}>X</Button>
                                 <Stack direction={'column'} sx={{
-                                    width: '900px', // Adjust the width as needed
+                                    width: '100%', // Adjust the width as needed
                                     height: '500px', // Adjust the height as needed
                                     bgcolor: 'black !important', color: 'white', border: '0px solid black',
-                                    transform: 'translate(43%, 30%)', backgroundColor: 'black'
+                                    // transform: 'translate(43%, 30%)',
+                                    backgroundColor: 'black'
                                 }}>
                                     <AppBar position="static" sx={{ bgcolor: 'transparent' }}>
                                         <Toolbar>
@@ -606,7 +611,9 @@ export default function PopularPage({
                                                 </>
                                             </Button>
                                             <Box sx={{ margin: '0 10px' }} /> {/* Adjust the margin value as needed */}
-                                            <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px' }}>
+                                            <Button fullWidth sx={{
+                                                fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px'
+                                            }} onClick={() => navigate(`/movie/id/${selectedStudent?.imdb_id}`)}>
                                                 < PlayArrowIcon sx={{ color: 'blue' }} />
                                                 <>
                                                     <span style={{ marginRight: '1rem' }}></span>
@@ -623,14 +630,12 @@ export default function PopularPage({
                                         </Toolbar>
                                     </Stack>
                                 </Stack>
-                            </Popper>
+                            </Dialog>
 
                         </div>
 
                     </Grid>
-
                 );
-
             case 'compact':
                 return (
                     <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black' }}>
@@ -641,6 +646,7 @@ export default function PopularPage({
                             borderColor: 'divider',
                             backgroundColor: 'background.paper',
                         }} />
+
                         <AppBar position="static" sx={{ bgcolor: 'black' }}>
                             <Toolbar>
                                 <div key={movie.imdb_id} style={{ display: 'flex', alignItems: 'center' }}>
@@ -680,12 +686,12 @@ export default function PopularPage({
 
                                                 </Button>
 
-                                                <Popper
+                                                <Dialog
                                                     open={openDialog}
-                                                    // anchorEl={anchorEl}
-                                                    anchorEl={anchorRef.current}
-                                                    transition
-                                                    placement="bottom-start"
+                                                // anchorEl={anchorEl}
+                                                // anchorEl={anchorRef.current}
+                                                // transition
+                                                // placement="bottom-start"
 
                                                 >
                                                     <Button onClick={() => handleCloseRating()} sx={{
@@ -697,12 +703,14 @@ export default function PopularPage({
                                                             bgcolor: 'yellow',
                                                             color: 'blue',
                                                         },
-                                                        transform: 'translate(1650%, 290%)'
+                                                        // transform: 'translate(1650%, 290%)'
                                                     }}>X
                                                     </Button>
                                                     <Stack direction={'column'} sx={{
                                                         bgcolor: 'black', color: 'white'
-                                                        , border: '1px solid white', transform: 'translate(125%, 100%)', width: '100%'
+                                                        , border: '1px solid white',
+                                                        //  transform: 'translate(125%, 100%)',
+                                                        width: '99%'
                                                     }}>
                                                         <Typography variant='h3' sx={{ textAlign: 'center', color: 'yellow' }}>
                                                             Rate {starIndex} <StarIcon > </StarIcon> of
@@ -719,7 +727,7 @@ export default function PopularPage({
                                                             RATE
                                                         </Button>
                                                     </Stack>
-                                                </Popper>
+                                                </Dialog>
                                             </div>
                                         </div>
                                     </Stack>
@@ -728,8 +736,11 @@ export default function PopularPage({
 
                                 <Box sx={{ flexGrow: 1 }} />
                                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <InfoIcon onClick={() => handleInfoClick(movie)} ref={anchorRef} />
-                                    <Popper open={openInfoDialog} anchorEl={anchorRef.current} transition >
+                                    <InfoIcon onClick={() => handleInfoClick(movie)} ref={anchorRef} sx={{ display: { xs: 'none', md: 'flex' } }} />
+                                    <Popper
+                                        open={openInfoDialog}
+                                    // anchorEl={anchorRef.current} transition 
+                                    >
                                         <Button onClick={() => handleCloseInfo()} sx={{
                                             position: 'absolute', bgcolor: 'white', color: 'black', textAlign: 'center',
                                             right: 0, border: 'none', fontWeight: 'bold', fontSize: '36px',
@@ -740,14 +751,15 @@ export default function PopularPage({
                                                 bgcolor: 'yellow',
                                                 color: 'blue',
                                             },
-                                            transform: 'translate(610%, 150%)'
+                                            transform: 'translate(450%, 70%)'
 
                                         }}>X</Button>
                                         <Stack direction={'column'} sx={{
                                             width: '900px', // Adjust the width as needed
                                             height: '500px', // Adjust the height as needed
                                             bgcolor: 'black !important', color: 'white', border: '0px solid black',
-                                            transform: 'translate(43%, 30%)', backgroundColor: 'black'
+                                            transform: 'translate(23%, 14%)',
+                                            backgroundColor: 'black'
                                         }}>
                                             <AppBar position="static" sx={{ bgcolor: 'transparent' }}>
                                                 <Toolbar>
@@ -831,7 +843,13 @@ export default function PopularPage({
                                                         </>
                                                     </Button>
                                                     <Box sx={{ margin: '0 10px' }} /> {/* Adjust the margin value as needed */}
-                                                    <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
+                                                    <Button fullWidth sx={{
+                                                        fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%'
+                                                        ,
+                                                    }
+                                                    }
+                                                        onClick={() => navigate(`/movie/id/${selectedStudent?.imdb_id}`)}
+                                                    >
                                                         < PlayArrowIcon sx={{ color: 'blue' }} />
                                                         <>
                                                             <span style={{ marginRight: '1rem' }}></span>
@@ -1005,28 +1023,27 @@ export default function PopularPage({
             <Box alignContent="center" sx={{ width: '100%', m: 'auto', Typography: 3, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Toolbar>
-                        <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                            <IconButton size="large" color="inherit">
-                                <Typography sx={{
-                                    color: 'white',
-                                    fontSize: "2rem",
-                                    fontWeight: "bold",
-                                    fontFamily: "Arial, sans-serif",
-                                    textTransform: 'capitalize',
-                                    ':hover': {
-                                        textDecoration: 'underline',
-                                    },
-                                }}>IMDb Charts
+                        <Stack direction="column" alignItems="flex-start" justifyContent='left'>
+                            <Typography sx={{
+                                color: 'white',
+                                fontSize: "2rem",
+                                fontWeight: "bold",
+                                fontFamily: "Arial, sans-serif",
+                                textTransform: 'capitalize',
+                                ':hover': {
+                                    textDecoration: 'underline',
+                                    cursor: 'pointer'
+                                },
+
+                            }}>IMDb Charts
+                            </Typography>
+
+                            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
+                                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+                                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                                    Most Popular Movie
                                 </Typography>
-                            </IconButton>
-                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
-                                <>
-                                    <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                        Most Popular Movies
-                                    </Typography>
-                                </>
-                            </Button>
+                            </Stack>
                             <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>As determined by IMDb users</Typography>
                         </Stack>
 
@@ -1043,8 +1060,8 @@ export default function PopularPage({
                         </Box>
                     </Toolbar>
                 </AppBar>
-                <Grid container spacing={2} >
-                    <Grid item xs={7}>
+                <Grid container spacing={0} >
+                    <Grid item xs={12} sm={6} md={8}>
                         <AppBar position="static" sx={{ bgcolor: 'black' }} >
                             <Toolbar >
                                 <Stack direction="column" alignItems="flex-start" justifyContent='center'>
@@ -1256,93 +1273,27 @@ export default function PopularPage({
                                     </Dialog>
                                 </Stack>
                                 <Box sx={{ flexGrow: 1 }} />
-                                <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <ViewListIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '70px' }} onClick={() => switchView('detail')} />
-                                    <GridViewIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '70px' }} onClick={() => switchView('grid')} />
-                                    <ViewHeadlineIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '70px' }} onClick={() => switchView('compact')} />
-                                </Box>
+                                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                    <Stack direction={'row'}>
+                                        <Tooltip title="Detail View">
+                                            <ViewListIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={() => switchView('detail')} />
+                                        </Tooltip>
+                                        <Tooltip title="Grid View" sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                            <GridViewIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={() => switchView('grid')} />
+                                        </Tooltip>
+                                        <Tooltip title="Compact View">
+                                            <ViewHeadlineIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={() => switchView('compact')} />
+                                        </Tooltip>
+                                    </Stack>
+                                </div>
+
                             </Toolbar>
                         </AppBar>
-                        {/* <AppBar position="static" sx={{ bgcolor: 'black' }} >
-                            <Toolbar>
-                                <Box sx={{ flexGrow: 1 }} />
-                                <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <IconButton size="large" color="inherit">
-                                        <Typography sx={{ color: 'white', fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>Soft by </Typography>
-                                    </IconButton>
-                                    <IconButton sx={{ display: 'flex' }} size="large" color="inherit">
-                                        <ToggleButtonGroup
-                                            value={open ? 'visible' : 'hidden'}
-                                            exclusive
-                                            onChange={handleRankingClick}
-                                            sx={{
-                                                borderColor: 'green', // Border color when the Popper is open
-                                                '&.Mui-selected': {
-                                                    color: 'green', // Text color when the Popper is open
-                                                    borderColor: 'green', // Border color when the Popper is open
-                                                    ':hover': {
-                                                        textDecoration: 'underline',
-                                                        border: '3px solid red',
-                                                        cursor: 'pointer'
-                                                    },
-                                                },
-                                            }}
-                                        >
-                                            <ToggleButton value="visible" aria-label="show 4 new mails" size="large">
-                                                <Typography sx={{
-                                                    color: 'blue',
-                                                    fontSize: "2rem",
-                                                    fontWeight: "bold",
-                                                    fontFamily: "Arial, sans-serif",
-
-                                                    textTransform: 'capitalize',
-                                                    ':hover': {
-                                                        textDecoration: 'underline',
-
-                                                    },
-                                                }}> {selectedItem} </Typography>
-                                            </ToggleButton>
-                                            <ArrowDropDownIcon sx={{ color: 'blue', mt: '3px', fontSize: '60px' }} />
-                                        </ToggleButtonGroup>
-
-                                        <Popper id={id} open={open} anchorEl={anchorEl} transition>
-                                            {({ TransitionProps }) => (
-                                                <Fade {...TransitionProps} timeout={350}>
-                                                    <Box sx={{ border: 1, Typography: 1, bgcolor: 'background.paper' }}>
-                                                        <Menu
-                                                            id="ranking-menu"
-                                                            anchorEl={anchorEl}
-                                                            open={Boolean(anchorEl)}
-                                                            onClose={handleRankingClick}
-                                                        >
-                                                            <MenuItem onClick={(e) => handleItemClick('Ranking', e)}>Ranking</MenuItem>
-                                                            <MenuItem onClick={(e) => handleItemClick('IMDb Rating', e)} >IMDb Rating</MenuItem>
-                                                            <MenuItem onClick={(e) => handleItemClick('Release Day', e)} >Release Day</MenuItem>
-                                                            <MenuItem onClick={(e) => handleItemClick('Number Of Rating', e)} >Number Of Rating</MenuItem>
-                                                            <MenuItem onClick={(e) => handleItemClick('Alphabetical', e)} >Alphabetical</MenuItem>
-                                                            <MenuItem onClick={(e) => handleItemClick('Popularity', e)} >Popularity</MenuItem>
-                                                            <MenuItem onClick={(e) => handleItemClick('Run Time', e)} >Run Time</MenuItem>
-                                                        </Menu>
-                                                    </Box>
-                                                </Fade>
-                                            )}
-                                        </Popper>
-                                    </IconButton>
-                                    
-                                     <IconButton size="large" aria-label="Toggle Sort Order" color="inherit" >
-                                        <SwapVertIcon sx={{ color: 'red', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={toggleSortOrder}/>
-                                    </IconButton> 
-
-                                </Box>
-                            </Toolbar>
-                        </AppBar> */}
-
 
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {sortedPopularityItemList
                                 .filter((movie) => {
                                     if (selectedGenres.length === 0) return true; // No genre filter
-
                                     // Check if every selected genre is present in the movie's genres
                                     const hasAllGenres = selectedGenres.every((genre) =>
                                         movie.gen.some((mGenre) => mGenre.genre === genre)
@@ -1388,7 +1339,7 @@ export default function PopularPage({
                         </div>
 
                     </Grid>
-                    <Grid item xs={5} key={selectedGenres.length}>
+                    <Grid item xs={12} sm={12} md={4} key={selectedGenres.length}>
                         <AppBar position="static">
                             <Stack
                                 direction="column"
@@ -1398,13 +1349,13 @@ export default function PopularPage({
                                 sx={{ bgcolor: 'black' }}
 
                             >
-                                <Typography variant='h3' sx={{ color: 'white' }}>
+                                {/* <Typography variant='h3' sx={{ color: 'white' }}>
                                     You have rated
                                 </Typography>
                                 <Typography variant='h4' sx={{ color: 'white' }}>
                                     <span>0</span>/100 (0%)
-                                </Typography>
-                                <FormControlLabel control={
+                                </Typography> */}
+                                {/* <FormControlLabel control={
                                     <Checkbox
                                         onClick={() => navigate('/IMDbPro')}
                                         // defaultChecked
@@ -1417,126 +1368,132 @@ export default function PopularPage({
                                     />} label="
                                         Hide titles you've rated"
 
-                                />
+                                /> */}
 
                             </Stack>
 
                         </AppBar>
                         <AppBar position="static" sx={{ bgcolor: 'black' }}>
-                            <Toolbar>
-                                <Stack direction={'column'}>
-                                    <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                                        <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                            <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
+                            <Stack direction={'column'}>
+                                <Stack direction="column" alignItems="flex-start" justifyContent='flex-start'>
+                                    <Button sx={{ display: 'flex', alignItems: 'flex-start', height: '50px' }}>
+                                        <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow' }} orientation="vertical" />
 
-                                            <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                                More to explore
-                                            </Typography>
-                                        </Button>
-                                        <Stack alignContent={'flex-start'} alignItems={'flex-start'} direction={'column'} spacing={2}>
-                                            <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}
-                                            >Charts
-                                            </Typography>
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    Top Box Office (US)</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                From the past weekend
-                                            </Typography>
-
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    IMDb Top 250 Movies</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                As rated by regular IMDb voters.
-                                            </Typography>
-
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    Top Rated English Movies</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                From the past weekend
-                                            </Typography>
-
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    Most Popular TV Shows</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                As determined by IMDb users
-                                            </Typography>
-
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    Top 250 TV Shows</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                Top 250 as rated by IMDb Users
-                                            </Typography>
-
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    Lowest Rated Movies</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                Bottom 100 as voted by IMDb users
-                                            </Typography>
-                                            <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ display: { xs: 'none', md: 'flex', ':hover': { bgcolor: 'yellow', color: 'blue' } } }}>
-                                                <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                    Most Popular Celebs</Typography>
-                                                <KeyboardArrowRight sx={{ color: 'white' }} />
-                                            </Stack>
-                                            <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
-                                                As determined by IMDb users
-
-                                            </Typography>
+                                        <Typography sx={{ alignItems: 'center', color: 'white', marginLeft: '10px', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                            More to explore
+                                        </Typography>
+                                    </Button>
+                                    <Stack alignContent={'flex-start'} alignItems={'flex-start'} direction={'column'} spacing={2}>
+                                        <Typography sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}
+                                        >
+                                            {/* Charts */}
+                                        </Typography>
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                Top Box Office (US)</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
                                         </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            From the past weekend
+                                        </Typography>
 
-                                    </Stack>
-                                    <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                                        <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                            <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow', marginRight: '10px' }} orientation="vertical" />
-                                            <>
-                                                <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                                    Top Rated Movies by Genre
-                                                </Typography>
-                                            </>
-                                        </Button>
-                                        <Stack alignContent={'flex-start'} alignItems={'flex-start'} spacing={2}>
-                                            <Box sx={{ color: 'white', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}
-                                            >
-                                                {Object.entries(genreCount).map(([genre, count]) => (
-                                                    <Button key={genre} variant="contained" size="large" sx={{
-                                                        flexWrap: 'wrap',
-                                                        fontWeight: '100', textTransform: 'uppercase', minHeight: '1rem', width: '8.5rem',
-                                                        ':hover': { bgcolor: 'yellow', color: 'white', },
-                                                        background: `linear-gradient(180deg, ${selectedGenres.includes(genre as Genre) ? 'yellow' : 'grey'}, transparent) border-box`,
-                                                        border: "2px solid transparent", backgroundColor: 'black', borderRadius: '1rem', '--Grid-borderWidth': '1px', borderColor: 'white', margin: '5px',
-                                                    }}
-                                                        onClick={() => navigate(`/movie/byGen/${genre}`)}
-                                                    >
-                                                        <Typography> {`${genre}`}
-                                                            {/* <ListItemText primary={`${genre}`} /> */}
-                                                        </Typography>
-                                                    </Button>
-                                                ))}
-                                            </Box>
-
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                IMDb Top 250 Movies</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
                                         </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            As rated by regular IMDb voters.
+                                        </Typography>
+
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                Top Rated English Movies</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
+                                        </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            From the past weekend
+                                        </Typography>
+
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                Most Popular TV Shows</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
+                                        </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            As determined by IMDb users
+                                        </Typography>
+
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                Top 250 TV Shows</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
+                                        </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            Top 250 as rated by IMDb Users
+                                        </Typography>
+
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                Lowest Rated Movies</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
+                                        </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            Bottom 100 as voted by IMDb users
+                                        </Typography>
+                                        <Stack alignContent={'center'} direction={'row'} alignItems={'center'} sx={{ ':hover': { color: 'blue' } }}>
+                                            <Typography sx={{ color: 'white', fontSize: "1.3rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                                Most Popular Celebs</Typography>
+                                            <KeyboardArrowRight sx={{ color: 'white' }} />
+                                        </Stack>
+                                        <Typography sx={{ color: 'gray', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }, fontWeight: 'bold' }}>
+                                            As determined by IMDb users
+
+                                        </Typography>
                                     </Stack>
+
                                 </Stack>
-                            </Toolbar>
+                                <Stack direction="column" alignItems="center" justifyContent='center' sx={{ marginTop: '30px' }}>
+                                    <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                        <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow' }} orientation="vertical" />
+                                        <Typography sx={{
+                                            alignItems: 'center', color: 'white', border: 'none',
+                                            fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }
+                                        }}>
+                                            Top Rated Movies by Genre
+                                        </Typography>
+                                    </Button>
+                                    <Box
+                                        sx={{
+                                            columnGap: 3,
+                                            rowGap: 3,
+                                            gridTemplateColumns: 'repeat(4, 1fr)',
+                                            textAlign: 'left',
+                                            mt: 3
+
+                                        }} >
+
+                                        {Object.entries(genreCount).map(([genre, count]) => (
+                                            <Button key={genre} variant="contained" sx={{
+                                                textTransform: 'uppercase',
+                                                ':hover': { bgcolor: 'yellow', color: 'purple', },
+                                                background: `linear-gradient(180deg, ${selectedGenres.includes(genre as Genre) ? 'yellow' : 'grey'}, transparent) border-box`,
+                                                border: "2px solid transparent", backgroundColor: 'black', borderRadius: '1rem', '--Grid-borderWidth': '1px', borderColor: 'yellow', margin: '7px',
+                                            }}
+                                                onClick={() => handleGenreClick(genre as Genre)}
+                                            >
+                                                {`${genre})`}
+                                            </Button>
+                                        ))}
+
+
+                                        {/* </List> */}
+                                    </Box>
+                                </Stack>
+                            </Stack>
+
                         </AppBar>
-                        <FormControl fullWidth sx={{ bgcolor: 'black', height: '100%' }} />
+                        {/* <FormControl fullWidth sx={{ bgcolor: 'black', height: '100%' }} /> */}
 
                     </Grid>
                 </Grid>

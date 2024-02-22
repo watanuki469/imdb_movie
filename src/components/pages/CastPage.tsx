@@ -56,7 +56,9 @@ export default function CastPage({
                     textAlign: 'left'
                 }}
             >
-                <Stack direction={'row'}>  Director:{' '}
+                <Stack direction={'row'}>
+                    <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}>  Director:{' '}
+                    </Typography>
                     {directors &&
                         directors.map((item: any, index: number) => (
                             <Fragment key={`director_${item.role}_${index}`}>
@@ -64,7 +66,8 @@ export default function CastPage({
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
                                             color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                            <span style={{ color: 'blue', fontWeight: 'normal' }}>{item.actor?.name}</span>
+                                            {/* <span style={{ color: 'blue', fontWeight: 'normal' }}></span> */}
+                                            <Typography variant="h6" sx={{ color: 'blue' }}>{item.actor?.name}</Typography>
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
@@ -85,15 +88,19 @@ export default function CastPage({
                 textAlign: 'left'
 
             }}>
-                <Stack direction={'row'} spacing={1}>   Writers:{' '}
+                <Stack direction={'row'} spacing={1}>
+                    <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}> Writers:{' '}
+                    </Typography>
+
                     {writers &&
                         writers.map((item: any, index: number) => (
-                            <Fragment  key={`writer_${item.role}_${index}`}>
+                            <Fragment key={`writer_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1}>
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
                                             color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                            <span style={{ color: 'blue', fontWeight: 'normal' }}>{item.actor?.name}</span>
+                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}</Typography>
+
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
@@ -110,30 +117,34 @@ export default function CastPage({
                 fontWeight: "bold",
                 fontFamily: "Arial, sans-serif",
                 textTransform: 'capitalize',
-                textAlign: 'left'
+                textAlign: 'left',
             }}>
-                <Stack direction={'row'}>   Stars:{' '}
-                    <Stack direction={'row'} sx={{ marginLeft: '5px' }}>
+                <Stack direction={'row'} alignItems="center">
+                    <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}>    Stars:{' '}
+                    </Typography>
+
+                    <Stack direction={'row'} sx={{ marginLeft: '5px', flexWrap: 'wrap' }}>
                         {sortedStars && sortedStars.slice(0, 3).map((item: any, index: number) => (
-                            <Fragment  key={`star_${item.role}_${index}`}>
-                                <Stack direction={'row'} spacing={1}>
+                            <Fragment key={`star_${item.role}_${index}`}>
+                                <Stack direction={'row'} spacing={1} alignItems="center">
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton
                                             onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
-
                                             color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                            <span style={{ color: 'blue', fontWeight: 'normal' }}>{item.actor?.name}</span>
+                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}</Typography>
+
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
-                                {/* <span style={{ marginRight: '5px' }}>{index <= stars.length - 1 && index <= 1 ? ', ' : ''}</span> */}
-                                <span style={{ marginRight: '5px' }}>{index <= sortedStars.length - 1 && index <= 1 ? ', ' : ''}</span>
-
+                                {index <= sortedStars.length - 1 && index <= 1 && <span style={{ marginRight: '5px' }}>,</span>}
                             </Fragment>
                         ))}
                     </Stack>
                 </Stack>
             </Box>
+
+
+
             <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
             <Typography sx={{
                 color: 'white',

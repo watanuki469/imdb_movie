@@ -32,7 +32,7 @@ export default function SingleStarItem({
         <div >
             <Grid container spacing={1}>
                 {remainingList.map((item: any, index: number) => (
-                    <Grid item xs={2} sm={6} md={6} key={index}>
+                    <Grid item xs={6} sm={4} md={3} key={index}>
                         <Stack key={index} direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
                             {/* <Typography onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)} >
                                 {index}
@@ -40,25 +40,11 @@ export default function SingleStarItem({
 
                             <Stack direction={'column'} alignItems="flex-start" alignContent={'flex-start'}
                                 sx={{
-                                    display: 'flex',
-                                    alignItems: 'flex-start',
-                                    textAlign: 'left',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    maxWidth: '100%',
-                                    justifyContent: 'flex-start',
-                                    alignContent: 'flex-start',
-                                    marginLeft: '10px'
+                                    display: 'flex', alignItems: 'flex-start', textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%', justifyContent: 'flex-start', alignContent: 'flex-start', marginLeft: '10px'
                                 }}>
 
                                 <Stack direction={'column'} alignContent={'center'} justifyContent={'center'}>
-                                    <Stack
-                                        direction={'row'}
-                                        alignContent={'center'}
-                                        justifyContent={'center'}
-                                        style={{
-                                            textAlign: 'center'
-                                        }}
+                                    <Stack direction={'row'} alignContent={'center'} justifyContent={'center'} style={{ textAlign: 'center' }}
                                     >
                                         <Typography variant="h5" sx={{
                                             fontWeight: 'bold', textAlign: 'center', alignContent: 'center'
@@ -68,7 +54,6 @@ export default function SingleStarItem({
                                                 ? `${item.award_name.slice(0, 50)}...`
                                                 : item.award_name}
                                         </Typography>
-
                                     </Stack>
 
                                 </Stack>

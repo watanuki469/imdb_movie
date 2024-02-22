@@ -41,18 +41,18 @@ export default function SingleStarMedia() {
 
     return (
         <div>
-            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'flex-start'}>
+            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
                 {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
                 <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.8rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                <Typography sx={{color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
                     Award:
                 </Typography>
-                <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', marginTop: '5px' }}>
+                <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
 
                     {Object.entries(typeCount)
                         .filter(([type, count]) => type !== 'undefined')
                         .map(([type, count], index, array) => (
-                            <Stack key={index} direction={'row'} sx={{ fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                            <Stack key={index} direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
                                 {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
                             </Stack>
 

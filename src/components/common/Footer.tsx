@@ -10,7 +10,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export function Footer() {
     return (
-        <Stack sx={{mt:10}}>
+        <Stack sx={{ mt: 14 }}>
 
 
             <Grid container spacing={2}>
