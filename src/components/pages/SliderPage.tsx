@@ -65,35 +65,38 @@ export default function SliderPage({
             }
         };
     }, [activeStep, uniquePopurarityItemList]);
+
     let navigate = useNavigate()
     const [imageHeight, setImageHeight] = useState(300); // Chiều cao mặc định của ảnh là 300px
+    const halfImageHeight = imageHeight / 2;
+
 
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth <= 600) {
-                setImageHeight(150); // Đặt chiều cao của ảnh là 150px khi màn hình thu nhỏ
+                setImageHeight(150); // Đặt chiều cao của ảnh là 100px khi màn hình thu nhỏ
             } else {
-                setImageHeight(200); // Đặt lại chiều cao mặc định khi màn hình lớn hơn 600px
+                setImageHeight(300); // Đặt lại chiều cao mặc định khi màn hình lớn hơn 600px
             }
         };
 
         window.addEventListener('resize', handleResize);
-
         // Clean up
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     return (
         <div>
+
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container rowSpacing={1} >
                     <Grid item xs={12} sm={12} md={9}>
                         <Box onClick={() => navigate(`/movie/id/${uniquePopurarityItemList[activeStep]?.imdb_id}`)}
                             id="1234567" sx={{
                                 // position: "relative",
-                                "&::before": {
-                                    content: '""', width: "100%", height: "30%", position: "absolute", bottom: 0, left: 0, zIndex: 2, pointerEvents: "none"
-                                },
+                                // "&::before": {
+                                //     content: '""', width: "100%", height: "30%", position: "absolute", bottom: 0, left: 0, zIndex: 2, pointerEvents: "none"
+                                // },
                                 paddingTop: {
                                     xs: "50%", // Giảm xuống 50% cho kích thước màn hình xs
                                     sm: "40%", // Giảm xuống 40% cho kích thước màn hình sm
@@ -109,61 +112,113 @@ export default function SliderPage({
                                 backgroundImage: `url(${uniquePopurarityItemList[activeStep]?.banner})`,
                             }}    >
 
-                            <div style={{ display: 'flex', marginTop: 5 }}>
+                            <Stack direction={'row'} sx={{ mt: 5 }}>
                                 <img
                                     src={uniquePopurarityItemList[activeStep]?.image_url}
                                     onError={handleImageError}
                                     alt="movie-img"
                                     style={{
+                                        alignSelf: 'flex-end',
                                         display: 'block', // Hiển thị ảnh dưới dạng block để đảm bảo nó nằm ở vị trí dưới cùng
-                                        margin: 'auto', // Canh giữa theo chiều ngang
+                                        // margin: 'auto', // Canh giữa theo chiều ngang
                                         marginBottom: '0', // Loại bỏ khoảng trắng dưới ảnh
                                         height: `${imageHeight}px`, // Sử dụng dynamic height
-
                                     }}
                                 />
-                                <Box sx={{ display: 'flex', bgcolor: 'rgba(0, 0, 0, 0.6)', height: '115px', alignSelf: 'flex-end', width: '100%' }}>
-                                    <PlayCircleOutlineIcon sx={{
-                                        height: '100px', bgcolor: 'transparent',
-                                        color: 'white', alignSelf: 'flex-end', width: '100px', margin: '6px'
-                                        , ':hover': {
-                                            color: 'yellow',
-                                        },
-                                    }} />
-                                    <div style={{ alignSelf: 'center' }}>
-                                        <h2 style={{
-                                            textAlign: "justify",
-                                            display: "-webkit-box",
-                                            overflow: "hidden",
-                                            WebkitBoxOrient: "vertical",
-                                            textDecoration: 'bold',
-                                            color: 'white',
+                                <Stack direction={'column'} sx={{ alignSelf: 'flex-end', width: '100%' }}>
+                                    <Stack direction={'row'}>
+                                        <PlayCircleOutlineIcon sx={{
+                                            fontSize: '60px', color: 'red', alignSelf: 'flex-start', display: { xs: 'flex', md: 'none' }, margin: '6px',
+                                            ':hover': {
+                                                color: 'yellow',
+                                            },
+                                        }} />
+                                        <Typography variant='h6' sx={{
+                                            textDecoration: 'none', color: 'white', alignSelf: 'center',
+                                            marginRight: '10px', display: { xs: 'flex', md: 'none' }, justifyContent: 'end',
+                                            whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                        }}>
+                                            {uniquePopurarityItemList[activeStep]?.movie_length} min
 
-                                        }}>{uniquePopurarityItemList[activeStep]?.title}
-                                        </h2>
-                                        <Typography sx={{
-                                            color: 'rgba(255, 255, 255, 0.7)',
-                                            textAlign: "justify",
-                                            display: "-webkit-box",
-                                            overflow: "hidden",
-                                            WebkitBoxOrient: "vertical", marginTop: '-10videpx'
 
-                                        }}>Watch The Trailer
                                         </Typography>
 
-                                    </div>
-                                    <Typography variant='h4' sx={{
-                                        left: 0,
-                                        textDecoration: 'none', color: 'rgba(255, 255, 255, 0.7)', alignSelf: 'center', marginRight: '10px', width: '150px'
-                                        , display: { xs: 'none', md: 'flex' }
+                                    </Stack>
+
+                                    <Box sx={{
+                                        display: 'flex',
+                                        bgcolor: 'rgba(0, 0, 0, 0.6)',
+                                        alignSelf: 'flex-end', width: '100%', height: `${halfImageHeight}px`
                                     }}>
-                                        {uniquePopurarityItemList[activeStep]?.movie_length} min
+                                        <Stack direction={'column'}>
+                                            <Typography variant='h6' sx={{
+                                                textAlign: "left", display: { xs: 'flex', md: 'none' }, overflow: "hidden", textDecoration: 'bold', color: 'white',
+                                            }}>
+                                                {uniquePopurarityItemList[activeStep]?.title}
+                                            </Typography>
+                                            <Typography sx={{
+                                                color: 'rgba(255, 255, 255, 0.7)',
+                                                textAlign: "left",
+                                                display: { xs: 'flex', md: 'none' },
+                                                overflow: "hidden",
+                                                WebkitBoxOrient: "vertical",
+                                                marginTop: 'auto', // Đặt margin-top thành auto để nội dung luôn ở dưới cùng
 
 
-                                    </Typography>
-                                </Box>
+                                            }}>Watch The Trailer
+                                            </Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} sx={{ alignSelf: 'flex-end', }}>
+                                            <PlayCircleOutlineIcon sx={{
+                                                display: { xs: 'none', md: 'flex' }, height: '100%', bgcolor: 'transparent',
+                                                color: 'white', alignSelf: 'center', width: '100px', margin: '6px'
+                                                , ':hover': {
+                                                    color: 'yellow',
+                                                },
+                                            }} />
 
-                            </div>
+                                            <div style={{ alignSelf: 'center' }}>
+                                                <Typography variant='h4' sx={{
+                                                    textAlign: "left",
+                                                    display: { xs: 'none', md: 'flex' },
+                                                    overflow: "hidden",
+                                                    textDecoration: 'bold',
+                                                    color: 'white',
+
+                                                }}>
+                                                    {uniquePopurarityItemList[activeStep]?.title}
+                                                </Typography>
+                                                <Typography sx={{
+                                                    color: 'rgba(255, 255, 255, 0.7)',
+                                                    textAlign: "justify",
+                                                    display: { xs: 'none', md: 'flex' },
+                                                    overflow: "hidden",
+                                                    WebkitBoxOrient: "vertical",
+                                                    marginTop: 'auto', // Đặt margin-top thành auto để nội dung luôn ở dưới cùng
+
+                                                }}>Watch The Trailer
+                                                </Typography>
+
+                                            </div>
+                                            <Typography variant='h4' sx={{
+
+                                                textDecoration: 'none', color: 'rgba(255, 255, 255, 0.7)', alignSelf: 'center', marginRight: '10px', width: '150px'
+                                                , display: { xs: 'none', md: 'flex' }, justifyContent: 'end'
+                                            }}>
+                                                {uniquePopurarityItemList[activeStep]?.movie_length} min
+
+
+                                            </Typography>
+                                        </Stack>
+                                    </Box>
+
+                                </Stack>
+
+                            </Stack>
+
+
+
+
 
                         </Box>
 
@@ -237,15 +292,7 @@ export default function SliderPage({
                                             </Box>
                                             <Box>
                                                 <h5 style={{
-                                                    textAlign: "justify",
-                                                    display: "-webkit-box",
-                                                    overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
-                                                    textDecoration: 'bold',
-                                                    color: 'white',
-                                                    marginTop: '0%',
-
-
+                                                    textAlign: "justify", display: "-webkit-box", overflow: "hidden", WebkitBoxOrient: "vertical", textDecoration: 'bold', color: 'white', marginTop: '0%',
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 1]?.title}
                                                 </h5>
@@ -275,9 +322,7 @@ export default function SliderPage({
                                                 <PlayCircleOutlineIcon sx={{
                                                     height: '40px', bgcolor: 'black', color: 'white', width: '40px', margin: '6px', alignSelf: 'center'
                                                     , ':hover': {
-                                                        bgcolor: 'black',
-                                                        color: 'yellow',
-                                                        borderColor: 'red'
+                                                        bgcolor: 'black', color: 'yellow', borderColor: 'red'
                                                     },
                                                 }} />
                                                 <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'center' }}>
@@ -286,13 +331,7 @@ export default function SliderPage({
                                             </Box>
                                             <Box>
                                                 <h5 style={{
-                                                    textAlign: "justify",
-                                                    overflow: "hidden",
-                                                    textDecoration: 'bold',
-                                                    color: 'white',
-                                                    marginTop: '0%',
-
-
+                                                    textAlign: "justify", overflow: "hidden", textDecoration: 'bold', color: 'white', marginTop: '0%',
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 2]?.title}
                                                 </h5>

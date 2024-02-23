@@ -80,13 +80,7 @@ export default function CastPage({
             <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
 
             <Box sx={{
-                color: 'white',
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-                fontFamily: "Arial, sans-serif",
-                textTransform: 'capitalize',
-                textAlign: 'left'
-
+                color: 'white', fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'left'
             }}>
                 <Stack direction={'row'} spacing={1}>
                     <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}> Writers:{' '}
@@ -100,13 +94,14 @@ export default function CastPage({
                                         <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
                                             color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
                                             <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}</Typography>
-
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
                                 {index < writers.length - 1 && ', '}
                             </Fragment>
-                        ))}
+                        ))
+                    }
+
                 </Stack>
             </Box>
 
@@ -131,12 +126,14 @@ export default function CastPage({
                                         <IconButton
                                             onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
                                             color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}</Typography>
+                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}
+                                                <span style={{ color: "white" }}>,</span>
+                                            </Typography>
 
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
-                                {index <= sortedStars.length - 1 && index <= 1 && <span style={{ marginRight: '5px' }}>,</span>}
+                                {/* {index <= sortedStars.length - 1 && index <= 1 && <span style={{ marginRight: '5px' }}>-</span>} */}
                             </Fragment>
                         ))}
                     </Stack>
@@ -158,7 +155,7 @@ export default function CastPage({
                     <span style={{ color: 'blue', fontWeight: 'normal' }}> See production info at IMDbPro</span>
                 </IconButton>
             </Typography>
-        </div>
+        </div >
 
     )
 

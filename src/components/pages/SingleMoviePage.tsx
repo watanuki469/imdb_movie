@@ -179,8 +179,7 @@ export default function SingleMoviePage({
                                 color="inherit"
                                 sx={{
                                     ':hover': {
-                                        textDecoration: 'underline',
-                                        bgcolor: '#FFA1F5',
+                                        textDecoration: 'underline', bgcolor: '#FFA1F5',
                                     },
                                 }} >
                                 <Badge color="error">
@@ -249,7 +248,6 @@ export default function SingleMoviePage({
                         <Box sx={{ flexGrow: 1 }} />
                         {singleList.map((item, index) =>
                             <Stack key={index} direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex', textAlign: 'center' } }}>
-
                                 <Box>
                                     <Typography sx={{
                                         color: '#B0A695', fontSize: "1rem",
@@ -258,19 +256,13 @@ export default function SingleMoviePage({
                                         textTransform: 'capitalize'
                                     }}>  IMDb RATING </Typography>
                                     <Button sx={{ display: 'flex' }}>
-                                        <Box>
-                                            < StarIcon sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
-
-                                        </Box>
+                                        < StarIcon sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
                                         <Box sx={{ textAlign: 'left' }}>
                                             <Typography sx={{ color: '#B0A695' }}> <span style={{ fontSize: '20px', color: 'white' }} > {item.rating}</span>/10 </Typography>
                                             <Typography sx={{ color: '#B0A695' }}>  842k </Typography>
-
                                         </Box>
-
                                     </Button>
                                 </Box>
-
 
                                 <Box>
                                     <Typography sx={{
@@ -330,7 +322,9 @@ export default function SingleMoviePage({
                                 >
                                     <Stack sx={{ width: '100%', height: '100%' }} direction="column" justifyContent="center" alignItems="center">
                                         <Button fullWidth sx={{
-                                            height: '50%', bgcolor: '#EDCDBB', mb: 1,
+                                            height: '50%',
+                                            bgcolor: 'gray', 
+                                            mb: 1,
                                             ':hover': {
                                                 bgcolor: '#FFB6B9'
                                             },
@@ -349,7 +343,9 @@ export default function SingleMoviePage({
                                             </Stack>
                                         </Button>
                                         <Button fullWidth sx={{
-                                            height: '50%', bgcolor: '#EDCDBB', mb: 1, ':hover': {
+                                            height: '50%',
+                                            bgcolor: 'gray',
+                                            mb: 1, ':hover': {
                                                 bgcolor: '#FFB6B9'
                                             },
                                         }}>
@@ -374,10 +370,15 @@ export default function SingleMoviePage({
                                 <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
                                     <Grid item xs={6} sm={6} md={6}
                                         sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                        <Button fullWidth sx={{ bgcolor: '#EDCDBB', ':hover': { bgcolor: '#FFB6B9' } }}>
-                                            <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
-                                                <VideoLibraryIcon sx={{ color: 'white', mt: '3px', fontSize: '60px' }} />
-                                                <Typography sx={{ color: "yellow", fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif" }}>
+                                        <Button fullWidth sx={{
+                                            bgcolor: 'gray',
+                                            ':hover': {
+                                                bgcolor: '#FFB6B9'
+                                            }
+                                        }}>
+                                            <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <VideoLibraryIcon sx={{ color: 'white', mt: '3px', fontSize: '30px' }} />
+                                                <Typography sx={{ color: "yellow", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif" }}>
                                                     {item.popularity} VIDEOS
                                                 </Typography>
                                             </Stack>
@@ -385,17 +386,67 @@ export default function SingleMoviePage({
                                     </Grid>
                                     <Grid item xs={6} sm={6} md={6}
                                         sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                        <Button fullWidth sx={{ bgcolor: '#EDCDBB', ':hover': { bgcolor: '#FFB6B9' } }}>
-                                            <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
-                                                <FilterIcon sx={{ color: 'white', mt: '3px', fontSize: '60px' }} />
-                                                <Typography sx={{ color: "yellow", fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif" }}>
+                                        <Button fullWidth sx={{
+                                            bgcolor: 'gray',
+                                            ':hover': { bgcolor: '#FFB6B9' }
+                                        }}>
+                                            <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <FilterIcon sx={{ color: 'white', mt: '3px', fontSize: '30px' }} />
+                                                <Typography sx={{
+                                                    color: "yellow", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif",
+                                                    opacity: 'revert',
+                                                }}>
                                                     {item.movie_length} PHOTOS
                                                 </Typography>
                                             </Stack>
                                         </Button>
                                     </Grid>
                                 </Grid>
+                                <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+                                    <Grid item xs={5} sm={5} md={5}
+                                        sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                        <img
+                                            onError={handleImageError}
+                                            src={item.image_url}
+                                            alt="movie-img"
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
+                                        />
 
+                                    </Grid>
+                                    <Grid item xs={7} sm={7} md={7}
+                                        sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                        <Box key={index}
+                                            sx={{
+                                                columnGap: 3,
+                                                rowGap: 3,
+                                                gridTemplateColumns: 'repeat(4, 1fr)',
+                                                textAlign: 'left',
+                                                mt: 3,
+
+
+                                            }} >
+                                            {item.gen.map((item: any, index) =>
+                                                <Button variant="contained" key={index}
+                                                    onClick={() => navigate(`/movie/byGen/${item.genre}`)}
+                                                    sx={{
+
+                                                        textTransform: 'uppercase', textAlign: 'center', minHeight: '1rem', ':hover': {
+                                                            bgcolor: 'A9A9A9', color: 'black',
+                                                        },
+                                                        border: "2px solid transparent", padding: '10px', backgroundColor: 'black',
+                                                        color: 'white', borderRadius: '1rem', borderColor: 'pink',
+                                                        margin: '7px',
+                                                        // textOverflow: 'ellipsis',
+
+                                                    }}>
+                                                    {item.genre}
+                                                </Button>
+
+                                            )}
+
+                                        </Box>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         )}
                     </Toolbar>
@@ -408,19 +459,12 @@ export default function SingleMoviePage({
                                             onClick={() => navigate(`/movie/byGen/${item.genre}`)}
                                             sx={{
                                                 mx: '6px',
-                                                textTransform: 'uppercase', textAlign: 'center'
-                                                , minHeight: '1rem', width: '10rem', ':hover': {
-                                                    bgcolor: 'A9A9A9',
-                                                    color: 'black',
+                                                textTransform: 'uppercase', textAlign: 'center', minHeight: '1rem', width: '10rem', ':hover': {
+                                                    bgcolor: 'yellow', color: 'black',
                                                 },
                                                 background: "linear-gradient(180deg,grey,transparent) border-box",
-                                                border: "2px solid transparent",
-                                                paddingLeft: '1rem', paddingRight: '1rem',
-                                                backgroundColor: 'black',
-                                                color: 'white',
-                                                borderRadius: '1rem',
-                                                '--Grid-borderWidth': '1px',
-                                                borderColor: 'pink',
+                                                border: "2px solid transparent", paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'black',
+                                                color: 'white', borderRadius: '1rem', '--Grid-borderWidth': '1px', borderColor: 'pink',
 
                                             }}>
                                             {item.genre}
@@ -432,30 +476,20 @@ export default function SingleMoviePage({
                         </Box>
 
                     </Toolbar>
-                    <Toolbar sx={{ mt: '30px', display: 'flex', justifyContent: 'space-between' }}>
+                    <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Box >
                             {singleList.map((item, index) =>
                                 <List key={index} sx={{
-                                    width: '100%',
-                                    borderRadius: 2,
-                                    border: '1px solid',
-                                    borderColor: 'divider',
+                                    width: '100%', borderRadius: 2, border: '1px solid', borderColor: 'divider',
                                 }}>
                                     <Typography sx={{
-                                        color: 'white',
-                                        textAlign: 'left',
-                                        fontSize: "1rem",
-                                        fontWeight: "bold",
-                                        fontFamily: "Arial, sans-serif",
-                                        textTransform: 'capitalize',
+                                        color: 'white', textAlign: 'left', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                         ':hover': {
                                             textDecoration: 'underline',
-
                                         }
                                     }}>
                                         {item.plot}
                                     </Typography>
-
 
                                     <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                                     <div id='caster'>
@@ -472,23 +506,12 @@ export default function SingleMoviePage({
                                 <Grid sx={{ display: { xs: 'none', md: 'block' } }} key={index}>
                                     <Stack direction="column" spacing={0} >
                                         <Button sx={{
-                                            marginLeft: 'auto',
-                                            display: 'flex', bgcolor: 'yellow',
-                                            ':hover': {
-                                                bgcolor: 'green',
-                                                color: 'white',
-                                                borderColor: 'red'
-                                            },
+                                            marginLeft: 'auto', display: 'flex', bgcolor: 'yellow', ':hover': { bgcolor: 'green', color: 'white', borderColor: 'red' },
                                         }}>
                                             < AddIcon sx={{ color: 'black', alignContent: 'center', mt: '3px', fontSize: '30px' }} />
                                             <Box sx={{ textAlign: 'center' }}>
                                                 <Typography sx={{
-                                                    color: "black", fontSize: "0.8rem",
-                                                    fontWeight: "bold",
-                                                    fontFamily: "Arial, sans-serif",
-                                                    textTransform: 'capitalize',
-                                                    textAlign: 'right'
-
+                                                    color: "black", fontSize: "0.8rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'right'
                                                 }}>  Add to watch list </Typography>
                                                 <Typography sx={{ color: 'black', fontSize: '0.7rem', textAlign: 'right' }}>Added by 1{item.popularity}k user </Typography>
 
@@ -498,53 +521,36 @@ export default function SingleMoviePage({
                                             <Stack direction={'row'}>
                                                 <Typography sx={{ color: 'blue', textAlign: 'right' }}>
                                                     <span style={{
-                                                        color: "blue", fontSize: "1rem",
-                                                        fontWeight: "bold",
-                                                        fontFamily: "Arial, sans-serif",
-                                                        textTransform: 'capitalize'
-                                                    }}>2k </span>
+                                                        color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
+                                                    }}>2k
+                                                    </span>
                                                     User reviews
                                                 </Typography>
 
                                                 <Typography sx={{ color: 'blue' }}>
                                                     <span style={{
-                                                        color: "blue", fontSize: "1rem",
-                                                        fontWeight: "bold",
-                                                        fontFamily: "Arial, sans-serif",
-                                                        textTransform: 'capitalize'
+                                                        color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                                     }}>150 </span>
                                                     Critic reviews
                                                 </Typography>
                                             </Stack>
 
                                             <Grid item xs={6}>
-
                                                 <Typography>
                                                     <span style={{
-                                                        color: "white", fontSize: "1rem",
-                                                        fontWeight: "bold",
-                                                        fontFamily: "Arial, sans-serif",
-                                                        textTransform: 'capitalize',
-                                                        backgroundColor: 'green'
+                                                        color: "white", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', backgroundColor: 'green'
                                                     }}>{randomScore}  </span>
                                                     Metascore
                                                 </Typography>
                                             </Grid>
-
                                         </Box>
-
                                     </Stack>
-
                                 </Grid >
                             )}
-
                         </Box>
                     </Toolbar>
-
                 </AppBar>
-
             </Box>
         </div >
-
     );
 }

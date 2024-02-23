@@ -66,7 +66,7 @@ export default function Top10PageItem({
     ));
     return (
         <div>
-            <Stack sx={{ position: 'relative', height: '300px', width: '200px' }}>
+            <Stack sx={{ position: 'relative', height: '300px', }}>
 
                 <img
                     onClick={() => navigate(`/movie/id/${popurarityItemList[activeStep + number]?.imdb_id}`)}
@@ -136,7 +136,7 @@ export default function Top10PageItem({
                 </Stack>
                 <Box>
                     <h4 style={{
-                        textAlign: "justify",
+                        textAlign: "left",
                         display: "-webkit-box",
                         overflow: "hidden",
                         WebkitBoxOrient: "vertical",
@@ -146,7 +146,7 @@ export default function Top10PageItem({
                         height: '3em'
 
                     }}>
-                        {popurarityItemList[activeStep + number]?.title.substring(0, 32)}...
+                        {popurarityItemList[activeStep + number]?.title.substring(0, 32)}
                     </h4>
                 </Box>
                 <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>

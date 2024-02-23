@@ -70,143 +70,128 @@ export function Header() {
                                     </Grid>
                                 </Grid>
                             ) : (
-                                <Grid container spacing={2} alignContent="center" alignItems="center">
-                                    <Grid item xs={1} >
-                                        <Button onClick={() => navigate('/')}
-                                            fullWidth sx={{
-                                                bgcolor: 'yellow', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '24px', fontFamily: 'sans-serif', padding: '10px 20px', height: '50px', textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                                ':hover': {
-                                                    bgcolor: 'black',
-                                                    color: 'blue',
-                                                    borderColor: 'red'
-                                                },
-                                            }}>IMDb</Button>
-                                    </Grid>
+                                <Stack direction={'row'} sx={{ flexGrow: 1, bgcolor: 'black' }}>
+                                    <Button onClick={() => navigate('/')}
+                                        sx={{
+                                            mr: 1,
+                                            bgcolor: 'yellow', color: 'black', textAlign: 'center',
+                                            border: 'none', fontWeight: 'bold', fontSize: '24px',
+                                            fontFamily: 'sans-serif', height: '50px',
+                                            textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                            whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                            textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                            ':hover': {
+                                                bgcolor: 'black',
+                                                color: 'blue',
+                                                borderColor: 'red'
+                                            },
+                                        }}>IMDb</Button>
 
-                                    <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                        <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px' }}
-                                            onClick={() => handleRemoveClick()}>
-                                            < ReorderIcon sx={{ color: 'white' }} />
+                                    {/* <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }}> */}
+                                    <Button
+                                        sx={{
+                                            alignItems: 'center', bgcolor: 'black', height: '50px', mr: 1,
+                                            display: { xs: 'none', md: 'flex' }
+                                        }}
+                                        onClick={() => handleRemoveClick()}>
+                                        < ReorderIcon sx={{ color: 'white' }} />
+                                        <>
+
+                                            <Typography sx={{
+                                                display: 'flex', alignItems: 'center', color: 'white',
+                                                border: 'none',
+                                                fontWeight: 'bold',
+
+                                            }}>
+                                                Menu
+                                            </Typography>
+                                        </>
+                                    </Button>
+
+
+
+                                    {/* // <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', bgcolor: 'black', display: { xs: 'none', md: 'flex' } }} > */}
+                                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: '100%' }}>
+                                        <SearchDashBoard />
+
+                                    </Box>
+
+                                    {/* // <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} > */}
+                                    <Button onClick={() => navigate('/IMDbPro')} sx={{
+                                        mr: 1, bgcolor: 'black', color: 'white', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '15px', fontFamily: 'sans-serif', textTransform: 'none',
+                                        overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                        whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                        textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                        display: { xs: 'none', md: 'flex' }
+                                    }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
+                                    </Button>
+                                    <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                        <Button sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '50px', padding: '5px' }}>
+                                            <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '55%' }} />
                                             <>
-                                                <span style={{ marginRight: '1rem' }}></span>
                                                 <Typography sx={{
-                                                    display: 'flex', alignItems: 'center', color: 'white',
-                                                    border: 'none',
-                                                    fontWeight: 'bold',
-
+                                                    display: 'flex', alignItems: 'center', color: 'white', border: 'none', fontWeight: '36px', marginLeft: '10px',
+                                                    whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                                                 }}>
-                                                    Menu
+                                                    Watch List
                                                 </Typography>
                                             </>
                                         </Button>
+                                    </Stack>
 
-                                    </Grid>
-
-                                    <Grid item xs={6} sx={{ alignItems: 'center', height: '50px', bgcolor: 'black', display: { xs: 'none', md: 'flex' } }} >
-                                        <SearchDashBoard />
-                                    </Grid>
-
-                                    <Grid item xs={1} sx={{ display: { xs: 'none', md: 'flex' } }} >
-                                        <Button onClick={() => navigate('/IMDbPro')} fullWidth sx={{
+                                    {/* // <Grid item xs={1} ml="auto" mr="auto" > */}
+                                    <Stack direction="row" sx={{ alignItems: 'center' , ml:'auto',}} >
+                                        <Search sx={{ display: { xs: 'flex', md: 'none' } }} onClick={handleSearchClick} />
+                                        <Button sx={{
                                             bgcolor: 'black',
                                             color: 'white',
                                             textAlign: 'center',
                                             border: 'none',
                                             fontWeight: 'bold',
-                                            fontSize: '15px',
+                                            fontSize: '16px',
                                             fontFamily: 'sans-serif',
-                                            padding: '10px 20px',
-                                            height: '30px',
                                             textTransform: 'none',
-                                            overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                            overflow: 'hidden',
+                                            whiteSpace: 'nowrap',
+                                            textOverflow: 'ellipsis',
+                                        }}>Sign In
+                                        </Button>
+
+                                    </Stack>
+
+                                    {/* // <Grid item xs={1} ml="auto" sx={{ flexGrow: 1 }}
+                                    // > */}
+                                    <Button sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                        <FormControl sx={{ width: '100%', height: '100%', bgcolor: 'black', color: 'red', mt: '10px' }}>
+                                            <Select
+                                                label="Agel" value={personName} onChange={handleChange} renderValue={(selected) => selected.join(', ')} MenuProps={MenuProps} variant="standard"
+                                                sx={{ color: 'white', textAlign: 'center' }}
+                                            >
+                                                <MenuItem value="language" disabled>Language</MenuItem>
+                                                <MenuItem value="en">English</MenuItem>
+                                                <MenuItem value="vn">Vietnamese</MenuItem>
+                                                <MenuItem value="jp">Japanese</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Button>
+                                    <Button onClick={() => navigate('/')}
+                                         sx={{
+                                            ml:'auto',
+                                            bgcolor: 'yellow', color: 'black', textAlign: 'center',
+                                            border: 'none', fontWeight: 'bold', fontSize: '12px', fontFamily: 'sans-serif',
+                                            padding: '10px 20px', height: '50px', textTransform: 'none',
                                             whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                            textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                        }}>IMDb <span style={{ color: 'blue' }}>Pro</span>
-                                        </Button>
-                                    </Grid>
-                                    <Grid item xs={1}  >
-                                        <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                            <Button fullWidth sx={{ display: 'flex', alignItems: 'center', bgcolor: 'black', height: '40px', padding: '5px' }}>
-                                                <FontAwesomeIcon icon={icon({ name: 'calendar-plus' })} style={{ color: 'white', height: '60%' }} />
-                                                <>
-                                                    <Typography sx={{
-                                                        display: 'flex', alignItems: 'center', color: 'white',
-                                                        border: 'none',
-                                                        fontWeight: 'bold',
-                                                        marginLeft: '10px',
-                                                        marginTop: '10px',
-
-                                                    }}>
-                                                        Watch List
-                                                    </Typography>
-                                                </>
-                                            </Button>
-                                        </Stack>
-                                    </Grid>
-
-                                    <Grid item xs={1} ml="auto" >
-                                        <Stack direction="row" sx={{ alignItems: 'center' }} >
-                                            <Search sx={{ display: { xs: 'flex', md: 'none' } }} onClick={handleSearchClick} />
-                                            <Button fullWidth sx={{
+                                            display: { xs: 'flex', md: 'none' },
+                                            ':hover': {
                                                 bgcolor: 'black',
-                                                color: 'white',
-                                                textAlign: 'center',
-                                                border: 'none',
-                                                fontWeight: 'bold',
-                                                fontSize: '16px',
-                                                fontFamily: 'sans-serif',
-                                                height: '50px',
-                                                textTransform: 'none',
-                                                overflow: 'hidden',
-                                                whiteSpace: 'nowrap',
-                                                textOverflow: 'ellipsis',
-                                            }}>Sign In
-                                            </Button>
-
-                                        </Stack>
-
-                                    </Grid>
-                                    <Grid item xs={1} ml="auto" sx={{ overflow: '-moz-hidden-unscrollable' }}
-                                    >
-                                        <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                            <FormControl sx={{ width: '100%', bgcolor: 'black', color: 'red' }}>
-                                                <Select
-                                                    label="Agel"
-                                                    value={personName}
-                                                    onChange={handleChange}
-                                                    renderValue={(selected) => selected.join(', ')}
-                                                    MenuProps={MenuProps}
-                                                    variant="standard"
-                                                    sx={{ color: 'white', textAlign: 'center', justifyContent: 'center', alignContent: 'center' }}
-                                                >
-                                                    <MenuItem value="language" disabled>Language</MenuItem>
-                                                    <MenuItem value="en">English</MenuItem>
-                                                    <MenuItem value="vn">Vietnamese</MenuItem>
-                                                    <MenuItem value="jp">Japanese</MenuItem>
-                                                </Select>
-                                            </FormControl>
-                                        </Stack>
-                                        <Button onClick={() => navigate('/')}
-                                            fullWidth sx={{
-                                                bgcolor: 'yellow', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '12px', fontFamily: 'sans-serif', padding: '10px 20px', height: '50px', textTransform: 'none', overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                                whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                                textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                                display: { xs: 'flex', md: 'none' },
-                                                ':hover': {
-                                                    bgcolor: 'black',
-                                                    color: 'blue',
-                                                    borderColor: 'red'
-                                                },
-                                            }}>Use App
-                                        </Button>
+                                                color: 'blue',
+                                                borderColor: 'red'
+                                            }
+                                        }}>Use App
+                                    </Button>
 
 
-                                    </Grid>
-
-
-                                </Grid >
+                                </Stack>
                             )}
 
 

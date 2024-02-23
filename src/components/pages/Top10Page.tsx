@@ -80,10 +80,9 @@ export default function Top10Page({
                             color: 'white',
                             border: 'none',
                             fontWeight: 'bold',
-                            marginLeft: '10px',
-                            marginTop: '10px',
+                            margin: '30px',
                             textAlign: 'center',
-                            cursor:'pointer'
+                            cursor: 'pointer'
                         }}>
                             Top movies on IMDb this week
                         </Typography>
@@ -92,20 +91,20 @@ export default function Top10Page({
                     {/* <PlayArrowIcon  sx={{ color: 'yellow', height: '100%'  }} /> */}
                 </Button>
                 <Grid item xs={12} >
-                    <Stack direction='row' spacing={3} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Stack direction='row' spacing={3} sx={{ justifyContent: 'center', alignItems: 'center', mt: 4 }}>
                         <Box>
                             <Button sx={{
-                                color: 'white' ,
-                         display: activeStep === 0 ? 'none' : 'inline-block'
+                                color: 'white',
+                                display: activeStep === 0 ? 'none' : 'inline-block'
                             }} size="small" onClick={handleBack} disabled={activeStep === 0}>
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowRight />
                                 ) : (
-
                                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
                                         <Box sx={{
                                             width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
+                                            position: 'absolute'
 
                                         }}>
                                             <KeyboardArrowLeft sx={{
@@ -142,8 +141,10 @@ export default function Top10Page({
 
 
                         <Box>
-                            <Button sx={{ color: 'white',
-                        display: activeStep >=44 ? 'none' : 'inline-block' }} size="small" onClick={handleNext} disabled={activeStep >= 44}>
+                            <Button sx={{
+                                color: 'white',
+                                display: activeStep >= 44 ? 'none' : 'inline-block'
+                            }} size="small" onClick={handleNext} disabled={activeStep >= 44}>
 
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowLeft />

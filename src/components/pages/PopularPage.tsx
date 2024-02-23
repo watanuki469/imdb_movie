@@ -105,7 +105,7 @@ export default function PopularPage({
             case 'detail':
                 return (
                     // Render detail view
-                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black' }}>
+                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black', width: '100%' }}>
                         <Divider sx={{
                             width: '100%',
                             borderRadius: 2,
@@ -119,7 +119,7 @@ export default function PopularPage({
 
                                     {/* Left side - Image */}
                                     <img onError={handleImageError}
-                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }}
+                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px' }}
                                         onClick={() => navigate(`/movie/id/${movie.imdb_id}`)}
                                     />
 
@@ -638,7 +638,7 @@ export default function PopularPage({
                 );
             case 'compact':
                 return (
-                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black' }}>
+                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black', width: '100%' }}>
                         <Divider sx={{
                             width: '100%',
                             borderRadius: 2,
@@ -653,7 +653,7 @@ export default function PopularPage({
 
                                     {/* Left side - Image */}
                                     <img onError={handleImageError}
-                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '200px', marginTop: '10px' }} />
+                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px' }} />
 
                                     {/* Right side - Details */}
                                     <Stack sx={{ color: 'white' }} alignItems={'flex-start'}>
@@ -1065,9 +1065,9 @@ export default function PopularPage({
                         <AppBar position="static" sx={{ bgcolor: 'black' }} >
                             <Toolbar >
                                 <Stack direction="column" alignItems="flex-start" justifyContent='center'>
-                                    <Typography sx={{ color: 'white', fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}
+                                    <Typography sx={{ color: 'white', fontSize: "1.3rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}
                                     >
-                                        {isFilterApplied ? '0 of ' : ''} {popurarityItemList.length} Movies
+                                        {isFilterApplied ? '0 of ' : ''} {popurarityItemList.length} Movie
                                     </Typography>
                                     <Stack
                                         sx={{
@@ -1276,13 +1276,13 @@ export default function PopularPage({
                                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                     <Stack direction={'row'}>
                                         <Tooltip title="Detail View">
-                                            <ViewListIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={() => switchView('detail')} />
+                                            <ViewListIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} onClick={() => switchView('detail')} />
                                         </Tooltip>
                                         <Tooltip title="Grid View" sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                            <GridViewIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={() => switchView('grid')} />
+                                            <GridViewIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} onClick={() => switchView('grid')} />
                                         </Tooltip>
                                         <Tooltip title="Compact View">
-                                            <ViewHeadlineIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '60px' }} onClick={() => switchView('compact')} />
+                                            <ViewHeadlineIcon fontSize='large' sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} onClick={() => switchView('compact')} />
                                         </Tooltip>
                                     </Stack>
                                 </div>

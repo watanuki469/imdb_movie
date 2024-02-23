@@ -82,7 +82,7 @@ export function SinglePage() {
                   {Object.entries(typeCount)
                     .filter(([type, count]) => type !== 'undefined')
                     .map(([type, count], index, array) => (
-                      <Stack key={index} direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                      <Stack key={index} direction={'row'} sx={{textAlign:'left', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
                         {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
                       </Stack>
                     ))}
