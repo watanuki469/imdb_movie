@@ -5,11 +5,13 @@ import App from './App';
 import { store } from './app/store';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { useEffect } from 'react';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
+  
     <Provider store={store}>
       <BrowserRouter>
         <App />

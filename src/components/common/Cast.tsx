@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import MoviePage from 'components/dashboard/MovieItemPageDashBoard';
 import CastPage from 'components/pages/CastPage';
 import { castActions, selectCastList } from 'features/cast/castSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function Cast() {
@@ -13,13 +13,11 @@ export default function Cast() {
   const castList = useAppSelector(selectCastList);
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (imdb_id) {
-      dispatch(castActions.fetchCastList(imdb_id))
-    }
-  }, [imdb_id])
-
-
+    useEffect(() => {
+      if (imdb_id&& castList) {
+        dispatch(castActions.fetchCastList(imdb_id))
+      }
+    }, [imdb_id,castList])
   return (
     <div>
       <CastPage castList={castList} />

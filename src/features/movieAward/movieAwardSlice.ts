@@ -17,7 +17,7 @@ const movieAwardSlice = createSlice({
     initialState,
     reducers: {
         fetchmovieAwardList(state, action: PayloadAction<any>) {
-            // state.loading = true;
+            state.loading = true;
         },
         //cập nhật vào redux từ fetch movieAward list
         fetchmovieAwardListSuccess(state, action: PayloadAction<any>) {

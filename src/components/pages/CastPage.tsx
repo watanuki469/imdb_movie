@@ -11,11 +11,9 @@ export default function CastPage({
     castList
 
 }: CastPageProps) {
-    console.log(castList + 'cast list')
     const [writers, setWriters] = useState<any>([])
     const [directors, setDirectors] = useState<any>([])
     const [stars, setStars] = useState<any>([])
-    const bull = (<Box sx={{ display: 'inline-block', mx: '6px', transform: 'scale(0.8)', color: 'white' }} > • </Box>)
 
     const sortedStars = [...stars].sort((a, b) => {
         // Check if name is Emma Watson
@@ -48,12 +46,7 @@ export default function CastPage({
         <div>
             <Box
                 sx={{
-                    color: 'white',
-                    fontSize: '1.5rem',
-                    fontWeight: 'bold',
-                    fontFamily: 'Arial, sans-serif',
-                    textTransform: 'capitalize',
-                    textAlign: 'left'
+                    color: 'white', fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'Arial, sans-serif', textTransform: 'capitalize', textAlign: 'left'
                 }}
             >
                 <Stack direction={'row'}>
@@ -85,37 +78,33 @@ export default function CastPage({
                 <Stack direction={'row'} spacing={1}>
                     <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}> Writers:{' '}
                     </Typography>
-
-                    {writers &&
-                        writers.map((item: any, index: number) => (
-                            <Fragment key={`writer_${item.role}_${index}`}>
-                                <Stack direction={'row'} spacing={1}>
-                                    <Fragment key={item.actor?.imdb_id}>
-                                        <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
-                                            color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}</Typography>
-                                        </IconButton>
-                                    </Fragment>
-                                </Stack>
-                                {index < writers.length - 1 && ', '}
-                            </Fragment>
-                        ))
-                    }
+                    <Stack direction={'row'} sx={{ marginLeft: '5px', flexWrap: 'wrap' }}>
+                        {writers &&
+                            writers.map((item: any, index: number) => (
+                                <Fragment key={`writer_${item.role}_${index}`}>
+                                    <Stack direction={'row'} spacing={1}>
+                                        <Fragment key={item.actor?.imdb_id}>
+                                            <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
+                                                color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                                <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}</Typography>
+                                            </IconButton>
+                                        </Fragment>
+                                    </Stack>
+                                    {/* {index < writers.length - 1 && ', '} */}
+                                </Fragment>
+                            ))
+                        }
+                    </Stack>
 
                 </Stack>
             </Box>
 
             <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
             <Box sx={{
-                color: 'white',
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-                fontFamily: "Arial, sans-serif",
-                textTransform: 'capitalize',
-                textAlign: 'left',
+                color: 'white', fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'left',
             }}>
                 <Stack direction={'row'} alignItems="center">
-                    <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}>    Stars:{' '}
+                    <Typography variant="h6" sx={{ textAlign: 'left', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}>    Stars:{' '}
                     </Typography>
 
                     <Stack direction={'row'} sx={{ marginLeft: '5px', flexWrap: 'wrap' }}>
@@ -129,7 +118,6 @@ export default function CastPage({
                                             <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap' }}>{item.actor?.name}
                                                 <span style={{ color: "white" }}>,</span>
                                             </Typography>
-
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
@@ -140,25 +128,14 @@ export default function CastPage({
                 </Stack>
             </Box>
 
-
-
             <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
             <Typography sx={{
-                color: 'white',
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-                fontFamily: "Arial, sans-serif",
-                textTransform: 'capitalize',
-                textAlign: 'left'
+                color: 'white', fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'left'
             }}>IMBb<span style={{ color: '#AED2FF' }}>Pro</span>
                 <IconButton onClick={() => navigate('/IMDbPro')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
                     <span style={{ color: 'blue', fontWeight: 'normal' }}> See production info at IMDbPro</span>
                 </IconButton>
             </Typography>
         </div >
-
     )
-
-
-
 }

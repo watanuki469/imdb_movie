@@ -5,6 +5,8 @@ import { AwardActions, selectAwardList } from 'features/award/awardSlice';
 import { award } from 'models';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import SingleStarItem from "./SingleStarItem";
 
 export default function SingleStarMedia() {
@@ -37,18 +39,23 @@ export default function SingleStarMedia() {
         return keyCounting;
 
     }
+    const [moviesPlay, setMoviesIsPlay] = useState(true);
+
+    const handleMoviesClick = () => {
+        setMoviesIsPlay(!moviesPlay);
+    };
 
 
     return (
-        <div>
-            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
+        <div id="awarrd">
+            <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
                 {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
-                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                <Typography sx={{color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
-                    Award:
-                </Typography>
-                <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
 
+                <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
+                    <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+                    <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                        Award:
+                    </Typography>
                     {Object.entries(typeCount)
                         .filter(([type, count]) => type !== 'undefined')
                         .map(([type, count], index, array) => (
@@ -57,15 +64,26 @@ export default function SingleStarMedia() {
                             </Stack>
 
                         ))}
-                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
-
+                    {/* <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} /> */}
+                    <IconButton onClick={handleMoviesClick}>
+                        {moviesPlay ?
+                            <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+                            :
+                            <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
+                    </IconButton>
                 </Stack>
 
                 {/* </Button> */}
             </Stack>
-            <Stack direction={'row'}>
-                <SingleStarItem awardList={awardList} />
-            </Stack>
+            {moviesPlay ?
+                <Stack direction={'column'} sx={{ mt: 3 }}>
+                    <SingleStarItem awardList={awardList} />
+                </Stack>
+                : <Stack>
+
+                </Stack>
+            }
+
         </div >
 
     );

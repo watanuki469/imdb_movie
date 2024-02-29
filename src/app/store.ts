@@ -15,6 +15,9 @@ import AwardReducer from 'features/award/awardSlice'
 import movieAwardReducer from 'features/movieAward/movieAwardSlice'
 import singleStarReducer from 'features/singleStar/singleStarSlice'
 import TechReducer from 'features/tech/techSlice'
+import knowForReducer from 'features/knowfor/knowForSlice'
+import knowforItemReducer from 'features/knowforItem/knowforItemSlice'
+import authReducer from 'features/auth/authSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
@@ -32,7 +35,10 @@ export const store = configureStore({
     award:AwardReducer,
     singleStar:singleStarReducer,
     movieAward:movieAwardReducer,
-    tech:TechReducer
+    tech:TechReducer,
+    knowFor:knowForReducer,
+    knowforItem:knowforItemReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

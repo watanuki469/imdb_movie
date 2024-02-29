@@ -84,12 +84,8 @@ export default function PopularPage({
 
     const starsArray = Array.from({ length: 10 }, (_, index) => (
         <Star
-            key={index}
-            selected={starIndex > index}
-            hover={index <= hoveredIndex}
-            onClick={() => handleStarClick(index)}
-            onMouseEnter={() => handleStarHover(index)}
-            onMouseLeave={() => handleStarHover(-1)}
+            key={index} selected={starIndex > index} hover={index <= hoveredIndex}
+            onClick={() => handleStarClick(index)} onMouseEnter={() => handleStarHover(index)} onMouseLeave={() => handleStarHover(-1)}
 
         />
     ));
@@ -100,17 +96,16 @@ export default function PopularPage({
 
     const renderMovieItem = (movie: any, movieIndex: number, currentView: any, sortOrder: any) => {
         // Implement rendering logic based on the currentView (detail, grid, compact)
-
+        if (movieIndex >= 50) {
+            return null;
+        }
         switch (currentView) {
             case 'detail':
                 return (
                     // Render detail view
                     <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black', width: '100%' }}>
                         <Divider sx={{
-                            width: '100%',
-                            borderRadius: 2,
-                            border: '2px solid gray',
-                            borderColor: 'divider',
+                            width: '100%', borderRadius: 2, border: '2px solid gray', borderColor: 'divider',
                             backgroundColor: 'background.paper',
                         }} />
                         <AppBar position="static" sx={{ bgcolor: 'black' }}>
@@ -128,10 +123,7 @@ export default function PopularPage({
                                         <Typography variant='h6'>{`${movieIndex + 1}`}</Typography>
                                         <Typography variant='h5'
                                             sx={{
-                                                fontSize: "2rem",
-                                                fontWeight: "bold",
-                                                fontFamily: "Arial, sans-serif",
-                                                textTransform: 'capitalize',
+                                                fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                             }}
                                         >{`${movie.title}`}
                                         </Typography>
@@ -902,7 +894,6 @@ export default function PopularPage({
         popurarityItemList.forEach((movie) => {
             movie.gen.forEach((genre) => {
                 const genreName = genre.genre;
-
                 // Nếu thể loại đã tồn tại, tăng giá trị đếm lên 1; ngược lại, tạo mới với giá trị 1.
                 genreCount[genreName] = (genreCount[genreName] || 0) + 1;
             });
@@ -918,13 +909,11 @@ export default function PopularPage({
             movie.keywords.forEach((type) => {
                 // type key
                 const keyName: Key = type.keyword as Key;
-
                 // Nếu thể loại đã tồn tại, tăng giá trị đếm lên 1; ngược lại, tạo mới với giá trị 1.
                 keyCounting[keyName] = (keyCounting[keyName] || 0) + 1;
             });
         });
         return keyCounting;
-
     }
 
     const [openGenDialog, setOpenGenDialog] = useState(false);
@@ -944,7 +933,6 @@ export default function PopularPage({
     };
     const handleRemoveKeyFilter = (removedGenre: any) => {
         setSelectedKeys(selectedKeys.filter((genre) => genre !== removedGenre));
-
     };
 
 
@@ -1025,16 +1013,11 @@ export default function PopularPage({
                     <Toolbar>
                         <Stack direction="column" alignItems="flex-start" justifyContent='left'>
                             <Typography sx={{
-                                color: 'white',
-                                fontSize: "2rem",
-                                fontWeight: "bold",
-                                fontFamily: "Arial, sans-serif",
-                                textTransform: 'capitalize',
+                                color: 'white', fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                 ':hover': {
                                     textDecoration: 'underline',
                                     cursor: 'pointer'
                                 },
-
                             }}>IMDb Charts
                             </Typography>
 
@@ -1050,11 +1033,9 @@ export default function PopularPage({
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                <>
-                                    <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                        Share
-                                    </Typography>
-                                </>
+                                <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                    Share
+                                </Typography>
                                 <ShareIcon sx={{ color: 'gray', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
                             </Button>
                         </Box>
@@ -1068,13 +1049,11 @@ export default function PopularPage({
                                     <Typography sx={{ color: 'white', fontSize: "1.3rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}
                                     >
                                         {isFilterApplied ? '0 of ' : ''} {popurarityItemList.length} Movie
+                                        {/* {isFilterApplied ? '0 of ' : ''} 50 Movie */}
                                     </Typography>
                                     <Stack
                                         sx={{
-                                            display: 'grid',
-                                            columnGap: 5,
-                                            rowGap: 3,
-                                            gridTemplateColumns: 'repeat(4, 1fr)',
+                                            display: 'grid', columnGap: 5, rowGap: 3, gridTemplateColumns: 'repeat(4, 1fr)',
                                         }} >
 
                                         <FilterListIcon fontSize='large' sx={{ bgcolor: 'blue', color: 'white', alignContent: 'center', mt: '3px', borderRadius: '100%', height: '50px', width: '50px' }} onClick={handleDiaGenlogOpen} />
@@ -1085,8 +1064,7 @@ export default function PopularPage({
                                                     {genre}
                                                 </Typography>
                                                 <IconButton
-                                                    size="small"
-                                                    onClick={() => handleRemoveGenreFilter(genre)}
+                                                    size="small" onClick={() => handleRemoveGenreFilter(genre)}
                                                     sx={{ color: 'red', padding: 0 }}
                                                 >
                                                     <CloseIcon />
@@ -1102,8 +1080,7 @@ export default function PopularPage({
                                                     {genre}
                                                 </Typography>
                                                 <IconButton
-                                                    size="small"
-                                                    onClick={() => handleRemoveKeyFilter(genre)}
+                                                    size="small" onClick={() => handleRemoveKeyFilter(genre)}
                                                     sx={{ color: 'red', padding: 0 }}
                                                 >
                                                     <CloseIcon />
@@ -1125,10 +1102,7 @@ export default function PopularPage({
                                         <DialogContent>
                                             <Box
                                                 sx={{
-                                                    display: 'grid',
-                                                    columnGap: 3,
-                                                    rowGap: 3,
-                                                    gridTemplateColumns: 'repeat(4, 1fr)',
+                                                    display: 'grid', columnGap: 3, rowGap: 3, gridTemplateColumns: 'repeat(4, 1fr)',
                                                 }} >
 
                                                 {Object.entries(genreCount).map(([genre, count]) => (
@@ -1151,13 +1125,7 @@ export default function PopularPage({
                                                 {/* </List> */}
                                             </Box>
                                             <Divider sx={{
-                                                marginTop: '20px',
-                                                width: '100%',
-                                                maxWidth: '1100px',
-                                                borderRadius: 2,
-                                                border: '1px solid',
-                                                borderColor: 'divider',
-                                                backgroundColor: 'background.paper',
+                                                marginTop: '20px', width: '100%', maxWidth: '1100px', borderRadius: 2, border: '1px solid', borderColor: 'divider', backgroundColor: 'background.paper',
                                             }} />
                                             <DialogTitle sx={{ color: 'yellow', textTransform: 'uppercase', fontWeight: 'bold' }}>IN THEATERS</DialogTitle>
 
@@ -1169,20 +1137,16 @@ export default function PopularPage({
                                                     <Stack direction={'row'}>
                                                         <Stack direction={'row'} alignItems='center' alignContent={'center'}>
                                                             <Radio
-                                                                icon={<FavoriteBorder sx={{ color: 'white' }} />}
-                                                                checkedIcon={<Favorite />}
-                                                                checked={filterType === 'none'}
-                                                                onChange={() => handleFilterChange('none')}
+                                                                icon={<FavoriteBorder sx={{ color: 'white' }} />} checkedIcon={<Favorite />}
+                                                                checked={filterType === 'none'} onChange={() => handleFilterChange('none')}
                                                             />
                                                             <Typography variant='h5' sx={{ color: 'white' }}>None</Typography>
                                                         </Stack>
 
                                                         <Stack sx={{ marginLeft: '20px' }} direction={'row'} alignItems='center' alignContent={'center'}>
                                                             <Radio
-                                                                icon={<FavoriteBorder sx={{ color: 'white' }} />}
-                                                                checkedIcon={<Favorite />}
-                                                                checked={filterType === 'inTheaters'}
-                                                                onChange={() => handleFilterChange('inTheaters')}
+                                                                icon={<FavoriteBorder sx={{ color: 'white' }} />} checkedIcon={<Favorite />}
+                                                                checked={filterType === 'inTheaters'} onChange={() => handleFilterChange('inTheaters')}
                                                             />
                                                             <Typography variant='h5' sx={{ color: 'white' }}>
                                                                 In theaters near you
@@ -1192,10 +1156,8 @@ export default function PopularPage({
 
                                                     <Stack direction={'row'} alignItems='center' alignContent={'center'}>
                                                         <Radio
-                                                            icon={<FavoriteBorder sx={{ color: 'white' }} />}
-                                                            checkedIcon={<Favorite />}
-                                                            checked={filterType === 'In theaters with online ticketing'}
-                                                            onChange={() => handleFilterChange('In theaters with online ticketing')}
+                                                            icon={<FavoriteBorder sx={{ color: 'white' }} />} checkedIcon={<Favorite />}
+                                                            checked={filterType === 'In theaters with online ticketing'} onChange={() => handleFilterChange('In theaters with online ticketing')}
                                                         />
                                                         <Typography variant='h5' sx={{ color: 'white' }}>
                                                             In theaters with online ticketing
@@ -1204,27 +1166,19 @@ export default function PopularPage({
                                                 </Stack>
                                             </Box>
                                             <Divider sx={{
-                                                marginTop: '20px',
-                                                width: '100%',
-                                                maxWidth: '1100px',
-                                                borderRadius: 2,
-                                                border: '1px solid',
-                                                borderColor: 'divider',
-                                                backgroundColor: 'background.paper',
+                                                marginTop: '20px', width: '100%', maxWidth: '1100px', borderRadius: 2,
+                                                border: '1px solid', borderColor: 'divider', backgroundColor: 'background.paper',
                                             }} />
                                             <DialogTitle sx={{ color: 'yellow', textTransform: 'uppercase', fontWeight: 'bold' }}>Movie Key</DialogTitle>
 
                                             <Box
                                                 sx={{
                                                     // display: 'grid',
-                                                    columnGap: 5,
-                                                    rowGap: 5,
-                                                    gridTemplateColumns: 'repeat(4, 1fr)',
+                                                    columnGap: 5, rowGap: 5, gridTemplateColumns: 'repeat(4, 1fr)',
                                                 }} >
                                                 <Box>
                                                     <Box sx={{
-                                                        rowGap: 3,
-                                                        gridTemplateColumns: 'repeat(4, 1fr)',
+                                                        rowGap: 3, gridTemplateColumns: 'repeat(4, 1fr)',
                                                     }} >
                                                         {Object.entries(keyCount)
                                                             .slice(0, displayedGenres) // Display only the specified number of genres
@@ -1234,16 +1188,11 @@ export default function PopularPage({
                                                                     variant="contained"
                                                                     size="large"
                                                                     sx={{
-                                                                        textTransform: 'uppercase',
-                                                                        ':hover': { bgcolor: 'yellow', color: 'white' },
+                                                                        textTransform: 'uppercase', ':hover': { bgcolor: 'yellow', color: 'white' },
                                                                         background: `linear-gradient(180deg, ${selectedKeys.includes(genre as Key) ? 'yellow' : 'grey'
                                                                             }, transparent) border-box`,
-                                                                        border: '2px solid transparent',
-                                                                        backgroundColor: 'black',
-                                                                        borderRadius: '1rem',
-                                                                        '--Grid-borderWidth': '1px',
-                                                                        borderColor: 'blue',
-                                                                        margin: '5px',
+                                                                        border: '2px solid transparent', backgroundColor: 'black', borderRadius: '1rem', '--Grid-borderWidth': '1px',
+                                                                        borderColor: 'blue', margin: '5px',
                                                                     }}
                                                                     onClick={() => handleTypeClick(genre as Key)}
                                                                 >
@@ -1255,12 +1204,8 @@ export default function PopularPage({
                                                         {displayedGenres < Object.entries(keyCount).length && (
                                                             <Button onClick={handleLoadMore} variant="outlined" size="large"
                                                                 sx={{
-                                                                    ':hover': { bgcolor: 'yellow', color: 'black', },
-                                                                    margin: '5px', width: '200px', textAlign: 'center',
-                                                                    alignContent: 'center', justifyContent: 'center',
-                                                                    color: 'purple',
-                                                                    border: '2px solid blue',
-                                                                    backgroundColor: 'white'
+                                                                    ':hover': { bgcolor: 'yellow', color: 'black', }, margin: '5px', width: '200px', textAlign: 'center',
+                                                                    alignContent: 'center', justifyContent: 'center', color: 'purple', border: '2px solid blue', backgroundColor: 'white'
                                                                 }}
                                                             >
                                                                 Load More ({Object.entries(keyCount).length - displayedGenres})
@@ -1342,11 +1287,7 @@ export default function PopularPage({
                     <Grid item xs={12} sm={12} md={4} key={selectedGenres.length}>
                         <AppBar position="static">
                             <Stack
-                                direction="column"
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                                spacing={2}
-                                sx={{ bgcolor: 'black' }}
+                                direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={2} sx={{ bgcolor: 'black' }}
 
                             >
                                 {/* <Typography variant='h3' sx={{ color: 'white' }}>

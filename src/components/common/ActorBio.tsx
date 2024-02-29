@@ -3,7 +3,9 @@ import { Box, Divider, IconButton, Stack, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import ActorBioPages from 'components/pages/ActorBioPages';
 import { ActorActions, selectActorList } from 'features/actor/actorSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import { useParams } from 'react-router-dom';
 
 
@@ -17,26 +19,39 @@ export function ActorBio() {
   useEffect(() => {
     dispatch(ActorActions.fetchActorList(imdb_id))
   }, [imdb_id])
+  const [moviesPlay, setMoviesIsPlay] = useState(true);
+
+  const handleMoviesClick = () => {
+    setMoviesIsPlay(!moviesPlay);
+  };
 
   return (
-    <div>
-      <Stack alignContent={'flex-start'} alignItems={'flex-start'} direction={'row'}>
-        {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
-        <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '50px' }} orientation="vertical" />
-        <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', } }}>
+    <div style={{ marginTop: '20px', }} id="biography-section">
+      <Stack alignContent={'center'} alignItems={'center'} direction={'row'}>
+        <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+        <Typography sx={{
+          textAlign: 'left', justifyContent: 'center', alignItems: 'center', alignContent: 'center',
+          color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }
+        }}>
           Did you know
         </Typography>
         <Stack direction={'row'} alignContent={'center'} alignItems={'center'}>
-
-          <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
-
-          {/* </List> */}
-
+          <IconButton onClick={handleMoviesClick}>
+            {moviesPlay ?
+              <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+              :
+              <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
+          </IconButton>
         </Stack>
-        {/* </Button> */}
-      </Stack>
-      <ActorBioPages starList={starList} />
 
-    </div>
+      </Stack>
+      {moviesPlay ?
+        <Stack direction={'column'} sx={{ mt: 3, width: '100%' }}>
+          <ActorBioPages starList={starList} />
+        </Stack>
+        : <Stack></Stack>
+      }
+      
+    </div >
   );
 }

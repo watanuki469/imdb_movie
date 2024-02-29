@@ -26,12 +26,10 @@ export function SinglePage() {
 
   useEffect(() => {
     dispatch(movieAwardActions.fetchmovieAwardList(imdb_id))
-
   }, [imdb_id])
 
   useEffect(() => {
     dispatch(TechActions.fetchTechList(imdb_id))
-
   }, [imdb_id])
 
   useEffect(() => {
@@ -77,7 +75,7 @@ export function SinglePage() {
                 <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
                   <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
                   <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
-                    Movie Award:
+                    Movie Award:{movieAward.length}
                   </Typography>
                   {Object.entries(typeCount)
                     .filter(([type, count]) => type !== 'undefined')

@@ -19,8 +19,8 @@ export default function SliderPage({
 }: SliderPageProps) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    // const maxSteps = popurarityItemList.length
-    const maxSteps = 50
+    const maxSteps = popurarityItemList.length
+    // const maxSteps = 50
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -102,29 +102,31 @@ export default function SliderPage({
                                     sm: "40%", // Giảm xuống 40% cho kích thước màn hình sm
                                     md: "30%", // Giảm xuống 30% cho kích thước màn hình md
                                     lg: "22.5%" // Giảm xuống 22.5% cho kích thước màn hình lg
-
                                 },
                                 backgroundPosition: "top",
                                 backgroundSize: "cover",
                                 width: '100%',
-
                                 // src={uniquePopurarityItemList[activeStep] && uniquePopurarityItemList[activeStep].banner && uniquePopurarityItemList[activeStep]?.banner}
                                 backgroundImage: `url(${uniquePopurarityItemList[activeStep]?.banner})`,
                             }}    >
 
                             <Stack direction={'row'} sx={{ mt: 5 }}>
-                                <img
-                                    src={uniquePopurarityItemList[activeStep]?.image_url}
-                                    onError={handleImageError}
-                                    alt="movie-img"
-                                    style={{
-                                        alignSelf: 'flex-end',
-                                        display: 'block', // Hiển thị ảnh dưới dạng block để đảm bảo nó nằm ở vị trí dưới cùng
-                                        // margin: 'auto', // Canh giữa theo chiều ngang
-                                        marginBottom: '0', // Loại bỏ khoảng trắng dưới ảnh
-                                        height: `${imageHeight}px`, // Sử dụng dynamic height
-                                    }}
-                                />
+                                <div style={{ backgroundColor: 'black', textAlign: 'center' }}>
+                                    <img
+                                        src={uniquePopurarityItemList[activeStep]?.image_url}
+                                        onError={handleImageError}
+                                        alt="movie-img"
+                                        style={{
+                                            alignSelf: 'flex-end',
+                                            display: 'block', // Hiển thị ảnh dưới dạng block để đảm bảo nó nằm ở vị trí dưới cùng
+                                            // margin: 'auto', // Canh giữa theo chiều ngang
+                                            marginBottom: '0', // Loại bỏ khoảng trắng dưới ảnh
+                                            height: `${imageHeight}px`, // Sử dụng dynamic height
+
+                                        }}
+                                    />
+                                </div>
+
                                 <Stack direction={'column'} sx={{ alignSelf: 'flex-end', width: '100%' }}>
                                     <Stack direction={'row'}>
                                         <PlayCircleOutlineIcon sx={{
@@ -292,7 +294,7 @@ export default function SliderPage({
                                             </Box>
                                             <Box>
                                                 <h5 style={{
-                                                    textAlign: "justify", display: "-webkit-box", overflow: "hidden", WebkitBoxOrient: "vertical", textDecoration: 'bold', color: 'white', marginTop: '0%',
+                                                    textAlign: "left", display: "-webkit-box", overflow: "hidden", WebkitBoxOrient: "vertical", textDecoration: 'bold', color: 'white', marginTop: '0%',
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 1]?.title}
                                                 </h5>
@@ -331,7 +333,7 @@ export default function SliderPage({
                                             </Box>
                                             <Box>
                                                 <h5 style={{
-                                                    textAlign: "justify", overflow: "hidden", textDecoration: 'bold', color: 'white', marginTop: '0%',
+                                                    textAlign: "left", overflow: "hidden", textDecoration: 'bold', color: 'white', marginTop: '0%',
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 2]?.title}
                                                 </h5>
@@ -371,7 +373,7 @@ export default function SliderPage({
                                             </Box>
                                             <Box>
                                                 <h5 style={{
-                                                    textAlign: "justify",
+                                                    textAlign: "left",
                                                     overflow: "hidden",
                                                     textDecoration: 'bold',
                                                     color: 'white',

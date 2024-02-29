@@ -52,6 +52,10 @@ const genresApi = {
     const url = `/movie/id/${imdb_id}/tehnical_spec/`
     return axiosClient.get(url)
   },
+  listgetMoviesKnownForByIds(imdb_id: any): Promise<Movie> {
+    const url = `/actor/id/${imdb_id}/movies_knownFor/`
+    return axiosClient.get(url)
+  },
 
 };
 

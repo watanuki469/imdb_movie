@@ -66,7 +66,7 @@ export default function ActorBioPages({
 
     return (
         <div>
-            <Box display="flex" alignContent="center" sx={{ width: '100%', m: 'auto', p: 1, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
+            <Box display="flex" alignContent="center" sx={{ width: '100%', m: 'auto', p: 1, textAlign: 'center', bgcolor: 'black' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
                     <Stack direction={'column'}>
                         <Stack alignContent={'flex-start'} justifyContent={'flex-start'} >
@@ -77,13 +77,7 @@ export default function ActorBioPages({
                                         <Toolbar sx={{ bgcolor: 'black', border: '2px solid white' }}>
                                             <Stack sx={{ textAlign: 'left' }} >
                                                 <Typography sx={{
-                                                    fontWeight: 'bold',
-                                                    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                                                    fontSize: '1rem',
-                                                    textTransform: 'none',
-                                                    WebkitFontSmoothing: 'auto',
-                                                    fontSmooth: 'auto',
-                                                    lineHeight: '1.5rem',
+                                                    fontWeight: 'bold', fontFamily: 'Roboto, Helvetica, Arial, sans-serif', fontSize: '1rem', textTransform: 'none', WebkitFontSmoothing: 'auto', fontSmooth: 'auto', lineHeight: '1.5rem',
                                                 }}>
                                                     Trivia
                                                 </Typography>

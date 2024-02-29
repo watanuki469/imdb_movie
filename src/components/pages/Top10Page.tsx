@@ -5,7 +5,7 @@ import { Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import { movieItem } from 'models';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Top10PageItem from './Top10PageItem';
 
 export interface Top10PageProps {
@@ -64,45 +64,35 @@ export default function Top10Page({
         itemsToShow = 5; // Giả sử mặc định là 4 cho các kích thước khác
     }
 
+
     return (
         <div>
             <Grid rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ alignContent: 'center', justifyContent: 'center' }}>
-                <Button fullWidth sx={{
-                    bgcolor: 'black', height: '50px', padding: '10px', justifyContent: 'center',
-                    marginTop: '30px',
-                    marginBottom: '30px',
-                    alignContent: 'center',
-                    textAlign: 'center'
-                }}>
-                    <Diversity2Icon sx={{ color: 'yellow', height: '100%' }} />;
-                    <>
-                        <Typography variant='h3' sx={{
-                            color: 'white',
-                            border: 'none',
-                            fontWeight: 'bold',
-                            margin: '30px',
-                            textAlign: 'center',
-                            cursor: 'pointer'
-                        }}>
-                            Top movies on IMDb this week
-                        </Typography>
 
-                    </>
-                    {/* <PlayArrowIcon  sx={{ color: 'yellow', height: '100%'  }} /> */}
-                </Button>
+                <Stack direction={'row'} sx={{ justifyContent: "center", alignContent: 'center', alignItems: 'center', padding: '10px', height: 'auto' }}>
+
+                    <Typography variant='h3' sx={{
+                        color: 'white', border: 'none', fontWeight: 'bold', margin: '30px', textAlign: 'center', cursor: 'pointer'
+                    }}>
+                        Top movies on IMDb this week
+                    </Typography>
+                </Stack>
+
+                {/* <PlayArrowIcon  sx={{ color: 'yellow', height: '100%'  }} /> */}
                 <Grid item xs={12} >
                     <Stack direction='row' spacing={3} sx={{ justifyContent: 'center', alignItems: 'center', mt: 4 }}>
                         <Box>
                             <Button sx={{
                                 color: 'white',
-                                display: activeStep === 0 ? 'none' : 'inline-block'
+                                // display: activeStep === 0 ? 'none' : 'inline-block'
+                                display: 'inline-block'
                             }} size="small" onClick={handleBack} disabled={activeStep === 0}>
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowRight />
                                 ) : (
                                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
                                         <Box sx={{
-                                            width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            width: 30, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
                                             position: 'absolute'
 
@@ -143,15 +133,16 @@ export default function Top10Page({
                         <Box>
                             <Button sx={{
                                 color: 'white',
-                                display: activeStep >= 44 ? 'none' : 'inline-block'
+                                // display: activeStep >= 44 ? 'none' : 'inline-block'
+                                display: 'inline-block'
                             }} size="small" onClick={handleNext} disabled={activeStep >= 44}>
 
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowLeft />
                                 ) : (
-                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                         <Box sx={{
-                                            width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            width: 30, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
 
                                         }}>

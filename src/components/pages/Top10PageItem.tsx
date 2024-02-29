@@ -65,14 +65,17 @@ export default function Top10PageItem({
         />
     ));
     return (
-        <div>
-            <Stack sx={{ position: 'relative', height: '300px', }}>
+        <div style={{ maxWidth: '200px' }}>
+            <Stack sx={{ position: 'relative', height: '300px' }}>
 
                 <img
                     onClick={() => navigate(`/movie/id/${popurarityItemList[activeStep + number]?.imdb_id}`)}
                     src={popurarityItemList[activeStep + number]?.image_url}
                     alt="movie-img"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
+                    style={{
+                        width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black', maxWidth: "200px",
+                        alignContent: 'center', justifyContent: 'center', alignItems: 'center'
+                    }}
                     onError={(e) => {
                         const imgElement = e.currentTarget as HTMLImageElement;
                         imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây

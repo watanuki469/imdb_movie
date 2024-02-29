@@ -8,12 +8,15 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import { AppBar, Badge, Box, Button, Divider, Grid, IconButton, LinearProgress, List, ListItem, Stack, Toolbar, Typography, makeStyles } from "@mui/material";
+import { AppBar, Badge, Box, Button, Dialog, DialogContent, Divider, Grid, IconButton, LinearProgress, List, ListItem, Stack, Toolbar, Typography, makeStyles } from "@mui/material";
 import { useAppSelector } from 'app/hooks';
 import Cast from 'components/common/Cast';
 import { selectSingleMovieListLoading } from 'features/singleMovie/singleMovieSlice';
 import { movieItem, singleMovie } from 'models';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-material/StarRate';
+
 
 
 export interface SingleMoviePageProps {
@@ -38,14 +41,17 @@ export default function SingleMoviePage({
             return (
                 <Box>
                     <Typography sx={{
-                        color: "#A9A9A9", fontSize: "1.5rem",
+                        color: "#A9A9A9", fontSize: "1rem",
                         fontWeight: "bold",
                         fontFamily: "Arial, sans-serif",
                         textTransform: 'capitalize'
                     }}>POPULARITY RATING</Typography>
-                    <Button sx={{ display: 'flex' }}>
+                    <Button >
                         <Box>
-                            <TrendingUpIcon sx={{ color: 'blue', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
+                            <TrendingUpIcon sx={{
+                                color: 'blue', alignContent: 'center', mt: '3px', fontSize: '60px',
+                                alignItems: 'center'
+                            }} />
                         </Box>
                         <Box sx={{ textAlign: 'left' }}>
                             <Typography sx={{
@@ -78,6 +84,47 @@ export default function SingleMoviePage({
             casterElement.scrollIntoView({ behavior: 'smooth' });
         }
     };
+    const [selectedStudent, setSelectedStudent] = useState<singleMovie>();
+    const [openDialog, setOpenDialog] = useState(false);
+    const [starIndex, setStarIndex] = useState(0);
+
+
+    const handleRatingClick = (movie: singleMovie) => {
+        setSelectedStudent(movie)
+        setOpenDialog(true);
+    };
+    const handleCloseRating = () => {
+        setStarIndex(0)
+        setOpenDialog(false);
+    };
+    const handleStarClick = (starIndex: any) => {
+        setStarIndex(starIndex + 1); // Assuming 1-based indexing for stars
+
+    };
+    const [hoveredIndex, setHoveredIndex] = useState(-1);
+    const handleStarHover = (hoveredIndex: number) => {
+        setHoveredIndex(hoveredIndex);
+    };
+
+    const Star = ({ selected, hover, onClick, onMouseEnter, onMouseLeave }: { selected: boolean; hover: boolean; onClick: () => void; onMouseEnter: () => void; onMouseLeave: () => void }) => {
+        return selected ? (
+            <StarIcon sx={{ color: openDialog ? 'yellow' : 'white' }} onClick={onClick} />
+        ) : (
+            <StarOutlineIcon sx={{ color: hover ? 'yellow' : openDialog ? 'white' : 'white' }} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} />
+        );
+    };
+
+    const starsArray = Array.from({ length: 10 }, (_, index) => (
+        <Star
+            key={index}
+            selected={starIndex > index}
+            hover={index <= hoveredIndex}
+            onClick={() => handleStarClick(index)}
+            onMouseEnter={() => handleStarHover(index)}
+            onMouseLeave={() => handleStarHover(-1)}
+
+        />
+    ));
 
 
     return (
@@ -207,7 +254,7 @@ export default function SingleMoviePage({
                                             textDecoration: 'underline',
                                         },
                                     }}>
-                                        All Topic
+                                        All Topiccc
                                     </Typography>
                                 </>
                             </Button>
@@ -216,17 +263,25 @@ export default function SingleMoviePage({
                             </IconButton>
                             <IconButton
                                 size="large"
-                                aria-label="show more"
-                                aria-haspopup="true"
                                 color="inherit"
-                            >
-                                <ShareIcon />
+                                sx={{
+                                    ':hover': {
+                                        textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                    },
+                                }} >
+                                <Badge color="error">
+                                    <ShareIcon sx={{
+                                        ':hover': {
+                                            textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                        },
+                                    }} />
+                                </Badge>
                             </IconButton>
                         </Box>
                     </Toolbar>
                     <Toolbar sx={{ mt: '30px' }}>
                         <Box>
-                            {singleList.map((item, index) =>
+                            {singleList&& singleList.length>0&&singleList.map((item, index) =>
                                 <Stack key={index} sx={{ textAlign: 'left' }}>
                                     <Stack alignItems="left">
                                         <Typography variant="h4" color="white">
@@ -246,7 +301,7 @@ export default function SingleMoviePage({
                         </Box>
 
                         <Box sx={{ flexGrow: 1 }} />
-                        {singleList.map((item, index) =>
+                        {singleList&&singleList.length>0&&singleList.map((item, index) =>
                             <Stack key={index} direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex', textAlign: 'center' } }}>
                                 <Box>
                                     <Typography sx={{
@@ -276,17 +331,55 @@ export default function SingleMoviePage({
                                             < StarBorderIcon sx={{ color: 'blue', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
 
                                         </Box>
-                                        <Box sx={{ textAlign: 'left' }}>
+                                        <Box onClick={() => handleRatingClick(item)} sx={{ textAlign: 'left' }}>
                                             <Typography sx={{
-                                                color: "blue", fontSize: "1.5rem",
-                                                fontWeight: "bold",
-                                                fontFamily: "Arial, sans-serif",
-                                                textTransform: 'capitalize'
+                                                color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                             }}>  Rate </Typography>
 
                                         </Box>
 
                                     </Button>
+
+                                    <Dialog open={openDialog}
+                                    >
+                                        <Button onClick={() => handleCloseRating()} sx={{
+                                            justifyContent: 'center', right: 0,
+                                            position: 'absolute', bgcolor: 'white', color: 'black',
+                                            textAlign: 'center', border: 'none', fontWeight: 'bold',
+                                            fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto',
+                                            height: '50px', textTransform: 'none', borderRadius: '100%',
+                                            overflow: 'hidden', // Tránh chữ tràn ra ngoài
+                                            whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
+                                            // textOverflow: 'ellipsis', // Hiển thị dấu elipsis
+                                            ':hover': {
+                                                bgcolor: 'yellow',
+                                                color: 'blue',
+                                            },
+                                            // transform: 'translate(1200%, 290%)'
+                                        }}>X
+                                        </Button>
+                                        <Stack direction={'column'} sx={{
+                                            bgcolor: 'black', color: 'white'
+                                            , border: '1px solid white',
+                                            //  transform: 'translate(70%, 100%)',
+                                            width: '99%'
+                                        }}>
+                                            <Typography variant='h3' sx={{ textAlign: 'center', color: 'yellow' }}>
+                                                Rate {starIndex} <StarIcon > </StarIcon> of
+                                            </Typography>
+                                            <DialogContent sx={{ textAlign: 'center', mx: '24px' }}>
+                                                <Typography variant='h4' sx={{ maxWidth: '20ch', overflowWrap: 'break-word' }}>
+                                                    {selectedStudent?.title}
+                                                </Typography>
+                                                <Stack direction="row" spacing={2}>
+                                                    {starsArray}
+                                                </Stack>
+                                            </DialogContent>
+                                            <Button fullWidth sx={{ color: 'white', backgroundColor: starIndex > 0 ? 'red' : 'gray' }} onClick={() => handleCloseRating()}>
+                                                RATE
+                                            </Button>
+                                        </Stack>
+                                    </Dialog>
                                 </Box>
 
                                 {/* <Box> */}
@@ -300,10 +393,7 @@ export default function SingleMoviePage({
                             <Grid key={index} container spacing={2}>
                                 <Grid item xs={6} md={3} sx={{ display: { xs: 'none', md: 'block' } }}>
                                     <Stack sx={{ position: 'relative' }}>
-                                        <img
-                                            onError={handleImageError}
-                                            src={item.image_url}
-                                            alt="movie-img"
+                                        <img onError={handleImageError} src={item.image_url} alt="movie-img"
                                             style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
                                         />
                                         <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '65px' }} />
@@ -323,7 +413,7 @@ export default function SingleMoviePage({
                                     <Stack sx={{ width: '100%', height: '100%' }} direction="column" justifyContent="center" alignItems="center">
                                         <Button fullWidth sx={{
                                             height: '50%',
-                                            bgcolor: 'gray', 
+                                            bgcolor: 'gray',
                                             mb: 1,
                                             ':hover': {
                                                 bgcolor: '#FFB6B9'
@@ -417,15 +507,10 @@ export default function SingleMoviePage({
                                         sx={{ display: { xs: 'flex', md: 'none' } }}>
                                         <Box key={index}
                                             sx={{
-                                                columnGap: 3,
-                                                rowGap: 3,
-                                                gridTemplateColumns: 'repeat(4, 1fr)',
-                                                textAlign: 'left',
-                                                mt: 3,
-
-
+                                                columnGap: 3, rowGap: 3, gridTemplateColumns: 'repeat(4, 1fr)',
+                                                textAlign: 'left', mt: 3,
                                             }} >
-                                            {item.gen.map((item: any, index) =>
+                                            {item.gen && item.gen.length > 0 && item.gen.map((item: any, index) =>
                                                 <Button variant="contained" key={index}
                                                     onClick={() => navigate(`/movie/byGen/${item.genre}`)}
                                                     sx={{
@@ -452,9 +537,9 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            {singleList.map((item, index) =>
+                            {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <Box key={index}>
-                                    {item.gen.map((item: any, index) =>
+                                    {item && item.gen && item.gen.length > 0 && item.gen.map((item: any, index) =>
                                         <Button variant="contained" key={index}
                                             onClick={() => navigate(`/movie/byGen/${item.genre}`)}
                                             sx={{
@@ -478,7 +563,7 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Box >
-                            {singleList.map((item, index) =>
+                            {singleList&& singleList.length>0&&singleList.map((item, index) =>
                                 <List key={index} sx={{
                                     width: '100%', borderRadius: 2, border: '1px solid', borderColor: 'divider',
                                 }}>
@@ -502,7 +587,7 @@ export default function SingleMoviePage({
                         </Box>
 
                         <Box sx={{ right: 0 }}>
-                            {singleList.map((item, index) =>
+                            {singleList&&singleList.length>0&&singleList.map((item, index) =>
                                 <Grid sx={{ display: { xs: 'none', md: 'block' } }} key={index}>
                                     <Stack direction="column" spacing={0} >
                                         <Button sx={{

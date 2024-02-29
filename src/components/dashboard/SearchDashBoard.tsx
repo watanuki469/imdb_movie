@@ -59,10 +59,10 @@ export default function SearchDashBoard() {
     <div style={{ width: '100%', backgroundColor: 'black' }}>
       <Grid sx={{ alignItems: 'center', height: '50px', display: 'flex', bgcolor: "black" }}>
         <FormControl variant="outlined" size="small" sx={{ bgcolor: 'white', width: '30%' }}>
-          <InputLabel sx={{ color: 'black' }}>All</InputLabel>
+          <InputLabel sx={{ color: 'blue' }}>All</InputLabel>
           <Select
             fullWidth
-            sx={{ color: "black", width: '100%' }}
+            sx={{ color: "blue", width: '100%' }}
             label="Sort"
             value={searchType}
             onChange={handleSearchTypeChange}
@@ -77,15 +77,10 @@ export default function SearchDashBoard() {
           </Select>
         </FormControl>
         <FormControl fullWidth variant="outlined" size="small" sx={{ borderColor: 'white', bgcolor: 'white' }}>
-          <InputLabel sx={{ color: 'blue' }}>Search by {searchType}</InputLabel>
+          <InputLabel sx={{ color: 'black' }}>Search by  <span style={{ color: 'blue' }}>{searchType}</span></InputLabel>
           <OutlinedInput
-            id="searchBy "
-            label="Search by "
-            sx={{ color: 'black' }}
-            autoFocus
-            onChange={onQueryChange}
-            value={query}
-            ref={anchorRef}
+            id="searchBy " label="Search by " sx={{ color: 'black' }} autoFocus onChange={onQueryChange} value={query}
+             ref={anchorRef}
             endAdornment={
               loading ? (
                 <Loop sx={{ position: 'absolute', right: '26px', animation: 'spin 1s linear infinite' }} />

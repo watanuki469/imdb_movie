@@ -76,7 +76,7 @@ export default function SingleMovieAward({
 
                                 </Stack>
                             </Stack>
-                            <InfoIcon
+                            {/* <InfoIcon
                                 onClick={scrollToTop}
                                 // onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)}
                                 sx={{
@@ -85,7 +85,7 @@ export default function SingleMovieAward({
                                     alignContent: 'flex-end',
                                     marginRight: '30px',
                                 }}
-                            />
+                            /> */}
                         </Stack>
                     </Grid>
                 ))}

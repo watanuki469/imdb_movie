@@ -26,17 +26,14 @@ export default function MovieItemPage({
     setOpen(true)
   }
   const bull = (<Box sx={{ display: 'inline-block', mx: '6px', transform: 'scale(0.8)', color: 'white' }} >     • </Box>);
-  const handleChangePage = () => {
 
-  };
   const handleImageError = (e: any) => {
     const imgElement = e.currentTarget as HTMLImageElement;
     imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
-};
+  };
 
   const renderPopularity = (uniqueTitles: any[] = []) => {
     return (
-
       <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
         {movieItemList?.map((item: movieItem) => {
           // Kiểm tra xem item.title đã xuất hiện chưa
@@ -49,8 +46,10 @@ export default function MovieItemPage({
                   <img
                     onError={handleImageError}
                     src={item.banner}
-                    style={{ height: "280px",maxWidth: '200px', objectFit: 'initial',
-                    backgroundColor: 'black', }}
+                    style={{
+                      height: "280px", maxWidth: '200px', objectFit: 'initial',
+                      backgroundColor: 'black',
+                    }}
                     onClick={() => onEdit?.(item)}
                   />
                   <Typography variant="h6" color="white">
@@ -70,9 +69,7 @@ export default function MovieItemPage({
 
   return (
     <div style={{ width: '80%', marginLeft: '10%' }}>
-
       {renderPopularity()}
-
       {/* Dialog */}
       <Dialog
         maxWidth="lg"

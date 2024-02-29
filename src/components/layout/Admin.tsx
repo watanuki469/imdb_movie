@@ -8,11 +8,10 @@ export function AdminLayout() {
     // const classes = useStyles();
 
     return (
-        <Box sx={{ bgcolor: "black" }}>
+        <Box sx={{ bgcolor: "black" ,width:'100%',overflow: 'hidden' }}>
             <Header />
             <SliderDashBoard />
             <Body />
-
             <Top10DashBoard />
             <Footer />
         </Box>

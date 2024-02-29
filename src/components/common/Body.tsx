@@ -5,7 +5,7 @@ import Dashboard from "../dashboard/GenrePageDashBoard";
 export function Body() {
 
     return (
-        <CardContent>
+        <CardContent sx={{  textAlign: 'center' }}>
             <Typography variant='h2' color="white" gutterBottom>
                 Discover top-rated movies based on your mood
             </Typography>
