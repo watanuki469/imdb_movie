@@ -1,6 +1,6 @@
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AppBar, Box, Button, Container, Dialog, Divider, Drawer, FormControl, Grid, IconButton, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Container, Dialog, Divider, Drawer, FormControl, Grid, IconButton, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
 import SearchDashBoard from 'components/dashboard/SearchDashBoard';
 import { Fragment, useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -18,11 +18,16 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TvIcon from '@mui/icons-material/Tv';
 import { Label, People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
-import { logout } from 'features/auth/authSlice';
+import { login, logout } from 'features/auth/authSlice';
 import { useAppDispatch } from 'app/hooks';
+import { useSelector } from 'react-redux';
+import { RootState } from 'app/store';
 
 
 export function Header() {
+    const dispatch = useAppDispatch();
+    dispatch(login({ username: '', password: '', }));
+
     let navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const handleRemoveClick = () => {
@@ -225,12 +230,36 @@ export function Header() {
         }
         setMenuOpen(false);
     };
-    const dispatch = useAppDispatch();
     const handleLogout = () => {
         dispatch(logout());
         navigate('/Login');
     };
+    const [email, setEmail] = useState(localStorage.getItem('email') || ''); // Lấy giá trị email từ local storage nếu có
+    const stringToColor = (str: any) => {
+        let hash = 0;
+        let i;
 
+        for (i = 0; i < str.length; i += 1) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        let color = "#";
+
+        for (i = 0; i < 3; i += 1) {
+            const value = (hash >> (i * 8)) & 0xff;
+            color += `00${value.toString(16)}`.slice(-2);
+        }
+
+        return color;
+    };
+    const [anchorUserEl, setAnchorUserEl] = useState<null | HTMLElement>(null);
+    const openUser = Boolean(anchorUserEl);
+    const handleUserClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorUserEl(event.currentTarget);
+    };
+    const handleUserClose = () => {
+        setAnchorUserEl(null);
+    };
 
     const drawer = (
         <div>
@@ -433,25 +462,13 @@ export function Header() {
                                             </>
                                         </Button>
                                     </Stack>
-
-                                    {/* // <Grid item xs={1} ml="auto" mr="auto" > */}
-                                    <Stack direction="row" sx={{ alignItems: 'center', ml: 'auto', }} >
-                                        <Search sx={{ display: { xs: 'flex', md: 'none' } }} onClick={handleSearchClick} />
-                                        <Button
-                                            onClick={handleLogout}
-                                            sx={{
-                                                bgcolor: 'black', color: 'white', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '16px', fontFamily: 'sans-serif', textTransform: 'none', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis',
-                                            }}>Logout
-                                        </Button>
-
-                                    </Stack>
-
-                                    {/* // <Grid item xs={1} ml="auto" sx={{ flexGrow: 1 }}
-                                    // > */}
                                     <Button
                                         sx={{ display: { xs: 'none', md: 'flex' } }}
                                     >
-                                        <FormControl sx={{ width: '100%', height: '100%', bgcolor: 'black', color: 'red', mt: '10px' }}>
+                                        <FormControl sx={{
+                                            width: '100%', height: '100%', bgcolor: 'black', color: 'red', mt: '10px',
+                                            textAlign: 'center', alignContent: 'center', alignItems: 'center',
+                                        }}>
                                             <Select
                                                 label="Agel" value={personName} onChange={handleChange} renderValue={(selected) => selected.join(', ')} MenuProps={MenuProps} variant="standard"
                                                 sx={{ color: 'white', textAlign: 'center' }}
@@ -463,6 +480,59 @@ export function Header() {
                                             </Select>
                                         </FormControl>
                                     </Button>
+                                    {/* // <Grid item xs={1} ml="auto" mr="auto" > */}
+                                    <Stack direction="row" sx={{ alignItems: 'center', ml: 'auto', }} >
+                                        <Search sx={{ display: { xs: 'flex', md: 'none' } }} onClick={handleSearchClick} />
+                                        {/* <Button
+                                            onClick={handleLogout}
+                                            sx={{
+                                                bgcolor: 'black', color: 'white', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '16px', fontFamily: 'sans-serif', textTransform: 'none', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis',
+                                            }}>
+                                            <Avatar
+                                                sx={{
+                                                    backgroundColor: stringToColor(email),
+                                                    width: 40,
+                                                    height: 40
+                                                }}
+                                                children={`${email.split(" ")[0][0]}`}
+                                            />
+                                        </Button> */}
+                                        <Button
+                                            id="basic-button"
+                                            aria-controls={open ? 'basic-menu' : undefined}
+                                            aria-haspopup="true"
+                                            aria-expanded={open ? 'true' : undefined}
+                                            onClick={handleUserClick}
+                                        >
+                                           <Avatar
+                                                sx={{
+                                                    backgroundColor: stringToColor(email),
+                                                    width: 40,
+                                                    height: 40
+                                                }}
+                                                children={`${email.split(" ")[0][0]}`}
+                                            />
+                                        </Button>
+                                        <Menu
+                                            id="basic-menu"
+                                            anchorEl={anchorUserEl}
+                                            open={openUser}
+                                            onClose={handleUserClose}
+                                            MenuListProps={{
+                                                'aria-labelledby': 'basic-button',
+                                            }}
+                                        >
+                                            <MenuItem onClick={handleUserClose}>Profile</MenuItem>
+                                            <MenuItem onClick={handleUserClose}>My account</MenuItem>
+                                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                        </Menu>
+
+
+                                    </Stack>
+
+                                    {/* // <Grid item xs={1} ml="auto" sx={{ flexGrow: 1 }}
+                                    // > */}
+
                                     <Button onClick={() => navigate('/')}
                                         sx={{
                                             ml: 'auto',

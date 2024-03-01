@@ -74,8 +74,8 @@ export function SinglePage() {
               <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
                 <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
                   <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                  <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
-                    Movie Award:{movieAward.length}
+                  <Typography  id='award' sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                    Movie Award({movieAward.length-1}):
                   </Typography>
                   {Object.entries(typeCount)
                     .filter(([type, count]) => type !== 'undefined')
@@ -104,7 +104,7 @@ export function SinglePage() {
             }
 
 
-            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
+            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'} id={'tech'}>
               <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
                 <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
                 <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>

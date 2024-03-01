@@ -35,14 +35,14 @@ export default function Top10Page({
     const maxSteps = uniquePopurarityItemList.length
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 6);
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
     const handleLast = () => {
         setActiveStep(maxSteps - 1);
     };
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 6);
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     const handleBackFirst = () => {
         setActiveStep(0);
@@ -86,13 +86,13 @@ export default function Top10Page({
                                 color: 'white',
                                 // display: activeStep === 0 ? 'none' : 'inline-block'
                                 display: 'inline-block'
-                            }} size="small" onClick={handleBack} disabled={activeStep === 0}>
+                            }} size="small" onClick={handleBack} disabled={activeStep <= 0}>
                                 {theme.direction === 'rtl' ? (
                                     <KeyboardArrowRight />
                                 ) : (
                                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
                                         <Box sx={{
-                                            width: 30, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
                                             position: 'absolute'
 
@@ -142,7 +142,7 @@ export default function Top10Page({
                                 ) : (
                                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                         <Box sx={{
-                                            width: 30, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            width: 50, height: 50, backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid white',
 
                                         }}>

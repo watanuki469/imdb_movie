@@ -35,7 +35,7 @@ export default function SliderItemPageDashBoard({
   // }, [popurarityList])
 
   useEffect(() => {
-    if (popurarityList && popurarityList.length > 0 &&popurarityItemList.length<50) {
+    if (popurarityList && popurarityList.length > 0 && popurarityItemList.length < 50) {
       // Fetch data for each IMDb ID that hasn't been loaded yet
       popurarityList.forEach(item => {
         if (!loadedIds.has(item.imdb_id)) {
@@ -51,11 +51,8 @@ export default function SliderItemPageDashBoard({
     <AppBar position="static" sx={{ bgcolor: 'black' }}>
       <Container maxWidth="xl">
         <div style={{
-          backgroundColor: "black", width: '80%',
-          alignContent: 'center',
-          textAlign: 'center',
-          justifyContent: 'center',
-          margin: 'auto',
+          backgroundColor: "black", width: '100%', alignContent: 'center',
+          textAlign: 'center', justifyContent: 'center', margin: 'auto',
         }}>
           <SliderPage popurarityItemList={popurarityItemList} />
         </div >

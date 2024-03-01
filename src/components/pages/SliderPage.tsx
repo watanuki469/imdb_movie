@@ -79,6 +79,8 @@ export default function SliderPage({
                 setImageHeight(300); // Đặt lại chiều cao mặc định khi màn hình lớn hơn 600px
             }
         };
+        // Chạy handleResize khi trang được tải lần đầu tiên
+        handleResize();
 
         window.addEventListener('resize', handleResize);
         // Clean up
@@ -90,7 +92,7 @@ export default function SliderPage({
 
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container rowSpacing={1} >
-                    <Grid item xs={12} sm={12} md={9}>
+                    <Grid item xs={12} sm={12} md={8}>
                         <Box onClick={() => navigate(`/movie/id/${uniquePopurarityItemList[activeStep]?.imdb_id}`)}
                             id="1234567" sx={{
                                 // position: "relative",
@@ -260,7 +262,7 @@ export default function SliderPage({
                         />
                     </Grid>
 
-                    <Grid item xs={3} sx={{ display: { xs: 'none', md: 'flex' }, bgcolor: 'black' }}>
+                    <Grid item md={4} sx={{ display: { xs: 'none', md: 'flex' }, bgcolor: 'black' }}>
                         <Grid item xs={12} >
                             <Stack spacing={4} direction="row" alignItems="center" sx={{ color: 'yellow', bgcolor: 'black' }}>
                                 <Typography variant='h5'>  Up next</Typography>

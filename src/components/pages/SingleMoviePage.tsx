@@ -55,10 +55,7 @@ export default function SingleMoviePage({
                         </Box>
                         <Box sx={{ textAlign: 'left' }}>
                             <Typography sx={{
-                                color: "white", fontSize: "1.5rem",
-                                fontWeight: "bold",
-                                fontFamily: "Arial, sans-serif",
-                                textTransform: 'capitalize'
+                                color: "white", fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                             }}> {num}</Typography>
                         </Box>
                     </Button>
@@ -80,6 +77,18 @@ export default function SingleMoviePage({
     };
     const handleCastClick = () => {
         const casterElement = document.getElementById('caster');
+        if (casterElement) {
+            casterElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    const handleAwardClick = () => {
+        const casterElement = document.getElementById('award');
+        if (casterElement) {
+            casterElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    const handleTechClick = () => {
+        const casterElement = document.getElementById('tech');
         if (casterElement) {
             casterElement.scrollIntoView({ behavior: 'smooth' });
         }
@@ -146,51 +155,38 @@ export default function SingleMoviePage({
                             </IconButton>
 
                             <IconButton size="large"
-                                onClick={() => navigate('/')}
-                                color="inherit">
+                                onClick={handleAwardClick} color="inherit">
                                 <Typography sx={{
                                     color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': { textDecoration: 'underline', },
-                                }}> User reviews {bull}</Typography>
+                                }}> Movie Award {bull}</Typography>
                             </IconButton>
 
-                            <IconButton size="large" onClick={() => navigate('/')} color="inherit">
+                            <IconButton size="large" onClick={(handleTechClick)} color="inherit">
                                 <Typography sx={{
-                                    color: 'white',
-                                    fontSize: "1rem",
-                                    fontWeight: "bold",
-                                    fontFamily: "Arial, sans-serif",
-                                    textTransform: 'capitalize',
+                                    color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
                                         textDecoration: 'underline',
-
                                     },
-                                }}> Trivia {bull}</Typography>
+                                }}> Technical Spec {bull}</Typography>
                             </IconButton>
 
-                            <IconButton onClick={() => navigate('/')}
+                            {/* <IconButton onClick={() => navigate('/')}
                                 size="large" color="inherit">
                                 <Typography sx={{
-                                    color: 'white',
-                                    fontSize: "1rem",
-                                    fontWeight: "bold",
-                                    fontFamily: "Arial, sans-serif",
-                                    textTransform: 'capitalize',
+                                    color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
                                         textDecoration: 'underline',
 
                                     },
                                 }}>FAQ </Typography>
-                            </IconButton>
+                            </IconButton> */}
                             <IconButton size="large" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                             </IconButton>
                             <IconButton size="large" color="inherit">
                                 <Typography sx={{
-                                    color: 'white', fontSize: "1rem",
-                                    fontWeight: "bold",
-                                    fontFamily: "Arial, sans-serif",
-                                    textTransform: 'capitalize',
+                                    color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
                                         textDecoration: 'underline',
 
@@ -204,12 +200,7 @@ export default function SingleMoviePage({
                                 < CategoryIcon sx={{ color: 'white' }} />
                                 <>
                                     <Typography onClick={() => handleChangePage()} sx={{
-                                        alignItems: 'center', color: 'white',
-                                        border: 'none',
-                                        fontWeight: 'bold',
-                                        fontSize: "1rem",
-                                        fontFamily: "Arial, sans-serif",
-                                        textTransform: 'capitalize',
+                                        alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                         ':hover': {
                                             textDecoration: 'underline',
                                         },
@@ -244,12 +235,7 @@ export default function SingleMoviePage({
                                 < CategoryIcon sx={{ color: 'white' }} />
                                 <>
                                     <Typography onClick={() => handleChangePage()} sx={{
-                                        alignItems: 'center', color: 'white',
-                                        border: 'none',
-                                        fontWeight: 'bold',
-                                        fontSize: "1rem",
-                                        fontFamily: "Arial, sans-serif",
-                                        textTransform: 'capitalize',
+                                        alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                         ':hover': {
                                             textDecoration: 'underline',
                                         },
@@ -281,7 +267,7 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar sx={{ mt: '30px' }}>
                         <Box>
-                            {singleList&& singleList.length>0&&singleList.map((item, index) =>
+                            {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <Stack key={index} sx={{ textAlign: 'left' }}>
                                     <Stack alignItems="left">
                                         <Typography variant="h4" color="white">
@@ -301,14 +287,11 @@ export default function SingleMoviePage({
                         </Box>
 
                         <Box sx={{ flexGrow: 1 }} />
-                        {singleList&&singleList.length>0&&singleList.map((item, index) =>
+                        {singleList && singleList.length > 0 && singleList.map((item, index) =>
                             <Stack key={index} direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex', textAlign: 'center' } }}>
                                 <Box>
                                     <Typography sx={{
-                                        color: '#B0A695', fontSize: "1rem",
-                                        fontWeight: "bold",
-                                        fontFamily: "Arial, sans-serif",
-                                        textTransform: 'capitalize'
+                                        color: '#B0A695', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                     }}>  IMDb RATING </Typography>
                                     <Button sx={{ display: 'flex' }}>
                                         < StarIcon sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
@@ -321,10 +304,7 @@ export default function SingleMoviePage({
 
                                 <Box>
                                     <Typography sx={{
-                                        color: '#B0A695', fontSize: "1rem",
-                                        fontWeight: "bold",
-                                        fontFamily: "Arial, sans-serif",
-                                        textTransform: 'capitalize'
+                                        color: '#B0A695', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                     }}> YOUR RATING </Typography>
                                     <Button sx={{ display: 'flex' }}>
                                         <Box>
@@ -334,7 +314,7 @@ export default function SingleMoviePage({
                                         <Box onClick={() => handleRatingClick(item)} sx={{ textAlign: 'left' }}>
                                             <Typography sx={{
                                                 color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
-                                            }}>  Rate </Typography>
+                                            }}>  Rate</Typography>
 
                                         </Box>
 
@@ -343,10 +323,8 @@ export default function SingleMoviePage({
                                     <Dialog open={openDialog}
                                     >
                                         <Button onClick={() => handleCloseRating()} sx={{
-                                            justifyContent: 'center', right: 0,
-                                            position: 'absolute', bgcolor: 'white', color: 'black',
-                                            textAlign: 'center', border: 'none', fontWeight: 'bold',
-                                            fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto',
+                                            justifyContent: 'center', right: 0, position: 'absolute', bgcolor: 'white', color: 'black',
+                                            textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto',
                                             height: '50px', textTransform: 'none', borderRadius: '100%',
                                             overflow: 'hidden', // Tránh chữ tràn ra ngoài
                                             whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
@@ -423,31 +401,21 @@ export default function SingleMoviePage({
                                             <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
                                                 <VideoLibraryIcon sx={{ color: 'white', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
                                                 <Typography sx={{
-                                                    color: "yellow", fontSize: "1.5rem",
-                                                    fontWeight: "bold",
-                                                    fontFamily: "Arial, sans-serif",
-                                                    textTransform: 'capitalize',
+                                                    color: "yellow", fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                                 }}>
                                                     {item.popularity} VIDEOS
                                                 </Typography>
                                             </Stack>
                                         </Button>
                                         <Button fullWidth sx={{
-                                            height: '50%',
-                                            bgcolor: 'gray',
-                                            mb: 1, ':hover': {
+                                            height: '50%', bgcolor: 'gray', mb: 1, ':hover': {
                                                 bgcolor: '#FFB6B9'
                                             },
                                         }}>
                                             <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
                                                 <FilterIcon sx={{ color: 'white', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
                                                 <Typography sx={{
-                                                    color: "yellow", fontSize: "1.5rem",
-                                                    fontWeight: "bold",
-                                                    fontFamily: "Arial, sans-serif",
-                                                    textTransform: 'capitalize',
-                                                    display: { xs: 6, md: 3 }
-
+                                                    color: "yellow", fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', display: { xs: 6, md: 3 }
                                                 }}>
                                                     {item.movie_length} PHOTOS
                                                 </Typography>
@@ -519,16 +487,11 @@ export default function SingleMoviePage({
                                                             bgcolor: 'A9A9A9', color: 'black',
                                                         },
                                                         border: "2px solid transparent", padding: '10px', backgroundColor: 'black',
-                                                        color: 'white', borderRadius: '1rem', borderColor: 'pink',
-                                                        margin: '7px',
-                                                        // textOverflow: 'ellipsis',
-
+                                                        color: 'white', borderRadius: '1rem', borderColor: 'pink', margin: '7px',
                                                     }}>
                                                     {item.genre}
                                                 </Button>
-
                                             )}
-
                                         </Box>
                                     </Grid>
                                 </Grid>
@@ -563,7 +526,7 @@ export default function SingleMoviePage({
                     </Toolbar>
                     <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Box >
-                            {singleList&& singleList.length>0&&singleList.map((item, index) =>
+                            {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <List key={index} sx={{
                                     width: '100%', borderRadius: 2, border: '1px solid', borderColor: 'divider',
                                 }}>
@@ -587,7 +550,7 @@ export default function SingleMoviePage({
                         </Box>
 
                         <Box sx={{ right: 0 }}>
-                            {singleList&&singleList.length>0&&singleList.map((item, index) =>
+                            {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <Grid sx={{ display: { xs: 'none', md: 'block' } }} key={index}>
                                     <Stack direction="column" spacing={0} >
                                         <Button sx={{
