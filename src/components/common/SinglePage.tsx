@@ -138,7 +138,7 @@ export function SinglePage() {
             <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'} id={'tech'}>
               <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
                 <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
-                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                <Typography id={'product'} sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
                  Production Location List
                 </Typography>
                 <IconButton onClick={handleProductClick}>

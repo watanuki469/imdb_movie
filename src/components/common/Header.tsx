@@ -1,32 +1,24 @@
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AppBar, Avatar, Box, Button, Container, Dialog, Divider, Drawer, FormControl, Grid, IconButton, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
-import SearchDashBoard from 'components/dashboard/SearchDashBoard';
-import { Fragment, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { Clear, Loop, Search } from "@mui/icons-material";
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import StarsIcon from '@mui/icons-material/Stars';
-import PublicIcon from '@mui/icons-material/Public';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import LaunchIcon from '@mui/icons-material/Launch';
+import { Clear, People, Public, Search, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import LaunchIcon from '@mui/icons-material/Launch';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PublicIcon from '@mui/icons-material/Public';
 import ReorderIcon from '@mui/icons-material/Reorder';
+import StarsIcon from '@mui/icons-material/Stars';
 import TvIcon from '@mui/icons-material/Tv';
-import { Label, People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
-import { login, logout } from 'features/auth/authSlice';
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import { AppBar, Avatar, Box, Button, Container, Dialog, Divider, Drawer, FormControl, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
 import { useAppDispatch } from 'app/hooks';
-import { useSelector } from 'react-redux';
-import { RootState } from 'app/store';
-
+import SearchDashBoard from 'components/dashboard/SearchDashBoard';
+import { login, logout } from 'features/auth/authSlice';
+import { Fragment, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export function Header() {
     const dispatch = useAppDispatch();
-    dispatch(login({ username: '', password: '', }));
+    // dispatch(login({ username: '', password: '', }));
 
     let navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -276,9 +268,9 @@ export function Header() {
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                                 {menuOpen && selectedMenu === text ? <ArrowDropUpIcon
-                                    sx={{ padding: '10px', cursor: 'pointer' }}
+                                    sx={{ padding: '10px', cursor: 'pointer' ,color:'black'}}
                                     onClick={() => toggleMenu(text)} /> : <ArrowDropDownIcon
-                                    sx={{ padding: '10px', cursor: 'pointer' }} onClick={() => toggleMenu(text)}
+                                    sx={{ padding: '10px', cursor: 'pointer',color:'black' }} onClick={() => toggleMenu(text)}
                                 />}
                             </ListItemButton>
 

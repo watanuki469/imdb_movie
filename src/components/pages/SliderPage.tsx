@@ -109,9 +109,9 @@ export default function SliderPage({
                                 backgroundPosition: "top",
                                 backgroundSize: "cover",
                                 width: '100%',
-                               
+
                                 // src={uniquePopurarityItemList[activeStep] && uniquePopurarityItemList[activeStep].banner && uniquePopurarityItemList[activeStep]?.banner}
-                                
+
                                 // backgroundImage: uniquePopurarityItemList[activeStep]?.banner ? `url(${uniquePopurarityItemList[activeStep]?.banner})` : 'url(https://www.dtcvietnam.com.vn/web/images/noimg.jpg)', // Thay 'default-background.jpg' bằng đường dẫn của ảnh mặc định
                             }}    >
 
@@ -124,8 +124,7 @@ export default function SliderPage({
                                         style={{
                                             alignSelf: 'flex-end',
                                             display: 'block', // Hiển thị ảnh dưới dạng block để đảm bảo nó nằm ở vị trí dưới cùng
-                                            // margin: 'auto', // Canh giữa theo chiều ngang
-                                            marginBottom: '0', // Loại bỏ khoảng trắng dưới ảnh
+                                            marginBottom: '0',
                                             height: `${imageHeight}px`, // Sử dụng dynamic height
 
                                         }}
@@ -146,15 +145,11 @@ export default function SliderPage({
                                             whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                                         }}>
                                             {uniquePopurarityItemList[activeStep]?.movie_length} min
-
-
                                         </Typography>
-
                                     </Stack>
 
                                     <Box sx={{
-                                        display: 'flex',
-                                        bgcolor: 'rgba(0, 0, 0, 0.6)',
+                                        display: 'flex', bgcolor: 'rgba(0, 0, 0, 0.6)',
                                         alignSelf: 'flex-end', width: '100%', height: `${halfImageHeight}px`
                                     }}>
                                         <Stack direction={'column'}>
@@ -164,11 +159,7 @@ export default function SliderPage({
                                                 {uniquePopurarityItemList[activeStep]?.title}
                                             </Typography>
                                             <Typography sx={{
-                                                color: 'rgba(255, 255, 255, 0.7)',
-                                                textAlign: "left",
-                                                display: { xs: 'flex', md: 'none' },
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
+                                                color: 'rgba(255, 255, 255, 0.7)', textAlign: "left", display: { xs: 'flex', md: 'none' }, overflow: "hidden", WebkitBoxOrient: "vertical",
                                                 marginTop: 'auto', // Đặt margin-top thành auto để nội dung luôn ở dưới cùng
 
 
@@ -186,47 +177,28 @@ export default function SliderPage({
 
                                             <div style={{ alignSelf: 'center' }}>
                                                 <Typography variant='h4' sx={{
-                                                    textAlign: "left",
-                                                    display: { xs: 'none', md: 'flex' },
-                                                    overflow: "hidden",
-                                                    textDecoration: 'bold',
-                                                    color: 'white',
-
+                                                    textAlign: "left", display: { xs: 'none', md: 'flex' }, overflow: "hidden", textDecoration: 'bold', color: 'white',
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep]?.title}
                                                 </Typography>
                                                 <Typography sx={{
-                                                    color: 'rgba(255, 255, 255, 0.7)',
-                                                    textAlign: "justify",
-                                                    display: { xs: 'none', md: 'flex' },
-                                                    overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
-                                                    marginTop: 'auto', // Đặt margin-top thành auto để nội dung luôn ở dưới cùng
+                                                    color: 'rgba(255, 255, 255, 0.7)', textAlign: "justify", display: { xs: 'none', md: 'flex' }, overflow: "hidden", WebkitBoxOrient: "vertical"
+                                                    , marginTop: 'auto', // Đặt margin-top thành auto để nội dung luôn ở dưới cùng
 
                                                 }}>Watch The Trailer
                                                 </Typography>
 
                                             </div>
                                             <Typography variant='h4' sx={{
-
                                                 textDecoration: 'none', color: 'rgba(255, 255, 255, 0.7)', alignSelf: 'center', marginRight: '10px', width: '150px'
                                                 , display: { xs: 'none', md: 'flex' }, justifyContent: 'end'
                                             }}>
                                                 {uniquePopurarityItemList[activeStep]?.movie_length} min
-
-
                                             </Typography>
                                         </Stack>
                                     </Box>
-
                                 </Stack>
-
                             </Stack>
-
-
-
-
-
                         </Box>
 
 
@@ -269,7 +241,6 @@ export default function SliderPage({
                         <Grid item xs={12} >
                             <Stack spacing={4} direction="row" alignItems="center" sx={{ color: 'yellow', bgcolor: 'black' }}>
                                 <Typography variant='h5'>  Up next</Typography>
-
                             </Stack>
                             <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3, objectFit: 'contain', display: 'block', width: '100%', bgcolor: 'black' }}>
                                 <Stack spacing={1}>
@@ -368,9 +339,7 @@ export default function SliderPage({
                                                 <PlayCircleOutlineIcon sx={{
                                                     height: '40px', bgcolor: 'black', color: 'white', width: '40px', margin: '6px', alignSelf: 'center'
                                                     , ':hover': {
-                                                        bgcolor: 'black',
-                                                        color: 'yellow',
-                                                        borderColor: 'red'
+                                                        bgcolor: 'black', color: 'yellow', borderColor: 'red'
                                                     },
                                                 }} />
                                                 <h4 style={{ textDecoration: 'none', color: 'gray', alignSelf: 'center' }}>
@@ -379,22 +348,13 @@ export default function SliderPage({
                                             </Box>
                                             <Box>
                                                 <h5 style={{
-                                                    textAlign: "left",
-                                                    overflow: "hidden",
-                                                    textDecoration: 'bold',
-                                                    color: 'white',
-                                                    marginTop: '0%',
-
+                                                    textAlign: "left", overflow: "hidden", textDecoration: 'bold', color: 'white', marginTop: '0%',
 
                                                 }}>
                                                     {uniquePopurarityItemList[activeStep + 3]?.title}
                                                 </h5>
                                                 <Typography sx={{
-                                                    color: 'gray',
-                                                    textAlign: "left",
-                                                    overflow: "hidden",
-                                                    WebkitBoxOrient: "vertical",
-                                                    mt: '-1rem'
+                                                    color: 'gray', textAlign: "left", overflow: "hidden", WebkitBoxOrient: "vertical", mt: '-1rem'
                                                 }}>
                                                     All Hail Britannia!!</Typography>
                                             </Box>

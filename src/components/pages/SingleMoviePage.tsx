@@ -97,6 +97,12 @@ export default function SingleMoviePage({
             casterElement.scrollIntoView({ behavior: 'smooth' });
         }
     };
+    const handleProductClick = () => {
+        const casterElement = document.getElementById('product');
+        if (casterElement) {
+            casterElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     const [selectedStudent, setSelectedStudent] = useState<singleMovie>();
     const [openDialog, setOpenDialog] = useState(false);
     const [starIndex, setStarIndex] = useState(0);
@@ -170,14 +176,15 @@ export default function SingleMoviePage({
         }
     }
 
-
     return (
         <div>
             <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', textAlign: 'center', bgcolor: 'black' }}>
                 <AppBar position="static" sx={{ bgcolor: 'black' }}>
-                    <Toolbar>
+                    <Toolbar sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <Box sx={{ flexGrow: 1 }} />
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <Stack direction={'row'}
+                        // sx={{ display: { xs: 'none', md: 'flex' } }}
+                        >
                             <IconButton size="large" color="inherit"
                                 onClick={handleCastClick}
                             >
@@ -203,7 +210,7 @@ export default function SingleMoviePage({
                                     ':hover': {
                                         textDecoration: 'underline',
                                     },
-                                }}> Technical Spec {bull}</Typography>
+                                }}> Technical Spec {bull} </Typography>
                             </IconButton>
 
                             {/* <IconButton onClick={() => navigate('/')}
@@ -216,11 +223,9 @@ export default function SingleMoviePage({
                                     },
                                 }}>FAQ </Typography>
                             </IconButton> */}
-                            <IconButton size="large" color="inherit">
-                                <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                            </IconButton>
+
                             <IconButton size="large" color="inherit"
-                                onClick={() => navigate('/IMDbPro')}
+                                onClick={(handleProductClick)}
                             >
                                 <Typography sx={{
                                     color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
@@ -228,15 +233,52 @@ export default function SingleMoviePage({
                                         textDecoration: 'underline',
 
                                     },
-                                }}> IMDbPro </Typography>
+                                }}> Product </Typography>
                             </IconButton>
-                            <IconButton size="large" color="inherit">
+                            {/* <IconButton size="large" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                            </IconButton>
-                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                            </IconButton> */}
+                            {/* <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
                                 < CategoryIcon sx={{ color: 'white' }} />
                                 <>
                                     <Typography onClick={() => handleChangePage()} sx={{
+                                        alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
+                                        ':hover': {
+                                            textDecoration: 'underline',
+                                        },
+                                    }}>
+                                        All Topic
+                                    </Typography>
+                                </>
+                            </Button> */}
+                            {/* <IconButton size="large" color="inherit">
+                                <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
+                            </IconButton> */}
+                            <a href={`https://www.facebook.com/share.php?u=${encodeURIComponent(window.location.href)}/`}>
+                                <IconButton
+                                    size="large"
+                                    color="inherit"
+                                    sx={{
+                                        ':hover': {
+                                            textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                        },
+                                    }} >
+                                    <Badge color="error">
+                                        <ShareIcon sx={{
+                                            ':hover': {
+                                                textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                            },
+                                        }} />
+                                    </Badge>
+                                </IconButton>
+                            </a>
+
+                        </Stack>
+                        {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                < CategoryIcon sx={{ color: 'white' }} />
+                                <>
+                                    <Typography sx={{
                                         alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                         ':hover': {
                                             textDecoration: 'underline',
@@ -265,42 +307,7 @@ export default function SingleMoviePage({
                                     }} />
                                 </Badge>
                             </IconButton>
-
-                        </Box>
-                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                < CategoryIcon sx={{ color: 'white' }} />
-                                <>
-                                    <Typography onClick={() => handleChangePage()} sx={{
-                                        alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
-                                        ':hover': {
-                                            textDecoration: 'underline',
-                                        },
-                                    }}>
-                                        All Topiccc
-                                    </Typography>
-                                </>
-                            </Button>
-                            <IconButton size="large" color="inherit">
-                                <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                color="inherit"
-                                sx={{
-                                    ':hover': {
-                                        textDecoration: 'underline', bgcolor: '#FFA1F5',
-                                    },
-                                }} >
-                                <Badge color="error">
-                                    <ShareIcon sx={{
-                                        ':hover': {
-                                            textDecoration: 'underline', bgcolor: '#FFA1F5',
-                                        },
-                                    }} />
-                                </Badge>
-                            </IconButton>
-                        </Box>
+                        </Box> */}
                     </Toolbar>
                     <Toolbar sx={{ mt: '30px' }}>
                         <Box>

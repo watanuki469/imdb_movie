@@ -115,7 +115,7 @@ export function LoginPage() {
                         required
                         fullWidth
                         name="gmail"
-                        label="gmail"
+                        label="gmail@gmail.com"
                         type="gmail"
                         id="gmail"
                         inputRef={searchRef}
@@ -177,7 +177,7 @@ export function LoginPage() {
                         {isProcessing ? (
                             <CircularProgress size={20} color="secondary" />
                         ) : (
-                            'Fake Login'
+                            'Login'
                         )}
                     </Button>
                     <Grid container>
