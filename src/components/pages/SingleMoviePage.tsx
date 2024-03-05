@@ -14,8 +14,11 @@ import Cast from 'components/common/Cast';
 import { selectSingleMovieListLoading } from 'features/singleMovie/singleMovieSlice';
 import { movieItem, singleMovie } from 'models';
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-material/StarRate';
+import { toast } from 'react-toastify';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 
 
@@ -33,6 +36,7 @@ export default function SingleMoviePage({
     const handleChangePage = () => {
 
     };
+
     const loading = useAppSelector(selectSingleMovieListLoading)
 
     const renderPopularity = (popularity: number) => {
@@ -132,8 +136,39 @@ export default function SingleMoviePage({
             onMouseEnter={() => handleStarHover(index)}
             onMouseLeave={() => handleStarHover(-1)}
 
+
         />
     ));
+    const [isFavorite, setIsFavorite] = useState(false)
+
+
+    const handleWatchList = (movie: singleMovie) => {
+        const storedDataString = localStorage.getItem('watchList');
+        let storedData: { [key: string]: singleMovie } = {};
+        if (storedDataString !== null) {
+            storedData = JSON.parse(storedDataString);
+        }
+        if (storedData[movie.imdb_id]) {
+            setIsFavorite(false)
+            delete storedData[movie.imdb_id];
+            localStorage.setItem('watchList', JSON.stringify(storedData));
+            toast.success(`Removed ${movie.title} from watch list successfully`);
+
+        } else {
+            setIsFavorite(true)
+            storedData[movie.imdb_id] = movie;
+            localStorage.setItem('watchList', JSON.stringify(storedData));
+            toast.success(`Added ${movie.title} to watch list successfully`);
+
+        }
+    };
+    const handleCheck = (movie: any) => {
+        if (isFavorite) {
+            return <FavoriteIcon sx={{ color: "blue" }} />
+        } else {
+            return <FavoriteBorderOutlinedIcon sx={{ color: 'red' }} />
+        }
+    }
 
 
     return (
@@ -184,7 +219,9 @@ export default function SingleMoviePage({
                             <IconButton size="large" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                             </IconButton>
-                            <IconButton size="large" color="inherit">
+                            <IconButton size="large" color="inherit"
+                                onClick={() => navigate('/IMDbPro')}
+                            >
                                 <Typography sx={{
                                     color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
@@ -306,12 +343,12 @@ export default function SingleMoviePage({
                                     <Typography sx={{
                                         color: '#B0A695', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                     }}> YOUR RATING </Typography>
-                                    <Button sx={{ display: 'flex' }}>
+                                    <Button onClick={() => handleRatingClick(item)} sx={{ display: 'flex' }}>
                                         <Box>
                                             < StarBorderIcon sx={{ color: 'blue', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
 
                                         </Box>
-                                        <Box onClick={() => handleRatingClick(item)} sx={{ textAlign: 'left' }}>
+                                        <Box sx={{ textAlign: 'left' }}>
                                             <Typography sx={{
                                                 color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                             }}>  Rate</Typography>
@@ -349,8 +386,20 @@ export default function SingleMoviePage({
                                                 <Typography variant='h4' sx={{ maxWidth: '20ch', overflowWrap: 'break-word' }}>
                                                     {selectedStudent?.title}
                                                 </Typography>
-                                                <Stack direction="row" spacing={2}>
-                                                    {starsArray}
+                                                <Stack direction={'row'} spacing={1}
+                                                    sx={{
+                                                        flexWrap: 'wrap',
+                                                        justifyContent: 'center'
+                                                    }}>
+                                                    {starsArray.map((star, index) => (
+                                                        <Stack key={index} sx={{
+                                                            flexBasis: `${100 / 6}%`,
+                                                            display: 'flex',
+                                                            justifyContent: 'center',
+                                                        }}>
+                                                            {star}
+                                                        </Stack>
+                                                    ))}
                                                 </Stack>
                                             </DialogContent>
                                             <Button fullWidth sx={{ color: 'white', backgroundColor: starIndex > 0 ? 'red' : 'gray' }} onClick={() => handleCloseRating()}>
@@ -425,6 +474,49 @@ export default function SingleMoviePage({
 
 
                                 </Grid>
+                                <Grid item xs={12} sm={12} md={12}>
+                                    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                                        <Stack direction="column"  >
+                                            <Button fullWidth sx={{
+                                                marginLeft: 'auto', display: 'flex', bgcolor: 'yellow', ':hover': { bgcolor: 'green', color: 'white', borderColor: 'red' },
+                                            }} onClick={() => handleWatchList(item)}>
+                                                {handleCheck(item.imdb_id)}
+                                                <Box sx={{ textAlign: 'center' }} >
+                                                    <Typography sx={{ color: 'black', fontSize: '0.7rem', textAlign: 'right' }}>Added by 1{item.popularity}k user </Typography>
+                                                </Box>
+                                            </Button>
+                                        </Stack>
+                                    </Box>
+                                </Grid>
+                                <Stack direction={'row'} sx={{ display: { xs: 'block', md: 'none' } }}>
+                                    <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+                                        <Grid item xs={4} sm={4} md={4}>
+                                            <Typography sx={{ color: 'blue', textAlign: 'right' }}>
+                                                <span style={{
+                                                    color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
+                                                }}>2k
+                                                </span>
+                                                User reviews
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4} sm={4} md={4}>
+                                            <Typography sx={{ color: 'blue' }}>
+                                                <span style={{
+                                                    color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
+                                                }}>150 </span>
+                                                Critic reviews
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4} sm={4} md={4}>
+                                            <Typography>
+                                                <span style={{
+                                                    color: "white", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', backgroundColor: 'green'
+                                                }}>{randomScore}  </span>
+                                                Metascore
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Stack>
                                 <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
                                     <Grid item xs={6} sm={6} md={6}
                                         sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -524,7 +616,7 @@ export default function SingleMoviePage({
                         </Box>
 
                     </Toolbar>
-                    <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <Box >
                             {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <List key={index} sx={{
@@ -543,28 +635,27 @@ export default function SingleMoviePage({
                                     <div id='caster'>
                                         <Cast />
                                     </div>
-
                                 </List>
 
                             )}
                         </Box>
 
-                        <Box sx={{ right: 0 }}>
+                        <Box sx={{ right: 0, display: { xs: 'none', md: 'block' } }}>
                             {singleList && singleList.length > 0 && singleList.map((item, index) =>
-                                <Grid sx={{ display: { xs: 'none', md: 'block' } }} key={index}>
-                                    <Stack direction="column" spacing={0} >
+                                <Grid
+                                    //  sx={{ display: { xs: 'none', md: 'block' } }} 
+                                    key={index}>
+                                    <Stack direction="column" spacing={0} alignItems={'flex-start'} >
                                         <Button sx={{
                                             marginLeft: 'auto', display: 'flex', bgcolor: 'yellow', ':hover': { bgcolor: 'green', color: 'white', borderColor: 'red' },
-                                        }}>
-                                            < AddIcon sx={{ color: 'black', alignContent: 'center', mt: '3px', fontSize: '30px' }} />
-                                            <Box sx={{ textAlign: 'center' }}>
-                                                <Typography sx={{
-                                                    color: "black", fontSize: "0.8rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'right'
-                                                }}>  Add to watch list </Typography>
-                                                <Typography sx={{ color: 'black', fontSize: '0.7rem', textAlign: 'right' }}>Added by 1{item.popularity}k user </Typography>
+                                        }} onClick={() => handleWatchList(item)}>
 
+                                            {handleCheck(item.imdb_id)}
+                                            <Box sx={{ textAlign: 'center' }} >
+                                                <Typography sx={{ color: 'black', fontSize: '0.7rem', textAlign: 'right' }}>Added by 1{item.popularity}k user </Typography>
                                             </Box>
                                         </Button>
+
                                         <Box sx={{ ml: 'auto' }}>
                                             <Stack direction={'row'}>
                                                 <Typography sx={{ color: 'blue', textAlign: 'right' }}>
@@ -598,7 +689,7 @@ export default function SingleMoviePage({
                         </Box>
                     </Toolbar>
                 </AppBar>
-            </Box>
+            </Box >
         </div >
     );
 }

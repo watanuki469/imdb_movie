@@ -292,10 +292,7 @@ export default function SingleStarPage({
                             </IconButton>
                             <IconButton size="large" color="inherit">
                                 <Typography sx={{
-                                    color: 'white', fontSize: "1rem",
-                                    fontWeight: "bold",
-                                    fontFamily: "Arial, sans-serif",
-                                    textTransform: 'capitalize',
+                                    color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
                                         textDecoration: 'underline',
 
@@ -345,8 +342,7 @@ export default function SingleStarPage({
                             <>
                                 <Typography sx={{
                                     alignItems: 'center', color: 'white', border: 'none',
-                                    fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif",
-                                    textTransform: 'capitalize',
+                                    fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
                                         textDecoration: 'underline',
                                     },
@@ -378,7 +374,7 @@ export default function SingleStarPage({
 
                 <Toolbar >
                     {starList.map((item, index) =>
-                        <Grid key={index} container spacing={2}>
+                        <Grid key={index} container spacing={2} >
                             <Grid item xs={6} md={3}>
                                 <Stack sx={{ position: 'relative', height: '100%', width: '100%' }}>
                                     <MovieImage imageUrl={item.image_url} />
@@ -390,7 +386,7 @@ export default function SingleStarPage({
                             </Drawer>
                             <Grid item xs={6} md={9}>
                                 <Box sx={{
-                                    width: { xs: "100%", md: "80%" },
+                                    width: '100%',
                                     padding: { xs: "1rem 0", md: "1rem 2rem" }
                                 }}>
                                     <Typography variant='h4' sx={{ color: 'yellow' }}>{item.name}</Typography>
@@ -421,14 +417,14 @@ export default function SingleStarPage({
                         <KnowForPageDashBoard />
                         <ActorBio />
                         <Stack
-                         direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
+                            direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
                             {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
 
                             <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
                                 <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
                                 <Typography id='faq'
-                                sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
-                                    FAQ:
+                                    sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                                    FAQ
                                 </Typography>
 
                                 <Stack direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
@@ -448,13 +444,13 @@ export default function SingleStarPage({
                         </Stack>
                         {moviesPlay ?
                             <Stack direction={'column'} sx={{ mt: 3 }}>
-                                <Toolbar sx={{ bgcolor: 'black', border: '2px solid white', marginTop: '10px', marginLeft: '8px' }} >
+                                {/* <Toolbar sx={{ bgcolor: 'black', border: '2px solid white', marginTop: '10px', marginLeft: '8px' }} >
                                     <Stack sx={{ textAlign: 'left' }} >
                                         <Typography sx={{
                                             fontWeight: 'bold', fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
                                             fontSize: '1rem', textTransform: 'none', WebkitFontSmoothing: 'auto', fontSmooth: 'auto', lineHeight: '1.5rem',
                                         }}>
-                                            FAQ
+                                            FAQm
                                         </Typography>
                                     </Stack>
 
@@ -507,7 +503,24 @@ export default function SingleStarPage({
                                             </Stack>
                                         </Dialog>
                                     </Box>
-                                </Toolbar>
+                                </Toolbar> */}
+                                {starList.map(item => (
+                                    <Stack spacing={2} direction={'column'} alignContent={'flex-start'} justifyContent={'flex-start'} sx={{
+                                        textAlign: 'left',
+                                        bgcolor: 'black', color: 'white',
+
+                                    }} key={item.imdb_id} >
+                                        <Typography sx={textStyle}>How old is  <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>: {calculateAge(item.birth_date)}</Typography>
+                                        <Typography sx={textStyle} >When was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born?  : {item.birth_date}</Typography  >
+                                        <Typography sx={textStyle} >Where was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born? :{item.birth_place}</Typography >
+                                        <Typography sx={textStyle} >How tall is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>? :{item.height}</Typography  >
+                                        {/* <Typography sx={textStyle} >What is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s birth name?   : Google search it ^^</Typography >
+                                        <Typography sx={textStyle} >Does <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> have children?  : Google search it ^^</Typography >
+                                        <Typography sx={textStyle} >Does <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> have siblings? : Google search it ^^</Typography >
+                                        <Typography sx={textStyle} >Who are <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s parents?  : Google search it ^^</Typography >
+                                        <Typography sx={textStyle} >Who are <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s relatives? : Google search it ^^</Typography > */}
+                                    </Stack>
+                                ))}
                             </Stack> : <Stack> </Stack>
                         }
 

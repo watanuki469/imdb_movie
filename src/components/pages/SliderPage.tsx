@@ -49,11 +49,12 @@ export default function SliderPage({
     };
     const handleBackgroundImageError = (e: any) => {
         e.target.style.backgroundImage = 'url(https://www.dtcvietnam.com.vn/web/images/noimg.jpg)';
+        const imgElement = e.currentTarget as HTMLImageElement;
+        imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Set the fallback image source here
     };
 
     useEffect(() => {
         const boxElement = document.getElementById('1234567');
-
         if (boxElement) {
             boxElement.style.backgroundImage = `url(${uniquePopurarityItemList[activeStep]?.banner})`;
             boxElement.addEventListener('error', handleBackgroundImageError);
@@ -108,8 +109,10 @@ export default function SliderPage({
                                 backgroundPosition: "top",
                                 backgroundSize: "cover",
                                 width: '100%',
+                               
                                 // src={uniquePopurarityItemList[activeStep] && uniquePopurarityItemList[activeStep].banner && uniquePopurarityItemList[activeStep]?.banner}
-                                backgroundImage: `url(${uniquePopurarityItemList[activeStep]?.banner})`,
+                                
+                                // backgroundImage: uniquePopurarityItemList[activeStep]?.banner ? `url(${uniquePopurarityItemList[activeStep]?.banner})` : 'url(https://www.dtcvietnam.com.vn/web/images/noimg.jpg)', // Thay 'default-background.jpg' bằng đường dẫn của ảnh mặc định
                             }}    >
 
                             <Stack direction={'row'} sx={{ mt: 5 }}>
@@ -356,6 +359,7 @@ export default function SliderPage({
                                                 onClick={() => navigate(`/movie/id/${uniquePopurarityItemList[activeStep + 3]?.imdb_id}`)}
                                                 src={uniquePopurarityItemList[activeStep + 3]?.image_url}
                                                 alt="movie-img"
+                                                onError={handleImageError}
                                                 style={{ width: '100%', height: '80%', objectFit: 'cover' }}
                                             />
                                         </Avatar>

@@ -4,8 +4,13 @@ import { Footer } from "components/common";
 export function Pro() {
     return (
         <Grid sx={{}}>
-            <Box sx={{ bgcolor: "white" }}>
-                <img alt="IMDbPro" src="https://m.media-amazon.com/images/G/01/IMDbPro/images/IMDbPro_payments_2x.png" height="46" width="120">
+            <Box sx={{
+                bgcolor: "white",
+                justifyContent: 'center', // căn giữa theo chiều ngang
+                alignItems: 'center', // căn giữa theo chiều dọc
+            }}>
+                <img
+                    alt="IMDbPro" src="https://m.media-amazon.com/images/G/01/IMDbPro/images/IMDbPro_payments_2x.png" height="130" width="100%">
                 </img>
                 <Grid container spacing={2}
                     sx={{
@@ -21,8 +26,10 @@ export function Pro() {
                     <List sx={{ textAlign: 'center', border: ' 2px solid black', alignContent: 'center', alignItems: 'center', m: "auto", width: '100%' }} >
                         <ListItem >
                             <ListItemAvatar>
-                                <Avatar variant="square" sx={{ textAlign: 'center', alignItems: 'center', alignContent: 'center'
-                            ,justifyContent:'center' }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
+                                <Avatar variant="square" sx={{
+                                    textAlign: 'center', alignItems: 'center', alignContent: 'center'
+                                    , justifyContent: 'center'
+                                }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
                             </ListItemAvatar>
                             <ListItemText sx={{ alignItems: 'center' }} >
                                 <Typography variant='h6' sx={{ whiteSpace: 'nowrap', textAlign: 'center' }}>Join With Amazon</Typography>
@@ -42,7 +49,7 @@ export function Pro() {
                                 <Avatar variant="square" sx={{ textAlign: 'center', alignItems: 'center', alignContent: 'center' }} alt="Remy Sharp" src="https://file.baothuathienhue.vn/data2/image/news/2017/20170803/origin/1501744451.png" />
                             </ListItemAvatar>
                             <ListItemText sx={{ alignItems: 'center' }} >
-                                <Typography variant='h6' sx={{ whiteSpace: 'nowrap',textAlign:'center' }}>Join With Amazon</Typography>
+                                <Typography variant='h6' sx={{ whiteSpace: 'nowrap', textAlign: 'center' }}>Join With Amazon</Typography>
                             </ListItemText>
                         </ListItem>
                     </List>
@@ -58,12 +65,12 @@ export function Pro() {
                                 }} alt="Remy Sharp" src="https://m.media-amazon.com/images/G/01/imdbpro/logos/imdb_login_logo._CB1539729863_.png" />
                             </ListItemAvatar>
                             <ListItemText sx={{ alignItems: 'center' }} >
-                                <Typography variant='h6' sx={{ whiteSpace: 'nowrap',textAlign:'center' }}>Join With Amazon</Typography>
+                                <Typography variant='h6' sx={{ whiteSpace: 'nowrap', textAlign: 'center' }}>Join With Amazon</Typography>
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Grid >
-                <Footer/>
+                <Footer />
 
 
                 {/* <Box alignContent="center" sx={{ width: '100%', p: 3 }}>

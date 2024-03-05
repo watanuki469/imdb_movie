@@ -12,6 +12,7 @@ import { NotFound } from "./NotFound";
 import PopularDashBoard from "components/dashboard/PopularDashBoard";
 import { Pro } from "./Pro";
 import { StarLayout } from "./StarLayout";
+import { WatchList } from "./WatchList";
 
 export function Home() {
     // const classes = useStyles();
@@ -25,6 +26,7 @@ export function Home() {
                 <Route path="/movie/id/:imdb_id" element={<SingleMovie />} />
                 <Route path='*' element={<NotFound />} />
                 <Route path='IMDbPro' element={<Pro />} />
+                <Route path='/WatchList' element={<WatchList />} />
                 <Route path='Popular' element={<PopularDashBoard />} />
                 <Route path='/actor/id/:imdb_id' element={<StarLayout />} />
             </Routes>

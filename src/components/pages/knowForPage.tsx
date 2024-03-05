@@ -51,7 +51,7 @@ export default function KnowForPage({
 
   const renderPopularity = (uniqueTitles: any[] = []) => {
     return (
-      <Grid container spacing={0} justifyContent="center">
+      <Grid container spacing={0} justifyContent="flex-start">
         {movieItemList?.map((item: movieItem) => {
           // Kiểm tra xem item.title đã xuất hiện chưa
           if (!uniqueTitles.includes(item.title)) {
@@ -68,7 +68,7 @@ export default function KnowForPage({
                     {breakWord(item.title).map((line, index) => (
                       <Fragment key={index}>
                         {line}
-                        <br /> 
+                        <br />
                       </Fragment>
                     ))}
                   </Typography>
@@ -88,10 +88,10 @@ export default function KnowForPage({
   };
 
   return (
-    <div style={{ width: '100%' }}  id='knowfor'>
-      <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
+    <div style={{ width: '100%' }} id='knowfor'>
+      <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'flex-start'} alignContent={'flex-start'} >
         {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
-        <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
+        <Stack direction={'row'} sx={{ flexWrap: 'wrap' }}>
           <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
           <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
             Know For:

@@ -46,7 +46,7 @@ export default function GenrePage({
                 alignItems: 'center', // Căn chỉnh theo chiều dọc
                 justifyContent: 'center', // Căn chỉnh theo chiều ngang
                 textAlign: 'center', // Căn chỉnh nội dung văn bản theo giữa
-                gap: '0.5rem'
+                // gap: '0.5rem'
               }}>
               {(() => {
                 switch (item.genre) {

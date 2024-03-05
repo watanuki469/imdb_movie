@@ -16,9 +16,9 @@ export default function PopularDashBoard() {
     dispatch(popularityActions.fetchPopularityList({}))
   }, [])
 
-  useEffect(() => {
-    console.log('popurarity list' + popurarityList);
-  }, [popurarityList])
+  // useEffect(() => {
+  //   console.log('popurarity list' + popurarityList);
+  // }, [popurarityList])
 
   return (
     <div>

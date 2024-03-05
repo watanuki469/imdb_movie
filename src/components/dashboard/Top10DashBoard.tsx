@@ -14,9 +14,9 @@ export default function Top10DashBoard() {
     dispatch(popularityActions.fetchPopularityList({}))
   }, [])
 
-  useEffect(() => {
-    console.log('popurarity list' + popurarityList);
-  }, [popurarityList])
+  // useEffect(() => {
+  //   console.log('popurarity list' + popurarityList);
+  // }, [popurarityList])
 
   return (
     <div>

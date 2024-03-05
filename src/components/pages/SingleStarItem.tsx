@@ -30,9 +30,11 @@ export default function SingleStarItem({
 
     return (
         <div >
-            <Grid container spacing={1}>
+            <Grid container spacing={3}>
                 {remainingList.map((item: any, index: number) => (
-                    <Grid item xs={6} sm={4} md={3} key={index}>
+                    <Grid
+                    //  item xs={6} sm={4} md={3}
+                      key={index}>
                         <Stack key={index} direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
                             {/* <Typography onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)} >
                                 {index}
@@ -67,7 +69,7 @@ export default function SingleStarItem({
                                                 {item.actor && item.actor.length > 0 && (
                                                     item.actor.map((actor: any, actorIndex: any) => (
                                                         <span key={actorIndex}>{actor.name}
-                                                            {actorIndex < Math.min(item.actor.length, 3) - 1 ? ', ' : ''}</span>
+                                                            {actorIndex < Math.min(item.actor.length) - 1 ? ', ' : ''}</span>
                                                     ))
                                                 )}
                                                 {/* {item.actor && item.actor.length > 3 && <span>, ...</span>} */}

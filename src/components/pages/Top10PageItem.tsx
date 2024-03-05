@@ -101,8 +101,8 @@ export default function Top10PageItem({
                         <Button onClick={() => handleCloseRating()} sx={{
                             position: 'absolute', bgcolor: 'white', color: 'black',
                             textAlign: 'center', border: 'none', fontWeight: 'bold',
-                            fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto',
-                            height: '50px', textTransform: 'none', borderRadius: '100%',
+                            fontSize: '24px', fontFamily: 'sans-serif', padding: 'auto',
+                            height: '30px', width:'30px',textTransform: 'none', borderRadius: '100%',
                             overflow: 'hidden', // Tránh chữ tràn ra ngoài
                             whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                             // textOverflow: 'ellipsis', // Hiển thị dấu elipsis

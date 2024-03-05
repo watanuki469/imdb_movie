@@ -1,6 +1,6 @@
 import PopularDashBoard from 'components/dashboard/PopularDashBoard';
 import PopurarityDashBoard from 'components/dashboard/PopurarityDashBoard';
-import { AdminLayout, MovieLayout, NotFound, SingleMovie } from 'components/layout';
+import { AdminLayout, MovieLayout, NotFound, SingleMovie, WatchList } from 'components/layout';
 import { Pro } from 'components/layout/Pro';
 import { StarLayout } from 'components/layout/StarLayout';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -23,21 +23,22 @@ function App() {
     }
   }, []);
   return (
-    // <div className="App">
-    <Routes>
-      <Route path="/Login" element={<LoginPage />} />
-      <Route path='/' element={<PrivateRoute />}>
-        <Route path="/" element={<AdminLayout />} />
-        <Route path="/popurarity" element={<PopurarityDashBoard />} />
-        <Route path="/movie/byGen/:genre" element={<MovieLayout />} />
-        <Route path="/movie/id/:imdb_id" element={<SingleMovie />} />
-        <Route path='*' element={<NotFound />} />
-        <Route path='IMDbPro' element={<Pro />} />
-        <Route path='Popular' element={<PopularDashBoard />} />
-        <Route path='/actor/id/:imdb_id' element={<StarLayout />} />
-      </Route>
-    </Routes>
-    // </div>
+    <div className="App">
+      <Routes>
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path='/' element={<PrivateRoute />}>
+          <Route path="/" element={<AdminLayout />} />
+          <Route path="/popurarity" element={<PopurarityDashBoard />} />
+          <Route path="/movie/byGen/:genre" element={<MovieLayout />} />
+          <Route path="/movie/id/:imdb_id" element={<SingleMovie />} />
+          <Route path='*' element={<NotFound />} />
+          <Route path='IMDbPro' element={<Pro />} />
+          <Route path='WatchList' element={<WatchList />} />
+          <Route path='Popular' element={<PopularDashBoard />} />
+          <Route path='/actor/id/:imdb_id' element={<StarLayout />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 

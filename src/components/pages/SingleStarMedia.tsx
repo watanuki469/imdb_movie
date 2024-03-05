@@ -52,14 +52,14 @@ export default function SingleStarMedia() {
                 {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
 
                 <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                    <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                    <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                    <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
+                    <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
                         Award:
                     </Typography>
                     {Object.entries(typeCount)
                         .filter(([type, count]) => type !== 'undefined')
                         .map(([type, count], index, array) => (
-                            <Stack key={index} direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                            <Stack key={index} direction={'row'} sx={{ fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
                                 {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
                             </Stack>
 
@@ -67,9 +67,9 @@ export default function SingleStarMedia() {
                     {/* <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} /> */}
                     <IconButton onClick={handleMoviesClick}>
                         {moviesPlay ?
-                            <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+                            <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
                             :
-                            <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
+                            <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
                     </IconButton>
                 </Stack>
 

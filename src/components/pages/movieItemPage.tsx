@@ -34,7 +34,7 @@ export default function MovieItemPage({
 
   const renderPopularity = (uniqueTitles: any[] = []) => {
     return (
-      <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
+      <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="flex-start">
         {movieItemList?.map((item: movieItem) => {
           // Kiểm tra xem item.title đã xuất hiện chưa
           if (!uniqueTitles.includes(item.title)) {

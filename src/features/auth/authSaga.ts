@@ -1,10 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import {Navigate, useNavigate} from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { all, call, delay, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
 import { login, loginSuccess, loginFailed, logout, LoginPayload } from './authSlice';
 
 function* handleLogin(action: PayloadAction<any>) {
-  console.log('handle login', action)
+  // console.log('handle login', action)
   try {
     yield delay(1000);
 
@@ -17,7 +17,8 @@ function* handleLogin(action: PayloadAction<any>) {
     );
 
     // redirect to admin page
-    yield put({ type: 'NAVIGATE_TO_HOME' })  } catch (error) {
+    yield put({ type: 'NAVIGATE_TO_HOME' })
+  } catch (error) {
     yield put(loginFailed((error as Error).message));
   }
 
@@ -27,11 +28,13 @@ function* handleLogin(action: PayloadAction<any>) {
 }
 
 function* handleLogout() {
-  console.log('handle logout')
+  // console.log('handle logout')
   yield delay(500);
   localStorage.removeItem('access_token');
+  localStorage.removeItem('email');
   // redirect to login page
-  yield put({ type: 'NAVIGATE_TO_DASHBOARD' })}
+  yield put({ type: 'NAVIGATE_TO_DASHBOARD' })
+}
 
 // function* watchLoginFlow() {
 //   while (true) {
@@ -48,5 +51,5 @@ function* handleLogout() {
 // }
 
 export default function* authSaga() {
-   yield all([takeLatest(login.type, handleLogin)]);
+  yield all([takeLatest(login.type, handleLogin)]);
 }
