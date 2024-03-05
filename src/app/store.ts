@@ -18,6 +18,7 @@ import TechReducer from 'features/tech/techSlice'
 import knowForReducer from 'features/knowfor/knowForSlice'
 import knowforItemReducer from 'features/knowforItem/knowforItemSlice'
 import authReducer from 'features/auth/authSlice'
+import ProductReducer from 'features/product/productSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
@@ -39,6 +40,7 @@ export const store = configureStore({
     knowFor:knowForReducer,
     knowforItem:knowforItemReducer,
     auth: authReducer,
+    product:ProductReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

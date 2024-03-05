@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import OpenWithIcon from '@mui/icons-material/OpenWith';
+import { ProductActions, selectProductList } from "features/product/productSlice";
+import SingleProduct from "components/pages/SingleProduct";
 
 export function SinglePage() {
   const { imdb_id } = useParams();
@@ -19,6 +21,7 @@ export function SinglePage() {
   const singleList2 = useAppSelector(selectSingleMovieList)
   const movieAward = useAppSelector(selectmovieAwardList)
   const techList = useAppSelector(selectTechList)
+  const productList = useAppSelector(selectProductList)
 
   useEffect(() => {
     dispatch(singleMovieActions.fetchSingleMovieList(imdb_id))
@@ -30,6 +33,9 @@ export function SinglePage() {
 
   useEffect(() => {
     dispatch(TechActions.fetchTechList(imdb_id))
+  }, [imdb_id])
+  useEffect(() => {
+    dispatch(ProductActions.fetchProductList(imdb_id))
   }, [imdb_id])
 
   useEffect(() => {
@@ -57,6 +63,11 @@ export function SinglePage() {
   const handlePlayClick = () => {
     setIsPlay(!isPlay);
   };
+  const [isProduct, setIsProduct] = useState(true);
+
+  const handleProductClick = () => {
+    setIsProduct(!isProduct);
+  };
   const [moviesPlay, setMoviesIsPlay] = useState(true);
 
   const handleMoviesClick = () => {
@@ -73,22 +84,22 @@ export function SinglePage() {
             <Stack alignContent={'flex-start'} alignItems={'flex-start'}>
               <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'}>
                 <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
-                  <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                  <Typography  id='award' sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
-                    Movie Award({movieAward.length-1}):
+                  <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
+                  <Typography id='award' sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                    Movie Award({movieAward.length - 1}):
                   </Typography>
                   {Object.entries(typeCount)
                     .filter(([type, count]) => type !== 'undefined')
                     .map(([type, count], index, array) => (
-                      <Stack key={index} direction={'row'} sx={{textAlign:'left', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                      <Stack key={index} direction={'row'} sx={{ textAlign: 'left', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
                         {`${count} ${type}${index !== array.length - 1 ? ' & ' : ''}`}
                       </Stack>
                     ))}
                   <IconButton onClick={handleMoviesClick}>
                     {moviesPlay ?
-                      <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+                      <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
                       :
-                      <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "4rem" }} />}
+                      <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
                   </IconButton>
 
                 </Stack>
@@ -106,21 +117,41 @@ export function SinglePage() {
 
             <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'} id={'tech'}>
               <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
-                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
+                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
                   Technical Spec
                 </Typography>
                 <IconButton onClick={handlePlayClick}>
                   {isPlay ?
-                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
                     :
-                    <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "4rem" }} />}
+                    <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
                 </IconButton>
               </Stack>
 
             </Stack>
             {isPlay ?
               <SingleTech awardList={techList} /> :
+              <Stack></Stack>
+            }
+
+            <Stack direction={'row'} sx={{ width: '100%' }} alignItems={'center'} id={'tech'}>
+              <Stack direction={'row'} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: 3 }}>
+                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
+                <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                 Production Location List
+                </Typography>
+                <IconButton onClick={handleProductClick}>
+                  {isProduct ?
+                    <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
+                    :
+                    <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
+                </IconButton>
+              </Stack>
+
+            </Stack>
+            {isProduct ?
+              <SingleProduct awardList={productList} /> :
               <Stack></Stack>
             }
 

@@ -428,11 +428,15 @@ export default function SingleMoviePage({
                                     </Stack>
                                 </Grid>
                                 <Grid item xs={12} md={7}>
-                                    <iframe src={`${item.trailer}?autoplay=1`}
-                                        width="100%" height="100%"
-                                        title="Trailer" frameBorder="0"
-                                    >nfkn
-                                    </iframe>
+                                    {item.trailer ? (
+                                        <iframe
+                                            src={`${item.trailer}?autoplay=1`}
+                                            width="100%" height="100%"
+                                            title="Trailer" frameBorder="0"
+                                        ></iframe>
+                                    ) : (
+                                        <Stack sx={{ alignItems: 'center', justifyContent: 'center', height: "100%" }}>Không có trailer được cung cấp</Stack>
+                                    )}
                                 </Grid>
                                 <Grid item xs={12} md={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }}
                                     sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}

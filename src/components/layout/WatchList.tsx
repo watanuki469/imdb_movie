@@ -40,7 +40,7 @@ export function WatchList() {
     const [email, setEmail] = useState(localStorage.getItem('email') || ''); // Lấy giá trị email từ local storage nếu có
 
     return (
-        <div style={{ backgroundColor: 'black' }}>
+        <div style={{ backgroundColor: 'black', height: '100%' }}>
             <Header />
             <Stack sx={{ bgcolor: 'black', height: '100%' }}>
                 <Typography variant="h3" sx={{ color: 'white', textAlign: 'center' }}>Welcome to your watch list: {email}</Typography>
@@ -65,6 +65,7 @@ export function WatchList() {
                 </Grid>
 
             </Stack>
+            <Footer />
         </div>
 
 

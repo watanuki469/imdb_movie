@@ -7,6 +7,7 @@ import { useDebounce } from "hook/useDebounce";
 import { useEffect, useRef, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { purple, red } from '@mui/material/colors';
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 export default function SearchDashBoard() {
@@ -53,13 +54,14 @@ export default function SearchDashBoard() {
     setInputLabelVisible(true);
 
   };
+  let navigate=useNavigate()
 
 
   return (
     <div style={{ width: '100%', backgroundColor: 'black' }}>
       <Grid sx={{ alignItems: 'center', height: '50px', display: 'flex', bgcolor: "black" }}>
         <FormControl variant="outlined" size="small" sx={{ bgcolor: 'white', width: '30%' }}>
-          <InputLabel sx={{ color: 'blue' }}>All</InputLabel>
+          <InputLabel sx={{ color: 'blue' }}>Titles</InputLabel>
           <Select
             fullWidth
             sx={{ color: "blue", width: '100%' }}
@@ -67,13 +69,9 @@ export default function SearchDashBoard() {
             value={searchType}
             onChange={handleSearchTypeChange}
           >
-            <MenuItem value="All"> All  </MenuItem>
             <MenuItem value="Title"> Titles  </MenuItem>
-            <MenuItem value="TV Episodes">TV Episodes  </MenuItem>
-            <MenuItem value="Celebs"> Celebs   </MenuItem>
-            <MenuItem value="Companies"> Companies </MenuItem>
-            <MenuItem value="Keywords"> Keywords </MenuItem>
-            <MenuItem value="Advanced Search"> Advanced Search </MenuItem>
+            {/* <MenuItem value="Series">Series  </MenuItem> */}
+            <MenuItem value="Advanced Search" onClick={()=>navigate('/IMDbPro')}> Advanced Search </MenuItem>
           </Select>
         </FormControl>
         <FormControl fullWidth variant="outlined" size="small" sx={{ borderColor: 'white', bgcolor: 'white' }}>

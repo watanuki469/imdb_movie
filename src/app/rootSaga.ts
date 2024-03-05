@@ -16,10 +16,11 @@ import TechSaga from 'features/tech/techSaga';
 import knowForSaga from 'features/knowfor/knowForSaga';
 import knowforItemSaga from 'features/knowforItem/knowforItemSaga';
 import authSaga from 'features/auth/authSaga';
+import ProductSaga from 'features/product/productSaga';
 
 export default function* rootSaga() {
     console.log('rootSaga')
   yield all([genreSaga(),movieSaga(),movieItemSaga(),singleMovieSaga(),
     popularitySaga(),searchSaga(),searchItemSaga(),castSaga(),starSaga(),actorSaga(),awardSaga()
-    ,singleStarSaga(),movieAwardSaga(),TechSaga(),knowForSaga(),knowforItemSaga(),authSaga()]);
+    ,singleStarSaga(),movieAwardSaga(),TechSaga(),knowForSaga(),knowforItemSaga(),authSaga(),ProductSaga()]);
 }

@@ -1,7 +1,7 @@
 import { ListParams, ListResponse, Movie, genres, movieItem, popularity, singleMovie } from 'models';
 import axiosClient from './axiosClient';
 
-const genresApi = {
+const seriesApi = {
   getAll(params: ListParams): Promise<ListResponse<genres>> {
     const url = '/genres';
     return axiosClient.get(url, { params });
@@ -56,11 +56,7 @@ const genresApi = {
     const url = `/actor/id/${imdb_id}/movies_knownFor/`
     return axiosClient.get(url)
   },
-  listgetProductionLocationsByMovieIds(imdb_id: any): Promise<Movie> {
-    const url = `/movie/id/${imdb_id}/production_locations/`
-    return axiosClient.get(url)
-  },
 
 };
 
-export default genresApi;
+export default seriesApi;
