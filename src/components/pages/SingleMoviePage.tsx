@@ -175,7 +175,7 @@ export default function SingleMoviePage({
             return <FavoriteBorderOutlinedIcon sx={{ color: 'red' }} />
         }
     }
-
+    
     return (
         <div>
             <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', textAlign: 'center', bgcolor: 'black' }}>
@@ -254,23 +254,24 @@ export default function SingleMoviePage({
                             {/* <IconButton size="large" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                             </IconButton> */}
-                            <a href={`https://www.facebook.com/share.php?u=${encodeURIComponent(window.location.href)}/`}>
-                                <IconButton
-                                    size="large"
-                                    color="inherit"
-                                    sx={{
+                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}>
+
+                            <IconButton
+                                size="large"
+                                color="inherit"
+                                sx={{
+                                    ':hover': {
+                                        textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                    },
+                                }} >
+                                <Badge color="error">
+                                    <ShareIcon sx={{
                                         ':hover': {
                                             textDecoration: 'underline', bgcolor: '#FFA1F5',
                                         },
-                                    }} >
-                                    <Badge color="error">
-                                        <ShareIcon sx={{
-                                            ':hover': {
-                                                textDecoration: 'underline', bgcolor: '#FFA1F5',
-                                            },
-                                        }} />
-                                    </Badge>
-                                </IconButton>
+                                    }} />
+                                </Badge>
+                            </IconButton>
                             </a>
 
                         </Stack>

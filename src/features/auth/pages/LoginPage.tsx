@@ -50,7 +50,7 @@ export function LoginPage() {
             setTimeout(() => { navigate('/') }, 1500);
         }, 100);
         localStorage.setItem('email', email);
-        toast.success(`welcome home ${email}`)
+        toast.success(`Welcome to Vasiliev Movie Palace Mr/Mrs: ${email}`)
 
 
     };
@@ -91,9 +91,6 @@ export function LoginPage() {
     const passwordRef = useRef<HTMLInputElement>();
     const [isProcessing, setIsProcessing] = useState(false);
     const [isValidEmail, setIsValidEmail] = useState(false);
-
-
-
 
     return (
         <Container component="main" maxWidth="xs" 

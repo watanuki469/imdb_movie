@@ -318,21 +318,23 @@ export default function SingleStarPage({
                             <IconButton size="large" color="inherit">
                                 <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
                             </IconButton>
-                            <IconButton
-                                size="large" color="inherit"
-                                sx={{
-                                    ':hover': {
-                                        textDecoration: 'underline', bgcolor: '#FFA1F5',
-                                    },
-                                }} >
-                                <Badge color="error">
-                                    <ShareIcon sx={{
+                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}>
+                                <IconButton
+                                    size="large" color="inherit"
+                                    sx={{
                                         ':hover': {
                                             textDecoration: 'underline', bgcolor: '#FFA1F5',
                                         },
-                                    }} />
-                                </Badge>
-                            </IconButton>
+                                    }} >
+                                    <Badge color="error">
+                                        <ShareIcon sx={{
+                                            ':hover': {
+                                                textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                            },
+                                        }} />
+                                    </Badge>
+                                </IconButton>
+                            </a>
 
                         </Box>
                         <Button

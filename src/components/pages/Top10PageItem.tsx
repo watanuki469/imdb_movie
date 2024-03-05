@@ -9,6 +9,7 @@ import { movieItem } from 'models';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-material/StarRate';
+import { toast } from 'react-toastify';
 
 export interface Top10PageProps {
     popurarityItemList: movieItem[],
@@ -64,6 +65,24 @@ export default function Top10PageItem({
 
         />
     ));
+    const handleWatchList = (movie: movieItem) => {
+        const storedDataString = localStorage.getItem('watchList');
+        let storedData: { [key: string]: movieItem } = {};
+        if (storedDataString !== null) {
+            storedData = JSON.parse(storedDataString);
+        }
+        if (storedData[movie.imdb_id]) {
+            delete storedData[movie.imdb_id];
+            localStorage.setItem('watchList', JSON.stringify(storedData));
+            toast.success(`Removed ${movie.title} from watch list successfully`);
+
+        } else {
+            storedData[movie.imdb_id] = movie;
+            localStorage.setItem('watchList', JSON.stringify(storedData));
+            toast.success(`Added ${movie.title} to watch list successfully`);
+
+        }
+    };
     return (
         <div style={{ maxWidth: '200px' }}>
             <Stack sx={{ position: 'relative', height: '300px' }}>
@@ -139,20 +158,14 @@ export default function Top10PageItem({
                 </Stack>
                 <Box>
                     <h4 style={{
-                        textAlign: "left",
-                        display: "-webkit-box",
-                        overflow: "hidden",
-                        WebkitBoxOrient: "vertical",
-                        textDecoration: 'bold',
-                        color: 'white',
-                        marginTop: '0%',
-                        height: '3em'
+                        textAlign: "left",display: "-webkit-box",overflow: "hidden",WebkitBoxOrient: "vertical",textDecoration: 'bold',color: 'white',marginTop: '0%',height: '3em'
 
                     }}>
                         {popurarityItemList[activeStep + number]?.title.substring(0, 32)}
                     </h4>
                 </Box>
-                <Button fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
+                <Button onClick={() => handleWatchList(popurarityItemList[activeStep + number])}
+                 fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
                     < AddIcon sx={{ color: 'blue' }} />
                     <>
                         <span style={{ marginRight: '1rem' }}></span>

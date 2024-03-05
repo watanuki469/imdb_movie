@@ -645,7 +645,8 @@ export default function PopularPage({
 
                                     {/* Left side - Image */}
                                     <img onError={handleImageError}
-                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px' }} />
+                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px'
+                                        ,height:"100%" }} />
 
                                     {/* Right side - Details */}
                                     <Stack sx={{ color: 'white' }} alignItems={'flex-start'}>
@@ -659,7 +660,7 @@ export default function PopularPage({
                                             }}
                                         >{`${movie.title}`}</Typography>
 
-                                        <div style={{ display: 'flex', marginBottom: '10px' }}>
+                                        <div style={{ display: 'flex' }}>
                                             <h4 style={{ marginRight: '20px' }}>Year: {movie.year}</h4>
                                             <h4 style={{ marginRight: '20px' }}>Length: {movie.movie_length}min</h4>
                                             <h4>Rating: {movie.content_rating}</h4>
@@ -1032,12 +1033,16 @@ export default function PopularPage({
 
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-                                <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
-                                    Share
-                                </Typography>
-                                <ShareIcon sx={{ color: 'gray', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
-                            </Button>
+                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}>
+
+                                <Button
+                                    sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                    <Typography sx={{ alignItems: 'center', color: 'white', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline', }, }}>
+                                        Share
+                                    </Typography>
+                                    <ShareIcon sx={{ color: 'gray', alignContent: 'center', mt: '3px', fontSize: '60px' }} />
+                                </Button>
+                            </a>
                         </Box>
                     </Toolbar>
                 </AppBar>
