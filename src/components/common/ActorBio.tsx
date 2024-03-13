@@ -26,21 +26,24 @@ export function ActorBio() {
   };
 
   return (
-    <div style={{ marginTop: '20px', }} id="biography-section">
-      <Stack alignContent={'center'} alignItems={'center'} direction={'row'}>
-        <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
+    <div id="biography-section">
+      <Stack direction={'column'} sx={{ mt: 3, width: '100%' }}>
+        <ActorBioPages starList={starList} />
+      </Stack>
+      {/* <Stack alignContent={'center'} alignItems={'center'} direction={'row'}>
+        <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
         <Typography sx={{
           textAlign: 'left', justifyContent: 'center', alignItems: 'center', alignContent: 'center',
-          color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }
+          color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }
         }}>
           Did you know
         </Typography>
         <Stack direction={'row'} alignContent={'center'} alignItems={'center'}>
           <IconButton onClick={handleMoviesClick}>
             {moviesPlay ?
-              <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+              <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
               :
-              <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
+              <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
           </IconButton>
         </Stack>
 
@@ -50,8 +53,8 @@ export function ActorBio() {
           <ActorBioPages starList={starList} />
         </Stack>
         : <Stack></Stack>
-      }
-      
+      } */}
+
     </div >
   );
 }

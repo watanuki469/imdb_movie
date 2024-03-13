@@ -1,13 +1,17 @@
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import { Avatar, Box, Grid, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Grid, IconButton, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import MobileStepper from '@mui/material/MobileStepper';
 import { useTheme } from '@mui/material/styles';
 import { movieItem } from 'models';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 export interface SliderPageProps {
     popurarityItemList: movieItem[];
@@ -87,6 +91,13 @@ export default function SliderPage({
         // Clean up
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
 
     return (
         <div>
@@ -94,6 +105,31 @@ export default function SliderPage({
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container rowSpacing={1} >
                     <Grid item xs={12} sm={12} md={8}>
+                        <IconButton
+                            onClick={handleBack}
+                            size="medium"
+                            sx={{
+                                overflow: "visible", // Ensures child elements can overflow
+                                // visibility: {
+                                //     xs: "visible",
+                                //     md: "hidden",
+                                // },
+                                position: "absolute",
+                                top: "45%",
+                                left: "0px",
+                                transform: "translateY(-50%)",
+                                // background: "rgba(0, 0, 0, 0.15)",
+                                background: "rgba(0, 0, 0, 0.35)",
+                                border: '1px solid white',
+                                "&:hover": {
+                                    background: "rgba(0, 0, 0, 0.35)",
+                                },
+                                zIndex: 998,
+                            }}
+                        >
+
+                            <KeyboardArrowLeftIcon sx={{ width: "50px", height: "50px", color: 'white', ':hover': { color: 'yellow' } }} />
+                        </IconButton>
                         <Box onClick={() => navigate(`/movie/id/${uniquePopurarityItemList[activeStep]?.imdb_id}`)}
                             id="1234567" sx={{
                                 // position: "relative",
@@ -108,12 +144,14 @@ export default function SliderPage({
                                 },
                                 backgroundPosition: "top",
                                 backgroundSize: "cover",
-                                width: '100%',
+                                width: '100%'
 
                                 // src={uniquePopurarityItemList[activeStep] && uniquePopurarityItemList[activeStep].banner && uniquePopurarityItemList[activeStep]?.banner}
 
                                 // backgroundImage: uniquePopurarityItemList[activeStep]?.banner ? `url(${uniquePopurarityItemList[activeStep]?.banner})` : 'url(https://www.dtcvietnam.com.vn/web/images/noimg.jpg)', // Thay 'default-background.jpg' bằng đường dẫn của ảnh mặc định
-                            }}    >
+                            }}
+                        >
+
 
                             <Stack direction={'row'} sx={{ mt: 5 }}>
                                 <div style={{ backgroundColor: 'black', textAlign: 'center' }}>
@@ -126,7 +164,6 @@ export default function SliderPage({
                                             display: 'block', // Hiển thị ảnh dưới dạng block để đảm bảo nó nằm ở vị trí dưới cùng
                                             marginBottom: '0',
                                             height: `${imageHeight}px`, // Sử dụng dynamic height
-
                                         }}
                                     />
                                 </div>
@@ -200,9 +237,32 @@ export default function SliderPage({
                                 </Stack>
                             </Stack>
                         </Box>
+                        <IconButton
+                            // ref={nextPageIconRef}
+                            onClick={handleNext}
+                            size="medium"
+                            sx={{
+                                // visibility: {
+                                //     xs: "visible",
+                                //     md: "hidden",
+                                // },
+                                // position: "absolute",
+                                top: "-48%",
+                                right: "-48%",
+                                // transform: "translateY(-50%)",
+                                // background: "rgba(0, 0, 0, 0.15)",
+                                background: "rgba(0, 0, 0, 0.35)",
+                                border: '1px solid white',
+                                "&:hover": {
+                                    background: "rgba(0, 0, 0, 0.35)",
+                                },
+                                zIndex: 998,
+                            }}
+                        >
+                            <KeyboardArrowRightIcon sx={{ width: "50px", height: "50px", color: 'white', ':hover': { color: 'yellow' } }} />
+                        </IconButton>
 
-
-                        <MobileStepper
+                        {/* <MobileStepper
                             sx={{ backgroundColor: 'transparent', color: 'blue', marginTop: 2 }}
                             variant="text"
                             steps={maxSteps}
@@ -234,7 +294,7 @@ export default function SliderPage({
                                 </Button>
                             }
 
-                        />
+                        /> */}
                     </Grid>
 
                     <Grid item md={4} sx={{ display: { xs: 'none', md: 'flex' }, bgcolor: 'black' }}>
@@ -242,7 +302,7 @@ export default function SliderPage({
                             <Stack spacing={4} direction="row" alignItems="center" sx={{ color: 'yellow', bgcolor: 'black' }}>
                                 <Typography variant='h5'>  Up next</Typography>
                             </Stack>
-                            <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3, objectFit: 'contain', display: 'block', width: '100%', bgcolor: 'black' }}>
+                            <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3, objectFit: 'contain', display: 'block', width: '100%', bgcolor: 'rgba(0, 0, 0, )', }}>
                                 <Stack spacing={1}>
                                     <Stack spacing={2} direction="row" alignItems="center" >
                                         <Avatar variant="square" sx={{ width: '100px', height: '60%', overflow: 'hidden', objectFit: 'cover' }}>

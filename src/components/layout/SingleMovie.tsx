@@ -12,8 +12,8 @@ export function SingleMovie() {
         <Header />
         <SinglePage />
 
-        <div className={`${loading ? "block" : "hidden"} `}>
-          <CircularProgress disableShrink />
+        <div className={`${loading ? "hidden" : "hidden"} `}>
+          <CircularProgress disableShrink sx={{ color: 'black' }} />
         </div>
         <Footer />
       </Box>

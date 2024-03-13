@@ -1,5 +1,5 @@
 import InfoIcon from '@mui/icons-material/Info';
-import { AppBar, Badge, Box, Button, Dialog, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, Button, Container, Dialog, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Tab, Tabs, Toolbar, Typography } from "@mui/material";
 import { ActorBio } from 'components/common';
 import { actor } from 'models';
 import { Fragment, useState } from 'react';
@@ -23,6 +23,8 @@ import ReorderIcon from '@mui/icons-material/Reorder';
 import TvIcon from '@mui/icons-material/Tv';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import { Label, People, Public, Stars, Theaters, VideoLibrary } from "@mui/icons-material";
+import { useTheme } from '@mui/material/styles';
+import TopCastPageDashBoard from 'components/dashboard/TopCastPageDashBoard';
 
 export interface SingleStarPageProps {
     starList: actor[]
@@ -236,11 +238,90 @@ export default function SingleStarPage({
             </Box>
         )
     };
+    const theme = useTheme();
+    const [value, setValue] = useState('one');
+    const handleChange = (event: any, newValue: any) => {
+        setValue(newValue);
+    };
+
+    const renderTabContent = (tabValue: any) => {
+        switch (tabValue) {
+            case 'one':
+                return <SingleStarMedia />;
+            case 'two':
+                return <KnowForPageDashBoard />;
+            case 'three':
+                return <ActorBio />;
+            case 'fourth':
+                return (
+                    // <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
+                    //     <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
+                    //         <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
+                    //         <Typography id='faq'
+                    //             sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+                    //             FAQ
+                    //         </Typography>
+
+                    //         <Stack direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
+                    //         </Stack>
 
 
+                    //         {/* <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} /> */}
+                    //         <IconButton onClick={handleMoviesClick}>
+                    //             {moviesPlay ?
+                    //                 <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
+                    //                 :
+                    //                 <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
+                    //         </IconButton>
+                    //     </Stack>
+                    // {/* {
+                    //     moviesPlay ?
+                    //         <Stack direction={'column'} sx={{ mt: 3 }}>
+                    //             {starList.map(item => (
+                    //                 <Stack spacing={2} direction={'column'} alignContent={'flex-start'} justifyContent={'flex-start'} sx={{
+                    //                     textAlign: 'left',
+                    //                     bgcolor: 'black', color: 'white',
+
+                    //                 }} key={item.imdb_id} >
+                    //                     <Typography sx={textStyle}>How old is  <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>: {calculateAge(item.birth_date)}</Typography>
+                    //                     <Typography sx={textStyle} >When was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born?  : {item.birth_date}</Typography  >
+                    //                     <Typography sx={textStyle} >Where was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born? :{item.birth_place}</Typography >
+                    //                     <Typography sx={textStyle} >How tall is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>? :{item.height}</Typography  >
+                    //                 </Stack>
+                    //             ))}
+                    //         </Stack> : <Stack> </Stack>
+                    // // } */}
+                    <Stack direction={'column'} sx={{ mt: 3 }}>
+                        {starList.map(item => (
+                            <Stack spacing={2} direction={'column'} alignContent={'flex-start'} justifyContent={'flex-start'} sx={{
+                                textAlign: 'left',
+                                bgcolor: 'black', color: 'white',
+
+                            }} key={item.imdb_id} >
+                                <Typography sx={textStyle}>How old is  <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>: {calculateAge(item.birth_date)}</Typography>
+                                <Typography sx={textStyle} >When was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born?  : {item.birth_date}</Typography  >
+                                <Typography sx={textStyle} >Where was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born? :{item.birth_place}</Typography >
+                                <Typography sx={textStyle} >How tall is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>? :{item.height}</Typography  >
+                            </Stack>
+                        ))}
+
+                    </Stack>
+
+                )
+            case 'five':
+                return (
+                    <Typography sx={{ bgcolor: 'red' }}>
+                        meom meo meo
+                    </Typography>
+                );
+
+            default:
+                return null;
+        }
+    };
 
     return (
-        <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', p: 1, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
+        <Box display="flex" alignContent="center" sx={{ width: '100%', m: 'auto', p: 1, textAlign: 'center', flexGrow: 1, bgcolor: 'black' }}>
             <AppBar position="static" sx={{ bgcolor: 'black' }}>
                 <div>
                     <Toolbar>
@@ -413,124 +494,44 @@ export default function SingleStarPage({
                     )}
                 </Toolbar>
 
-                <Toolbar sx={{ mt: '30px' }}>
-                    <Stack sx={{ width: '100%' }}>
-                        <SingleStarMedia />
-                        <KnowForPageDashBoard />
-                        <ActorBio />
-                        <Stack
-                            direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
-                            {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
+              
+                <Toolbar sx={{ mt: '30px', width: '100%', overflowX: 'auto' }}>
+                    <Stack direction={'row'} sx={{ bgcolor: 'black' }}>
+                        <Stack>
+                            <Tabs
+                                variant="scrollable"
+                                scrollButtons="auto"
+                                value={value} onChange={handleChange} textColor="secondary" indicatorColor="secondary"
+                                sx={{
+                                    bgcolor: 'black',
+                                    '& .MuiTab-root': {
+                                        alignItems: 'center', border: 0, cursor: 'pointer', display: 'flex', flexShrink: 0, height: '48px', justifyContent: 'center',
+                                        listStyle: 'none', outline: 0, padding: '0 1.5rem', textTransform: 'none', transition: 'all .15s, fontWeight 0',
+                                        color: 'white', fontWeight: 'bold',
+                                        '&:hover': {
+                                            bgcolor: '#FC819E',
+                                        },
+                                    },
+                                    '& .Mui-selected': {
+                                        bgcolor: 'purple',
+                                    },
+                                }}
 
-                            <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                                <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-                                <Typography id='faq'
-                                    sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
-                                    FAQ
-                                </Typography>
+                            >
+                                <Tab value="one" label={<span style={{ color: 'white' }}>Award & Nomine</span>} />
+                                <Tab value="two" label={<span style={{ color: 'white' }}>Known For</span>} />
+                                <Tab value="three" label={<span style={{ color: 'white' }}>Did you know</span>} />
+                                <Tab value="fourth" label={<span style={{ color: 'white' }}>FAQ</span>} />
+                                {/* <Tab value="five" label={<span style={{ color: 'white' }}>meomeo</span>} /> */}
 
-                                <Stack direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
-                                </Stack>
+                            </Tabs>
 
 
-                                {/* <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} /> */}
-                                <IconButton onClick={handleMoviesClick}>
-                                    {moviesPlay ?
-                                        <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
-                                        :
-                                        <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
-                                </IconButton>
-                            </Stack>
-
-                            {/* </Button> */}
                         </Stack>
-                        {moviesPlay ?
-                            <Stack direction={'column'} sx={{ mt: 3 }}>
-                                {/* <Toolbar sx={{ bgcolor: 'black', border: '2px solid white', marginTop: '10px', marginLeft: '8px' }} >
-                                    <Stack sx={{ textAlign: 'left' }} >
-                                        <Typography sx={{
-                                            fontWeight: 'bold', fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                                            fontSize: '1rem', textTransform: 'none', WebkitFontSmoothing: 'auto', fontSmooth: 'auto', lineHeight: '1.5rem',
-                                        }}>
-                                            FAQm
-                                        </Typography>
-                                    </Stack>
-
-                                    <Box sx={{ flexGrow: 1 }} />
-                                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                        <IconButton size="large" color="inherit" onClick={handleFAQDialogOpen}
-                                        >
-                                            <InfoIcon sx={{ marginRight: '-8px' }} />
-                                        </IconButton>
-                                        <Dialog open={openFAQDialog} onClose={handleFAQDialogClose} maxWidth={'lg'} fullWidth
-                                            keepMounted={true} PaperProps={{
-                                                style: {
-                                                    backgroundColor: 'white'
-                                                },
-                                            }}
-                                        >
-                                            <Stack>
-                                                <Button onClick={() => handleFAQDialogClose()} sx={{
-                                                    position: 'absolute', bgcolor: 'white', color: 'black', textAlign: 'center', border: 'none', fontWeight: 'bold', fontSize: '36px', fontFamily: 'sans-serif', padding: 'auto', height: '50px', textTransform: 'none', borderRadius: '100%',
-                                                    overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                                                    whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                                                    textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                                                    ':hover': {
-                                                        bgcolor: 'yellow', color: 'blue',
-                                                    },
-                                                    top: 0, right: 0
-                                                    // transform: 'translate(1650%, 290%)'
-                                                }}>X
-                                                </Button>
-                                                <Typography variant='h3' sx={{ textAlign: "center", color: 'white', bgcolor: 'black' }}>
-                                                    {starList.map(item => (item.name))}       FAQ
-                                                </Typography>
-                                                {starList.map(item => (
-                                                    <Stack spacing={2} direction={'column'} alignContent={'flex-start'} justifyContent={'flex-start'} sx={{
-                                                        textAlign: 'left',
-                                                        bgcolor: 'black', color: 'white',
-
-                                                    }} key={item.imdb_id} >
-                                                        <Typography sx={textStyle}>How old is  <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>: {calculateAge(item.birth_date)}</Typography>
-                                                        <Typography sx={textStyle} >When was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born?  : {item.birth_date}</Typography  >
-                                                        <Typography sx={textStyle} >Where was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born? :{item.birth_place}</Typography >
-                                                        <Typography sx={textStyle} >How tall is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>? :{item.height}</Typography  >
-                                                        <Typography sx={textStyle} >What is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s birth name?   : Google search it ^^</Typography >
-                                                        <Typography sx={textStyle} >Does <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> have children?  : Google search it ^^</Typography >
-                                                        <Typography sx={textStyle} >Does <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> have siblings? : Google search it ^^</Typography >
-                                                        <Typography sx={textStyle} >Who are <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s parents?  : Google search it ^^</Typography >
-                                                        <Typography sx={textStyle} >Who are <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s relatives? : Google search it ^^</Typography >
-                                                    </Stack>
-                                                ))}
-                                            </Stack>
-                                        </Dialog>
-                                    </Box>
-                                </Toolbar> */}
-                                {starList.map(item => (
-                                    <Stack spacing={2} direction={'column'} alignContent={'flex-start'} justifyContent={'flex-start'} sx={{
-                                        textAlign: 'left',
-                                        bgcolor: 'black', color: 'white',
-
-                                    }} key={item.imdb_id} >
-                                        <Typography sx={textStyle}>How old is  <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>: {calculateAge(item.birth_date)}</Typography>
-                                        <Typography sx={textStyle} >When was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born?  : {item.birth_date}</Typography  >
-                                        <Typography sx={textStyle} >Where was <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> born? :{item.birth_place}</Typography >
-                                        <Typography sx={textStyle} >How tall is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>? :{item.height}</Typography  >
-                                        {/* <Typography sx={textStyle} >What is <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s birth name?   : Google search it ^^</Typography >
-                                        <Typography sx={textStyle} >Does <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> have children?  : Google search it ^^</Typography >
-                                        <Typography sx={textStyle} >Does <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span> have siblings? : Google search it ^^</Typography >
-                                        <Typography sx={textStyle} >Who are <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s parents?  : Google search it ^^</Typography >
-                                        <Typography sx={textStyle} >Who are <span style={{ fontWeight: 'bold', color: 'blue' }}>{item.name}</span>'s relatives? : Google search it ^^</Typography > */}
-                                    </Stack>
-                                ))}
-                            </Stack> : <Stack> </Stack>
-                        }
-
-
-
                     </Stack>
                 </Toolbar>
-            </AppBar>
-        </Box>
+                {renderTabContent(value)}
+            </AppBar >
+        </Box >
     );
 }

@@ -103,24 +103,26 @@ export default function PopularPage({
             case 'detail':
                 return (
                     // Render detail view
-                    <Box key={movieIndex} sx={{ flexGrow: 1, bgcolor: 'black', width: '100%' }}>
+                    <Box key={movieIndex} sx={{ bgcolor: 'black', width: '100%' }}>
                         <Divider sx={{
-                            width: '100%', borderRadius: 2, border: '2px solid gray', borderColor: 'divider',
-                            backgroundColor: 'background.paper',
+                            width: '100%', borderRadius: 2, border: '2px solid gray', borderColor: 'divider', backgroundColor: 'background.paper',
                         }} />
                         <AppBar position="static" sx={{ bgcolor: 'black' }}>
                             <Toolbar>
-                                <div key={movie.imdb_id} style={{ display: 'flex', alignItems: 'center' }}>
-
-                                    {/* Left side - Image */}
-                                    <img onError={handleImageError}
-                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px' }}
-                                        onClick={() => navigate(`/movie/id/${movie.imdb_id}`)}
-                                    />
+                                <div key={movie.imdb_id} style={{ display: 'flex' }}>
+                                    <div style={{ height: '100%' }}>
+                                        {/* Left side - Image */}
+                                        <img onError={handleImageError}
+                                            src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px', }}
+                                            onClick={() => navigate(`/movie/id/${movie.imdb_id}`)}
+                                        />
+                                    </div>
 
                                     {/* Right side - Details */}
+
                                     <Stack sx={{ color: 'white' }} alignItems={'flex-start'}>
-                                        <Typography variant='h6'>{`${movieIndex + 1}`}</Typography>
+                                        <Typography variant='h6' sx={{ textAlign: 'center', color: 'gray', alignItems: 'center', }}>{`${movieIndex + 1}`}(-)</Typography>
+
                                         <Typography variant='h5'
                                             sx={{
                                                 fontSize: "2rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
@@ -128,7 +130,7 @@ export default function PopularPage({
                                         >{`${movie.title}`}
                                         </Typography>
 
-                                        <div style={{ display: 'flex', marginBottom: '10px' }}>
+                                        <div style={{ display: 'flex' }}>
                                             <h4 style={{ marginRight: '20px' }}>Year: {movie.year}</h4>
                                             <h4 style={{ marginRight: '20px' }}>Length: {movie.movie_length}min</h4>
                                             <h4>Rating: {movie.content_rating}</h4>
@@ -346,7 +348,9 @@ export default function PopularPage({
                                                 textAlign: 'left',
                                                 marginTop: '10px'
                                             }}
-                                        >{`${movie.plot}`}
+                                        >
+                                            {/* {`${movie.plot}`} */}
+                                            {movie.plot}
                                         </Typography>
                                         <Stack>
                                             {/* <Stack direction={'row'} sx={{ marginTop: '10px', alignContent: 'flex-start', justifyContent: 'flex-start' }}>
@@ -359,10 +363,20 @@ export default function PopularPage({
                                                     </Typography>
                                                 </div>
                                             </Stack> */}
-                                            <Stack direction={'row'}>
-                                                <div>
-                                                    <Typography sx={{ fontWeight: 'bold' }}> Votes: <span>103,682</span></Typography>
-                                                </div>
+                                            <Stack direction={'column'} justifyContent={'flex-start'} alignItems={'flex-start'}>
+                                                <Stack direction={'row'} spacing={2} sx={{ fontWeight: 'bold' }}>
+                                                    {/* {`${movie.gen.map((item: movieItem) =>
+                                                        <Typography>{item.gen}
+                                                        </Typography>
+                                                    )}`} */}
+                                                    Genre:
+                                                    {movie.gen.map((item: any) => (
+                                                        <Typography sx={{ color: 'blue', fontWeight: 'none', marginLeft: '5px', flexWrap: 'nowrap' }}>{item.genre}
+                                                        </Typography>
+                                                    ))}
+                                                </Stack>
+
+                                                <Typography sx={{ fontWeight: 'bold' }}> Votes: <span>103,682</span></Typography>
                                             </Stack>
                                         </Stack>
                                     </Stack>
@@ -403,19 +417,35 @@ export default function PopularPage({
                                     e.currentTarget.alt = 'Fail to load image'; // Replace with fallback title
                                 }}
                             />
-                            <Stack direction={'column'} position={'static'} display={'flex'} sx={{ marginLeft: '10px' }}>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            {/* <Stack direction={'column'} position={'static'} sx={{ display: 'flex', flexDirection: 'column', marginLeft: '10px', alignItems: 'flex-start' }}>
+                                <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                     <StarRateIcon sx={{ color: 'yellow' }} />
-                                    <Typography style={{ marginLeft: '5px' }}>{movie.rating}</Typography>
+                                    <Typography style={{ marginLeft: '5px' }}>{movie.rating}
+                                        <span style={{ color: 'gray', marginLeft: '10px' }}>({movie.popularity}k)</span>
+                                    </Typography>
                                 </Box>
-                                <Box sx={{ margin: '0 30px' }} /> {/* Adjust the margin value as needed */}
 
-                                <Button onClick={() => handleRatingClick(movie)} sx={{ marginTop: '-10px', display: 'flex', alignContent: 'left', justifyContent: 'left' }}>
+                                <Button onClick={() => handleRatingClick(movie)} sx={{ alignItems: "flex-start", justifyContent: 'flex-start' }}>
                                     <StarRateIcon sx={{ color: 'blue' }} />
                                     <Typography style={{ color: 'blue' }} ref={anchorRef}>
                                         Rate
                                     </Typography>
                                 </Button>
+                            </Stack> */}
+                            <Stack direction={'column'} sx={{ m: '10px' }}>
+                                <Stack direction={'row'} >
+                                    <StarRateIcon sx={{ color: 'yellow' }} />
+                                    <Typography style={{ marginLeft: '5px' }}>{movie.rating}
+                                        <span style={{ color: 'gray', marginLeft: '10px' }}>({movie.popularity}k)</span>
+                                    </Typography>
+                                </Stack>
+                                <Stack onClick={() => handleRatingClick(movie)} direction={'row'} sx={{ marginTop: '5px' }}>
+                                    <StarRateIcon sx={{ color: 'blue' }} />
+                                    <Typography style={{ color: 'blue' }} ref={anchorRef}>
+                                        Rate
+                                    </Typography>
+                                </Stack>
+
                             </Stack>
                             <div>
                                 <Dialog
@@ -462,40 +492,26 @@ export default function PopularPage({
                             </div>
                             <Typography variant='h5'
                                 sx={{
-                                    color: 'black', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, textAlign: 'left', fontWeight: 'bold', height: '2.4em', margin: '10px',
+                                    color: 'black', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, textAlign: 'left', height: '2.4em', margin: '10px',
                                 }}>{movie.title}
                             </Typography>
                             <Stack direction={'row'} sx={{ marginTop: '20px', marginLeft: '10px' }} alignContent={'left'} justifyContent={'left'}>
                                 <Typography variant='subtitle1'
                                     sx={{
-                                        color: '#29ADB2',
-                                        overflow: 'hidden',
-                                        // display: '-webkit-box',
-                                        WebkitBoxOrient: 'vertical',
-                                        WebkitLineClamp: 2,
-                                        // marginLeft: '10px',
-                                        // textAlign: 'left',
-                                        lineHeight: '1.4'
+                                        color: '#29ADB2', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, lineHeight: '1.4'
                                     }}>{movie.year}
                                 </Typography>
                                 <Box sx={{ margin: '0 10px' }} /> {/* Adjust the margin value as needed */}
 
                                 <Typography variant='subtitle1'
                                     sx={{
-                                        color: '#29ADB2',
-                                        // marginLeft: '10px',
-                                        overflow: 'hidden',
-                                        // display: '-webkit-box',
-                                        WebkitBoxOrient: 'vertical',
-                                        WebkitLineClamp: 2,
-                                        // textAlign: 'left',
-                                        lineHeight: '1.4'
+                                        color: '#29ADB2', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, lineHeight: '1.4'
                                     }}>{movie.movie_length} min
                                 </Typography>
                             </Stack>
                             <Button onClick={() => handleInfoClick(movie)} ref={anchorRef}
                                 sx={{
-                                    color: 'blue', bgcolor: '#FFE5E5', textAlign: 'center', width: '70%', marginTop: '10px',
+                                    color: 'blue', bgcolor: 'rgb(236,237,236)', textAlign: 'center', width: '90%', marginTop: '10px',
                                     fontWeight: 'bold'
                                 }}>Detail</Button>
                             <Dialog
@@ -507,8 +523,7 @@ export default function PopularPage({
                                     , overflow: 'hidden', // Tránh chữ tràn ra ngoài
                                     textOverflow: 'ellipsis', // Hiển thị dấu elipsis
                                     ':hover': {
-                                        bgcolor: 'yellow',
-                                        color: 'blue',
+                                        bgcolor: 'yellow', color: 'blue',
                                     },
                                     // transform: 'translate(610%, 150%)'
 
@@ -552,25 +567,15 @@ export default function PopularPage({
                                                             <Button sx={{ marginLeft: '5px' }} onClick={() => selectedStudent && handleRatingClick(selectedStudent)}>
                                                                 <StarRateIcon sx={{ color: 'blue' }} />
                                                                 <Typography style={{ color: 'blue' }} ref={anchorRef}>Rate</Typography>
-
                                                             </Button>
-
                                                         </Stack>
-
                                                     </Typography>
-
                                                 </Box>
-
                                             </Stack>
 
-
                                             <Box sx={{ flexGrow: 1 }} />
-                                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
-                                            </Box>
-                                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-
-                                            </Box>
+                                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}></Box>
+                                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}></Box>
                                         </Toolbar>
 
                                     </AppBar>
@@ -645,8 +650,10 @@ export default function PopularPage({
 
                                     {/* Left side - Image */}
                                     <img onError={handleImageError}
-                                        src={movie.image_url} alt={movie.title} style={{ marginRight: '20px', maxWidth: '100px', marginTop: '10px'
-                                        ,height:"100%" }} />
+                                        src={movie.image_url} alt={movie.title} style={{
+                                            marginRight: '20px', maxWidth: '100px', marginTop: '10px'
+                                            , height: "100%"
+                                        }} />
 
                                     {/* Right side - Details */}
                                     <Stack sx={{ color: 'white' }} alignItems={'flex-start'}>
@@ -1321,7 +1328,7 @@ export default function PopularPage({
                         </AppBar>
                         <AppBar position="static" sx={{ bgcolor: 'black' }}>
                             <Stack direction={'column'}>
-                                <Stack direction="column" alignItems="flex-start" justifyContent='flex-start'>
+                                <Stack direction="column" alignItems="center" justifyContent='center'>
                                     <Button sx={{ display: 'flex', alignItems: 'flex-start', height: '50px' }}>
                                         <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow' }} orientation="vertical" />
 
@@ -1399,14 +1406,15 @@ export default function PopularPage({
                                     </Stack>
 
                                 </Stack>
-                                <Stack direction="column" alignItems="center" justifyContent='center' sx={{ marginTop: '30px' }}>
-                                    <Button sx={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                                <Stack direction="column" alignItems="center" justifyContent='center' sx={{ marginTop: '50px' }}>
+                                    <Button sx={{ display: 'flex', alignItems: 'center', height: '50px', justifyContent: 'flex-end' }}>
                                         <Divider sx={{ borderColor: 'yellow', border: '5px solid yellow' }} orientation="vertical" />
                                         <Typography sx={{
+                                            ml: '10px',
                                             alignItems: 'center', color: 'white', border: 'none',
                                             fontWeight: 'bold', fontSize: "2rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' }
                                         }}>
-                                            Top Rated Movies by Genre
+                                            Top Rated Genre
                                         </Typography>
                                     </Button>
                                     <Box
@@ -1415,7 +1423,10 @@ export default function PopularPage({
                                             rowGap: 3,
                                             gridTemplateColumns: 'repeat(4, 1fr)',
                                             textAlign: 'left',
-                                            mt: 3
+                                            mt: 3,
+                                            alignItems: "flex-end",
+                                            justifyContent: 'flex-end'
+
 
                                         }} >
 

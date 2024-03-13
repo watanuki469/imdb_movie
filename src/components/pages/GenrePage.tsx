@@ -26,14 +26,14 @@ export default function GenrePage({
           gridTemplateColumns: 'repeat(4, 1fr)',
         }} > */}
       <Grid sx={{ mt: 3 }} rowSpacing={2}
-        container spacing={{ xs: 3, md: 6 }} columns={{ xs: 4, sm: 6, md: 12 }} justifyContent="left" alignContent='left'>
+        container spacing={{ xs: 3, md: 6 }} columns={{ xs: 4, sm: 4, md: 12 }} justifyContent="left" alignContent='left'>
         {genresList.map((item, index: number) =>
-          <Grid item xs={2} sm={3} md={2.4}
+          <Grid item xs={2} sm={6} md={3}
             key={index} sx={{ justifyContent: 'center', alignContent: 'center', alignItems: 'center', display: 'grid' }}>
             <Button variant="contained" size="large" onClick={() => navigate(`/movie/byGen/${item.genre}`)}
               sx={{
                 fontWeight: '700', textTransform: 'uppercase'
-                , minHeight: '1rem', width: '12rem', ':hover': {
+                , minHeight: '1rem', width: { xs: '8rem', sm: '10rem', md: '12rem' }, ':hover': {
                   bgcolor: 'red',
                   color: 'white',
                 },
@@ -46,6 +46,7 @@ export default function GenrePage({
                 alignItems: 'center', // Căn chỉnh theo chiều dọc
                 justifyContent: 'center', // Căn chỉnh theo chiều ngang
                 textAlign: 'center', // Căn chỉnh nội dung văn bản theo giữa
+                whiteSpace: 'nowrap'
                 // gap: '0.5rem'
               }}>
               {(() => {

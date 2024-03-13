@@ -28,10 +28,10 @@ export default function PopularItemPageDashBoard({
   //   })()
 
   // }, [dispatch, popurarityList])
- 
+
 
   useEffect(() => {
-    if (popurarityList && popurarityList.length > 0 &&popurarityItemList.length<50) {
+    if (popurarityList && popurarityList.length > 0 && popurarityItemList.length < 50) {
       // Fetch data for each IMDb ID that hasn't been loaded yet
       popurarityList.forEach(item => {
         if (!loadedIds.has(item.imdb_id)) {
@@ -47,7 +47,7 @@ export default function PopularItemPageDashBoard({
 
 
   return (
-    <div style={{ backgroundColor: "black", position: "relative", width: '80%', marginLeft: '13%' }}>
+    <div style={{ backgroundColor: "black", position: "relative", width: '100%', }}>
       <PopularPage popurarityItemList={popurarityItemList} />
 
     </div >

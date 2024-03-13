@@ -15,31 +15,35 @@ export default function CastPage({
     const [directors, setDirectors] = useState<any>([])
     const [stars, setStars] = useState<any>([])
 
-    const sortedStars = [...stars].sort((a, b) => {
-        // Check if name is Emma Watson
-        const isEmmaWatson = (star: any) => star.actor?.name === 'Emma Watson';
+    // const sortedStars = [...stars].sort((a, b) => {
+    //     // Check if name is Emma Watson
+    //     const isEmmaWatson = (star: any) => star.actor?.name === 'Emma Watson';
 
-        // Move Emma Watson to the front
-        if (isEmmaWatson(a) && !isEmmaWatson(b)) {
-            return -1;
-        } else if (!isEmmaWatson(a) && isEmmaWatson(b)) {
-            return 1;
-        } else {
-            // If neither or both are Emma Watson, maintain the original order
-            return 0;
-        }
-    });
+    //     // Move Emma Watson to the front
+    //     if (isEmmaWatson(a) && !isEmmaWatson(b)) {
+    //         return -1;
+    //     } else if (!isEmmaWatson(a) && isEmmaWatson(b)) {
+    //         return 1;
+    //     } else {
+    //         // If neither or both are Emma Watson, maintain the original order
+    //         return 0;
+    //     }
+    // });
 
     useEffect(() => {
-        if (castList && castList.length) {
-            const writers = castList && castList.filter((item: cast) => item.role === 'Writer')
-            setWriters(writers)
-            const director = castList && castList.filter((item: cast) => item.role === 'Director')
-            setDirectors(director)
-            const stars = castList.filter((item) => item.role !== 'Director' && item.role !== 'Writer');
-            setStars(stars);
+        // if (castList && castList.length) {
+        // const writers = castList && castList.filter((item: cast) => item.role === 'Writer')
+        // setWriters(writers)
+        // const director = castList && castList.filter((item: cast) => item.role === 'Director')
+        // setDirectors(director)
+        // const stars = castList.filter((item) => item.role !== 'Director' && item.role !== 'Writer');
+        // setStars(stars);
+        // }
+        if (castList ) {
+            setWriters(castList.filter((item: cast) => item.role === 'Writer'));
+            setDirectors(castList.filter((item: cast) => item.role === 'Director'));
+            setStars(castList.filter((item: cast) => item.role !== 'Director' && item.role !== 'Writer'));
         }
-
     }, [castList])
     let navigate = useNavigate()
     return (
@@ -52,8 +56,7 @@ export default function CastPage({
                 <Stack direction={'row'}>
                     <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}>  Director:{' '}
                     </Typography>
-                    {directors &&
-                        directors.map((item: any, index: number) => (
+                    {directors.map((item: any, index: number) => (
                             <Fragment key={`director_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1}>
                                     <Fragment key={item.actor?.imdb_id}>
@@ -75,21 +78,21 @@ export default function CastPage({
             <Box sx={{
                 color: 'white', fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'left'
             }}>
-                <Stack direction={'row'} spacing={1} sx={{ flexWrap: 'wrap' ,alignItems:'flex-start'}}>
+                <Stack direction={'row'} spacing={1} sx={{ flexWrap: 'wrap', alignItems: 'flex-start' }}>
                     <Typography variant="h6" sx={{
                         textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold',
                         flexWrap: 'wrap'
                     }}> Writers:{' '}
                     </Typography>
                     {/* <Stack direction={'row'} sx={{ marginLeft: '5px', flexWrap: 'wrap' }}> */}
-                    {writers &&
+                    {
                         writers.map((item: any, index: number) => (
                             <Fragment key={`writer_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1}>
                                     <Fragment key={item.actor?.imdb_id}>
                                         <IconButton onClick={() => navigate(`/actor/id/${item.actor?.imdb_id}`)}
                                             color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap',textAlign:"left" }}>{item.actor?.name}</Typography>
+                                            <Typography variant="h6" sx={{ color: 'blue', fontWeight: 'normal', whiteSpace: 'pre-wrap', textAlign: "left" }}>{item.actor?.name}</Typography>
                                         </IconButton>
                                     </Fragment>
                                 </Stack>
@@ -111,7 +114,8 @@ export default function CastPage({
                     </Typography>
 
                     <Stack direction={'row'} sx={{ marginLeft: '5px', flexWrap: 'wrap' }}>
-                        {sortedStars && sortedStars.slice(0, 3).map((item: any, index: number) => (
+                        {/* {sortedStars && sortedStars.slice(0, 3).map((item: any, index: number) => ( */}
+                        { stars.slice(0, 3).map((item: any, index: number) => (
                             <Fragment key={`star_${item.role}_${index}`}>
                                 <Stack direction={'row'} spacing={1} alignItems="center">
                                     <Fragment key={item.actor?.imdb_id}>
@@ -132,14 +136,7 @@ export default function CastPage({
                 </Stack>
             </Box>
 
-            <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
-            <Typography sx={{
-                color: 'white', fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'left'
-            }}>IMBb<span style={{ color: '#AED2FF' }}>Pro</span>
-                <IconButton onClick={() => navigate('/IMDbPro')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
-                    <span style={{ color: 'blue', fontWeight: 'normal' }}> See production info at IMDbPro</span>
-                </IconButton>
-            </Typography>
+            
         </div >
     )
 }

@@ -27,7 +27,9 @@ const searchItemSlice = createSlice({
             // state.list = [action.payload.results]
             // state.list = [...state.list, ...action.payload.results]
             // state.list = action.payload.results
-            state.list = state.list.concat(action.payload.results);
+            // state.list = state.list.concat(action.payload.results);
+            state.list = [...state.list, action.payload.results]
+
 
             state.loading = false
         },

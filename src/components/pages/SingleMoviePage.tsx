@@ -19,7 +19,9 @@ import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-
 import { toast } from 'react-toastify';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 export interface SingleMoviePageProps {
@@ -33,10 +35,6 @@ export default function SingleMoviePage({
 }: SingleMoviePageProps) {
     const bull = (<span style={{ display: 'inline-block', marginLeft: '6px', marginRight: '6px', transform: 'scale(0.8)', color: 'white' }} >     • </span>);
 
-    const handleChangePage = () => {
-
-    };
-
     const loading = useAppSelector(selectSingleMovieListLoading)
 
     const renderPopularity = (popularity: number) => {
@@ -45,15 +43,13 @@ export default function SingleMoviePage({
             return (
                 <Box>
                     <Typography sx={{
-                        color: "#A9A9A9", fontSize: "1rem",
-                        fontWeight: "bold",
-                        fontFamily: "Arial, sans-serif",
-                        textTransform: 'capitalize'
-                    }}>POPULARITY RATING</Typography>
-                    <Button >
+                        color: "#A9A9A9", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif",
+                        textTransform: 'capitalize', whiteSpace: 'nowrap',
+                    }}>POPULARITY </Typography>
+                    <Button sx={{ display: 'flex' }}>
                         <Box>
                             <TrendingUpIcon sx={{
-                                color: 'blue', alignContent: 'center', mt: '3px', fontSize: '60px',
+                                color: 'blue', alignContent: 'center', mt: '3px', fontSize: '40px',
                                 alignItems: 'center'
                             }} />
                         </Box>
@@ -148,6 +144,27 @@ export default function SingleMoviePage({
     const [isFavorite, setIsFavorite] = useState(false)
 
 
+    // const handleWatchList = (movie: singleMovie) => {
+    //     const storedDataString = localStorage.getItem('watchList');
+    //     let storedData: { [key: string]: singleMovie } = {};
+    //     if (storedDataString !== null) {
+    //         storedData = JSON.parse(storedDataString);
+    //     }
+    //     if (storedData[movie.imdb_id]) {
+    //         setIsFavorite(false)
+    //         delete storedData[movie.imdb_id];
+    //         localStorage.setItem('watchList', JSON.stringify(storedData));
+    //         toast.success(`Removed ${movie.title} from watch list successfully`);
+
+    //     } else {
+    //         setIsFavorite(true)
+    //         storedData[movie.imdb_id] = movie;
+    //         localStorage.setItem('watchList', JSON.stringify(storedData));
+    //         toast.success(`Added ${movie.title} to watch list successfully`);
+
+    //     }
+    // };
+
     const handleWatchList = (movie: singleMovie) => {
         const storedDataString = localStorage.getItem('watchList');
         let storedData: { [key: string]: singleMovie } = {};
@@ -168,18 +185,43 @@ export default function SingleMoviePage({
 
         }
     };
+
+
     const handleCheck = (movie: any) => {
         if (isFavorite) {
             return <FavoriteIcon sx={{ color: "blue" }} />
         } else {
             return <FavoriteBorderOutlinedIcon sx={{ color: 'red' }} />
         }
+
     }
-    
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleClick = () => {
+        setIsExpanded(!isExpanded);
+    };
+    const maxLength = 10;
+
     return (
         <div>
-            <Box display="flex" alignContent="center" sx={{ width: '80%', m: 'auto', textAlign: 'center', bgcolor: 'black' }}>
-                <AppBar position="static" sx={{ bgcolor: 'black' }}>
+            <Box display="flex" sx={{
+                width: {
+                    base: "100%", // For extra small screens and up
+                    sm: "100%",   // For small screens and up
+                    md: "100%",   // For medium screens and up
+                    lg: "111%",   // For large screens and up
+                    xl: "100%",
+
+                },
+                ml: {
+                    base: "0", // For extra small screens and up
+                    sm: "0",   // For small screens and up
+                    md: "0",   // For medium screens and up
+                    lg: '-60px', // For large screens and up
+                    xl: "0",
+                }
+            }}>
+                <AppBar position="static" sx={{ bgcolor: '#4c3c3b' }}>
                     <Toolbar sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <Box sx={{ flexGrow: 1 }} />
                         <Stack direction={'row'}
@@ -231,7 +273,6 @@ export default function SingleMoviePage({
                                     color: 'white', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize',
                                     ':hover': {
                                         textDecoration: 'underline',
-
                                     },
                                 }}> Product </Typography>
                             </IconButton>
@@ -256,22 +297,17 @@ export default function SingleMoviePage({
                             </IconButton> */}
                             <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}>
 
-                            <IconButton
-                                size="large"
-                                color="inherit"
-                                sx={{
-                                    ':hover': {
-                                        textDecoration: 'underline', bgcolor: '#FFA1F5',
-                                    },
-                                }} >
-                                <Badge color="error">
-                                    <ShareIcon sx={{
-                                        ':hover': {
-                                            textDecoration: 'underline', bgcolor: '#FFA1F5',
-                                        },
-                                    }} />
-                                </Badge>
-                            </IconButton>
+                                <IconButton
+                                    size="large" color="inherit"
+                                    sx={{ ':hover': { textDecoration: 'underline', bgcolor: '#FFA1F5', }, }} >
+                                    <Badge color="error">
+                                        <ShareIcon sx={{
+                                            ':hover': {
+                                                textDecoration: 'underline', bgcolor: '#FFA1F5',
+                                            },
+                                        }} />
+                                    </Badge>
+                                </IconButton>
                             </a>
 
                         </Stack>
@@ -310,12 +346,12 @@ export default function SingleMoviePage({
                             </IconButton>
                         </Box> */}
                     </Toolbar>
-                    <Toolbar sx={{ mt: '30px' }}>
+                    <Toolbar>
                         <Box>
                             {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <Stack key={index} sx={{ textAlign: 'left' }}>
                                     <Stack alignItems="left">
-                                        <Typography variant="h4" color="white">
+                                        <Typography variant="h3" color="white">
                                             {item.title}
                                         </Typography>
 
@@ -337,8 +373,9 @@ export default function SingleMoviePage({
                                 <Box>
                                     <Typography sx={{
                                         color: '#B0A695', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
+                                        , whiteSpace: 'nowrap',
                                     }}>  IMDb RATING </Typography>
-                                    <Button sx={{ display: 'flex' }}>
+                                    <Button sx={{ display: 'flex', alignContent: 'center', justifyContent: "center", alignItems: 'center' }}>
                                         < StarIcon sx={{ color: 'yellow', alignContent: 'center', mt: '3px', fontSize: '40px' }} />
                                         <Box sx={{ textAlign: 'left' }}>
                                             <Typography sx={{ color: '#B0A695' }}> <span style={{ fontSize: '20px', color: 'white' }} > {item.rating}</span>/10 </Typography>
@@ -349,7 +386,7 @@ export default function SingleMoviePage({
 
                                 <Box>
                                     <Typography sx={{
-                                        color: '#B0A695', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
+                                        color: '#B0A695', whiteSpace: 'nowrap', fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                     }}> YOUR RATING </Typography>
                                     <Button onClick={() => handleRatingClick(item)} sx={{ display: 'flex' }}>
                                         <Box>
@@ -440,10 +477,11 @@ export default function SingleMoviePage({
                                         <iframe
                                             src={`${item.trailer}?autoplay=1`}
                                             width="100%" height="100%"
+
                                             title="Trailer" frameBorder="0"
                                         ></iframe>
                                     ) : (
-                                        <Stack sx={{ alignItems: 'center', justifyContent: 'center', height: "100%" }}>Không có trailer được cung cấp</Stack>
+                                        <Stack sx={{ alignItems: 'center', justifyContent: 'center', height: "100%", minHeight: "200px" }}>Không có trailer được cung cấp</Stack>
                                     )}
                                 </Grid>
                                 <Grid item xs={12} md={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }}
@@ -452,10 +490,10 @@ export default function SingleMoviePage({
                                     <Stack sx={{ width: '100%', height: '100%' }} direction="column" justifyContent="center" alignItems="center">
                                         <Button fullWidth sx={{
                                             height: '50%',
-                                            bgcolor: 'gray',
+                                            bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.2))',
                                             mb: 1,
                                             ':hover': {
-                                                bgcolor: '#FFB6B9'
+                                                bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.3))',
                                             },
 
                                         }}>
@@ -469,8 +507,10 @@ export default function SingleMoviePage({
                                             </Stack>
                                         </Button>
                                         <Button fullWidth sx={{
-                                            height: '50%', bgcolor: 'gray', mb: 1, ':hover': {
-                                                bgcolor: '#FFB6B9'
+                                            height: '50%',
+                                            bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.2))',
+                                            mb: 1, ':hover': {
+                                                bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.3))',
                                             },
                                         }}>
                                             <Stack sx={{ flexDirection: 'column', alignItems: 'center' }}>
@@ -486,119 +526,169 @@ export default function SingleMoviePage({
 
 
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12}>
-                                    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                                <Stack direction={'row'} spacing={2} sx={{ display: { xs: 'flex', md: 'none' }, width: '100%', mt: '0px' }}>
+                                    <Button fullWidth sx={{
+                                        bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.2))',
+
+                                        ':hover': {
+                                            bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.3))',
+                                        }
+                                    }}>
+                                        <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <VideoLibraryIcon sx={{ color: 'white', mt: '3px', fontSize: '30px' }} />
+                                            <Typography sx={{ color: "yellow", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif" }}>
+                                                {item.popularity} VIDEOS
+                                            </Typography>
+                                        </Stack>
+                                    </Button>
+
+                                    <Button fullWidth sx={{
+                                        bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.2))',
+
+                                        ':hover': {
+                                            bgcolor: 'rgba(var(--ipt-on-baseAlt-rgb, 255, 255, 255), var(--ipt-baseAlt-hover-opacity, 0.3))',
+                                        }
+                                    }}>
+                                        <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <FilterIcon sx={{ color: 'white', mt: '3px', fontSize: '30px' }} />
+                                            <Typography sx={{
+                                                color: "yellow", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif",
+                                                opacity: 'revert',
+                                            }}>
+                                                {item.movie_length} PHOTOS
+                                            </Typography>
+                                        </Stack>
+                                    </Button>
+                                </Stack>
+                                <Stack direction={'row'} sx={{ width: '100%', mt: '10px', display: { xs: 'flex', md: 'none' } }}>
+                                    {/* <Grid container spacing={2} sx={{ justifyContent: 'center', mt: '10px', display: { xs: 'flex', md: 'none' } }}>
+                                    <Grid item xs={5} sm={5} md={5}
+                                    > */}
+                                    <img
+                                        onError={handleImageError}
+                                        src={item.image_url}
+                                        alt="movie-img"
+                                        style={{
+                                            minWidth: 'auto', height: '100%', objectFit: 'cover', backgroundColor: 'black',
+                                            maxHeight: '200px'
+                                        }}
+                                    />
+                                    {/* </Grid>
+                                    <Grid item xs={7} sm={7} md={7}
+                                    > */}
+                                    <Stack direction={'column'}>
+                                        <Box key={index}
+                                            sx={{
+                                                columnGap: 3, rowGap: 3, gridTemplateColumns: 'repeat(4, 1fr)',
+                                                textAlign: 'left',
+                                            }} >
+                                            {item.gen && item.gen.length > 0 && item.gen.map((item: any, index) =>
+                                                <Button key={index}
+                                                    onClick={() => navigate(`/movie/byGen/${item.genre}`)}
+                                                    sx={{
+                                                        maxWidth: '50%',
+                                                        textTransform: 'uppercase', textAlign: 'center', minHeight: '0.5rem', ':hover': {
+                                                            bgcolor: 'A9A9A9', color: 'black',
+                                                        },
+                                                        border: "1px solid transparent", padding: '10px', backgroundColor: 'black',
+                                                        color: 'white', borderColor: 'pink',
+                                                    }}>
+                                                    <Typography variant='h6'>
+                                                        {item.genre}
+                                                    </Typography>
+                                                </Button>
+                                            )}
+                                        </Box>
+                                        <Stack>
+                                            <Typography>
+                                                {item.plot.split(' ').slice(0, 20).join(' ')}
+                                                <span>
+                                                    {item.plot.split('').length > maxLength}
+                                                    <span style={{ color: 'blue', cursor: 'pointer' }}>... Xem thêm </span>
+                                                </span>
+                                            </Typography>
+
+
+                                        </Stack>
+
+
+                                    </Stack>
+
+                                    {/* </Grid>
+                                </Grid> */}
+                                </Stack>
+
+                                <Stack direction={'row'} spacing={2} sx={{ display: { xs: 'flex', md: 'none' }, width: '100%', mt: '0px' }}>
+                                    <Button onClick={handleClick} fullWidth sx={{
+                                        bgcolor: 'transparent'
+                                        , alignItems: "center", justifyContent: 'flex-start'
+                                    }}>
+                                        <Stack direction={'column'}>
+                                            <Stack direction={'row'} sx={{ marginLeft: '10px' }}>
+                                                {isExpanded ? <KeyboardArrowUpIcon sx={{ color: 'white' }} /> : <KeyboardArrowDownIcon sx={{ color: 'white' }} />}
+                                                <Typography sx={{ color: 'white' }}>Top credit</Typography>
+                                            </Stack>
+                                            {isExpanded && <Cast />}
+
+                                        </Stack>
+
+
+                                    </Button>
+                                </Stack>
+
+                                <Grid item xs={12} sm={12} md={12} sx={{ display: { xs: 'block', md: 'none' } }}>
+                                    <Box>
                                         <Stack direction="column"  >
                                             <Button fullWidth sx={{
-                                                marginLeft: 'auto', display: 'flex', bgcolor: 'yellow', ':hover': { bgcolor: 'green', color: 'white', borderColor: 'red' },
+                                                m: 'auto', display: 'flex', bgcolor: 'yellow', ':hover': { bgcolor: 'green', color: 'white', borderColor: 'red' },
                                             }} onClick={() => handleWatchList(item)}>
                                                 {handleCheck(item.imdb_id)}
                                                 <Box sx={{ textAlign: 'center' }} >
-                                                    <Typography sx={{ color: 'black', fontSize: '0.7rem', textAlign: 'right' }}>Added by 1{item.popularity}k user </Typography>
+                                                    <Typography sx={{ color: 'black', fontSize: '0.7rem', textAlign: 'right' }}>Add
+                                                        {/* by 1{item.popularity}k umser */}
+                                                        to watch list
+                                                    </Typography>
                                                 </Box>
                                             </Button>
                                         </Stack>
                                     </Box>
                                 </Grid>
-                                <Stack direction={'row'} sx={{ display: { xs: 'block', md: 'none' } }}>
-                                    <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+
+                                {/* <Stack direction={'row'} sx={{ display: { xs: 'flex', md: 'none' }, mt: 5, m: 'auto', bgcolor: 'red', width: '100%' }}> */}
+                                {/* <Grid container spacing={2} > */}
+                                <Grid item xs={12} sm={12} md={12} sx={{ display: { xs: 'block', md: 'none' } }}>
+                                    <Stack direction={'row'} >
                                         <Grid item xs={4} sm={4} md={4}>
-                                            <Typography sx={{ color: 'blue', textAlign: 'right' }}>
+                                            <Typography sx={{ color: 'blue', textAlign: 'center', whiteSpace: 'nowrap' }}>
                                                 <span style={{
                                                     color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
                                                 }}>2k
-                                                </span>
+                                                </span> <br />
                                                 User reviews
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={4} sm={4} md={4}>
-                                            <Typography sx={{ color: 'blue' }}>
+                                            <Typography sx={{ color: 'blue', whiteSpace: 'nowrap', textAlign: 'center' }}>
                                                 <span style={{
                                                     color: "blue", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize'
-                                                }}>150 </span>
+                                                }}>150 </span> <br />
                                                 Critic reviews
                                             </Typography>
                                         </Grid>
+
                                         <Grid item xs={4} sm={4} md={4}>
                                             <Typography>
                                                 <span style={{
+                                                    textAlign: 'center',
                                                     color: "white", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', backgroundColor: 'green'
-                                                }}>{randomScore}  </span>
+                                                }}>{randomScore}  </span> <br />
                                                 Metascore
                                             </Typography>
                                         </Grid>
-                                    </Grid>
-                                </Stack>
-                                <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-                                    <Grid item xs={6} sm={6} md={6}
-                                        sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                        <Button fullWidth sx={{
-                                            bgcolor: 'gray',
-                                            ':hover': {
-                                                bgcolor: '#FFB6B9'
-                                            }
-                                        }}>
-                                            <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <VideoLibraryIcon sx={{ color: 'white', mt: '3px', fontSize: '30px' }} />
-                                                <Typography sx={{ color: "yellow", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif" }}>
-                                                    {item.popularity} VIDEOS
-                                                </Typography>
-                                            </Stack>
-                                        </Button>
-                                    </Grid>
-                                    <Grid item xs={6} sm={6} md={6}
-                                        sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                        <Button fullWidth sx={{
-                                            bgcolor: 'gray',
-                                            ':hover': { bgcolor: '#FFB6B9' }
-                                        }}>
-                                            <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <FilterIcon sx={{ color: 'white', mt: '3px', fontSize: '30px' }} />
-                                                <Typography sx={{
-                                                    color: "yellow", fontSize: "1rem", fontWeight: "bold", fontFamily: "Arial, sans-serif",
-                                                    opacity: 'revert',
-                                                }}>
-                                                    {item.movie_length} PHOTOS
-                                                </Typography>
-                                            </Stack>
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-                                    <Grid item xs={5} sm={5} md={5}
-                                        sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                        <img
-                                            onError={handleImageError}
-                                            src={item.image_url}
-                                            alt="movie-img"
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black' }}
-                                        />
 
-                                    </Grid>
-                                    <Grid item xs={7} sm={7} md={7}
-                                        sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                        <Box key={index}
-                                            sx={{
-                                                columnGap: 3, rowGap: 3, gridTemplateColumns: 'repeat(4, 1fr)',
-                                                textAlign: 'left', mt: 3,
-                                            }} >
-                                            {item.gen && item.gen.length > 0 && item.gen.map((item: any, index) =>
-                                                <Button variant="contained" key={index}
-                                                    onClick={() => navigate(`/movie/byGen/${item.genre}`)}
-                                                    sx={{
-
-                                                        textTransform: 'uppercase', textAlign: 'center', minHeight: '1rem', ':hover': {
-                                                            bgcolor: 'A9A9A9', color: 'black',
-                                                        },
-                                                        border: "2px solid transparent", padding: '10px', backgroundColor: 'black',
-                                                        color: 'white', borderRadius: '1rem', borderColor: 'pink', margin: '7px',
-                                                    }}>
-                                                    {item.genre}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                    </Grid>
+                                    </Stack>
                                 </Grid>
+
                             </Grid>
                         )}
                     </Toolbar>
@@ -610,7 +700,7 @@ export default function SingleMoviePage({
                                         <Button variant="contained" key={index}
                                             onClick={() => navigate(`/movie/byGen/${item.genre}`)}
                                             sx={{
-                                                mx: '6px',
+                                                mx: '6px', mt: '-20px',
                                                 textTransform: 'uppercase', textAlign: 'center', minHeight: '1rem', width: '10rem', ':hover': {
                                                     bgcolor: 'yellow', color: 'black',
                                                 },
@@ -628,7 +718,7 @@ export default function SingleMoviePage({
                         </Box>
 
                     </Toolbar>
-                    <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <Toolbar sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <Box >
                             {singleList && singleList.length > 0 && singleList.map((item, index) =>
                                 <List key={index} sx={{
@@ -647,6 +737,14 @@ export default function SingleMoviePage({
                                     <div id='caster'>
                                         <Cast />
                                     </div>
+                                    <Divider sx={{ borderColor: 'divider', border: '1px solid', }} orientation="vertical" />
+                                    <Typography sx={{
+                                        color: 'white', fontSize: "1.5rem", fontWeight: "bold", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', textAlign: 'left'
+                                    }}>IMBb<span style={{ color: '#AED2FF' }}>Pro</span>
+                                        <IconButton onClick={() => navigate('/IMDbPro')} color="inherit" sx={{ ':hover': { textDecoration: 'underline' } }}>
+                                            <span style={{ color: 'blue', fontWeight: 'normal' }}> See production info at IMDbPro</span>
+                                        </IconButton>
+                                    </Typography>
                                 </List>
 
                             )}

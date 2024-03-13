@@ -33,13 +33,9 @@ export default function SingleStarItem({
             <Grid container spacing={3}>
                 {remainingList.map((item: any, index: number) => (
                     <Grid
-                    //  item xs={6} sm={4} md={3}
-                      key={index}>
+                        item xs={6} sm={4} md={6}
+                        key={index}>
                         <Stack key={index} direction={'row'} alignItems="center" sx={{ borderTop: '2px solid white', borderLeft: '2px solid white' }}>
-                            {/* <Typography onClick={() => navigate(`/movie/id/${item.movie.imdb_id}`)} >
-                                {index}
-                            </Typography> */}
-
                             <Stack direction={'column'} alignItems="flex-start" alignContent={'flex-start'}
                                 sx={{
                                     display: 'flex', alignItems: 'flex-start', textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%', justifyContent: 'flex-start', alignContent: 'flex-start', marginLeft: '10px'

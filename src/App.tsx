@@ -9,6 +9,8 @@ import { LoginPage } from 'features/auth/pages/LoginPage';
 import { Fragment, useEffect } from 'react';
 import { PrivateRoute } from 'components/common/PrivateRoute';
 import { Home } from 'components/layout/Home';
+import { SignUp } from 'features/auth/pages/SignUp';
+import { Stack } from '@mui/material';
 
 
 function App() {
@@ -23,21 +25,33 @@ function App() {
     }
   }, []);
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/Login" element={<LoginPage />} />
-        <Route path='/' element={<PrivateRoute />}>
-          <Route path="/" element={<AdminLayout />} />
-          <Route path="/popurarity" element={<PopurarityDashBoard />} />
-          <Route path="/movie/byGen/:genre" element={<MovieLayout />} />
-          <Route path="/movie/id/:imdb_id" element={<SingleMovie />} />
-          <Route path='*' element={<NotFound />} />
-          <Route path='IMDbPro' element={<Pro />} />
-          <Route path='WatchList' element={<WatchList />} />
-          <Route path='Popular' element={<PopularDashBoard />} />
-          <Route path='/actor/id/:imdb_id' element={<StarLayout />} />
-        </Route>
-      </Routes>
+    <div className="App" style={{ backgroundColor: 'black' }}>
+      <Stack sx={{
+        maxWidth: {
+          base: "80%", // For extra small screens and up
+          sm: "100%",   // For small screens and up
+          md: "100%",   // For medium screens and up
+          lg: "90%",   // For large screens and up
+          xl: "90%",   // For extra large screens and up
+        },
+        margin: "0 auto", // Center align the Stack horizontally
+      }}>
+        <Routes>
+          <Route path="/Login" element={<LoginPage />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path='/' element={<PrivateRoute />}>
+            <Route path="/" element={<AdminLayout />} />
+            <Route path="/popurarity" element={<PopurarityDashBoard />} />
+            <Route path="/movie/byGen/:genre" element={<MovieLayout />} />
+            <Route path="/movie/id/:imdb_id" element={<SingleMovie />} />
+            <Route path='*' element={<NotFound />} />
+            <Route path='IMDbPro' element={<Pro />} />
+            <Route path='WatchList' element={<WatchList />} />
+            <Route path='Popular' element={<PopularDashBoard />} />
+            <Route path='/actor/id/:imdb_id' element={<StarLayout />} />
+          </Route>
+        </Routes>
+      </Stack>
     </div>
   );
 }

@@ -48,9 +48,11 @@ export default function SingleStarMedia() {
 
     return (
         <div id="awarrd">
-            <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
-                {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
+            <Stack direction={'column'} sx={{ mt: 3 }}>
+                <SingleStarItem awardList={awardList} />
+            </Stack>
 
+            {/* <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'center'} alignContent={'center'} >
                 <Stack direction={'row'} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
                     <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
                     <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
@@ -64,7 +66,6 @@ export default function SingleStarMedia() {
                             </Stack>
 
                         ))}
-                    {/* <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} /> */}
                     <IconButton onClick={handleMoviesClick}>
                         {moviesPlay ?
                             <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
@@ -72,8 +73,6 @@ export default function SingleStarMedia() {
                             <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
                     </IconButton>
                 </Stack>
-
-                {/* </Button> */}
             </Stack>
             {moviesPlay ?
                 <Stack direction={'column'} sx={{ mt: 3 }}>
@@ -82,7 +81,7 @@ export default function SingleStarMedia() {
                 : <Stack>
 
                 </Stack>
-            }
+            } */}
 
         </div >
 

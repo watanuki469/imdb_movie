@@ -19,6 +19,7 @@ import knowForReducer from 'features/knowfor/knowForSlice'
 import knowforItemReducer from 'features/knowforItem/knowforItemSlice'
 import authReducer from 'features/auth/authSlice'
 import ProductReducer from 'features/product/productSlice'
+import topCastReducer from 'features/topcast/topCastSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
@@ -41,6 +42,7 @@ export const store = configureStore({
     knowforItem:knowforItemReducer,
     auth: authReducer,
     product:ProductReducer,
+    topCast:topCastReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

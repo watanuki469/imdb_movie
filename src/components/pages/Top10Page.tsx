@@ -121,7 +121,7 @@ export default function Top10Page({
                         </Box>
 
 
-                        <Box sx={{ objectFit: 'contain', width: '80%', bgcolor: 'black' }}>
+                        <Box sx={{ objectFit: 'contain', width: '100%', bgcolor: 'black' }}>
                             <Stack spacing={1} direction="row" sx={{ width: '100%', height: '60vh', textAlign: 'center' }}>
                                 {uniquePopurarityItemList.slice(0, itemsToShow).map((item, index) => (
                                     <Top10PageItem key={index} popurarityItemList={uniquePopurarityItemList} number={index} activeStep={activeStep} />

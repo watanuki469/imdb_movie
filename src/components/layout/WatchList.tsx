@@ -45,7 +45,8 @@ export function WatchList() {
         <div style={{ backgroundColor: 'black', height: '100%' }}>
             <Header />
             <Stack sx={{ bgcolor: 'black', height: '100%', cursor: 'pointer' }}>
-                <Typography variant="h3" sx={{ color: 'white', textAlign: 'center' }}>Here is your watch list Mr/Mrs: {email}</Typography>
+                <Typography variant="h3" sx={{ color: 'white', textAlign: 'center' }}>Here is your watch list
+                    <br /> Mr/Mrs: {email}</Typography>
                 <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="left">
                     {Array.isArray(watchList) && watchList.map((item: singleMovie) => (
                         <Grid item xs={6} md={3} lg={2.4} key={item.imdb_id}>

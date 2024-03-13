@@ -17,11 +17,13 @@ const castSlice = createSlice({
     initialState,
     reducers: {
         fetchCastList(state, action: PayloadAction<any>) {
-            // state.loading = true;
+            state.loading = true;
         },
         //cập nhật vào redux từ fetch cast list
         fetchCastListSuccess(state, action: PayloadAction<any>) {
             state.list = action.payload.results.roles
+            // state.list = [...state.list, action.payload.results.roles]
+
             state.loading = false
         },
         fetchCastListFailed(state, action: PayloadAction<string>) {

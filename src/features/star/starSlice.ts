@@ -22,7 +22,7 @@ const starSlice = createSlice({
         //cập nhật vào redux từ fetch single movie list
         fetchStarListSuccess(state, action: PayloadAction<any>) {
             // state.list = [...state.list, action.payload.results]
-            state.list = [action.payload.results]
+            state.list = [action.payload.results] 
             state.loading = false
         },
         fetchStarListFailed(state, action: PayloadAction<string>) {

@@ -6,6 +6,8 @@ import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { PlayArrow } from "@mui/icons-material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+
 
 export interface KnowForPageProps {
   movieItemList: movieItem[],
@@ -58,20 +60,82 @@ export default function KnowForPage({
             // Nếu chưa xuất hiện, thêm vào mảng uniqueTitles và hiển thị
             uniqueTitles.push(item.title);
             return (
-              <Grid item xs={6} md={3} lg={2.4} key={item.title}>
-                <Stack alignItems="center" sx={{ width: '100%' }}>
-                  <img onError={handleImageError} src={item.banner}
-                    style={{ height: "280px", maxWidth: '150px', objectFit: 'cover', backgroundColor: 'black', }}
-                    onClick={() => onEdit?.(item)}
-                  />
-                  <Typography variant="h6" color="red">
+              <Grid item xs={6} sm={6} md={3} lg={2.4} key={item.title}>
+                <Stack alignItems="center" sx={{
+                  width: '100%',
+
+                }}
+                >
+                  <Stack sx={{
+                    position: 'relative', justifyContent: 'flex-start',
+                    "&:hover .media-info": { opacity: 1, bottom: 0 },
+                    "&:hover .media-back-drop, &:hover .media-play-btn": { opacity: 1 },
+                    "&:hover img": { opacity: 0.7 }, // Thêm đoạn này để khi hover vào ảnh, opacity của ảnh sẽ mờ đi
+                  }}>
+                    <img
+                      onError={handleImageError}
+                      src={item.banner}
+                      style={{
+                        width: '100%',
+                        height: "280px", objectFit: 'cover', backgroundColor: 'black',
+                      }}
+                      onClick={() => onEdit?.(item)}
+                    />
+                    <Box className="media-back-drop" sx={{ opacity: { xs: 1, md: 0 } }} />
+                    <Button
+                      className="media-play-btn"
+                      variant="contained"
+                      startIcon={<PlayArrowIcon />}
+                      sx={{
+                        display: { xs: "none", md: "flex" },
+                        opacity: 0,
+                        transition: "all 0.3s ease",
+                        position: "absolute",
+                        top: "50%",
+                        bgcolor: 'red',
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        "& .MuiButton-startIcon": { marginRight: "-4px" }
+                      }}
+                    />
+                    <Box
+                      className="media-info"
+                      sx={{
+                        transition: "all 0.3s ease",
+                        opacity: { xs: 1, md: 0 },
+                        position: "absolute",
+                        bottom: { xs: 0, md: "-20px" },
+                        width: "100%",
+                        height: "max-content",
+                        boxSizing: "border-box",
+                        padding: { xs: "10px", md: "2rem 1rem" }
+                      }}
+                    >
+                      <Stack spacing={{ xs: 1, md: 2 }} justifyContent={'flex-start'} sx={{ textAlign: "left" }}>
+                        <Typography>{item.year}</Typography>
+                        <Typography
+                          variant="body1"
+                          fontWeight="700"
+                          sx={{
+                            fontSize: "1rem",
+                          }}
+                        >
+                          {item.title}
+                        </Typography>
+                      </Stack>
+                    </Box>
+                  </Stack>
+
+
+
+                  {/* <Typography variant="h6" color="red">
                     {breakWord(item.title).map((line, index) => (
                       <Fragment key={index}>
                         {line}
                         <br />
                       </Fragment>
                     ))}
-                  </Typography>
+                  </Typography> */}
                 </Stack>
               </Grid>
             );
@@ -89,28 +153,26 @@ export default function KnowForPage({
 
   return (
     <div style={{ width: '100%' }} id='knowfor'>
-      <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'flex-start'} alignContent={'flex-start'} >
-        {/* <Button sx={{ alignItems: 'flex-start', alignContent: 'flex-start', height: '50px' }}> */}
-        <Stack direction={'row'} sx={{ flexWrap: 'wrap' }}>
-          <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '40px' }} orientation="vertical" />
-          <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
+      <Stack direction={'column'} sx={{ mt: 3 }}>    {renderPopularity()}  </Stack>
+      {/* <Stack direction={'row'} sx={{ width: '100%', display: 'flex' }} alignItems={'flex-start'} alignContent={'flex-start'} >
+        <Stack direction={'row'} sx={{ flexWrap: 'wrap',alignItems: 'center' }}>
+          <Divider sx={{ border: '5px solid yellow', marginRight: '10px', height: '30px' }} orientation="vertical" />
+          <Typography sx={{ color: 'yellow', border: 'none', fontWeight: 'bold', fontSize: "1rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', ':hover': { textDecoration: 'underline' } }}>
             Know For:
           </Typography>
           <Stack direction={'row'} sx={{ fontSize: "1.5rem", fontFamily: "Arial, sans-serif", textTransform: 'capitalize', color: 'yellow', width: 'auto' }}>
           </Stack>
-          {/* <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} /> */}
           <IconButton onClick={handleMoviesClick}>
             {moviesPlay ?
-              <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />
+              <PlayArrow sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />
               :
-              <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "3rem" }} />}
+              <KeyboardArrowDownIcon sx={{ color: 'yellow', alignContent: 'center', alignItems: 'center', justifyContent: 'center', fontSize: "2rem" }} />}
           </IconButton>
         </Stack>
-        {/* </Button> */}
       </Stack>
       {moviesPlay ?
         <Stack direction={'column'} sx={{ mt: 3 }}>    {renderPopularity()}  </Stack> : <Stack>    </Stack>
-      }
+      } */}
 
     </div>
   );

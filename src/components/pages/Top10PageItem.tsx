@@ -83,24 +83,53 @@ export default function Top10PageItem({
 
         }
     };
+    const [isFocus, setIsFocus] = useState(false);
+    let timeOutId: NodeJS.Timeout;
+
+    const handleMouseEnter = () => {
+        timeOutId = setTimeout(() => {
+            setIsFocus(true);
+        }, 200);
+    };
+
+    const handleMouseLeave = () => {
+        clearTimeout(timeOutId);
+        setIsFocus(false);
+    };
+
+    const style = {
+        // position: "relative",
+        transition: "all 0.5s",
+        transformStyle: "preserve-3d",
+        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.8)",
+    };
+
+    const focusStyle = {
+        ...style,
+        transform: "rotateY(180deg)",
+    };
     return (
         <div style={{ maxWidth: '200px' }}>
-            <Stack sx={{ position: 'relative', height: '300px' }}>
+            <Stack sx={{ position: 'relative', height: '300px' }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
+                <Box sx={isFocus ? focusStyle : style}>
+                    <img
+                        onClick={() => navigate(`/movie/id/${popurarityItemList[activeStep + number]?.imdb_id}`)}
+                        src={popurarityItemList[activeStep + number]?.image_url}
+                        alt="movie-img"
+                        style={{
+                            width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black', maxWidth: "200px", minHeight: '250px',
+                            alignContent: 'center', justifyContent: 'center', alignItems: 'center'
+                        }}
+                        onError={(e) => {
+                            const imgElement = e.currentTarget as HTMLImageElement;
+                            imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây
 
-                <img
-                    onClick={() => navigate(`/movie/id/${popurarityItemList[activeStep + number]?.imdb_id}`)}
-                    src={popurarityItemList[activeStep + number]?.image_url}
-                    alt="movie-img"
-                    style={{
-                        width: '100%', height: '100%', objectFit: 'cover', backgroundColor: 'black', maxWidth: "200px",
-                        alignContent: 'center', justifyContent: 'center', alignItems: 'center'
-                    }}
-                    onError={(e) => {
-                        const imgElement = e.currentTarget as HTMLImageElement;
-                        imgElement.src = 'https://www.dtcvietnam.com.vn/web/images/noimg.jpg'; // Đặt nguồn của ảnh phụ trợ vào đây
+                        }}
+                    />
+                </Box>
 
-                    }}
-                />
 
 
                 <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
@@ -121,7 +150,7 @@ export default function Top10PageItem({
                             position: 'absolute', bgcolor: 'white', color: 'black',
                             textAlign: 'center', border: 'none', fontWeight: 'bold',
                             fontSize: '24px', fontFamily: 'sans-serif', padding: 'auto',
-                            height: '30px', width:'30px',textTransform: 'none', borderRadius: '100%',
+                            height: '30px', width: '30px', textTransform: 'none', borderRadius: '100%',
                             overflow: 'hidden', // Tránh chữ tràn ra ngoài
                             whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
                             // textOverflow: 'ellipsis', // Hiển thị dấu elipsis
@@ -158,14 +187,14 @@ export default function Top10PageItem({
                 </Stack>
                 <Box>
                     <h4 style={{
-                        textAlign: "left",display: "-webkit-box",overflow: "hidden",WebkitBoxOrient: "vertical",textDecoration: 'bold',color: 'white',marginTop: '0%',height: '3em'
+                        textAlign: "left", display: "-webkit-box", overflow: "hidden", WebkitBoxOrient: "vertical", textDecoration: 'bold', color: 'white', marginTop: '0%', height: '3em'
 
                     }}>
                         {popurarityItemList[activeStep + number]?.title.substring(0, 32)}
                     </h4>
                 </Box>
                 <Button onClick={() => handleWatchList(popurarityItemList[activeStep + number])}
-                 fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
+                    fullWidth sx={{ fill: 'currentcolor', display: 'flex', alignItems: 'center', bgcolor: '#31304D', height: '50px', opacity: '90%' }}>
                     < AddIcon sx={{ color: 'blue' }} />
                     <>
                         <span style={{ marginRight: '1rem' }}></span>
