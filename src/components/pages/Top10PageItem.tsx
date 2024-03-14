@@ -160,16 +160,12 @@ export default function Top10PageItem({
                         open={openDialog}
                         onClose={handleCloseRating}
                     >
+
                         <Stack direction={'column'} sx={{
                             bgcolor: 'black', color: 'white'
                             , border: '1px solid white',
-                            
                             //  transform: 'translate(70%, 100%)',
-                            width: {
-                                xs:'400px',
-                                sm:'400px',
-                                md:'200px'
-                            }
+                            width: '99%'
                         }}>
                             <Typography variant='h3' sx={{ textAlign: 'center', color: 'yellow' }}>
                                 Rate {value} <StarIcon > </StarIcon> of
@@ -184,6 +180,9 @@ export default function Top10PageItem({
                                 <Stack spacing={10}
                                     sx={{
                                         '& > legend': { mt: 2 },
+                                        justifyContent: "center"
+                                        , alignContent: 'center',
+                                        alignItems: "center"
                                     }}
                                 >
                                     <Rating value={value} emptyIcon={<StarIcon style={{ opacity: 0.55, color: 'white', }} />}
@@ -193,9 +192,9 @@ export default function Top10PageItem({
 
                                 </Stack>
                             </DialogContent>
-                            <Button fullWidth sx={{ color: 'white', backgroundColor: starIndex > 0 ? 'red' : 'gray' }} onClick={() => handleCloseRating()}>
+                            {/* <Button fullWidth sx={{ color: 'white', backgroundColor: starIndex > 0 ? 'red' : 'gray' }} onClick={() => handleCloseRating()}>
                                 RATE
-                            </Button>
+                            </Button> */}
                         </Stack>
                     </Dialog>
 
