@@ -10,6 +10,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { default as StarOutlineIcon, default as StarRateIcon } from '@mui/icons-material/StarRate';
 import { toast } from 'react-toastify';
+import Rating from '@mui/material/Rating';
+import { styled } from '@mui/material/styles';
+
 
 export interface Top10PageProps {
     popurarityItemList: movieItem[],
@@ -108,6 +111,16 @@ export default function Top10PageItem({
         ...style,
         transform: "rotateY(180deg)",
     };
+    // const StyledRating = styled(Rating)({
+    //     '& .MuiRating-iconFilled': {
+    //         color: '#ff6d75',
+    //     },
+    //     '& .MuiRating-iconHover': {
+    //         color: '#ff3d47',
+    //     },
+    // });
+    const [value, setValue] = useState<number | null>(0);
+
     return (
         <div style={{ maxWidth: '200px' }}>
             <Stack sx={{ position: 'relative', height: '300px' }}
@@ -132,8 +145,8 @@ export default function Top10PageItem({
 
 
 
-                <BookmarkIcon sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
-                <AddIcon sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
+                <BookmarkIcon onClick={() => handleWatchList(popurarityItemList[activeStep + number])} sx={{ position: 'absolute', top: 0, left: 0, color: 'black', fontSize: '35px' }} />
+                <AddIcon onClick={() => handleWatchList(popurarityItemList[activeStep + number])} sx={{ position: 'absolute', top: 0, margin: '5px', left: 0, color: 'white', fontSize: '25px' }} />
             </Stack>
 
             <Stack>
@@ -145,37 +158,39 @@ export default function Top10PageItem({
                     <StarBorderIcon sx={{ color: 'blue' }} onClick={() => handleRatingClick(popurarityItemList[activeStep + number])} />
                     <Dialog
                         open={openDialog}
+                        onClose={handleCloseRating}
                     >
-                        <Button onClick={() => handleCloseRating()} sx={{
-                            position: 'absolute', bgcolor: 'white', color: 'black',
-                            textAlign: 'center', border: 'none', fontWeight: 'bold',
-                            fontSize: '24px', fontFamily: 'sans-serif', padding: 'auto',
-                            height: '30px', width: '30px', textTransform: 'none', borderRadius: '100%',
-                            overflow: 'hidden', // Tránh chữ tràn ra ngoài
-                            whiteSpace: 'nowrap', // Ngăn chữ xuống dòng
-                            // textOverflow: 'ellipsis', // Hiển thị dấu elipsis
-                            ':hover': {
-                                bgcolor: 'yellow',
-                                color: 'blue',
-                            },
-                            // transform: 'translate(1200%, 290%)'
-                        }}>X
-                        </Button>
                         <Stack direction={'column'} sx={{
                             bgcolor: 'black', color: 'white'
                             , border: '1px solid white',
+                            
                             //  transform: 'translate(70%, 100%)',
-                            width: '99%'
+                            width: {
+                                xs:'400px',
+                                sm:'400px',
+                                md:'200px'
+                            }
                         }}>
                             <Typography variant='h3' sx={{ textAlign: 'center', color: 'yellow' }}>
-                                Rate {starIndex} <StarIcon > </StarIcon> of
+                                Rate {value} <StarIcon > </StarIcon> of
                             </Typography>
                             <DialogContent sx={{ textAlign: 'center', mx: '24px' }}>
                                 <Typography variant='h4' sx={{ maxWidth: '20ch', overflowWrap: 'break-word' }}>
                                     {selectedStudent?.title}
                                 </Typography>
-                                <Stack direction="row" spacing={2}>
+                                {/* <Stack direction="row" spacing={2} sx={{width:'100%'}}>
                                     {starsArray}
+                                </Stack> */}
+                                <Stack spacing={10}
+                                    sx={{
+                                        '& > legend': { mt: 2 },
+                                    }}
+                                >
+                                    <Rating value={value} emptyIcon={<StarIcon style={{ opacity: 0.55, color: 'white', }} />}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }} name="customized-10" defaultValue={2} max={10} />
+
                                 </Stack>
                             </DialogContent>
                             <Button fullWidth sx={{ color: 'white', backgroundColor: starIndex > 0 ? 'red' : 'gray' }} onClick={() => handleCloseRating()}>
@@ -224,7 +239,7 @@ export default function Top10PageItem({
                         </Typography>
                     </>
                 </Button>
-            </Stack>
-        </div>
+            </Stack >
+        </div >
     )
 }

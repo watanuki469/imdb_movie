@@ -31,7 +31,7 @@ export default function SingleStarItem({
     return (
         <div >
             <Grid container spacing={3}>
-                {remainingList.map((item: any, index: number) => (
+                {remainingList?.map((item: any, index: number) => (
                     <Grid
                         item xs={6} sm={4} md={6}
                         key={index}>

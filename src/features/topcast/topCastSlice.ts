@@ -32,10 +32,10 @@ const topCastSlice = createSlice({
         fetchtopCastListFailed(state, action: PayloadAction<string>) {
             state.loading = false
         },
-        setFilter(state,action:PayloadAction<ListParams>){
-            state.filter=action.payload;
+        setFilter(state, action: PayloadAction<ListParams>) {
+            state.filter = action.payload;
         },
-      
+
     }
 })
 

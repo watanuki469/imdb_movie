@@ -4,7 +4,7 @@ import MoviePage from 'components/dashboard/MovieItemPageDashBoard';
 import { ActorActions, selectActorList } from 'features/actor/actorSlice';
 import { movieActions, selectMovieList } from 'features/movie/movieSlice';
 import { StarActions } from 'features/star/starSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopCastItemPageDashBoard from './TopCastItemPageDashBoard';
 import { castActions, selectCastList } from 'features/cast/castSlice';
@@ -16,9 +16,13 @@ export default function TopCastPageDashBoard() {
   const movieList = useAppSelector(selectCastList);
   const dispatch = useAppDispatch()
 
+
   useEffect(() => {
-    dispatch(castActions.fetchCastList(imdb_id))
-  }, [imdb_id])
+    if (movieList && movieList.length > 0  ) {
+      dispatch(castActions.fetchCastList(imdb_id))
+    }
+
+  }, [])
 
   return (
     <div>

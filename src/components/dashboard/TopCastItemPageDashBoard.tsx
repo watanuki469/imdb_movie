@@ -1,3 +1,4 @@
+import { Stack } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import KnowForPage from "components/pages/knowForPage";
 import MovieItemPage from "components/pages/movieItemPage";
@@ -12,7 +13,7 @@ export interface TopCastItemPageDashBoardProps {
   movieList: cast[]
 }
 
-export default function TopCastItemPageDashBoard ({
+export default function TopCastItemPageDashBoard({
   movieList
 }: TopCastItemPageDashBoardProps) {
   const dispatch = useAppDispatch()
@@ -25,22 +26,21 @@ export default function TopCastItemPageDashBoard ({
   const [loadedIds, setLoadedIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    if (movieList && movieList.length > 0) {
-      // Fetch data for each IMDb ID that hasn't been loaded yet
+    if (movieList && movieList.length > 0 && movieList.length < 150) {
       movieList.forEach(item => {
         if (!loadedIds.has(item.actor.imdb_id)) {
           dispatch(topCastActions.fetchtopCastList(item.actor.imdb_id));
-          // Add the IMDb ID to the set of loaded IDs
           setLoadedIds(prevLoadedIds => new Set(prevLoadedIds).add(item.actor.imdb_id));
         }
       });
+
     }
   }, [dispatch, movieList, loadedIds]);
-
 
   return (
     <div >
       <TopCastPage2 movieItemList={movieItemList} onEdit={handleChangePage} />
+   
     </div >
 
 

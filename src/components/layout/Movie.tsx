@@ -13,8 +13,8 @@ export function MovieLayout() {
       <Box sx={{ bgcolor: "black", position: "relative" }}>
         <Header/>
         <MoviePageDashBoard />
-        <div className={`${loading ? "block" : "hidden"} `}>
-          <CircularProgress disableShrink />
+        <div className={`${loading ? "hidden" : "hidden"} `}>
+          <CircularProgress disableShrink sx={{ color: 'black' }} />
         </div>
         <Footer />
       </Box>

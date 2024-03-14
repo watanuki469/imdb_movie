@@ -14,10 +14,10 @@ export default function Cast() {
   const dispatch = useAppDispatch()
 
     useEffect(() => {
-      if (imdb_id && !castList.length) {
+      if (imdb_id ) {
         dispatch(castActions.fetchCastList(imdb_id))
       }
-    }, [imdb_id,castList,dispatch])
+    }, [imdb_id,dispatch])
   return (
     <div>
       <CastPage castList={castList} />

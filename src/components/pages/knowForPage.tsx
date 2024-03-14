@@ -73,8 +73,8 @@ export default function KnowForPage({
                     "&:hover img": { opacity: 0.7 }, // Thêm đoạn này để khi hover vào ảnh, opacity của ảnh sẽ mờ đi
                   }}>
                     <img
-                      onError={handleImageError}
                       src={item.banner}
+                      onError={handleImageError}
                       style={{
                         width: '100%',
                         height: "280px", objectFit: 'cover', backgroundColor: 'black',

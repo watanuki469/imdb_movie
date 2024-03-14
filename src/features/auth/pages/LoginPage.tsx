@@ -93,17 +93,18 @@ export function LoginPage() {
     const [isValidEmail, setIsValidEmail] = useState(false);
 
     return (
-        <Container component="main" maxWidth="xs" 
+        <Container component="main" maxWidth="xs" sx={{ bgcolor: 'white', width: '100%' }}
         >
             <CssBaseline />
             <Box
                 sx={{
-                    marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center'  }}
+                    marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center'
+                }}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" > 
                     Sign in
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
